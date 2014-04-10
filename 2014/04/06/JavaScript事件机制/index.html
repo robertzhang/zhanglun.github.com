@@ -89,8 +89,16 @@ JavaScript和HTML之间的交互是通过事件实现的。事件，就是文档
 <h2 id="事件流">事件流</h2>
 <p>事件流描述的是从页面中接受事件的顺序。但是值得注意的是，在当年的浏览器大战中的主角们采用的是几乎完全相反的事件流概念。IE的事件流是<strong>事件冒泡流</strong>，而Netscape Communicator的事件流是<strong>事件捕获流</strong>。</p>
 <h3 id="事件冒泡">事件冒泡</h3>
-<p>IE的事件流叫做<strong>事件冒泡</strong>（event bubbing），即事件右最具体的元素接受，然后逐级向上传播到不具体的元素，以下面的代码为例：<br>    fdf<br>    <html lang="en"><br>    <head><br>        <meta charset="UTF-8"><br>        <title>Document</title><br>    </head><br>    <body><br>        <div id="btn">点我</div><br>    </body><br>    </html></p>
-<p>如果你单击了#btn，那么在IE的页面中，这个事件会如下传播：</p>
+<p>IE的事件流叫做<strong>事件冒泡</strong>（event bubbing），即事件右最具体的元素接受，然后逐级向上传播到不具体的元素，以下面的代码为例：</p>
+<pre><code><span class="tag">&lt;<span class="title">html</span>&gt;</span>
+<span class="tag">&lt;<span class="title">head</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"btn"</span>&gt;</span>点我<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</code></pre><p>如果你单击了#btn，那么在IE的页面中，这个事件会如下传播：</p>
 <blockquote>
 <p>div-&gt;body-&gt;html-&gt;document</p>
 </blockquote>
@@ -148,7 +156,7 @@ btn.attachEvent(<span class="string">"onclick"</span>,<span class="function"><sp
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zhanglun.github.io/2014/04/06/JavaScript事件机制/" data-id="7gcd45v2av0h5qqg" class="article-share-link">Share</a>
+      <a data-url="http://zhanglun.github.io/2014/04/06/JavaScript事件机制/" data-id="bwwr616jmhspm3q8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScrit/">JavaScrit</a></li></ul>
