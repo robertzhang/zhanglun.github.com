@@ -76,7 +76,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-04-06T11:40:00.000Z" itemprop="datePublished">4月 6 2014</time>
-    更新日期:<time datetime="2014-04-19T00:38:10.000Z" itemprop="dateModified">4月 19 2014</time>
+    更新日期:<time datetime="2014-04-19T02:26:15.000Z" itemprop="dateModified">4月 19 2014</time>
     
   </p>
 </header>
@@ -106,12 +106,14 @@
 <blockquote>
 <p>div-&gt;body-&gt;html-&gt;document</p>
 </blockquote>
+<p><img src="http://cl.ly/image/0p402u452W2R/event-bubbling.png" alt="事件冒泡"></p>
 <p>可以看到，事件首先在div上发生，div就是我们单击的元素。然后事件沿着DOM树向上传播，一直到document对象。<br>所有的现代浏览器都支持事件冒泡。IE9，Firefox，Chrome和Safari则将事件一直冒泡到window对象。</p>
 <h3 id="事件捕获">事件捕获</h3>
 <p>事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该是最后接收到事件。事件捕获的顾名思义就是在事件到达预定的目标之间捕获它。以上面的代码作为例子，那么单击div的时候会按照与冒泡相反的顺序触发事件。</p>
 <blockquote>
 <p>div-&gt;body-&gt;html-&gt;document</p>
 </blockquote>
+<p><img src="http://cl.ly/image/3b1P2i0D1m1q/event-capture.png" alt="事件捕获"></p>
 <p>在这个过程中，document对象先接收到click事件，然后事件沿着DOM树依次向下，一直传递到目标元素。<br>IE9，Firefox，Chrome和Safari都支持事件捕获。“DOM2级事件”规范要求事件应该从document对象开始传播，但实际上这些浏览器都是从window对象开始捕获事件。</p>
 <h3 id="DOM事件流">DOM事件流</h3>
 <p>DOM事件流比事件毛婆和事件捕获稍微复杂一点点。它规定的事件流包括三个阶段：事件捕获阶段，处于目标阶段和事件冒泡阶段。</p>
@@ -119,6 +121,7 @@
 <blockquote>
 <p>document-&gt;html-&gt;body-&gt;div-&gt;body-&gt;html-&gt;document</p>
 </blockquote>
+<p><img src="http://cl.ly/image/3b1P2i0D1m1q/event-dom.png" alt="DOM事件流"></p>
 <p>在DOM事件流中，实际的目标在捕获阶段不会接收到事件。也就是说在捕获阶段中，事件从document到<html\>再到<body\>后就停止了。下一个阶段是“处于目标”阶段，于是事件在目标元素上面发生，并且在事件处理中被看成了冒泡阶段的一部分。紧接着冒泡阶段发生，事件传回文档</p>
 <h2 id="事件处理程序">事件处理程序</h2>
 <h3 id="HTML事件处理程序">HTML事件处理程序</h3>
