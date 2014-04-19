@@ -76,7 +76,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-04-06T11:40:00.000Z" itemprop="datePublished">4月 6 2014</time>
-    更新日期:<time datetime="2014-04-18T13:58:12.000Z" itemprop="dateModified">4月 18 2014</time>
+    更新日期:<time datetime="2014-04-19T00:23:41.000Z" itemprop="dateModified">4月 19 2014</time>
     
   </p>
 </header>
@@ -155,7 +155,7 @@ btn.addEventListener(<span class="string">"click"</span>,<span class="function">
 btn.attachEvent(<span class="string">"onclick"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     alert(<span class="string">"alert"</span>);
 });
-</code></pre><p>要注意哟，第一个参数是“onclick”而不是“click”。前面说到，在DOM0级事件中，事件处理程序的作用域是元素的作用域，而在使用attachEvent()时，作用域变成了全局作用域，此时this等于window<br>    var btn=document.getElementById(“myBtn”);<br>    btn.attachEvent(“onclick”,function(){<br>        alert(this==widnow);//“true”<br>    });</p>
+</code></pre><p>要注意哟，第一个参数是“onclick”而不是“click”。前面说到，在DOM0级事件中，事件处理程序的作用域是元素的作用域，而在使用attachEvent()时，作用域变成了全局作用域，此时this等于window<br>        var btn=document.getElementById(“myBtn”);<br>        btn.attachEvent(“onclick”,function(){<br>            alert(this==widnow);//“true”<br>        });</p>
   
 	</div>
 		<footer class="article-footer clearfix">
