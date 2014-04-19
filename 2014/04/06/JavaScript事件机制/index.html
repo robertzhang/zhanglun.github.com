@@ -76,7 +76,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-04-06T11:40:00.000Z" itemprop="datePublished">4月 6 2014</time>
-    更新日期:<time datetime="2014-04-19T00:27:38.000Z" itemprop="dateModified">4月 19 2014</time>
+    更新日期:<time datetime="2014-04-19T00:38:10.000Z" itemprop="dateModified">4月 19 2014</time>
     
   </p>
 </header>
@@ -116,6 +116,10 @@
 <h3 id="DOM事件流">DOM事件流</h3>
 <p>DOM事件流比事件毛婆和事件捕获稍微复杂一点点。它规定的事件流包括三个阶段：事件捕获阶段，处于目标阶段和事件冒泡阶段。</p>
 <p>以前面的代码为例。单击div</p>
+<blockquote>
+<p>document-&gt;html-&gt;body-&gt;div-&gt;body-&gt;html-&gt;document</p>
+</blockquote>
+<p>在DOM事件流中，实际的目标在捕获阶段不会接收到事件。也就是说在捕获阶段中，事件从document到<html\>再到<body\>后就停止了。下一个阶段是“处于目标”阶段，于是事件在目标元素上面发生，并且在事件处理中被看成了冒泡阶段的一部分。紧接着冒泡阶段发生，事件传回文档</p>
 <h2 id="事件处理程序">事件处理程序</h2>
 <h3 id="HTML事件处理程序">HTML事件处理程序</h3>
 <pre><code>&lt;input <span class="class"><span class="keyword">type</span>=</span><span class="string">"button"</span> <span class="keyword">value</span>=<span class="string">"Click"</span> id=<span class="string">"go"</span> onclick=<span class="string">"showMessage()"</span> /&gt;
@@ -155,8 +159,12 @@ btn.addEventListener(<span class="string">"click"</span>,<span class="function">
 btn.attachEvent(<span class="string">"onclick"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     alert(<span class="string">"alert"</span>);
 });
-</code></pre><p>要注意哟，第一个参数是“onclick”而不是“click”。前面说到，在DOM0级事件中，事件处理程序的作用域是元素的作用域，而在使用attachEvent()时，作用域变成了全局作用域，此时this等于window<br>    var btn=document.getElementById(“myBtn”);<br>    btn.attachEvent(“onclick”,function(){<br>        alert(this==widnow);//“true”<br>    });</p>
-  
+</code></pre><p>要注意哟，第一个参数是“onclick”而不是“click”。前面说到，在DOM0级事件中，事件处理程序的作用域是元素的作用域，而在使用attachEvent()时，作用域变成了全局作用域，此时this等于window </p>
+<pre><code><span class="keyword">var</span> btn=document.getElementById(<span class="string">"myBtn"</span>);
+btn.attachEvent(<span class="string">"onclick"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+    alert(<span class="keyword">this</span>==widnow);<span class="comment">//"true"</span>
+});
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 
