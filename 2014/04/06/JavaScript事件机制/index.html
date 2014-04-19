@@ -76,7 +76,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-04-06T11:40:00.000Z" itemprop="datePublished">4月 6 2014</time>
-    更新日期:<time datetime="2014-04-19T02:26:15.000Z" itemprop="dateModified">4月 19 2014</time>
+    更新日期:<time datetime="2014-04-19T02:39:37.000Z" itemprop="dateModified">4月 19 2014</time>
     
   </p>
 </header>
@@ -85,7 +85,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流"><span class="toc-number">1.</span> <span class="toc-text">事件流</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件冒泡"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件捕获"><span class="toc-number">1.2.</span> <span class="toc-text">事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM事件流"><span class="toc-number">1.3.</span> <span class="toc-text">DOM事件流</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#事件处理程序"><span class="toc-number">2.</span> <span class="toc-text">事件处理程序</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML事件处理程序"><span class="toc-number">2.1.</span> <span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM0级事件处理程序"><span class="toc-number">2.2.</span> <span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2级事件处理程序"><span class="toc-number">2.3.</span> <span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE中的事件处理程序"><span class="toc-number">2.4.</span> <span class="toc-text">IE中的事件处理程序</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流"><span class="toc-number">1.</span> <span class="toc-text">事件流</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件冒泡"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件捕获"><span class="toc-number">1.2.</span> <span class="toc-text">事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM事件流"><span class="toc-number">1.3.</span> <span class="toc-text">DOM事件流</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#事件处理程序"><span class="toc-number">2.</span> <span class="toc-text">事件处理程序</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML事件处理程序"><span class="toc-number">2.1.</span> <span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM0级事件处理程序"><span class="toc-number">2.2.</span> <span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2级事件处理程序"><span class="toc-number">2.3.</span> <span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE中的事件处理程序"><span class="toc-number">2.4.</span> <span class="toc-text">IE中的事件处理程序</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
 		</div>
 		
 		<p>JavaScript和HTML之间的交互是通过事件实现的。事件，就是文档或者浏览器窗口中发生的一些特定的交互瞬间。可以使用事件处理程序来预订事件，以便在事件发生的时候执行响应的代码……<br><a id="more"></a></p>
@@ -167,7 +167,39 @@ btn.attachEvent(<span class="string">"onclick"</span>,<span class="function"><sp
 btn.attachEvent(<span class="string">"onclick"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     alert(<span class="keyword">this</span>==widnow);<span class="comment">//"true"</span>
 });
-</code></pre>  
+</code></pre><p>与addEventListener()一样，attachEvent()也可以用来为一个元素天剑多个事件处理程序，不过与DOM方法不同的是，事件处理程序不是按照添加的顺序执行，而是以相反的顺序执行。<br>可以使用detachEvent()移除使用attachEvent()添加的事件处理程序。与DOM方法一样必须提供相同的参数，添加的匿名函数不能被移除。</p>
+<p>因此跨浏览器的事件处理程序可以这么写： （来自《JavaScript高级程序设计》） </p>
+<pre><code>var EventUtil = {
+    addHandler: <span class="keyword">function</span> (element, <span class="class"><span class="keyword">type</span>, <span class="title">handler</span>) {</span>
+        <span class="keyword">if</span> (element.addEventListener) {
+            element.addEventListener(<span class="class"><span class="keyword">type</span>, <span class="title">handler</span>, <span class="title">false</span>);</span>
+        } <span class="keyword">else</span> <span class="keyword">if</span> (element.attachEvent) {
+            element.attachEvent(<span class="string">"on"</span> + <span class="class"><span class="keyword">type</span>, <span class="title">handler</span>);</span>
+        } <span class="keyword">else</span> {
+            element[<span class="string">"on"</span> + <span class="class"><span class="keyword">type</span>] =</span> handler;
+        }
+    },
+    removeHandler: <span class="keyword">function</span> (element, <span class="class"><span class="keyword">type</span>, <span class="title">handler</span>) {</span>
+        <span class="keyword">if</span> (element.removeEventListener) {
+            element.removeEventListener(<span class="class"><span class="keyword">type</span>, <span class="title">handler</span>, <span class="title">false</span>);</span>
+        } <span class="keyword">else</span> <span class="keyword">if</span> (element.detachEvent) {
+            element.detachEvent(<span class="string">"on"</span> + <span class="class"><span class="keyword">type</span>, <span class="title">handler</span>);</span>
+        } <span class="keyword">else</span> {
+            element[<span class="string">"on"</span> + <span class="class"><span class="keyword">type</span>] =</span> <span class="keyword">null</span>;
+        }
+    }
+};
+var btn = document.getElementById(<span class="string">"myBtn"</span>);
+var handler = <span class="keyword">function</span> () {
+        alert(<span class="string">"Clicked"</span>);
+    };
+EventUtil.addHandler(btn, <span class="string">"click"</span>, handler);
+EventUtil.removeHandler(btn, <span class="string">"click"</span>, handler);
+</code></pre><h2 id="参考资料">参考资料</h2>
+<ul>
+<li>《JavaScript高级程序设计》</li>
+</ul>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
@@ -238,7 +270,7 @@ var duoshuoQuery = {short_name:"crispelite"};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流"><span class="toc-number">1.</span> <span class="toc-text">事件流</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件冒泡"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件捕获"><span class="toc-number">1.2.</span> <span class="toc-text">事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM事件流"><span class="toc-number">1.3.</span> <span class="toc-text">DOM事件流</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#事件处理程序"><span class="toc-number">2.</span> <span class="toc-text">事件处理程序</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML事件处理程序"><span class="toc-number">2.1.</span> <span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM0级事件处理程序"><span class="toc-number">2.2.</span> <span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2级事件处理程序"><span class="toc-number">2.3.</span> <span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE中的事件处理程序"><span class="toc-number">2.4.</span> <span class="toc-text">IE中的事件处理程序</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流"><span class="toc-number">1.</span> <span class="toc-text">事件流</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件冒泡"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件捕获"><span class="toc-number">1.2.</span> <span class="toc-text">事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM事件流"><span class="toc-number">1.3.</span> <span class="toc-text">DOM事件流</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#事件处理程序"><span class="toc-number">2.</span> <span class="toc-text">事件处理程序</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML事件处理程序"><span class="toc-number">2.1.</span> <span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM0级事件处理程序"><span class="toc-number">2.2.</span> <span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2级事件处理程序"><span class="toc-number">2.3.</span> <span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE中的事件处理程序"><span class="toc-number">2.4.</span> <span class="toc-text">IE中的事件处理程序</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
   </div>
 
 <div id="asidepart">
