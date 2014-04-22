@@ -77,7 +77,7 @@ Node.js 不是一种独立的语言，与 PHP，Python 等”既是语言优势�
     </p>
   <p class="article-time">
     <time datetime="2014-04-19T13:55:00.000Z" itemprop="datePublished">4月 19 2014</time>
-    更新日期:<time datetime="2014-04-22T09:25:34.000Z" itemprop="dateModified">4月 22 2014</time>
+    更新日期:<time datetime="2014-04-22T09:27:01.000Z" itemprop="dateModified">4月 22 2014</time>
     
   </p>
 </header>
@@ -143,18 +143,20 @@ res<span class="preprocessor">.output</span>()<span class="comment">;</span>
 <p>总而言之，当需要将某个包作为工程运作时的一部分时，通过本地模式获取，如果要在命令行中使用，则使用全局安装。</p>
 <h2 id="关于调试">关于调试</h2>
 <h3 id="我爱F5">我爱F5</h3>
-<p>在开发 Node.js 实现的 HTTP 应用时，无论修改了代码的哪一部分，都必须重新运行才能奏效。因为 Node.js 只有在第一次引用到某部分时才会解析脚本文件，之后都会直接访问内存，避免重复载入，以提高速度。 supervisor 可以监视代码的修改，并自动重启Node.js。使用 npm 以全局模式 安装 supervisor 之后，可以直接在命令行中使用下面的命令启动 server.js。</p>
+<p>在开发 Node.js 实现的 HTTP 应用时，无论修改了代码的哪一部分，都必须重新运行才能奏效。因为 Node.js 只有在第一次引用到某部分时才会解析脚本文件，之后都会直接访问内存，避免重复载入，以提高速度。 supervisor 可以监视代码的修改，并自动重启Node.js。使用 npm 以全局模式安装 supervisor 之后，可以直接在命令行中使用下面的命令启动 server.js。</p>
 <pre><code>supervisor <span class="keyword">server</span>.js 
 </code></pre><h3 id="调试方法">调试方法</h3>
 <p>调试的方法有：命令行调试，使用 Eclipse 调试等。个人倾向使用 node-inspector 进行调试。</p>
 <h4 id="使用_node-inspector">使用 node-inspector</h4>
 <pre><code>npm install <span class="attribute">-g</span> node<span class="attribute">-inspector</span> <span class="comment">//命令安装 node-inspector </span>
 </code></pre><p>然后在终端或者CMD中敲入</p>
-<pre><code>node --<span class="keyword">debug</span>-brk=<span class="number">5858</span> <span class="keyword">debug</span>.js  <span class="comment">//连接你要出错的脚本的调试服务器</span>
+<pre><code>node --<span class="keyword">debug</span>-brk=<span class="number">5858</span> <span class="keyword">debug</span>.js  <span class="comment">//连接你要测试的脚本的调试服务器</span>
 node-inspector                  <span class="comment">//启动 node-inspector </span>
 </code></pre><p>在浏览器中打开 “<a href="http://127.0.0.1:3000/debug?port=5858&quot;，便可以看到调试工具。" target="_blank">http://127.0.0.1:3000/debug?port=5858&quot;，便可以看到调试工具。</a><br>具体可以<a href="&quot;http://www.cnblogs.com/dolphinX/p/3485345.html&quot;">点这里</a> 。</p>
 <p><strong>个人笔记，仅供参考</strong></p>
+<blockquote>
 <p>参考:《 Node.js 开发指南》</p>
+</blockquote>
   
 	</div>
 		<footer class="article-footer clearfix">
