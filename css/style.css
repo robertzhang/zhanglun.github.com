@@ -1901,6 +1901,9 @@ footer {
 .copyright a:hover {
   color: #2ca6cb;
 }
+.blog-statement {
+  padding: 1.5em 4%;
+}
 .article-content pre,
 .article-content .highlight {
   background: #2d2d2d;
