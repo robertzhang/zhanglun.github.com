@@ -76,7 +76,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-04-26T11:45:00.000Z" itemprop="datePublished">4月 26 2014</time>
-    更新日期:<time datetime="2014-04-26T13:17:22.000Z" itemprop="dateModified">4月 26 2014</time>
+    更新日期:<time datetime="2014-04-26T13:54:07.000Z" itemprop="dateModified">4月 26 2014</time>
     
   </p>
 </header>
@@ -113,7 +113,7 @@ rocker.name(); <span class="regexp">//</span> <span class="string">'My name is L
 </code></pre><p>在另一个文件中调用 <code>rocker.js</code>:</p>
 <pre><code><span class="reserved">var</span> rocker = <span class="built_in">require</span>(<span class="string">'./rocker.js'</span>);
 rocker.name(); <span class="regexp">//</span> <span class="attribute">TypeError</span>: Object ROCK IT! has <span class="literal">no</span> method <span class="string">'name'</span>
-</code></pre><p>上述例子中的 <code>rocker<code> 模块完全将 <code>exports.name</code> 忽略了，只返回了一个 String 字符串：<code>‘ROCK IT!’</code> 。 从这个例子你大概明白了：你的模块并不一定总是一个模块的实例(module instance)，它可以是任何合法的 JavaScript 对象——boolean, number, date, JSON, string, function, array 和其他的。你的模块可以是任何你设置的  <code>module.exports</code> 的值。如果你没有明确地为  <code>module.exports</code> 设置任何值，那么 <code>exports</code> 中的属性会自动添加到 <code>module.exports<code> 中，然后并返回它。</p>
+</code></pre><p>上述例子中的 <code>rocker</code> 模块完全将 <code>exports.name</code> 忽略了，只返回了一个 String 字符串：<code>‘ROCK IT!’</code> 。 从这个例子你大概明白了：你的模块并不一定总是一个模块的实例(module instance)，它可以是任何合法的 JavaScript 对象——boolean, number, date, JSON, string, function, array 和其他的。你的模块可以是任何你设置的  <code>module.exports</code> 的值。如果你没有明确地为  <code>module.exports</code> 设置任何值，那么 <code>exports</code> 中的属性会自动添加到 <code>module.exports<code> 中，然后并返回它。</p>
 <p>在这种情况下，你的模块时一个类：</p>
 <pre><code>module.exports = <span class="function"><span class="keyword">function</span><span class="params">(name, age)</span> {</span>
     <span class="keyword">this</span>.name = name;
