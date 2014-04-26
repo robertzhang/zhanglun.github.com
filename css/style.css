@@ -455,7 +455,7 @@ body >header a {
 #textlogo h1.site-name {
   width: 86%;
 /*font-family font-custom-family*/
-  font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', "Hiragino Sans GB", "STXihei", "微软雅黑", serif;
+  font-family: "Hiragino Sans GB", "微软雅黑", "STXihei", Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
   font-size: 200%;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
