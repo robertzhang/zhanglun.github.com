@@ -1,96 +1,69 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   
-    <title>sass基本语法 | 张小伦爱学习</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="张小伦爱学习">
-    
-    <meta name="description" content="sass是一种基于ruby语言开发的CSS预处理器。它可以使用变量，嵌套，混入，继承，运算，函数等编程语言具有的特性进行CSS的开发，使得CSS的开发变得简单粗暴清晰可维护。sass有两种后缀文件格式：一种是sass后缀形式；一种是scss后缀形式。我选择的后缀是scss">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <title>sass基本语法 | 张小伦爱学习</title>
+  <meta name="author" content="张小伦爱学习">
+  
+  <meta name="description" content="sass是一种基于ruby语言开发的CSS预处理器。它可以使用变量，嵌套，混入，继承，运算，函数等编程语言具有的特性进行CSS的开发，使得CSS的开发变得简单粗暴清晰可维护。sass有两种后缀文件格式：一种是sass后缀形式；一种是scss后缀形式。我选择的后缀是scss">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="sass基本语法"/>
+  <meta property="og:site_name" content="张小伦爱学习"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="张小伦爱学习" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
 </head>
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.svg" alt="张小伦爱学习" title="张小伦爱学习"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="张小伦爱学习">张小伦爱学习</a></h1>
-				<h2 class="blog-motto">勿忘初心  方得始终</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">首页</a></li>
-					
-						<li><a href="/archives">存档</a></li>
-					
-						<li><a href="http://ncuey.sinaapp.com/CrispElite/">关于</a></li>
-					
-						<li><a href="https://github.com/zhanglun">Github</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:zhanglun.github.io/">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">张小伦爱学习</a></h1>
+  <h2><a href="/">勿忘初心  方得始终</a></h2>
 </div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="http://ncuey.sinaapp.com/CrispElite/">关于</a></li>
+    
+      <li><a href="https://github.com/zhanglun">Github</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-10T12:20:00.000Z"><a href="/2014/03/10/sass语法/">3月 10 2014</a></time>
+      
+      
+  
+    <h1 class="title">sass基本语法</h1>
+  
 
     </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2014/03/10/sass语法/" title="sass基本语法" itemprop="url">sass基本语法</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2014-03-10T12:20:00.000Z" itemprop="datePublished">3月 10 2014</time>
-    更新日期:<time datetime="2014-04-18T13:23:13.000Z" itemprop="dateModified">4月 18 2014</time>
-    
-  </p>
-</header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">1.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量(variable)"><span class="toc-number">2.</span> <span class="toc-text">变量(variable)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#嵌套(nesting)"><span class="toc-number">3.</span> <span class="toc-text">嵌套(nesting)</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#选择器嵌套"><span class="toc-number">3.1.</span> <span class="toc-text">选择器嵌套</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性嵌套"><span class="toc-number">3.2.</span> <span class="toc-text">属性嵌套</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#混合(mixin)"><span class="toc-number">4.</span> <span class="toc-text">混合(mixin)</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#声明一个mixin模块"><span class="toc-number">4.0.1.</span> <span class="toc-text">声明一个mixin模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#调用声明的mixin模块"><span class="toc-number">4.0.2.</span> <span class="toc-text">调用声明的mixin模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#@content的诞生"><span class="toc-number">4.0.3.</span> <span class="toc-text">@content的诞生</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#继承(extend)"><span class="toc-number">5.</span> <span class="toc-text">继承(extend)</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#占位选择器"><span class="toc-number">5.0.1.</span> <span class="toc-text">占位选择器</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#运算"><span class="toc-number">6.</span> <span class="toc-text">运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">7.</span> <span class="toc-text">函数</span></a></li><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#sass几个常见用的颜色函数"><span class="toc-number">7.0.0.1.</span> <span class="toc-text">sass几个常见用的颜色函数</span></a></li></ol></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#选择和循环"><span class="toc-number">8.</span> <span class="toc-text">选择和循环</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#选择"><span class="toc-number">8.0.1.</span> <span class="toc-text">选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for循环"><span class="toc-number">8.0.2.</span> <span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sass中的三目运算"><span class="toc-number">8.0.3.</span> <span class="toc-text">sass中的三目运算</span></a></li></ol>
-		</div>
-		
-		<p><strong><a href="http://sass-lang.com/" target="_blank">sass</a></strong>是一种基于ruby语言开发的CSS预处理器。它可以使用变量，嵌套，混入，继承，运算，函数等编程语言具有的特性进行CSS的开发，使得CSS的开发变得简单粗暴清晰可维护。<br>sass有两种后缀文件格式：一种是sass后缀形式；一种是scss后缀形式。我选择的后缀是scss<br><a id="more"></a></p>
+    <div class="entry">
+      
+        <p><strong><a href="http://sass-lang.com/" target="_blank">sass</a></strong>是一种基于ruby语言开发的CSS预处理器。它可以使用变量，嵌套，混入，继承，运算，函数等编程语言具有的特性进行CSS的开发，使得CSS的开发变得简单粗暴清晰可维护。<br>sass有两种后缀文件格式：一种是sass后缀形式；一种是scss后缀形式。我选择的后缀是scss<br><a id="more"></a></p>
 <h2 id="注释">注释</h2>
 <p>sass有两种注释方式：一种是”/* */“，标准的CSS注释；还有一种是双斜杠形式”//“。<br>前者在编译之后会作为注释在CSS文件中出现，但是后者不会。  </p>
 <h2 id="变量(variable)">变量(variable)</h2>
@@ -480,274 +453,135 @@ $type<span class="value">: monster;</span>
 <blockquote>
 <p>基本语法结束，在学习过程中感觉到了sass的魅力。编写CSS变得有趣，而且简单粗暴！！！！！</p>
 </blockquote>
-  
-	</div>
-	<div class="blog-statement">
-		<p>本博客所有博文皆为原创，转载请注明出处，谢谢</p>
-		
-	</div>
-		<footer class="article-footer clearfix">
 
-  <div class="article-tags">
+      
+    </div>
+    <footer>
+      
+        
   
-  <span></span> <a href="/tags/CSS/">CSS</a><a href="/tags/sass/">sass</a>
+  <div class="categories">
+    <a href="/categories/前端/">前端</a>
   </div>
 
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/前端/">前端</a>
-</div>
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="http://zhanglun.github.io/2014/03/10/sass语法/" data-title="sass基本语法 | 张小伦爱学习" data-tsina="null" class="share clearfix">
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>, <a href="/tags/sass/">sass</a>
   </div>
 
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2014/03/15/高性能网站优化-创建快速响应的Web/" title="高性能网站优化-创建快速响应的Web">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  高性能网站优化-创建快速响应的Web</span>
-</a>
-</div>
-
-
-</nav>
-
-	
-
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"crispelite"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-<!-- 多说公共JS代码 end -->
-
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">1.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量(variable)"><span class="toc-number">2.</span> <span class="toc-text">变量(variable)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#嵌套(nesting)"><span class="toc-number">3.</span> <span class="toc-text">嵌套(nesting)</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#选择器嵌套"><span class="toc-number">3.1.</span> <span class="toc-text">选择器嵌套</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性嵌套"><span class="toc-number">3.2.</span> <span class="toc-text">属性嵌套</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#混合(mixin)"><span class="toc-number">4.</span> <span class="toc-text">混合(mixin)</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#声明一个mixin模块"><span class="toc-number">4.0.1.</span> <span class="toc-text">声明一个mixin模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#调用声明的mixin模块"><span class="toc-number">4.0.2.</span> <span class="toc-text">调用声明的mixin模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#@content的诞生"><span class="toc-number">4.0.3.</span> <span class="toc-text">@content的诞生</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#继承(extend)"><span class="toc-number">5.</span> <span class="toc-text">继承(extend)</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#占位选择器"><span class="toc-number">5.0.1.</span> <span class="toc-text">占位选择器</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#运算"><span class="toc-number">6.</span> <span class="toc-text">运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">7.</span> <span class="toc-text">函数</span></a></li><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#sass几个常见用的颜色函数"><span class="toc-number">7.0.0.1.</span> <span class="toc-text">sass几个常见用的颜色函数</span></a></li></ol></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#选择和循环"><span class="toc-number">8.</span> <span class="toc-text">选择和循环</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#选择"><span class="toc-number">8.0.1.</span> <span class="toc-text">选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for循环"><span class="toc-number">8.0.2.</span> <span class="toc-text">for循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sass中的三目运算"><span class="toc-number">8.0.3.</span> <span class="toc-text">sass中的三目运算</span></a></li></ol>
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
   </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
 
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
 
   
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-			<li><a href="/categories/前端/" title="前端">前端<sup>5</sup></a></li>
-		
-			<li><a href="/categories/随笔/" title="随笔">随笔<sup>1</sup></a></li>
-		
-		</ul>
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://zhanglun.github.io//2014/03/10/sass语法/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:zhanglun.github.io/">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/前端/">前端</a><small>5</small></li>
+  
+    <li><a href="/categories/随笔/">随笔</a><small>1</small></li>
+  
+  </ul>
 </div>
 
 
   
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>1</sup></a></li>
-		
-			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>4</sup></a></li>
-		
-			<li><a href="/tags/sass/" title="sass">sass<sup>1</sup></a></li>
-		
-			<li><a href="/tags/web优化/" title="web优化">web优化<sup>3</sup></a></li>
-		
-			<li><a href="/tags/译文/" title="译文">译文<sup>2</sup></a></li>
-		
-			<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
-		
-		</ul>
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>1</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>1</small></li>
+  
+    <li><a href="/tags/Node.js/">Node.js</a><small>4</small></li>
+  
+    <li><a href="/tags/sass/">sass</a><small>1</small></li>
+  
+    <li><a href="/tags/web优化/">web优化</a><small>3</small></li>
+  
+    <li><a href="/tags/译文/">译文</a><small>2</small></li>
+  
+    <li><a href="/tags/随笔/">随笔</a><small>1</small></li>
+  
+  </ul>
 </div>
-
 
 </aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 张小伦爱学习
+  
 </div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> Hello ,I&#39;m CrispElite in Google. <br/>
-			This is my blog, believe it or not.</p>
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		<a href="http://weibo.com/2671026564" target="_blank" title="weibo"></a>
-		
-		
-		
-		<a href="https://github.com/zhanglun" target="_blank" title="github"></a>
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
-		
-		<a href="http://zhanglun.github.io/" target="_blank" title="张小伦爱学习">张小伦爱学习</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
-
-
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"null"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
-
-
-
-
-
-  </body>
+</body>
 </html>
