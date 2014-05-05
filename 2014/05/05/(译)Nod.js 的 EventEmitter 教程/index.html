@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>(��)Node.js�� EventEmitter �̳� | 张小伦爱学习</title>
+    <title>(译)Node.js的 EventEmitter 教程 | 张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
     
-    <meta name="description" content="ԭ�ı��⣺Node.js EventEmitter Tutorial ԭ�����ӣ�http://www.hacksparrow.com/node-js-eventemitter-tutorial.html">
+    <meta name="description" content="原文标题：Node.js EventEmitter Tutorial 原文链接：http://www.hacksparrow.com/node-js-eventemitter-tutorial.html">
     
     
     
@@ -70,7 +70,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/05/05/(译)Nod.js 的 EventEmitter 教程/" title="(��)Node.js�� EventEmitter �̳�" itemprop="url">(��)Node.js�� EventEmitter �̳�</a>
+      <a href="/2014/05/05/(译)Nod.js 的 EventEmitter 教程/" title="(译)Node.js的 EventEmitter 教程" itemprop="url">(译)Node.js的 EventEmitter 教程</a>
   </h1>
   <p class="article-author">By
     
@@ -78,7 +78,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-05-05T13:23:00.000Z" itemprop="datePublished">5月 5 2014</time>
-    更新日期:<time datetime="2014-05-05T14:19:10.000Z" itemprop="dateModified">5月 5 2014</time>
+    更新日期:<time datetime="2014-05-05T14:20:41.000Z" itemprop="dateModified">5月 5 2014</time>
     
   </p>
 </header>
@@ -91,39 +91,39 @@
 		</div>
 		
 		<blockquote>
-<p>ԭ�ı��⣺Node.js EventEmitter Tutorial<br> ԭ�����ӣ�<a href="http://www.hacksparrow.com/node-js-eventemitter-tutorial.html" target="_blank">http://www.hacksparrow.com/node-js-eventemitter-tutorial.html</a></p>
+<p>原文标题：Node.js EventEmitter Tutorial<br> 原文链接：<a href="http://www.hacksparrow.com/node-js-eventemitter-tutorial.html" target="_blank">http://www.hacksparrow.com/node-js-eventemitter-tutorial.html</a></p>
 </blockquote>
 <a id="more"></a>
 
-<p>��˵�� Node.js �е� <code>EventEmitter</code> ������Ҳ����֪���󲿷����õ� Node.js �� ��ʹ������Ҳ�������Ƕ� <code>EventEmitter</code> �������棬����û��˭�����ͣ�</p>
-<p>�������̳��У��һ�����һЩ���� <code>EventEmitter</code> ���� demo��</p>
-<p>��������Ϥ���� Node.js �е��¼����磺 <code>on data</code> �� <code>on end</code> �� <code>on error</code> �ȵ�֮���ġ��¼����ƵĹ������������޷죬ʮ���������ѵ������������ԵĻ����¼��� Node.js �ⶼ������ <code>EventEmitter</code> �࣬�����ܻ�˵��Щ�ⶼ�̳��� <code>EventEmitter</code>��</p>
-<p> <code>EventEmitter</code> ��ǿ��֮�������������õ� Node.js �⣬��Ҳ����ӵ������</p>
-<p>չʾ <code>EventEmitter</code> ���������÷�������ͨ��һ�����ӣ�����������</p>
+<p>听说过 Node.js 中的 <code>EventEmitter</code> 类吗？也许你知道大部分内置的 Node.js 库 都使用它，也许你总是对 <code>EventEmitter</code> 充满好奇，但是没有谁向解释？</p>
+<p>在这个教程中，我会给你一些关于 <code>EventEmitter</code> 类的 demo。</p>
+<p>你必须熟悉各种 Node.js 中的事件比如： <code>on data</code> ， <code>on end</code> ， <code>on error</code> 等等之类的。事件机制的工作做得天衣无缝，十分完美，难道不是吗？所以的基于事件的 Node.js 库都依赖于 <code>EventEmitter</code> 类，你可能会说那些库都继承了 <code>EventEmitter</code>。</p>
+<p> <code>EventEmitter</code> 的强大之处不仅限于内置的 Node.js 库，你也可以拥有它！</p>
+<p>展示 <code>EventEmitter</code> 能力的最好方法就是通过一个例子，看看这个：</p>
 <pre><code><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;
 <span class="keyword">var</span> radium = <span class="keyword">new</span> EventEmitter();
 
-<span class="comment">//���� &lt;code&gt;radiation&lt;/code&gt; �¼�</span>
+<span class="comment">//绑定 &lt;code&gt;radiation&lt;/code&gt; 事件</span>
 radium.on(<span class="string">'radiation'</span>, <span class="function"><span class="keyword">function</span><span class="params">(ray)</span> {</span>
     console.log(ray);
 });
 
 setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-    <span class="comment">//���� &lt;code&gt;radiation&lt;/code&gt; �¼�</span>
+    <span class="comment">//触发 &lt;code&gt;radiation&lt;/code&gt; 事件</span>
     radium.emit(<span class="string">'radiation'</span>, <span class="string">'GAMMA'</span>);
 }, <span class="number">1000</span>);
-</code></pre><p>ע�⵽�˰ɣ�����һ���¼�������һ���¼������󣬴����¼���ͨ���¼����������Ƕ�ô�ļ򵥡����е���Щ��Ϊ <code>EventEmitter</code> ��ħ����ʵ�֡� <code>EventEmitter</code> �ñ�д���˾��ȵ� Node.js �����ÿ��ܡ�</p>
-<p>���������ӻ���һ�� <code>EventEmitter</code> ��ʵ����������ô�����ܴ���һ���̳��� <code>EventEmitter</code> �����أ�Node.js ��һ�򣬽��� <code>util</code> �Ŀ⣬����һ�򷽷��� <code>inherits</code>��ʵ�ֶ���֮��ԭ�ͼ̳еĺ��������ǿ��Ժ����ɵ�ͨ������һ�����̳���һ���ࣨ׼ȷ��˵���ܽ��ࣩ��</p>
+</code></pre><p>注意到了吧，创建一个事件，添加一个事件监听器，触发事件，通过事件传递数据是多么的简单。所有的这些因为 <code>EventEmitter</code> 的魔力而实现。 <code>EventEmitter</code> 让编写令人惊讶的 Node.js 库变得可能。</p>
+<p>上面的例子基于一个 <code>EventEmitter</code> 的实例，我们怎么做才能创建一个继承自 <code>EventEmitter</code> 的类呢？Node.js 有一个，叫做 <code>util</code> 的库，它有一个方法： <code>inherits</code>，实现对象之间原型继承的函数。我们可以很轻松的通过它让一个类继承另一个类（准确的说不能叫类）：</p>
 <pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);
 util.inherits(MyClass, SuperClass);
-</code></pre><p>ʹ�� <code>util.inherits()</code> �����Ǵ�����һ���̳��� <code>EventEmitter</code> ��ģ�飬ע�������Ĵ��룺</p>
-<p><em>radio.js</em> �е����ݣ�</p>
+</code></pre><p>使用 <code>util.inherits()</code> ，我们创建了一个继承自 <code>EventEmitter</code> 的模块，注意下面的代码：</p>
+<p><em>radio.js</em> 中的内容：</p>
 <pre><code><span class="keyword">var</span> util = <span class="keyword">require</span>(<span class="string">'util'</span>);
 <span class="keyword">var</span> EventEmitter = <span class="keyword">require</span>(<span class="string">'events'</span>).EventEmitter;
 
-<span class="comment">//һ������ "freq" �� "name" ���ԵĶ���</span>
+<span class="comment">//一个包含 "freq" 和 "name" 属性的对象</span>
 <span class="keyword">var</span> Radio = <span class="function"><span class="keyword">function</span><span class="params">(station)</span> {</span>
-    <span class="comment">//���� ָ��Radio��this����setTimeout()��ʹ��</span>
+    <span class="comment">//保存 指向Radio的this，在setTimeout()中使用</span>
     <span class="keyword">var</span> <span class="keyword">self</span> = this;
 
     setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
@@ -141,39 +141,39 @@ util.inherits(MyClass, SuperClass);
 
 };
 
-<span class="comment">//Radio �̳� EventEmitter</span>
+<span class="comment">//Radio 继承 EventEmitter</span>
 util.inherits(Radio, EventEmitter);
 
 module.exports = Radio;
-</code></pre><p>���Ǵ�����һ���̳��� <code>EventEmitter</code> ��ģ�顣�����������ǿ���������һ��������ʹ�ô�����ģ�顣</p>
-<p><em>example.js</em> �е����ݣ�</p>
+</code></pre><p>我们创建了一个继承自 <code>EventEmitter</code> 的模块。接下来让我们看看如何在一个例子中使用创建的模块。</p>
+<p><em>example.js</em> 中的内容：</p>
 <pre><code><span class="keyword">var</span> Radio = <span class="built_in">require</span>(<span class="string">'./radio.js'</span>);
 
 <span class="keyword">var</span> station = {
     freq: <span class="string">'80.16'</span>,
     name: <span class="string">'Rock N Roll Radio'</span>,
 };
-<span class="comment">// ����һ��Radioʵ��</span>
+<span class="comment">// 创建一个Radio实例</span>
 <span class="keyword">var</span> radio = <span class="keyword">new</span> Radio(station);
 
-<span class="comment">//����һ����open���¼�������</span>
+<span class="comment">//添加一个“open”事件监听器</span>
 radio.on(<span class="string">'open'</span>, <span class="function"><span class="keyword">function</span><span class="params">(station)</span> {</span>
     console.log(<span class="string">'"%s" FM %s OPENED'</span>, station.name, station.freq);
     console.log(<span class="string">'? ??'</span>);
 });
 
-<span class="comment">//����һ����close���¼�������</span>
+<span class="comment">//添加一个“close”事件监听器</span>
 radio.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span><span class="params">(station)</span> {</span>
     console.log(<span class="string">'"%s" FM %s CLOSED'</span>, station.name, station.freq);
 });
-</code></pre><p>���� example.js ׼���ü�֤ <code>EventEmitter</code> ��ħ����</p>
-<p>������ΪĳЩԭ���㲻��ʹ�� <code>util</code> ģ�飬�����������ַ�������չһ���ࡣ</p>
+</code></pre><p>运行 example.js 准备好见证 <code>EventEmitter</code> 的魔力。</p>
+<p>如果因为某些原因你不想使用 <code>util</code> 模块，你可以用这种方法来拓展一个类。</p>
 <pre><code>Apple.<span class="keyword">prototype</span> = Object.create(<span class="keyword">require</span>(<span class="string">'events'</span>).EventEmitter.<span class="keyword">prototype</span>);
-</code></pre><p> <code>EventEmitter</code> ���԰�����д����ӡ�����̵Ļ����¼��� Node.js ģ�顣ͬʱ����Ϊ��Ϊһ�� Node.js �Ŀ�����Ա�������յĹ��� <code>EventEmitter</code> ��֪ʶ������Ӱ�����Ĺ���Ч�ʡ����ԣ�ȷ�����Ķ���<a href="http://nodejs.org/api/events.html" target="_blank">���� <code>EventEmitter</code> �ĸ���ϸ������</a>�������������������������ι����ġ������㲻�˽� <code>EventEmitter</code> ������Ҳ���˽� Nodejs.js</p>
-<p>(��)</p>
-<p><strong>����ˮƽ�д����ߣ��������Ĳ��Ĳ����ǰ���ԭ��һ��һ�䷭�룬�����������Լ������µ����⡣���в���֮������ӭָ����</strong><br><strong>���˱ʼǣ��򹩲ο���</strong></p>
+</code></pre><p> <code>EventEmitter</code> 可以帮你编写令人印象深刻的基于事件的 Node.js 模块。同时，作为作为一个 Node.js 的开发人员，你掌握的关于 <code>EventEmitter</code> 的知识会大大影响你的工作效率。所以，确保你阅读了<a href="http://nodejs.org/api/events.html" target="_blank">关于 <code>EventEmitter</code> 的更详细的资料</a>，并且掌握里里外外它是如何工作的。如果你不了解 <code>EventEmitter</code> ，那你也不了解 Nodejs.js</p>
+<p>(完)</p>
+<p><strong>翻译水平有待提高，所翻译的博文并不是按照原文一句一句翻译，而是添加了自己对文章的理解。如有不正之处，欢迎指正！</strong><br><strong>个人笔记，仅供参考。</strong></p>
 <blockquote>
-<p>�ο�:<br><a href="http://www.hacksparrow.com/node-js-eventemitter-tutorial.html">http://www.hacksparrow.com/node-js-eventemitter-tutorial.html
+<p>参考:<br><a href="http://www.hacksparrow.com/node-js-eventemitter-tutorial.html">http://www.hacksparrow.com/node-js-eventemitter-tutorial.html
 </a></p>
 </blockquote>
   
@@ -186,7 +186,7 @@ radio.on(<span class="string">'close'</span>, <span class="function"><span class
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/����/">����</a><a href="/tags/Node.js/">Node.js</a>
+  <span></span> <a href="/tags/译文/">译文</a><a href="/tags/Node.js/">Node.js</a>
   </div>
 
 
@@ -194,7 +194,7 @@ radio.on(<span class="string">'close'</span>, <span class="function"><span class
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/05/05/(译)Nod.js 的 EventEmitter 教程/" data-title="(��)Node.js�� EventEmitter �̳� | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/05/05/(译)Nod.js 的 EventEmitter 教程/" data-title="(译)Node.js的 EventEmitter 教程 | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -273,11 +273,9 @@ var duoshuoQuery = {short_name:"crispelite"};
 		
 			<li><a href="/tags/web优化/" title="web优化">web优化<sup>3</sup></a></li>
 		
-			<li><a href="/tags/译文/" title="译文">译文<sup>2</sup></a></li>
+			<li><a href="/tags/译文/" title="译文">译文<sup>3</sup></a></li>
 		
 			<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
-		
-			<li><a href="/tags/����/" title="����">����<sup>1</sup></a></li>
 		
 		</ul>
 </div>
