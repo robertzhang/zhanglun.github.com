@@ -78,7 +78,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-05-05T13:23:00.000Z" itemprop="datePublished">5月 5 2014</time>
-    更新日期:<time datetime="2014-05-05T14:20:41.000Z" itemprop="dateModified">5月 5 2014</time>
+    更新日期:<time datetime="2014-05-06T03:24:58.000Z" itemprop="dateModified">5月 6 2014</time>
     
   </p>
 </header>
@@ -95,21 +95,21 @@
 </blockquote>
 <a id="more"></a>
 
-<p>听说过 Node.js 中的 <code>EventEmitter</code> 类吗？也许你知道大部分内置的 Node.js 库 都使用它，也许你总是对 <code>EventEmitter</code> 充满好奇，但是没有谁向解释？</p>
-<p>在这个教程中，我会给你一些关于 <code>EventEmitter</code> 类的 demo。</p>
-<p>你必须熟悉各种 Node.js 中的事件比如： <code>on data</code> ， <code>on end</code> ， <code>on error</code> 等等之类的。事件机制的工作做得天衣无缝，十分完美，难道不是吗？所以的基于事件的 Node.js 库都依赖于 <code>EventEmitter</code> 类，你可能会说那些库都继承了 <code>EventEmitter</code>。</p>
+<p>听说过 Node.js 中的 <code>EventEmitter</code> 吗？也许你知道大部分内置的 Node.js 库 都使用它，也许你总是对 <code>EventEmitter</code> 充满好奇，但是没有谁向你解释？</p>
+<p>在这个教程中，我会给你一些关于 <code>EventEmitter</code> 类的例子。</p>
+<p>你必须熟悉各种 Node.js 中的事件比如： <code>on data</code> ， <code>on end</code> ， <code>on error</code> 等等之类的。事件机制的工作做得天衣无缝，十分完美，难道不是吗？所有的基于事件的 Node.js 库都依赖于 <code>EventEmitter</code> 类，你可能会说那些库都继承了 <code>EventEmitter</code>。</p>
 <p> <code>EventEmitter</code> 的强大之处不仅限于内置的 Node.js 库，你也可以拥有它！</p>
 <p>展示 <code>EventEmitter</code> 能力的最好方法就是通过一个例子，看看这个：</p>
 <pre><code><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;
 <span class="keyword">var</span> radium = <span class="keyword">new</span> EventEmitter();
 
-<span class="comment">//绑定 &lt;code&gt;radiation&lt;/code&gt; 事件</span>
+<span class="comment">//绑定 radiation 事件</span>
 radium.on(<span class="string">'radiation'</span>, <span class="function"><span class="keyword">function</span><span class="params">(ray)</span> {</span>
     console.log(ray);
 });
 
 setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-    <span class="comment">//触发 &lt;code&gt;radiation&lt;/code&gt; 事件</span>
+    <span class="comment">//触发 radiation 事件</span>
     radium.emit(<span class="string">'radiation'</span>, <span class="string">'GAMMA'</span>);
 }, <span class="number">1000</span>);
 </code></pre><p>注意到了吧，创建一个事件，添加一个事件监听器，触发事件，通过事件传递数据是多么的简单。所有的这些因为 <code>EventEmitter</code> 的魔力而实现。 <code>EventEmitter</code> 让编写令人惊讶的 Node.js 库变得可能。</p>
@@ -134,7 +134,6 @@ util.inherits(MyClass, SuperClass);
         <span class="keyword">self</span>.emit(<span class="string">'close'</span>, station);
     }, <span class="number">5000</span>);
 
-    <span class="comment">// EventEmitters inherit a single event listener, see it in action</span>
     this.on(<span class="string">'newListener'</span>, <span class="function"><span class="keyword">function</span><span class="params">(listener)</span> {</span>
         console.log(<span class="string">'Event Listener: '</span> + listener);
     });
@@ -143,7 +142,6 @@ util.inherits(MyClass, SuperClass);
 
 <span class="comment">//Radio 继承 EventEmitter</span>
 util.inherits(Radio, EventEmitter);
-
 module.exports = Radio;
 </code></pre><p>我们创建了一个继承自 <code>EventEmitter</code> 的模块。接下来让我们看看如何在一个例子中使用创建的模块。</p>
 <p><em>example.js</em> 中的内容：</p>
