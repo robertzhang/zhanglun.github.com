@@ -78,7 +78,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-05-08T13:34:00.000Z" itemprop="datePublished">5月 8 2014</time>
-    更新日期:<time datetime="2014-05-09T02:30:39.000Z" itemprop="dateModified">5月 9 2014</time>
+    更新日期:<time datetime="2014-05-09T02:31:54.000Z" itemprop="dateModified">5月 9 2014</time>
     
   </p>
 </header>
@@ -87,13 +87,13 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#计算布局"><span class="toc-number">1.</span> <span class="toc-text">计算布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用高级方法设置颜色"><span class="toc-number">2.</span> <span class="toc-text">使用高级方法设置颜色</span></a></li><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Lighten/Darken函数，修改亮度"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">Lighten/Darken函数，修改亮度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Saturate/Desaturate函数，修改饱和度"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">Saturate/Desaturate函数，修改饱和度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#adjust-hue函数，修改色度"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">adjust-hue函数，修改色度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Mix函数，混合颜色"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">Mix函数，混合颜色</span></a></li></ol></ol></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#导入其他sass文件"><span class="toc-number">3.</span> <span class="toc-text">导入其他sass文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个字体库"><span class="toc-number">4.</span> <span class="toc-text">创建一个字体库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@extend保持语义化"><span class="toc-number">5.</span> <span class="toc-text">使用@extend保持语义化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@mixin保持代码的整洁"><span class="toc-number">6.</span> <span class="toc-text">使用@mixin保持代码的整洁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用mixin创建动态的属性名和选择器"><span class="toc-number">7.</span> <span class="toc-text">利用mixin创建动态的属性名和选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@each为不同变量复制相同的样式"><span class="toc-number">8.</span> <span class="toc-text">使用@each为不同变量复制相同的样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@if让mixin模块更灵活"><span class="toc-number">9.</span> <span class="toc-text">使用@if让mixin模块更灵活</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#计算布局"><span class="toc-number">1.</span> <span class="toc-text">计算布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用高级方法设置颜色"><span class="toc-number">2.</span> <span class="toc-text">使用高级方法设置颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导入其他sass文件"><span class="toc-number">3.</span> <span class="toc-text">导入其他sass文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个字体库"><span class="toc-number">4.</span> <span class="toc-text">创建一个字体库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@extend保持语义化"><span class="toc-number">5.</span> <span class="toc-text">使用@extend保持语义化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@mixin保持代码的整洁"><span class="toc-number">6.</span> <span class="toc-text">使用@mixin保持代码的整洁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用mixin创建动态的属性名和选择器"><span class="toc-number">7.</span> <span class="toc-text">利用mixin创建动态的属性名和选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@each为不同变量复制相同的样式"><span class="toc-number">8.</span> <span class="toc-text">使用@each为不同变量复制相同的样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@if让mixin模块更灵活"><span class="toc-number">9.</span> <span class="toc-text">使用@if让mixin模块更灵活</span></a></li></ol>
 		</div>
 		
 		<p>很久很久以前，我根据网上的博文总结写了一篇博客<a href="http://zhanglun.github.io/2014/03/10/sass%E8%AF%AD%E6%B3%95/">《sass基本语法》</a>。在那之后平时虽然不太用到sass（因为没项目做，只能自己写着玩玩），但是也还一直在试着使用sass，提高熟练度。现在写写在学习过程中的总结。</p>
 <a id="more"></a>
 
-<p>众所周知，。<strong><a href="http://sass-lang.com/" target="_blank">sass</a></strong>是众多CSS预处理器中的一员，基于ruby语言开发的。它可以使用变量，嵌套，混入，继承，运算，函数等编程语言具有的特性进行CSS的开发，使得CSS的开发变得简单粗暴清晰可维护。相比书写CSS文件，书写sass多了很多不曾有过的快感。前面的提到的那些CSS没有的特性，灵活运用之后，可能会让你大吃一惊。</p>
+<p>众所周知，<strong><a href="http://sass-lang.com/" target="_blank">sass</a></strong>是众多CSS预处理器中的一员，基于ruby语言开发的。它可以使用变量，嵌套，混入，继承，运算，函数等编程语言具有的特性进行CSS的开发，使得CSS的开发变得简单粗暴清晰可维护。相比书写CSS文件，书写sass多了很多不曾有过的快感。前面的提到的那些CSS没有的特性，灵活运用之后，可能会让你大吃一惊。</p>
 <h3 id="计算布局">计算布局</h3>
 <p>sass允许我们在书写过程中使用“加减乘除”运算，我们可以这样写 <code>width:$page_width*0.1</code>，width的值将不再是硬编码的一个固定的数值，而是变量$page_width中定义的值的0.1倍。当编译成CSS文件时，width会输出一个确定的值。比如说我们定义一个页面的内容区域宽度为<code>500px</code>，然后我们可以以这个宽度为基础，用一定的比例来设置侧边栏的宽度:$page_width*0.2。当我们想修改页面内容区域的宽度的时候，侧边栏会按照设定的比例变化而不用手动修改。要注意的是，如果使用不同单位进行运算，sass会试着编译，如果没有编译成功便会输出error。比如：你不能用20px和2em相加，这没有意义。</p>
 <pre><code><span class="comment">//使用加减乘除标准运算，定义变量</span>
@@ -127,7 +127,7 @@
 }
 </code></pre><h3 id="使用高级方法设置颜色">使用高级方法设置颜色</h3>
 <p>如果我们想修改颜色，比如提供亮度，增加饱和度，我们要打开调色盘，然后选中找到你想要的颜色，然后找到对应的颜色代码，复制，粘贴……而sass通过添加一些函数让整个过程变得简单轻松。下面是sass中常用的颜色函数</p>
-<h6 id="Lighten/Darken函数，修改亮度">Lighten/Darken函数，修改亮度</h6>
+<p><strong>Lighten/Darken函数，修改亮度</strong></p>
 <pre><code><span class="preprocessor">#page{</span>
     <span class="keyword">color</span>:lighten(<span class="preprocessor">#336699,20%);</span>
 }
@@ -135,7 +135,7 @@
 <span class="preprocessor">#page{</span>
     <span class="keyword">color</span>:<span class="preprocessor">#6699cc;</span>
 }
-</code></pre><h6 id="Saturate/Desaturate函数，修改饱和度">Saturate/Desaturate函数，修改饱和度</h6>
+</code></pre><p><strong>Saturate/Desaturate函数，修改饱和度</strong></p>
 <pre><code>$main_color<span class="value">:<span class="hexcolor">#336699</span>;</span>
 <span class="id">#page</span>{
     <span class="attribute">color</span><span class="value">:saturate($main_color,<span class="number">30</span>%);</span>
@@ -144,7 +144,7 @@
 <span class="id">#page</span>{
     <span class="attribute">color</span><span class="value">:<span class="hexcolor">#1466b8</span>;</span>
 }
-</code></pre><h6 id="adjust-hue函数，修改色度">adjust-hue函数，修改色度</h6>
+</code></pre><p><strong>adjust-hue函数，修改色度</strong></p>
 <pre><code>$main_color<span class="value">:<span class="hexcolor">#336699</span>;</span>
 <span class="id">#page</span>{
     <span class="attribute">color</span><span class="value">:adjust-hue($main_color,<span class="number">180</span>);</span>
@@ -161,9 +161,9 @@
 <span class="id">#page</span> {
     <span class="attribute">color</span><span class="value">: <span class="hexcolor">#8f3d8f</span>;</span> 
 }
-</code></pre><h6 id="grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。">grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。</h6>
+</code></pre><p><strong>grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。</strong></p>
 <pre><code>desaturate(<span class="comment">#336699,100%);</span>
-</code></pre><h6 id="Mix函数，混合颜色">Mix函数，混合颜色</h6>
+</code></pre><p><strong>Mix函数，混合颜色</strong></p>
 <pre><code><span class="id">#page</span>{
     <span class="attribute">color</span><span class="value">:mix(<span class="hexcolor">#336699</span>,<span class="hexcolor">#993266</span>);</span>
 }
@@ -387,7 +387,7 @@ var duoshuoQuery = {short_name:"crispelite"};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#计算布局"><span class="toc-number">1.</span> <span class="toc-text">计算布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用高级方法设置颜色"><span class="toc-number">2.</span> <span class="toc-text">使用高级方法设置颜色</span></a></li><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Lighten/Darken函数，修改亮度"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">Lighten/Darken函数，修改亮度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Saturate/Desaturate函数，修改饱和度"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">Saturate/Desaturate函数，修改饱和度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#adjust-hue函数，修改色度"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">adjust-hue函数，修改色度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Mix函数，混合颜色"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">Mix函数，混合颜色</span></a></li></ol></ol></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#导入其他sass文件"><span class="toc-number">3.</span> <span class="toc-text">导入其他sass文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个字体库"><span class="toc-number">4.</span> <span class="toc-text">创建一个字体库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@extend保持语义化"><span class="toc-number">5.</span> <span class="toc-text">使用@extend保持语义化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@mixin保持代码的整洁"><span class="toc-number">6.</span> <span class="toc-text">使用@mixin保持代码的整洁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用mixin创建动态的属性名和选择器"><span class="toc-number">7.</span> <span class="toc-text">利用mixin创建动态的属性名和选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@each为不同变量复制相同的样式"><span class="toc-number">8.</span> <span class="toc-text">使用@each为不同变量复制相同的样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@if让mixin模块更灵活"><span class="toc-number">9.</span> <span class="toc-text">使用@if让mixin模块更灵活</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#计算布局"><span class="toc-number">1.</span> <span class="toc-text">计算布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用高级方法设置颜色"><span class="toc-number">2.</span> <span class="toc-text">使用高级方法设置颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导入其他sass文件"><span class="toc-number">3.</span> <span class="toc-text">导入其他sass文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个字体库"><span class="toc-number">4.</span> <span class="toc-text">创建一个字体库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@extend保持语义化"><span class="toc-number">5.</span> <span class="toc-text">使用@extend保持语义化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@mixin保持代码的整洁"><span class="toc-number">6.</span> <span class="toc-text">使用@mixin保持代码的整洁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用mixin创建动态的属性名和选择器"><span class="toc-number">7.</span> <span class="toc-text">利用mixin创建动态的属性名和选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@each为不同变量复制相同的样式"><span class="toc-number">8.</span> <span class="toc-text">使用@each为不同变量复制相同的样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用@if让mixin模块更灵活"><span class="toc-number">9.</span> <span class="toc-text">使用@if让mixin模块更灵活</span></a></li></ol>
   </div>
 
 <div id="asidepart">
