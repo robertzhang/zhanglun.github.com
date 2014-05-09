@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>学习sass时了解到的一些好玩特性 | 张小伦爱学习</title>
+    <title>ѧϰsassʱ�˽⵽��һЩ�������� | 张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
     
-    <meta name="description" content="很久很久以前，我根据网上的博文总结写了一篇博客《sass基本语法》。在那之后平时虽然不太用到sass（因为没项目做，只能自己写着玩玩），但是也还一直在试着使用sass，提高熟练度。现在写写在学习过程中的总结。">
+    <meta name="description" content="�ܾúܾ���ǰ���Ҹ������ϵĲ����ܽ�д��һƪ������sass�����﷨��������֮��ƽʱ��Ȼ��̫�õ�sass����Ϊû��Ŀ����ֻ���Լ�д�����棩������Ҳ��һֱ������ʹ��sass�����������ȡ�����дд��ѧϰ�����е��ܽᡣ">
     
     
     
@@ -70,7 +70,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/05/08/学习sass时了解到的一些好玩特性/" title="学习sass时了解到的一些好玩特性" itemprop="url">学习sass时了解到的一些好玩特性</a>
+      <a href="/2014/05/08/学习sass时了解到的一些好玩特性/" title="ѧϰsassʱ�˽⵽��һЩ��������" itemprop="url">ѧϰsassʱ�˽⵽��һЩ��������</a>
   </h1>
   <p class="article-author">By
     
@@ -78,7 +78,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-05-08T13:34:00.000Z" itemprop="datePublished">5月 8 2014</time>
-    更新日期:<time datetime="2014-05-08T23:16:02.000Z" itemprop="dateModified">5月 9 2014</time>
+    更新日期:<time datetime="2014-05-09T02:08:17.000Z" itemprop="dateModified">5月 9 2014</time>
     
   </p>
 </header>
@@ -87,23 +87,23 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#计算布局"><span class="toc-number">1.</span> <span class="toc-text">计算布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用高级方法设置颜色"><span class="toc-number">2.</span> <span class="toc-text">使用高级方法设置颜色</span></a></li><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Lighten/Darken函数，修改亮度"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">Lighten/Darken函数，修改亮度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Saturate/Desaturate函数，修改饱和度"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">Saturate/Desaturate函数，修改饱和度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#adjust-hue函数，修改色度"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">adjust-hue函数，修改色度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Mix函数，混合颜色"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">Mix函数，混合颜色</span></a></li></ol></ol></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#导入其他sass文件"><span class="toc-number">3.</span> <span class="toc-text">导入其他sass文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个字体库"><span class="toc-number">4.</span> <span class="toc-text">创建一个字体库</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#���㲼��"><span class="toc-number">1.</span> <span class="toc-text">���㲼��</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ʹ�ø߼�����������ɫ"><span class="toc-number">2.</span> <span class="toc-text">ʹ�ø߼�����������ɫ</span></a></li><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Lighten/Darken�������޸�����"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">Lighten/Darken�������޸�����</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Saturate/Desaturate�������޸ı��Ͷ�"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">Saturate/Desaturate�������޸ı��Ͷ�</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#adjust-hue�������޸�ɫ��"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">adjust-hue�������޸�ɫ��</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#grayscale������100%\���ͱ��Ͷȣ����򷽷�������������һ����Ч����"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">grayscale������100%\���ͱ��Ͷȣ����򷽷�������������һ����Ч����</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Mix������������ɫ"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">Mix������������ɫ</span></a></li></ol></ol></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#��������sass�ļ�"><span class="toc-number">3.</span> <span class="toc-text">��������sass�ļ�</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#����һ��������"><span class="toc-number">4.</span> <span class="toc-text">����һ��������</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ʹ��@extend�������廯"><span class="toc-number">5.</span> <span class="toc-text">ʹ��@extend�������廯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ʹ��@mixin���ִ���������"><span class="toc-number">6.</span> <span class="toc-text">ʹ��@mixin���ִ���������</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#����mixin������̬����������ѡ����"><span class="toc-number">7.</span> <span class="toc-text">����mixin������̬����������ѡ����</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ʹ��@eachΪ��ͬ����������ͬ����ʽ"><span class="toc-number">8.</span> <span class="toc-text">ʹ��@eachΪ��ͬ����������ͬ����ʽ</span></a></li></ol>
 		</div>
 		
-		<p>很久很久以前，我根据网上的博文总结写了一篇博客<a href="http://zhanglun.github.io/2014/03/10/sass%E8%AF%AD%E6%B3%95/">《sass基本语法》</a>。在那之后平时虽然不太用到sass（因为没项目做，只能自己写着玩玩），但是也还一直在试着使用sass，提高熟练度。现在写写在学习过程中的总结。</p>
+		<p>�ܾúܾ���ǰ���Ҹ������ϵĲ����ܽ�д��һƪ����<a href="http://zhanglun.github.io/2014/03/10/sass%E8%AF%AD%E6%B3%95/">��sass�����﷨��</a>������֮��ƽʱ��Ȼ��̫�õ�sass����Ϊû��Ŀ����ֻ���Լ�д�����棩������Ҳ��һֱ������ʹ��sass�����������ȡ�����дд��ѧϰ�����е��ܽᡣ</p>
 <a id="more"></a>
 
-<p>众所周知，。<strong><a href="http://sass-lang.com/" target="_blank">sass</a></strong>是众多CSS预处理器中的一员，基于ruby语言开发的。它可以使用变量，嵌套，混入，继承，运算，函数等编程语言具有的特性进行CSS的开发，使得CSS的开发变得简单粗暴清晰可维护。相比书写CSS文件，书写sass多了很多不曾有过的快感。前面的提到的那些CSS没有的特性，灵活运用之后，可能会让你大吃一惊。</p>
-<h3 id="计算布局">计算布局</h3>
-<p>sass允许我们在书写过程中使用“加减乘除”运算，我们可以这样写 <code>width:$page_width<em>0.1</code> ，width的值将不再是硬编码的一个固定的数值，而是变量$page_width中定义的值的0.1倍。当编译成CSS文件时，width会输出一个确定的值。比如说我们定义一个页面的内容区域宽度为<code>500px</code>，然后我们可以以这个宽度为基础，用一定的比例来设置侧边栏的宽度:$page_width</em>0.2。当我们想修改页面内容区域的宽度的时候，侧边栏会按照设定的比例变化而不用手动修改。要注意的是，如果使用不同单位进行运算，sass会试着编译，如果没有编译成功便会输出error。比如：你不能用20px和2em相加，这没有意义。</p>
-<pre><code><span class="comment">//使用加减乘除标准运算，定义变量</span>
+<p>������֪����<strong><a href="http://sass-lang.com/" target="_blank">sass</a></strong>���ڶ�CSSԤ�������е�һԱ������ruby���Կ����ġ�������ʹ�ñ�����Ƕ�ף����룬�̳У����㣬�����ȱ������Ծ��е����Խ���CSS�Ŀ�����ʹ��CSS�Ŀ������ü򵥴ֱ�������ά����������дCSS�ļ�����дsass���˺ܶ಻���й��Ŀ��С�ǰ�����ᵽ����ЩCSSû�е����ԣ���������֮�󣬿��ܻ���������һ����</p>
+<h3 id="���㲼��">���㲼��</h3>
+<p>sass������������д������ʹ�á��Ӽ��˳������㣬���ǿ�������д <code>width:$page_width*0.1</code>��width��ֵ��������Ӳ������һ���̶�����ֵ�����Ǳ���$page_width�ж�����ֵ��0.1������������CSS�ļ�ʱ��width������һ��ȷ����ֵ������˵���Ƕ���һ��ҳ����������������Ϊ<code>500px</code>��Ȼ�����ǿ�������������Ϊ��������һ���ı��������ò������Ŀ���:$page_width*0.2�����������޸�ҳ�����������Ŀ��ȵ�ʱ�򣬲������ᰴ���趨�ı����仯�������ֶ��޸ġ�Ҫע�����ǣ�����ʹ�ò�ͬ��λ�������㣬sass�����ű��룬����û�б����ɹ���������error�����磺�㲻����20px��2em���ӣ���û�����塣</p>
+<pre><code><span class="comment">//ʹ�üӼ��˳���׼���㣬��������</span>
 <span class="variable">$width</span>: <span class="number">10</span>px;
 <span class="variable">$double_width</span>: <span class="variable">$width</span> <span class="subst">*</span> <span class="number">2</span>;
 <span class="variable">$half_width</span>: <span class="variable">$width</span> <span class="subst">/</span> <span class="number">2</span>;
 <span class="variable">$width_plus_2</span>: <span class="variable">$width</span> <span class="subst">+</span> <span class="number">2</span>;
 <span class="variable">$width_minus_2</span>: <span class="variable">$width</span> <span class="subst">-</span> <span class="number">2</span>;
 
-<span class="comment">//在行间使用计算式</span>
+<span class="comment">//���м�ʹ�ü���ʽ</span>
 <span class="variable">$width</span>: <span class="number">500</span>px;
 <span class="variable">$sidebar_percent</span>: <span class="number">0.2</span>;
 <span class="variable">#page</span> {
@@ -115,7 +115,7 @@
         width: <span class="variable">$width</span> <span class="subst">*</span> (<span class="number">1</span> <span class="subst">-</span> <span class="variable">$sidebar_percent</span>);
     }
 }
-<span class="comment">//编译输出</span>
+<span class="comment">//��������</span>
 <span class="variable">#page</span> {
     width: <span class="number">500</span>px;
 }
@@ -125,26 +125,26 @@
 <span class="variable">#page</span> <span class="variable">#content</span> {
     width: <span class="number">400</span>px;
 }
-</code></pre><h3 id="使用高级方法设置颜色">使用高级方法设置颜色</h3>
-<p>如果我们想修改颜色，比如提供亮度，增加饱和度，我们要打开调色盘，然后选中找到你想要的颜色，然后找到对应的颜色代码，复制，粘贴……而sass通过添加一些函数让整个过程变得简单轻松。下面是sass中常用的颜色函数</p>
-<h6 id="Lighten/Darken函数，修改亮度">Lighten/Darken函数，修改亮度</h6>
+</code></pre><h3 id="ʹ�ø߼�����������ɫ">ʹ�ø߼�����������ɫ</h3>
+<p>�����������޸���ɫ�������ṩ���ȣ����ӱ��Ͷȣ�����Ҫ�򿪵�ɫ�̣�Ȼ��ѡ���ҵ�����Ҫ����ɫ��Ȼ���ҵ���Ӧ����ɫ���룬���ƣ�ճ��������sassͨ������һЩ�������������̱��ü������ɡ�������sass�г��õ���ɫ����</p>
+<h6 id="Lighten/Darken�������޸�����">Lighten/Darken�������޸�����</h6>
 <pre><code><span class="preprocessor">#page{</span>
     <span class="keyword">color</span>:lighten(<span class="preprocessor">#336699,20%);</span>
 }
-<span class="comment">//编译后的CSS</span>
+<span class="comment">//��������CSS</span>
 <span class="preprocessor">#page{</span>
     <span class="keyword">color</span>:<span class="preprocessor">#6699cc;</span>
 }
-</code></pre><h6 id="Saturate/Desaturate函数，修改饱和度">Saturate/Desaturate函数，修改饱和度</h6>
+</code></pre><h6 id="Saturate/Desaturate�������޸ı��Ͷ�">Saturate/Desaturate�������޸ı��Ͷ�</h6>
 <pre><code>$main_color<span class="value">:<span class="hexcolor">#336699</span>;</span>
 <span class="id">#page</span>{
     <span class="attribute">color</span><span class="value">:saturate($main_color,<span class="number">30</span>%);</span>
 }
-<span class="comment">//编译后的CSS</span>
+<span class="comment">//��������CSS</span>
 <span class="id">#page</span>{
     <span class="attribute">color</span><span class="value">:<span class="hexcolor">#1466b8</span>;</span>
 }
-</code></pre><h6 id="adjust-hue函数，修改色度">adjust-hue函数，修改色度</h6>
+</code></pre><h6 id="adjust-hue�������޸�ɫ��">adjust-hue�������޸�ɫ��</h6>
 <pre><code>$main_color<span class="value">:<span class="hexcolor">#336699</span>;</span>
 <span class="id">#page</span>{
     <span class="attribute">color</span><span class="value">:adjust-hue($main_color,<span class="number">180</span>);</span>
@@ -153,7 +153,7 @@
     <span class="attribute">color</span><span class="value">:adjust-hue(desaturate($main_color,<span class="number">10</span>%),<span class="number">90</span>);</span>
 }
 
-<span class="comment">//编译之后的CSS</span>
+<span class="comment">//����֮����CSS</span>
 <span class="id">#page</span> {
     <span class="attribute">color</span><span class="value">: <span class="hexcolor">#996633</span>;</span>
 }
@@ -161,26 +161,139 @@
 <span class="id">#page</span> {
     <span class="attribute">color</span><span class="value">: <span class="hexcolor">#8f3d8f</span>;</span> 
 }
-</code></pre><h6 id="grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。">grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。</h6>
+</code></pre><h6 id="grayscale������100%\���ͱ��Ͷȣ����򷽷�������������һ����Ч����">grayscale������100%\���ͱ��Ͷȣ����򷽷�������������һ����Ч����</h6>
 <pre><code>desaturate(<span class="comment">#336699,100%);</span>
-</code></pre><h6 id="Mix函数，混合颜色">Mix函数，混合颜色</h6>
+</code></pre><h6 id="Mix������������ɫ">Mix������������ɫ</h6>
 <pre><code><span class="id">#page</span>{
     <span class="attribute">color</span><span class="value">:mix(<span class="hexcolor">#336699</span>,<span class="hexcolor">#993266</span>);</span>
 }
-<span class="comment">//编译后的CSS</span>
+<span class="comment">//��������CSS</span>
 <span class="id">#page</span> {
     <span class="attribute">color</span><span class="value">: <span class="hexcolor">#664c7f</span>;</span>
 }
-</code></pre><p>有了这些，颜色方案再怎么改也不怕了！！</p>
-<h3 id="导入其他sass文件">导入其他sass文件</h3>
-<p>在开发的过程中，将一个大样式表拆分成若干个小的样式表对网页的性能的影响不言而喻。如果一个简单的页面去包含了五六个样式表，这会严重影响到页面的加载速度。 通过&lt;@import “filename”&gt;可以将很多文件转换成一个文件。这样一来，开发过程中，将模块拆分开方便开发，而最终还是只有一个样式表被引用到页面中。</p>
-<p>注意，使用<code>@import</code>引入其他文件时，如果不希望引入的文件也生成CSS文件，只要将引入的文件名前面加上一个下划线。在main.scss中colors.scss引入之后会编译生成mian.css和colors.css两个文件。将colors.scss文件名改成“_color.scss”，main.scss中依旧是“@import “colors”;”（不用加上文件名前面的下划线），然后重新编译，便不会输出colors.css文件。切记切记。</p>
-<h3 id="创建一个字体库">创建一个字体库</h3>
-<p>在普通的CSS文件中，我们通常这样定义字体：</p>
+</code></pre><p>������Щ����ɫ��������ô��Ҳ�����ˣ���</p>
+<h3 id="��������sass�ļ�">��������sass�ļ�</h3>
+<p>�ڿ����Ĺ����У���һ������ʽ�����ֳ����ɸ�С����ʽ������ҳ�����ܵ�Ӱ�첻�Զ���������һ���򵥵�ҳ��ȥ��������������ʽ������������Ӱ�쵽ҳ���ļ����ٶȡ� ͨ��&lt;@import “filename”&gt;���Խ��ܶ��ļ�ת����һ���ļ�������һ�������������У���ģ�����ֿ����㿪���������ջ���ֻ��һ����ʽ�������õ�ҳ���С�</p>
+<p>ע�⣬ʹ��<code>@import</code>���������ļ�ʱ��������ϣ���������ļ�Ҳ����CSS�ļ���ֻҪ���������ļ���ǰ������һ���»��ߡ���main.scss��colors.scss����֮������������mian.css��colors.css�����ļ�����colors.scss�ļ����ĳɡ�_color.scss����main.scss�������ǡ�@import “colors”;�������ü����ļ���ǰ�����»��ߣ���Ȼ�����±��룬�㲻������colors.css�ļ����м��мǡ�</p>
+<h3 id="����һ��������">����һ��������</h3>
+<p>����ͨ��CSS�ļ��У�����ͨ�������������壺</p>
 <pre><code><span class="attribute">font-family</span><span class="value">: <span class="string">"helvetica neue"</span>, arial, helvetica, freesans,<span class="string">"liberation sans"</span>, <span class="string">"numbus sans l"</span>, sans-serif;</span>
-</code></pre><p>我们必须按照我们顺序列出我们需要的字体。如果我们想在页面中切换使用的字体，我们要从这里复制，粘贴到那里……</p>
-<blockquote>
-<p>未完待续……</p>
+</code></pre><p>���Ǳ��밴������˳���г�������Ҫ�����塣������������ҳ�����л�ʹ�õ����壬����Ҫ�����︴�ƣ�ճ������������������м򵥵ķ����ˡ�������ҳ���Ķ�������������ʹ�ñ���������Щ�߳�����������������ʹ����Щ����ʱ��ֻ��ʹ�����ȶ����õı�����Ϊ�˷������������Խ�Ĭ�ϵ������Ķ��������ļ���ͷ�������ߵ���д��һ���ļ��У�ʹ��<code>@import</code>���롣</p>
+<h3 id="ʹ��@extend�������廯">ʹ��@extend�������廯</h3>
+<p>�������廯��һ����ѧ��ʹ�������Ϻ��߼������Ǹ��ݹ���ȡ���ֶ�������ʽ�����磺����ʹ��<code>.bule_button</code>������ʹ��<code>.checkout_button</code>������Զ��ǰ�����á�������д��һЩ��������һ����ɫ��ť����Ҫ������Ӧ�õ��ܶ಻ͬ���ܵİ�ť�ϣ�������ô�����ѵ�һ�����ĸ��ƣ�ճ������sass�е�<code>@extend</code>���Դ�class����ID�и������Ժ�����ֵ��Ȼ�����������ӵ���һ��class����ID���������С�</p>
+<p>����Ҫȥȷ���ڱ����Ѿ�������class��</p>
+<pre><code><span class="class">.blue_button</span> <span class="rules">{
+    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#336699</span></span></span>;
+    <span class="rule"><span class="attribute">font-weight</span>:<span class="value"> bold</span></span>;
+    <span class="rule"><span class="attribute">color</span>:<span class="value"> white</span></span>;
+    <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">5</span>px</span></span>; 
+<span class="rule">}</span></span>
+</code></pre><p>Ȼ�����Խ�����չ��������class����ID��</p>
+<pre><code><span class="class">.checkout_button</span> {
+    <span class="at_rule">@<span class="keyword">extend</span><span class="preprocessor"> .blue_button</span>     
+}
+//��������CSS<span class="preprocessor">
+.blue_button</span>,<span class="preprocessor"> .checkout_button</span> {</span>
+    <span class="attribute">background</span><span class="value">: <span class="hexcolor">#336699</span>;</span>
+    <span class="attribute">font-weight</span><span class="value">: bold;</span>
+    <span class="attribute">color</span><span class="value">: white;</span>
+    <span class="attribute">padding</span><span class="value">: <span class="number">5</span>px;</span> 
+}
+</code></pre><p>����ע�⵽������CSS������ѡ������<code>@extend</code>�������Ǻϲ����е����Ժ�����ֵ��ͬʱҲ���ϲ���չ�Ķ�����������class����ID��</p>
+<h3 id="ʹ��@mixin���ִ���������">ʹ��@mixin���ִ���������</h3>
+<p>����mixin���Խ�һ����CSS�Ӵ����г��򣬶�����һ��ģ���ظ�ʹ�á������ڹ��õ���ʽ�ж���һ��mixinģ�飬��Ҫ��ʱ��ֱ�ӵ��þͺ��ˡ�ͬʱ��mixin�����Դ��ݲ�����</p>
+<p>ʹ��<code>@mixin</code>����һ��mixinģ�飬����������mixin���������Դ��ݲ�����ͬʱ�������趨һ��Ĭ��ֵ�� ����Ҫע�⣬����Ҳ��Ҫ��$��ʼ�����Ҳ������Ͳ���ֵ����<strong>ð��</strong>�ֿ�������һ�������ж���ֵ������box-shadow�ȣ��ǲ������ñ�����������������ʾ” <strong>$variable…</strong> “ ��</p>
+<pre><code><span class="comment">//����һ��mixinģ��</span>
+<span class="comment">//boxRect</span>
+@mixin boxRect(<span class="variable">$W</span>:<span class="number">20</span>px,<span class="variable">$H</span>:<span class="number">20</span>px){
+    width:<span class="variable">$W</span>;
+    height:<span class="variable">$H</span>;
+}
+<span class="comment">//box-shadow</span>
+@mixin shadow(<span class="variable">$shadow...</span>){
+    <span class="attribute">-webkit</span><span class="attribute">-box</span><span class="attribute">-shadow</span>:<span class="variable">$shadow</span>;
+    <span class="attribute">-moz</span><span class="attribute">-box</span><span class="attribute">-shadow</span>:<span class="variable">$shadow</span>;
+    <span class="attribute">-o</span><span class="attribute">-box</span><span class="attribute">-shadow</span>:<span class="variable">$shadow</span>;
+    box<span class="attribute">-shadow</span>:<span class="variable">$shadow</span>;
+}
+</code></pre><p>������mixinģ��֮����ʹ��<code>@include</code>��mixinsҲ�ܹ��������ִ��������廯�������Զ���һ��<code>blue_text</code>ģ�飬Ȼ������Ӧ�õ��������廯��class����ID�У�����<code>product_title</code>��ͨ��<code>@import</code>��mixinģ���������ļ��У��ܺõطָ���ʽ������������ʽ�������ࡣ</p>
+<pre><code><span class="comment">//����һ��ģ��</span>
+<span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> blue_text</span> {</span>
+    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#336699</span>;</span>
+    <span class="attribute">font-family</span><span class="value">: helvetica, arial, sans-serif;</span>
+    <span class="attribute">font-size</span><span class="value">: <span class="number">20</span>px;</span>
+    <span class="attribute">font-variant</span><span class="value">: small-caps;</span> 
+}
+<span class="comment">//ʹ��ģ��</span>
+<span class="class">.product_title</span> {
+    <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> blue_text</span>;</span>     
+}
+<span class="comment">//��������CSS</span>
+<span class="class">.product_title</span> {
+    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#336699</span>;</span>
+    <span class="attribute">font-family</span><span class="value">: helvetica, arial, sans-serif;</span>
+    <span class="attribute">font-size</span><span class="value">: <span class="number">20</span>px;</span>
+    <span class="attribute">font-variant</span><span class="value">: small-caps;</span> 
+}
+</code></pre><h3 id="����mixin������̬����������ѡ����">����mixin������̬����������ѡ����</h3>
+<p>��<code>#{}</code>����ס�������Ϳ����ˣ�����������</p>
+<pre><code><span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> car_make</span>($car_make, $car_color) {</span>
+<span class="comment">// ��$car_make��̬������"_make"��β��class</span>
+    <span class="class">.car</span>.#{$car_make}_make {
+        <span class="attribute">color</span><span class="value">: $car_color;</span>
+        <span class="attribute">width</span><span class="value">: <span class="number">100</span>px;</span>
+        <span class="class">.image</span> {
+            <span class="attribute">background</span><span class="value">:             url(<span class="string">"images/#{$car_make}/#{$car_color}.png"</span>);</span>
+        }
+    }
+}
+<span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> car_make</span>(<span class="string">"volvo"</span>, <span class="string">"green"</span>);</span>
+<span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> car_make</span>(<span class="string">"corvette"</span>, <span class="string">"red"</span> );</span>
+<span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> car_make</span>(<span class="string">"bmw"</span>, <span class="string">"black"</span>);</span>
+<span class="comment">//��������CSS</span>
+<span class="class">.car</span><span class="class">.volvo_make</span> {
+    <span class="attribute">color</span><span class="value">: <span class="string">"green"</span>;</span>
+    <span class="attribute">width</span><span class="value">: <span class="number">100</span>px;</span> 
+}
+<span class="class">.car</span><span class="class">.volvo_make</span> <span class="class">.image</span> {
+    <span class="attribute">background</span><span class="value">: url(<span class="string">"images/volvo/green.png"</span>);</span> }
+<span class="class">.car</span><span class="class">.corvette_make</span> {
+    <span class="attribute">color</span><span class="value">: <span class="string">"red"</span>;</span>
+    <span class="attribute">width</span><span class="value">: <span class="number">100</span>px;</span> 
+}
+<span class="class">.car</span><span class="class">.corvette_make</span> <span class="class">.image</span> {
+    <span class="attribute">background</span><span class="value">: url(<span class="string">"images/corvette/red.png"</span>);</span>              
+}
+<span class="class">.car</span><span class="class">.bmw_make</span> {
+    <span class="attribute">color</span><span class="value">: <span class="string">"black"</span>;</span>
+    <span class="attribute">width</span><span class="value">: <span class="number">100</span>px;</span> 
+}
+<span class="class">.car</span><span class="class">.bmw_make</span> <span class="class">.image</span> {
+    <span class="attribute">background</span><span class="value">: url(<span class="string">"images/bmw/black.png"</span>);</span> 
+}
+</code></pre><h3 id="ʹ��@eachΪ��ͬ����������ͬ����ʽ">ʹ��@eachΪ��ͬ����������ͬ����ʽ</h3>
+<p>�����кܶ�url���Ƶ�ͼƬ��������Ҫ��ͼƬ��������Ϊclass��һ��������ͼƬ��ͨ������Ҫ�ֿ���дÿһ��ѡ���󣬸��ƣ�ճ������ʹ��@each���Խ����������⡣</p>
+<p>��<code>@each</code>���������βΣ�Ȼ����������ʹ�õı�������ʵ�Ρ�����Ҫ��<code>#{}</code>������</p>
+<pre><code><span class="at_rule">@<span class="keyword">each</span> $member<span class="preprocessor"> in</span><span class="preprocessor"> thom</span>,<span class="preprocessor"> jonny</span>,<span class="preprocessor"> colin</span>,<span class="preprocessor"> phil</span> {</span>
+    .#{$member}_picture {
+        <span class="attribute">background-image</span><span class="value">: url(<span class="string">"/image/#{$member}.jpg"</span>);</span> 
+    }
+}
+<span class="comment">//��������CSS</span>
+<span class="class">.thom_picture</span> {
+    <span class="attribute">background-image</span><span class="value">: url(<span class="string">"/image/thom.jpg"</span>);</span> 
+}
+<span class="class">.jonny_picture</span> {
+    <span class="attribute">background-image</span><span class="value">: url(<span class="string">"/image/jonny.jpg"</span>);</span>     
+}
+<span class="class">.colin_picture</span> {
+    <span class="attribute">background-image</span><span class="value">: url(<span class="string">"/image/colin.jpg"</span>);</span> 
+}
+<span class="class">.phil_picture</span> {
+    <span class="attribute">background-image</span><span class="value">: url(<span class="string">"/image/phil.jpg"</span>);</span> 
+}
+</code></pre><blockquote>
+<p>δ����������</p>
 </blockquote>
   
 	</div>
@@ -200,7 +313,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/05/08/学习sass时了解到的一些好玩特性/" data-title="学习sass时了解到的一些好玩特性 | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/05/08/学习sass时了解到的一些好玩特性/" data-title="ѧϰsassʱ�˽⵽��һЩ�������� | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -244,7 +357,7 @@ var duoshuoQuery = {short_name:"crispelite"};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#计算布局"><span class="toc-number">1.</span> <span class="toc-text">计算布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用高级方法设置颜色"><span class="toc-number">2.</span> <span class="toc-text">使用高级方法设置颜色</span></a></li><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Lighten/Darken函数，修改亮度"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">Lighten/Darken函数，修改亮度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Saturate/Desaturate函数，修改饱和度"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">Saturate/Desaturate函数，修改饱和度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#adjust-hue函数，修改色度"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">adjust-hue函数，修改色度</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Mix函数，混合颜色"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">Mix函数，混合颜色</span></a></li></ol></ol></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#导入其他sass文件"><span class="toc-number">3.</span> <span class="toc-text">导入其他sass文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个字体库"><span class="toc-number">4.</span> <span class="toc-text">创建一个字体库</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#���㲼��"><span class="toc-number">1.</span> <span class="toc-text">���㲼��</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ʹ�ø߼�����������ɫ"><span class="toc-number">2.</span> <span class="toc-text">ʹ�ø߼�����������ɫ</span></a></li><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Lighten/Darken�������޸�����"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">Lighten/Darken�������޸�����</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Saturate/Desaturate�������޸ı��Ͷ�"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">Saturate/Desaturate�������޸ı��Ͷ�</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#adjust-hue�������޸�ɫ��"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">adjust-hue�������޸�ɫ��</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#grayscale������100%\���ͱ��Ͷȣ����򷽷�������������һ����Ч����"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">grayscale������100%\���ͱ��Ͷȣ����򷽷�������������һ����Ч����</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Mix������������ɫ"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">Mix������������ɫ</span></a></li></ol></ol></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#��������sass�ļ�"><span class="toc-number">3.</span> <span class="toc-text">��������sass�ļ�</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#����һ��������"><span class="toc-number">4.</span> <span class="toc-text">����һ��������</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ʹ��@extend�������廯"><span class="toc-number">5.</span> <span class="toc-text">ʹ��@extend�������廯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ʹ��@mixin���ִ���������"><span class="toc-number">6.</span> <span class="toc-text">ʹ��@mixin���ִ���������</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#����mixin������̬����������ѡ����"><span class="toc-number">7.</span> <span class="toc-text">����mixin������̬����������ѡ����</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ʹ��@eachΪ��ͬ����������ͬ����ʽ"><span class="toc-number">8.</span> <span class="toc-text">ʹ��@eachΪ��ͬ����������ͬ����ʽ</span></a></li></ol>
   </div>
 
 <div id="asidepart">
