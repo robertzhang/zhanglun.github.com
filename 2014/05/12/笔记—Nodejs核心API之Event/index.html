@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Nodejs中的核心模块之Event | 张小伦爱学习</title>
+    <title>笔记-Nodejs中的核心API之Event | 张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
@@ -70,7 +70,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/05/12/笔记－Nodejs核心模块之Event/" title="Nodejs中的核心模块之Event" itemprop="url">Nodejs中的核心模块之Event</a>
+      <a href="/2014/05/12/笔记—Nodejs核心API之Event/" title="笔记-Nodejs中的核心API之Event" itemprop="url">笔记-Nodejs中的核心API之Event</a>
   </h1>
   <p class="article-author">By
     
@@ -78,7 +78,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-05-12T09:36:00.000Z" itemprop="datePublished">5月 12 2014</time>
-    更新日期:<time datetime="2014-05-12T23:05:11.000Z" itemprop="dateModified">5月 13 2014</time>
+    更新日期:<time datetime="2014-05-13T03:21:57.000Z" itemprop="dateModified">5月 13 2014</time>
     
   </p>
 </header>
@@ -87,14 +87,14 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Event模块"><span class="toc-number">1.</span> <span class="toc-text">Event模块</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EventEmitter"><span class="toc-number">1.1.</span> <span class="toc-text">EventEmitter</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用on方法监听事件"><span class="toc-number">1.1.1.</span> <span class="toc-text">使用on方法监听事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用emit方法触发事件"><span class="toc-number">1.1.2.</span> <span class="toc-text">使用emit方法触发事件</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#回调函数"><span class="toc-number">2.</span> <span class="toc-text">回调函数</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#更多方法"><span class="toc-number">2.1.</span> <span class="toc-text">更多方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束语"><span class="toc-number">2.2.</span> <span class="toc-text">结束语</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Events"><span class="toc-number">1.</span> <span class="toc-text">Events</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EventEmitter"><span class="toc-number">1.1.</span> <span class="toc-text">EventEmitter</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用on方法监听事件"><span class="toc-number">1.1.1.</span> <span class="toc-text">使用on方法监听事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用emit方法触发事件"><span class="toc-number">1.1.2.</span> <span class="toc-text">使用emit方法触发事件</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#回调函数"><span class="toc-number">2.</span> <span class="toc-text">回调函数</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#更多方法"><span class="toc-number">2.1.</span> <span class="toc-text">更多方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束语"><span class="toc-number">2.2.</span> <span class="toc-text">结束语</span></a></li></ol>
 		</div>
 		
 		<p>最近正在学习Node，在图书馆借了基本关于Node的书，同时在网上查阅资料，颇有收获，但是整体感觉对Node的理解还是停留在一个很模棱两可的状态。比如Node中的模块，平时练习就接触到那么几个，其他的一些模块暂时只会在学习的时候接触到，不常用便就荒废了。正所谓好记心不如烂笔头，多做笔记还是更有利于理解和记忆。自己做的总结也方便回头复习，所以决定踏上漫长的修炼之旅……</p>
 <a id="more"></a>
 
 <p>Node提供了许多API，其中一些比较重要。这些核心的API是所有Node应用的支柱，你会不停的用到他们。</p>
-<h2 id="Event模块">Event模块</h2>
+<h2 id="Events">Events</h2>
 <p>几乎所有的模块都是建立在Event模块的基础上诞生的，而Event模块只提供了一个对象：events.EventEmitter，其核心功能就是事件发射和事件监听功能的封装。</p>
 <h3 id="EventEmitter">EventEmitter</h3>
 <p>Node创建了一个EventEmitter类提供基础的事件功能，所有的Node的事件功能都围绕着EventEmitter，因为它的设计包含了其他类拓展所需要的接口类。EventEmitter的每一个事件由一个事件名和若干个参数组成，事件名是一个字符串，通常表达一定的语义。每一个事件都支持若干个事件监听器。当事件发射时，注册的事件监听器一次被调用，同时参数作为回调函数的参数传递要注意，通常不会直接调用EventEmitter对象，我们可以通过 require(‘events’).EventEmitter 获取 EventEmitter 类。</p>
@@ -171,7 +171,7 @@ para3 : c
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/译文/">译文</a><a href="/tags/Node.js/">Node.js</a>
+  <span></span> <a href="/tags/笔记/">笔记</a><a href="/tags/Node.js/">Node.js</a>
   </div>
 
 
@@ -179,7 +179,7 @@ para3 : c
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/05/12/笔记－Nodejs核心模块之Event/" data-title="Nodejs中的核心模块之Event | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/05/12/笔记—Nodejs核心API之Event/" data-title="笔记-Nodejs中的核心API之Event | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -190,9 +190,9 @@ para3 : c
  
 
 <div class="next">
-<a href="/2014/05/08/学习sass时了解到的一些好玩特性/"  title="学习sass时了解到的一些好玩特性">
+<a href="/2014/05/12/笔记—Node.js核心API之HTTP/"  title="�ʼ�-Node.js�еĺ���API֮HTTP">
  <strong>NEXT:</strong><br/> 
- <span>学习sass时了解到的一些好玩特性
+ <span>�ʼ�-Node.js�еĺ���API֮HTTP
 </span>
 </a>
 </div>
@@ -223,7 +223,7 @@ var duoshuoQuery = {short_name:"crispelite"};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Event模块"><span class="toc-number">1.</span> <span class="toc-text">Event模块</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EventEmitter"><span class="toc-number">1.1.</span> <span class="toc-text">EventEmitter</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用on方法监听事件"><span class="toc-number">1.1.1.</span> <span class="toc-text">使用on方法监听事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用emit方法触发事件"><span class="toc-number">1.1.2.</span> <span class="toc-text">使用emit方法触发事件</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#回调函数"><span class="toc-number">2.</span> <span class="toc-text">回调函数</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#更多方法"><span class="toc-number">2.1.</span> <span class="toc-text">更多方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束语"><span class="toc-number">2.2.</span> <span class="toc-text">结束语</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Events"><span class="toc-number">1.</span> <span class="toc-text">Events</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EventEmitter"><span class="toc-number">1.1.</span> <span class="toc-text">EventEmitter</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用on方法监听事件"><span class="toc-number">1.1.1.</span> <span class="toc-text">使用on方法监听事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用emit方法触发事件"><span class="toc-number">1.1.2.</span> <span class="toc-text">使用emit方法触发事件</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#回调函数"><span class="toc-number">2.</span> <span class="toc-text">回调函数</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#更多方法"><span class="toc-number">2.1.</span> <span class="toc-text">更多方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束语"><span class="toc-number">2.2.</span> <span class="toc-text">结束语</span></a></li></ol>
   </div>
 
 <div id="asidepart">
@@ -252,7 +252,7 @@ var duoshuoQuery = {short_name:"crispelite"};
 		
 			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>6</sup></a></li>
+			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>7</sup></a></li>
 		
 			<li><a href="/tags/css/" title="css">css<sup>1</sup></a></li>
 		
@@ -260,9 +260,13 @@ var duoshuoQuery = {short_name:"crispelite"};
 		
 			<li><a href="/tags/web优化/" title="web优化">web优化<sup>3</sup></a></li>
 		
-			<li><a href="/tags/译文/" title="译文">译文<sup>4</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>1</sup></a></li>
+		
+			<li><a href="/tags/译文/" title="译文">译文<sup>3</sup></a></li>
 		
 			<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+			<li><a href="/tags/����/" title="����">����<sup>1</sup></a></li>
 		
 		</ul>
 </div>
