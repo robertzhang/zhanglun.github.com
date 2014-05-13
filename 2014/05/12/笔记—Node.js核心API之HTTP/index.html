@@ -78,7 +78,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-05-12T09:36:00.000Z" itemprop="datePublished">5月 12 2014</time>
-    更新日期:<time datetime="2014-05-13T06:28:10.000Z" itemprop="dateModified">5月 13 2014</time>
+    更新日期:<time datetime="2014-05-13T08:57:43.000Z" itemprop="dateModified">5月 13 2014</time>
     
   </p>
 </header>
@@ -87,15 +87,94 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP�������Ϳͻ���"><span class="toc-number">1.</span> <span class="toc-text">HTTP�������Ϳͻ���</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP������"><span class="toc-number">1.</span> <span class="toc-text">HTTP������</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http-Server"><span class="toc-number">1.1.</span> <span class="toc-text">http.Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-ServerResponse"><span class="toc-number">1.2.</span> <span class="toc-text">http.ServerResponse</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#response-writeHead(statusCode,_[header])"><span class="toc-number">1.2.1.</span> <span class="toc-text">response.writeHead(statusCode, [header])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#response-write(data,_[encoding])"><span class="toc-number">1.2.2.</span> <span class="toc-text">response.write(data, [encoding])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#response-end([data],_[encoding])"><span class="toc-number">1.2.3.</span> <span class="toc-text">response.end([data], [encoding])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event:’close’"><span class="toc-number">1.2.4.</span> <span class="toc-text">Event:’close’</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event:’finish’"><span class="toc-number">1.2.5.</span> <span class="toc-text">Event:’finish’</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP�ͻ���"><span class="toc-number">2.</span> <span class="toc-text">HTTP�ͻ���</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http-request(options,_callback)"><span class="toc-number">2.1.</span> <span class="toc-text">http.request(options, callback)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-get(options,_callback)"><span class="toc-number">2.2.</span> <span class="toc-text">http.get(options, callback)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-ClientRequest"><span class="toc-number">2.3.</span> <span class="toc-text">http.ClientRequest</span></a></li></ol>
 		</div>
 		
 		<p>��������ѧϰNode����ͼ���ݽ��˻�������Node���飬ͬʱ�����ϲ������ϣ������ջ񣬵��������о���Node�����⻹��ͣ����һ����ģ�����ɵ�״̬������Node�е�ģ�飬ƽʱ��ϰ�ͽӴ�����ô������������һЩģ����ʱֻ����ѧϰ��ʱ���Ӵ����������ñ��ͻķ��ˡ�����ν�ü��Ĳ����ñ�ͷ�������ʼǻ��Ǹ������������ͼ��䡣�Լ������ܽ�Ҳ������ͷ��ϰ�����Ծ���̤������������֮�á���</p>
 <a id="more"></a>
 
 <p>Node�ṩ������API������һЩ�Ƚ���Ҫ����Щ���ĵ�API������NodeӦ�õ�֧�������᲻ͣ���õ����ǡ�</p>
-<h2 id="HTTP�������Ϳͻ���">HTTP�������Ϳͻ���</h2>
-<p>Node.js�ĺ��Ĺ���֮һ������Ϊwen������<br>�ڱ�׼�����ṩ��httpģ�飬���з�װ��һ����Ч��HTTP��������һ�����׵�HTTP�ͻ��ˡ�����֮ǰ˵���ģ�Node.js ������Ϊ�������ṩ������������������ Apache��IIS �� HTTP ���������ڽ��� HTTP ������֧�֣����������һ�� HTTP �����󣬱����������׾ٵ�ʵ����վ�ͷ����������ϡ�</p>
+<h2 id="HTTP������">HTTP������</h2>
+<p>Node.js�ĺ��Ĺ���֮һ������Ϊweb����������Node�ı�׼�����ṩ��httpģ�飬���з�װ��һ����Ч��HTTP��������һ�����׵�HTTP�ͻ��ˡ�����֮ǰ˵���ģ�Node.js ������Ϊ�������ṩ������������������ Apache��IIS �� HTTP ���������ڽ��� HTTP ������֧�֣����������һ�� HTTP �����󣬱����������׾ٵ�ʵ����վ�ͷ����������ϡ�</p>
+<p>Node�е�HTTP�ӿڵı����Ƴɿ���֧������HTTPЭ����ԭ�������������ѵ����ԣ��ر��Ƕ��ںܴ��Ļ��߿���������Ϣ.��Щ�ӿڲ�����ȫ������������(request)����Ӧ(response),�����û�����������(request)����Ӧ(response)��ʹ��������������ʹ��Node�е�HTTP�������ͻ��˹��ܣ������ô�ģ��<code>require(‘http’)</code>��</p>
+<blockquote>
+<p><a href="http://nodejs.org/api/http.html#http_http" target="_blank">http://nodejs.org/api/http.html#http_http</a>  </p>
+<p>In order to support the full spectrum of possible HTTP applications, Node’s HTTP API is very low-level. It deals with stream handling and message parsing only. It parses a message into headers and body but it does not parse the actual headers or the body.</p>
+<p>Ϊ����ȫ����֧�ֿ��ܵ�HTTPӦ�ó�����Node�ṩ��HTTP API���ܵײ㡣��ֻ��������������Ϣ����������һ����Ϣ�����ɱ���ͷ�ͱ����壬������������ʵ�ʵı���ͷ�ͱ����塣</p>
+</blockquote>
+<h3 id="http-Server">http.Server</h3>
+<p>����Node������һ���򵥵�HTTP��������</p>
+<pre><code>var http=require(<span class="string">"http"</span>);
+http.createServer(<span class="keyword">function</span>(<span class="built_in">request</span>,<span class="built_in">response</span>){
+    <span class="built_in">response</span>.writeHead(<span class="number">200</span>,{
+        <span class="string">"Content-Type"</span>:<span class="string">"text/html"</span>
+    });
+    <span class="built_in">response</span>.write(<span class="string">"&lt;h1&gt;Hello, CrispElite&lt;/h1&gt;"</span>);
+    <span class="built_in">response</span>.<span class="keyword">end</span>(<span class="string">"&lt;p&gt;Bye bye!&lt;/p&gt;"</span>);
+}).listen(<span class="number">3000</span>);
+
+console.<span class="built_in">log</span>(<span class="string">"���ķ������Ѿ��𶯣�"</span>);
+</code></pre><p>����http.createServer()������һ��http.Server��ʵ������һ�������������˴�������������������������������������������Ӧ������createServer()���صĻ���http.Server��ʵ����������ʽ���á����������У���createServer()֮��ֱ�ӵ�����http.Server��listen()����������3000�˿ڡ�</p>
+<p>http.Server��httpģ���е�HTTP���������������̳���EventEmitter������һ���������Լ����¼�����õĵ���<code>request</code>�����ͻ�������������˻����request�¼����������ṩ��������request��response���ص���������ʾ��������Ӧ����Ϣ��createServer(callback)������NodeΪrequest�ṩ��һ�����ݷ������书���Ǵ���һ��HTTP�����󲢽�callback��Ϊreuqest�¼��ļ�����������������������һ��������Ҫ��ʾ��ʹ��request�¼���ʵ�֣���ʵ������ô���£�</p>
+<pre><code>var http=require(<span class="string">"http"</span>),
+    <span class="built_in">server</span>=<span class="keyword">new</span> http.<span class="built_in">Server</span>();
+
+<span class="built_in">server</span>.<span class="keyword">on</span>(<span class="string">"request"</span>, <span class="keyword">function</span>(<span class="built_in">request</span>,<span class="built_in">response</span>){
+    <span class="built_in">response</span>.writeHead(<span class="number">200</span>,{
+        <span class="string">"Content-Type"</span>:<span class="string">"text/html"</span>
+    });
+    <span class="built_in">response</span>.write(<span class="string">"&lt;h1&gt;Hello, CrispElite&lt;/h1&gt;"</span>);
+    <span class="built_in">response</span>.<span class="keyword">end</span>(<span class="string">"&lt;p&gt;Bye bye!&lt;/p&gt;"</span>);
+});
+<span class="built_in">server</span>.listen(<span class="number">3000</span>);
+
+console.<span class="built_in">log</span>(<span class="string">"���ķ������Ѿ��𶯣�"</span>);
+</code></pre><h3 id="http-ServerResponse">http.ServerResponse</h3>
+<p>http.ServerResponse �Ƿ����󷵻ظ��ͻ��˵���Ϣ��һ����HTTP�������ڲ������Ķ��󣨲������û���������������Ϊ�ڶ����������ݵ�ǰ����˵�� ‘request’ �¼��ļ������С�</p>
+<p>http.ServerResponse �кܶ෽������������<a href="http://nodejs.org/api/http.html#http_response_writecontinue" target="_blank">����</a>�������м����Ƚ���Ҫ�ĳ�Ա������</p>
+<h4 id="response-writeHead(statusCode,_[header])">response.writeHead(statusCode, [header])</h4>
+<p>�������Ŀͻ��˷�����Ӧͷ������������һ������������ֻ�ܵ���һ�Σ����������������Զ�����һ����Ӧͷ��ע�⣬�����ڵ��� end()֮ǰ���á�</p>
+<pre><code>    <span class="keyword">var</span> body = <span class="string">'hello world'</span>;
+    response.writeHead(<span class="number">200</span>, {
+        <span class="string">'Content-Length'</span>: body.length,
+        <span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>
+    });
+</code></pre><p>Ҫע�����ǣ�Content-Length ���ֽ�Ϊ��λ�������ַ��������������ܹ�����������Ϊ�ַ��� ‘hello world’ ֻ�������ֽ��ַ����������������ڰ�����λ���ı����ַ���Ȼ����Ҫʹ��Buffer.byteLength������ȷ���ڸ���������ʽ�µ��ֽ�����<a href="http://nodejs.org/api/http.html#http_response_writecontinue" target="_blank">ԭ��</a>��</p>
+<h4 id="response-write(data,_[encoding])">response.write(data, [encoding])</h4>
+<p>�������Ŀͻ��˷�����Ӧ���ݡ�data ������һ�� Buffer �����ַ�������ʾҪ���͵����ݣ��������ַ�������ָ�� encoding��Ĭ���� utf-8���� response.end() ����֮ǰ�����Զ��ε��� write()����һ�ε��� write() ʱ���������ͻ����ı�ͷ��Ϣ�͵�һ���������嵽�ͻ��ˡ��� write() �ڶ��α�����ʱ��Node�������㽫Ҫʹ�������ݣ�Ȼ���Զ�����Ӧ���ݷֿ����͡�Ҳ����˵����Ӧ�����浽���������ĵ�һ���С�<a href="http://nodejs.org/api/http.html#http_response_write_chunk_encoding" target="_blank">ԭ��</a>��</p>
+<blockquote>
+<p>Returns true if the entire data was flushed successfully to the kernel buffer. Returns false if all or part of the data was queued in user memory. ‘drain’ will be emitted when the buffer is again free.</p>
+</blockquote>
+<h4 id="response-end([data],_[encoding])">response.end([data], [encoding])</h4>
+<p>���ڽ�����Ӧ��֪ͨ�ͻ������еķ����Ѿ����ɡ�����������ѡ������������ write() ������ͬ������������һ�������б��뱻����һ�Σ����������ÿͻ��˽���Զ���ڵȴ�״̬��</p>
+<p>http.ServerResponse Ҳ�̳��� EventEmitter ���ڹٷ���API�ĵ��У�Ŀǰ��2015/05/13��ֻ�ṩ�������¼���close��finish��</p>
+<h4 id="Event:’close’">Event:’close’</h4>
+<p>������ ServerResponse �� end ���������û���ˢ��֮ǰ�����ص������Ѿ�����ֹ��</p>
+<h4 id="Event:’finish’">Event:’finish’</h4>
+<p>����Ӧ��Ϣ�Ѿ��ɹ�����֮�󴥷� finish �¼���������һ����˵������Ӧ�ı���ͷ�ͱ�����������һ���ֶα��ƽ�������ϵͳ�������紫��ʱ��������<a href="http://nodejs.org/api/http.html#http_event_close_1" target="_blank">ԭ��</a>��</p>
+<h2 id="HTTP�ͻ���">HTTP�ͻ���</h2>
+<p>httpģ���ṩ���������� <code>http.request</code>��<code>http.get</code>������������Ϊ�ͻ�����HTTP����������������</p>
+<h3 id="http-request(options,_callback)">http.request(options, callback)</h3>
+<p>����HTTP���󣬽�������������options������һ��������һ���ַ���������options��һ���ַ���, �����Զ�ʹ��url.parse()������callback�������Ļص�������<br>options�ĳ��ò������£�</p>
+<ul>
+<li>host���������͵��ķ�������������IP��ַ��Ĭ��Ϊ’localhost’��</li>
+<li>hostname������֧��url.parse()��hostname��host����һЩ</li>
+<li>port��Զ�̷������Ķ˿ڡ�Ĭ��ֵΪ80��</li>
+<li>method��ָ��HTTP���󷽷����ַ�����Ĭ��Ϊ’GET’��</li>
+<li>path������·����Ĭ��Ϊ’/‘�������в�ѯ�ַ���������Ҫ����������’/index.html?page=12’��</li>
+<li>headers����������ͷ�Ķ�����</li>
+</ul>
+<p><!-- http.request() ����һ�� http.ClientRequest��ʵ��������ʵ����һ����д������������ʹ�� "POST" �����ϴ�һ���ļ� --><br>ʹ�� http.request() ʱ���������� response.end()���Դ���������������������������ʹ������������û���κ����ݡ�</p>
+<h3 id="http-get(options,_callback)">http.get(options, callback)</h3>
+<p>��Ϊ�󲿷���������û��������GET���������� Node �ṩ�����򷽱��ķ��������� http.request() Ψһ�����������Զ���������ΪGET������ͬʱ�Զ����� response.end()��</p>
+<pre><code>http.<span class="keyword">get</span>(<span class="string">"http://www.google.com/index.html"</span>, <span class="function"><span class="keyword">function</span><span class="params">(res)</span> {</span>
+    console.log(<span class="string">"Got response: "</span> + res.statusCode);
+}).on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span><span class="params">(e)</span> {</span>
+    console.log(<span class="string">"Got error: "</span> + e.message);
+});
+</code></pre><h3 id="http-ClientRequest">http.ClientRequest</h3>
+<p>http.ClientRequest �� Node �ڽ���һ�����󣬵��� http.request() �� http.get() ���صľ�����������������ʾһ���Ѿ������������ڽ��е� HTTP ���������ṩ��һ�� response �¼�������Ӧͷ�����յ�ʱ�򣬻��������Ķ����ϴ�����http.request() �� http.get() �ڶ�������ָ���Ļص������İ󶨶����������ˡ�http.ClientRequest �� http.ServerResponse һ���ṩ�� write() �� end() ���������������������塣���е�д�������������� end() ֪ͨ�����󡣸�����ϸ��Ϣ����<a href="http://nodejs.org/api/http.html#http_class_http_clientrequest" target="_blank">����</a>��</p>
+<p>���� Node �е� HTTP ģ���϶���ֹ����˵������Щ��������������ֻ��һЩ���õ����ݣ�ͨ�����������򵥵����ݡ������빹�����ӵģ�ȫ���� Web ��������ԶԶ����������Ҫ��ʱ���෭��<a href="http://nodejs.org/api/http.html" target="_blank">�ֲ�</a>����������~</p>
   
 	</div>
 	<div class="blog-statement">
@@ -158,7 +237,7 @@ var duoshuoQuery = {short_name:"crispelite"};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP�������Ϳͻ���"><span class="toc-number">1.</span> <span class="toc-text">HTTP�������Ϳͻ���</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP������"><span class="toc-number">1.</span> <span class="toc-text">HTTP������</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http-Server"><span class="toc-number">1.1.</span> <span class="toc-text">http.Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-ServerResponse"><span class="toc-number">1.2.</span> <span class="toc-text">http.ServerResponse</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#response-writeHead(statusCode,_[header])"><span class="toc-number">1.2.1.</span> <span class="toc-text">response.writeHead(statusCode, [header])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#response-write(data,_[encoding])"><span class="toc-number">1.2.2.</span> <span class="toc-text">response.write(data, [encoding])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#response-end([data],_[encoding])"><span class="toc-number">1.2.3.</span> <span class="toc-text">response.end([data], [encoding])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event:’close’"><span class="toc-number">1.2.4.</span> <span class="toc-text">Event:’close’</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event:’finish’"><span class="toc-number">1.2.5.</span> <span class="toc-text">Event:’finish’</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP�ͻ���"><span class="toc-number">2.</span> <span class="toc-text">HTTP�ͻ���</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http-request(options,_callback)"><span class="toc-number">2.1.</span> <span class="toc-text">http.request(options, callback)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-get(options,_callback)"><span class="toc-number">2.2.</span> <span class="toc-text">http.get(options, callback)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-ClientRequest"><span class="toc-number">2.3.</span> <span class="toc-text">http.ClientRequest</span></a></li></ol>
   </div>
 
 <div id="asidepart">
