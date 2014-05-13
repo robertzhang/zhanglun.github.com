@@ -1,0 +1,324 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>高性能网站优化-无阻塞加载脚本 | 张小伦爱学习</title>
+  <meta name="author" content="张小伦爱学习">
+  
+  <meta name="description" content="《高性能网站建设进阶指南》">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="高性能网站优化-无阻塞加载脚本"/>
+  <meta property="og:site_name" content="张小伦爱学习"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="张小伦爱学习" type="application/atom+xml">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-368771XX-X']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+<body>
+  <header id="header" class='normal_mode'>
+    <nav id="main-nav">
+  <ul class='container'>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="http://ncuey.sinaapp.com/CrispElite/">关于</a></li>
+    
+      <li><a href="https://github.com/zhanglun">Github</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+  </header>
+  <div id="content" class="container">
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+      <time datetime="2014-03-30T11:40:00.000Z"><a href="/2014/03/30/高性能网站优化-无阻塞加载脚本/">周日, 3月 30 2014, 7:40:00 晚上</a></time>
+
+  
+    <h1 class="title">高性能网站优化-无阻塞加载脚本</h1>
+  
+
+
+  
+  <div class="categories">
+  	<i class="fa fa-folder-open"></i>
+    <a href="/categories/前端/">前端</a>
+  </div>
+
+
+  
+  <div class="tags">
+  	<i class="fa fa-tag"></i>
+    <a href="/tags/web优化/">web优化</a>
+  </div>
+
+<div class="clear"></div>
+      
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>《高性能网站建设进阶指南》</p>
+</blockquote>
+<a id="more"></a>
+
+<p>按理来说，JavaScript在浏览器中的性能问题是开发人员面对的最重要的可用性问题。但由于JavaScript天生的阻塞性质，问题变得复杂。大多数浏览器在下载或者执行脚本的同时不会下载其他内容，使用单线程处理JavaScript的解析和UI的更新。当遇到这种情况时，希望以不阻塞其他内容下载的方式来加载JavaScript。有些技术可以做到这点，使页面加载更快。</p>
+<h2 id="头疼的脚本阻塞并行下载">头疼的脚本阻塞并行下载</h2>
+<p>在介绍JavaScript加载优化技术之前，先看看浏览器默认的方式。<script\> 标签可以放在 <head\> 或者 <body\> 里面的任意位置。一般来说都将 <script\> 和 <link\> 标签一起放在 <head\> 中，这样一来页面加载的时候会先加载它们，页面的样式和行为看起来正常。</p>
+<pre><code>    <span class="tag">&lt;<span class="title">html</span>&gt;</span>    
+        <span class="tag">&lt;<span class="title">head</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">title</span>&gt;</span>Demo<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"css/base.css"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"css/base2.css"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/file1.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/file2.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/file3.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">body</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">p</span>&gt;</span>Hello,CrispElte<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">html</span>&gt;</span>
+</code></pre><p>尽管这端代码开始来无伤大雅，但实际上存在几个性能问题：有三个脚本文件，每个文件在下载和执行时候都会阻塞页面的加载。只有脚本执行完成之后，才会继续加载其他资源，比如，图片，CSS文件，iframe等。<br>我们可以将 <script\> 标签放在页面的底部，即 </body\>标签之前。尽管脚本文件的加载会阻塞页面，但是页面在脚本呢加载之前已经加载完成，所以不用担心阻塞。<br>脚本应该顺序执行，但是没有必要顺序下载。IE8第一次实现了脚本的并行下载，但是在脚本下载并执行完毕之前依旧阻塞了后面的资源。<br>最终的目的时让脚本与其他资源并行下载，并且希望兼容所有的浏览器。</p>
+<h2 id="让脚本运行得更美好">让脚本运行得更美好</h2>
+<p>有几种动态加载外部脚本的技术可以使页面不会被脚本的阻塞行为所影响。</p>
+<h3 id="XHR_Eval">XHR Eval</h3>
+<p>通过XMLHttpRequest从服务端获取脚本，然后通过eval命令执行内容  </p>
+<pre><code><span class="keyword">var</span> xhrObj=<span class="keyword">new</span> XMLHttpRequest();
+xhrObj.onreadystatechange=<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+    <span class="keyword">if</span>(xhrObj.readyState == <span class="number">4</span> &amp;&amp; xhrObj.status == <span class="number">200</span>){
+        <span class="built_in">eval</span>(xhrObj.responseText);
+    }
+}
+xhrObj.open(<span class="string">"GET"</span>,<span class="string">"file1.js"</span>,<span class="literal">true</span>);
+xhrObj.send(<span class="literal">null</span>);
+</code></pre><p>这个方法的主要缺陷是，动态加载的脚本必须是同域的。  </p>
+<h3 id="XHR注入">XHR注入</h3>
+<p>与XHR Eval类似，同样是通过 XMLHttpRequest 对象来获取脚本，不同之处在于，这个方法时不是用 eval 而是创建一个 script 的 DOM 元素，然后将 XMLHttpRequest 的响应写入script标签中来执行JavaScript。  </p>
+<pre><code>var xhrObj=new XMLHttpRequest()<span class="comment">;</span>
+xhrObj<span class="preprocessor">.onreadystatechange</span>=function(){
+    if(xhrObj<span class="preprocessor">.readyState</span> == <span class="number">4</span> &amp;&amp; xhrObj<span class="preprocessor">.status</span> == <span class="number">200</span>){
+        var script=document<span class="preprocessor">.createElement</span>(<span class="string">"script"</span>)<span class="comment">;</span>
+        document<span class="preprocessor">.getElementsByTagName</span>(<span class="string">"head"</span>)[<span class="number">0</span>]<span class="preprocessor">.appendChild</span>(script)<span class="comment">;</span>
+        script<span class="preprocessor">.text</span>=xhrObj<span class="preprocessor">.responseText</span><span class="comment">;</span>
+    }
+}
+xhrObj<span class="preprocessor">.open</span>(<span class="string">"GET"</span>,<span class="string">"file1.js"</span>,true)<span class="comment">;</span>
+xhrObj<span class="preprocessor">.send</span>(null)<span class="comment">;</span>
+</code></pre><p>和 XHR Eval 方法一样，加载的脚本必须是同域的。  </p>
+<h3 id="Script_in_Iframe">Script in Iframe</h3>
+<p>在页面中 iframe 与其他资源是并行下载的，可以利用iframe无阻塞加载JavaScript。<br>由于 iframe 认为返回的是 HTML 文档，所以将src设置成一个 HTML 文件而不是 js 文件。<br>而我们要做的就是在 HTML 文档中将外部脚本转换成行内脚本。</p>
+<p>与 XHR Eval 和 XHR 注入这两种方法类似，这个方法要求 iframe URL 和主页同域。满足同域要求之后，我们需要修改 JavaScript 来创建他们之间的关联，其本质就是获得引用 iframe 的 JavaScript 标示符。</p>
+<pre><code>//使用 <span class="string">"iframes"</span> 中访问主页上的 iframe
+window<span class="preprocessor">.frames</span>[<span class="number">0</span>]<span class="preprocessor">.somefunction</span>()<span class="comment">;</span>
+//使用 <span class="string">"getElementById"</span> 访问主页上的iframe
+document<span class="preprocessor">.getElementById</span>(<span class="string">"myIframe"</span>)<span class="preprocessor">.contentWindow</span><span class="preprocessor">.someFunction</span>()<span class="comment">;</span>
+</code></pre><p><strong>可以在iframe中使用parent变量引用父页面</strong>     </p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">changeBg</span><span class="params">()</span>{</span>
+    <span class="keyword">var</span> body=<span class="keyword">parent</span>.document.body;
+    body.className=<span class="string">"red"</span>;
+}
+</code></pre><p>概括一下：主页面中添加一个 iframe 标签，其 src 指向一个 HTML 文档，在这个 HTML 文档中编写行内 JavaScript 代码，也可以引用外部的 JavaScript 文件</p>
+<h3 id="Script_DOM_Element">Script DOM Element</h3>
+<p>创建一个script标签并设置其src，代码很简单。  </p>
+<pre><code>var script=document<span class="preprocessor">.createElement</span>(<span class="string">"script"</span>)<span class="comment">;</span>
+script<span class="preprocessor">.src</span>=<span class="string">"demo2.js"</span><span class="comment">;</span>
+document<span class="preprocessor">.getElementsByTagName</span>(<span class="string">"head"</span>)[<span class="number">0</span>]<span class="preprocessor">.appendCHild</span>(script)<span class="comment">;</span>
+</code></pre><p>下载过程中用这种方式创建脚本不会阻塞其他的资源，同时这种方法允许跨域。 </p>
+<h3 id="defer还是async">defer还是async</h3>
+<p>在最新的标准中，script标签定义了defer属性和async属性，都是让脚本并行下载，但是defer下脚本按照顺序执行，而async不按顺序执行脚本。</p>
+<h3 id="document-write_Script_Tag">document.write Script Tag</h3>
+<p>最后一种技术是使用 document.write 把 HTML 标签 script 写入页面中。这种技术只在IE中是并行加载脚本的。虽然多个脚本可以并行下载，但在下载脚本时，浏览器仍然阻塞其他类型的资源。 </p>
+
+      
+    </div>
+    <footer>
+      
+          
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <span class="jiathis_txt">分享到：</span>
+  <a class="jiathis_button_weixin">微信</a>
+  <a class="jiathis_button_tsina">新浪微博</a>
+  <a class="jiathis_button_renren">人人网</a>
+  <a class="jiathis_button_qzone">QQ空间</a>
+  <a class="jiathis_button_douban">豆瓣</a>
+  <a class="jiathis_button_pocket">Pocket</a>
+  <a href="http://www.jiathis.com/share?uid=901656" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=901656" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+          <div class="clearfix"></div>
+          <nav id="pagination">
+  
+    <a href="/2014/04/06/JavaScript中的事件处理程序/" class="alignleft prev"><i class="fa fa-long-arrow-left"></i>Next</a>
+  
+  
+    <a href="/2014/03/15/高性能网站优化-创建快速响应的Web/" class="alignright next">Prev<i class="fa fa-long-arrow-right"></i></a>
+  
+  <div class="clearfix"></div>
+</nav>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+
+
+	<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="/2014/03/30/高性能网站优化-无阻塞加载脚本/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"crispelite"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+</section>
+
+
+
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div>
+  
+  &copy; 2014 张小伦爱学习
+  
+</div>
+Powered by <a href="http://zespia.tw/hexo/" title="Hexo" target="_blank" rel="external">Hexo</a> and <a href="http://pages.github.com/" title="GitHub Pages" target="_blank" rel="external">GitHub Pages</a>
+
+<div class="clearfix"></div></footer>
+  
+<script type="text/javascript" src="/js/jquery.imagesloaded.min.js"></script>
+<script type="text/javascript" src="/js/gallery.js"></script>
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+
+
+
+    <script type="text/javascript">
+        (function(){
+
+            $(window).scroll(function(){
+
+                var scrollTop = $(window).scrollTop();
+                if ( scrollTop >200 ){
+                    $("#main-nav").removeClass('normal_mode').addClass('top_mode');
+                } else{
+                    $("#main-nav").removeClass('top_mode').addClass('normal_mode');
+                }
+
+            });
+
+        })();
+    </script>
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox({
+      'titlePosition': 'inside'
+    });
+  })(jQuery);
+  </script>
+
+
+
+    
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"CrispElite"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = 'http://static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] 
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  
+  $(function(){
+
+    $('.title').hover(
+      function() {      
+        $(this).stop().animate(
+          {'marginLeft': '10px'}, 200
+        );   
+      }, 
+      function() {       
+        $(this).stop().animate({'marginLeft': '0px'}, 200);      
+      
+    });   
+
+  });
+
+</script>
+
+
+</body>
+</html>
