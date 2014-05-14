@@ -143,7 +143,7 @@ r.about(); <span class="comment">// Ozzy is 62 years old</span>
 </code></pre><p>而你可以这样使用：</p>
 <pre><code><span class="reserved">var</span> rocker = <span class="built_in">require</span>(<span class="string">'./rocker.js'</span>);
 <span class="built_in">console</span>.log(<span class="string">'Rockin in heaven: '</span> + rocker[<span class="number">2</span>]); <span class="regexp">//</span>Rockin <span class="keyword">in</span> <span class="attribute">heaven</span>: Ronnie James Dio
-</code></pre><p>现在你应该明白了点什么——如果你想让你的模块返回一个特殊的对象类型，比如构造函数，那么你得使用 <code>module.exports</code> ；如果你只想模块作为一个典型的模块实例（module instance），那么就用<code>exports</code>。 </p>
+</code></pre><p>现在你应该明白了点什么——如果你想让你的模块返回一个特殊的对象类型，比如构造函数，那么你得使用 <code>module.exports</code>；如果你只想模块作为一个典型的模块实例（module instance），那么就用<code>exports</code>。 </p>
 <p>把属性添加到 <code>module.exports</code> 中和添加到 <code>exports</code> 中的结果是一样的。比如像这样：</p>
 <pre><code><span class="built_in">module</span>.exports.name = <span class="function"><span class="keyword">function</span><span class="params">()</span></span> {
     console.log(<span class="string">'My name is Lemmy Kilmister'</span>);
@@ -152,15 +152,15 @@ r.about(); <span class="comment">// Ozzy is 62 years old</span>
 <pre><code><span class="transposed_variable">exports.</span>name = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
     <span class="transposed_variable">console.</span><span class="built_in">log</span>(<span class="string">'My name is Lemmy Kilmister'</span>);
 };
-</code></pre><p>但是要注意，他们不是同一个东西。就像之前说的一样，<code>exports</code>  只不过是 <code>module.exports</code> 的帮手而已。话虽如此，<code>exports</code> 还是推荐的对象，除非你想把你模块的对象类型从传统的模块实例（module instance）修改为其他的。</p>
-<p>只要你没有使用赋值运算重写 <code>module.exports</code> 对象，任何添加到 <code>module.exports</code> 和 <code>exports</code> 的属性都能够在 <code>require</code> 模块中。</p>
+</code></pre><p>但是要注意，他们不是同一个东西。就像之前说的一样，<code>exports</code>  只不过是 <code>module.exports</code> 的帮手而已。话虽如此，<code>exports</code>还是推荐的对象，除非你想把你模块的对象类型从传统的模块实例（module instance）修改为其他的。</p>
+<p>只要你没有使用赋值运算重写<code>module.exports</code>对象，任何添加到 <code>module.exports</code>和<code>exports</code>的属性都能够在 <code>require</code>模块中。</p>
 <p>比如这是你的模块中的内容：</p>
 <pre><code><span class="built_in">module</span>.<span class="built_in">exports</span>.age = <span class="number">68</span>;
 <span class="built_in">exports</span>.name = <span class="string">'Lemmy Kilmister'</span>;
 </code></pre><p>下面的代码可以很好的工作：</p>
 <pre><code><span class="reserved">var</span> rocker = <span class="built_in">require</span>(<span class="string">'./rocker.js'</span>);
 <span class="built_in">console</span>.log(<span class="string">'%s is %s'</span>, rocker.name, rocker.age); <span class="regexp">//</span> Lemmy Kilmister <span class="keyword">is</span> <span class="number">68</span>
-</code></pre><p>但是，如果你在你的模块中重写了 <code>module.exports</code> 中的任何地方，代码便会出错：</p>
+</code></pre><p>但是，如果你在你的模块中重写了<code>module.exports</code>中的任何地方，代码便会出错：</p>
 <pre><code><span class="built_in">module</span>.<span class="built_in">exports</span> = <span class="string">'LOL'</span>;
 <span class="built_in">module</span>.<span class="built_in">exports</span>.age = <span class="number">68</span>;
 <span class="built_in">exports</span>.name = <span class="string">'Lemmy Kilmister'</span>;
