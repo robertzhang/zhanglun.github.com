@@ -20,7 +20,7 @@
 
   <link href="/favicon.ico" rel="icon">
   <link rel="alternate" href="/atom.xml" title="张小伦爱学习" type="application/atom+xml">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -143,7 +143,7 @@ r.about(); <span class="comment">// Ozzy is 62 years old</span>
 </code></pre><p>而你可以这样使用：</p>
 <pre><code><span class="reserved">var</span> rocker = <span class="built_in">require</span>(<span class="string">'./rocker.js'</span>);
 <span class="built_in">console</span>.log(<span class="string">'Rockin in heaven: '</span> + rocker[<span class="number">2</span>]); <span class="regexp">//</span>Rockin <span class="keyword">in</span> <span class="attribute">heaven</span>: Ronnie James Dio
-</code></pre><p>现在你应该明白了点什么——如果你想让你的模块返回一个特殊的对象类型，比如构造函数，那么你得使用 <code>module.exports</code>；如果你只想模块作为一个典型的模块实例（module instance），那么就用<code>exports</code>。 </p>
+</code></pre><p>现在你应该明白了点什么：<br>如果你想让你的模块返回一个特殊的对象类型，比如构造函数，那么你得使用 module.exports ；如果你只想模块作为一个典型的模块实例（module instance），那么就用<code>exports</code>。 </p>
 <p>把属性添加到 <code>module.exports</code> 中和添加到 <code>exports</code> 中的结果是一样的。比如像这样：</p>
 <pre><code><span class="built_in">module</span>.exports.name = <span class="function"><span class="keyword">function</span><span class="params">()</span></span> {
     console.log(<span class="string">'My name is Lemmy Kilmister'</span>);
