@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>�ʼǡ�Node.js����API֮Util | 张小伦爱学习</title>
+  <meta name="author" content="张小伦爱学习">
+  
+  <meta name="description" content="��������ѧϰNode����ͼ���ݽ��˻�������Node���飬ͬʱ�����ϲ������ϣ������ջ񣬵��������о���Node�����⻹��ͣ����һ����ģ�����ɵ�״̬������Node�е�ģ�飬ƽʱ��ϰ�ͽӴ�����ô������������һЩģ����ʱֻ����ѧϰ��ʱ���Ӵ����������ñ��ͻķ��ˡ�����ν�ü��Ĳ����ñ�ͷ�������ʼǻ��Ǹ������������ͼ��䡣�Լ������ܽ�Ҳ������ͷ��ϰ�����Ծ���̤������������֮�á���">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="�ʼǡ�Node.js����API֮Util"/>
+  <meta property="og:site_name" content="张小伦爱学习"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="张小伦爱学习" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-368771XX-X']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+<body>
+  <header id="header" class='normal_mode'>
+    <nav id="main-nav">
+  <ul class='container'>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">存档</a></li>
+    
+      <li><a href="http://ncuey.sinaapp.com/CrispElite/">关于</a></li>
+    
+      <li><a href="https://github.com/zhanglun">Github</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+  </header>
+  <div id="content" class="container">
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+      <time datetime="2014-05-12T09:36:00.000Z"><a href="/2014/05/12/笔记—Node.js核心API之Util/">周一, 5月 12 2014, 5:36:00 下午</a></time>
+
+  
+    <h1 class="title">�ʼǡ�Node.js����API֮Util</h1>
+  
+
+
+
+  
+  <div class="tags">
+  	<i class="fa fa-tag"></i>
+    <a href="/tags/�ʼ�/">�ʼ�</a>, <a href="/tags/Node.js/">Node.js</a>
+  </div>
+
+<div class="clear"></div>
+      
+    </header>
+    <div class="entry">
+      
+        <p>��������ѧϰNode����ͼ���ݽ��˻�������Node���飬ͬʱ�����ϲ������ϣ������ջ񣬵��������о���Node�����⻹��ͣ����һ����ģ�����ɵ�״̬������Node�е�ģ�飬ƽʱ��ϰ�ͽӴ�����ô������������һЩģ����ʱֻ����ѧϰ��ʱ���Ӵ����������ñ��ͻķ��ˡ�����ν�ü��Ĳ����ñ�ͷ�������ʼǻ��Ǹ������������ͼ��䡣�Լ������ܽ�Ҳ������ͷ��ϰ�����Ծ���̤������������֮�á���</p>
+<a id="more"></a>
+
+<h2 id="utilģ��">utilģ��</h2>
+<p>util ��һ�� Node.js ����ģ�飬�ṩ��һЩ���ú����������ֲ����� JavaScript �Ĺ��ܹ��ھ����Ĳ��㡣��Щ������������ <code>util</code> ģ���У�����ͨ������ģ����ʹ�����ǡ�</p>
+<h3 id="util-format(format,_[…])">util.format(format, […])</h3>
+<p>����һ����ʽ�����ַ�����������Ч���е����� <code>printf</code>����һ��������һ���������ɸ�ռλ�����ַ�������ÿ������ת������ֵ����������Ӧ��ռλ����֧��ռλ���У�</p>
+<ul>
+<li>%s - String.</li>
+<li>%d - Number (both integer and float).</li>
+<li>%j - JSON.</li>
+<li>% - single percent sign (‘%’). This does not consume an argument.</li>
+</ul>
+<p>������һ�������е�ռλ���Ҳ�����֮��Ӧ�Ĳ����� ��ô����ռλ�������ᱻ�滻</p>
+<pre><code>util.format(<span class="string">'%s:%s'</span>, <span class="string">'foo'</span>); <span class="regexp">//</span> <span class="string">'foo:%s'</span>
+</code></pre><p>����ռλ��̫�٣������Ĳ��������� <code>util.inspect()</code> ת�����ַ�����Ȼ���ÿո񽫶������ַ���ƴ����һ����</p>
+<pre><code>util.format(<span class="string">'%s:%s'</span>, <span class="string">'foo'</span>, <span class="string">'bar'</span>, <span class="string">'baz'</span>, <span class="string">'zhanglun'</span>); <span class="regexp">//</span> <span class="string">'foo:bar baz zhanglun'</span>
+</code></pre><p>������һ����������һ����Ҫ��ʽ�����ַ�������ô���򷽷��Ὣ���еĲ����ÿո�ƴ�ӳ�һ���µ��ַ�����Ȼ�󷵻������ַ�����</p>
+<pre><code>util.format(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">"zhanglun"</span>); // <span class="string">'1 2 3 \'</span>zhanglun\<span class="string">''</span>
+</code></pre><h3 id="util-debug(string)">util.debug(string)</h3>
+<p>����һ��ͬ�������ķ�������ִ�е���һ��������ʱ�����������̣������Ա�׼��������ʽ������ string ������</p>
+<pre><code><span class="keyword">require</span>(<span class="string">'util'</span>).debug(<span class="string">'message on stderr'</span>); <span class="regexp">//message</span> on stderr
+</code></pre><h3 id="util-log(string)">util.log(string)</h3>
+<p>�Ա�׼��������ʽ������������ȡ��ǰ��ʱ���������Ͳ��� string һ���������м��� “ - “ ���ӡ�</p>
+<pre><code><span class="built_in">require</span>(<span class="string">'util'</span>).<span class="built_in">log</span>(<span class="string">'Timestmaped message.'</span>);<span class="comment"> //15 May 21:41:33 - Timestmaped message</span>
+</code></pre><h3 id="util-inspect(object,_showHidden=false,_depth=2)">util.inspect(object, showHidden=false, depth=2)</h3>
+<p>���򷽷�����������ת��Ϊ�ַ������Ե�����˵�����á����ٽ���һ������ object������Ҫ�������ַ�����</p>
+<p>�ڶ������� showHidden ��һ����ѡ���������� showHidden = true����ô���򷽷������Ѳ��� object �в���ö�ٵ�����������</p>
+<p>���������� depth ��ʾ�����ĵݹ�����������ָ���� depth��Ҳ��ָ���˸�ʽ������ʱ</p>
+<p>��������~~</p>
+
+      
+    </div>
+    <footer>
+      
+          
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <span class="jiathis_txt">分享到：</span>
+  <a class="jiathis_button_weixin">微信</a>
+  <a class="jiathis_button_tsina">新浪微博</a>
+  <a class="jiathis_button_renren">人人网</a>
+  <a class="jiathis_button_qzone">QQ空间</a>
+  <a class="jiathis_button_douban">豆瓣</a>
+  <a class="jiathis_button_pocket">Pocket</a>
+  <a href="http://www.jiathis.com/share?uid=901656" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=901656" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+          <div class="clearfix"></div>
+          <nav id="pagination">
+  
+    <a href="/2014/05/12/笔记—Node.js核心API之Events/" class="alignleft prev"><i class="fa fa-long-arrow-left"></i>Next</a>
+  
+  
+    <a href="/2014/05/12/笔记—Node.js核心API之HTTP/" class="alignright next">Prev<i class="fa fa-long-arrow-right"></i></a>
+  
+  <div class="clearfix"></div>
+</nav>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+
+
+	<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="/2014/05/12/笔记—Node.js核心API之Util/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"crispelite"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+</section>
+
+
+
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div>
+  
+  &copy; 2014 张小伦爱学习
+  
+</div>
+Powered by <a href="http://zespia.tw/hexo/" title="Hexo" target="_blank" rel="external">Hexo</a> and <a href="http://pages.github.com/" title="GitHub Pages" target="_blank" rel="external">GitHub Pages</a>
+
+<div class="clearfix"></div></footer>
+  
+<script type="text/javascript" src="/js/jquery.imagesloaded.min.js"></script>
+<script type="text/javascript" src="/js/gallery.js"></script>
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+
+
+
+    <script type="text/javascript">
+        (function(){
+
+            $(window).scroll(function(){
+
+                var scrollTop = $(window).scrollTop();
+                if ( scrollTop >200 ){
+                    $("#main-nav").removeClass('normal_mode').addClass('top_mode');
+                } else{
+                    $("#main-nav").removeClass('top_mode').addClass('normal_mode');
+                }
+
+            });
+
+        })();
+    </script>
+
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox({
+      'titlePosition': 'inside'
+    });
+  })(jQuery);
+  </script>
+
+
+
+    
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"CrispElite"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = 'http://static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] 
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+
+
+<script type="text/javascript">
+  
+  $(function(){
+
+    $('.title').hover(
+      function() {      
+        $(this).stop().animate(
+          {'marginLeft': '10px'}, 200
+        );   
+      }, 
+      function() {       
+        $(this).stop().animate({'marginLeft': '0px'}, 200);      
+      
+    });   
+
+  });
+
+</script>
+
+
+</body>
+</html>
