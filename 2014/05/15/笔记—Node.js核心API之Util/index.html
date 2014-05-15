@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>�ʼǡ�Node.js����API֮Util | 张小伦爱学习</title>
+  <title>笔记—Node.js核心API之Util | 张小伦爱学习</title>
   <meta name="author" content="张小伦爱学习">
   
-  <meta name="description" content="��������ѧϰNode����ͼ���ݽ��˻�������Node���飬ͬʱ�����ϲ������ϣ������ջ񣬵��������о���Node�����⻹��ͣ����һ����ģ�����ɵ�״̬������Node�е�ģ�飬ƽʱ��ϰ�ͽӴ�����ô������������һЩģ����ʱֻ����ѧϰ��ʱ���Ӵ����������ñ��ͻķ��ˡ�����ν�ü��Ĳ����ñ�ͷ�������ʼǻ��Ǹ������������ͼ��䡣�Լ������ܽ�Ҳ������ͷ��ϰ�����Ծ���̤������������֮�á���">
+  <meta name="description" content="最近正在学习Node，在图书馆借了基本关于Node的书，同时在网上查阅资料，颇有收获，但是整体感觉对Node的理解还是停留在一个很模棱两可的状态。比如Node中的模块，平时练习就接触到那么几个，其他的一些模块暂时只会在学习的时候接触到，不常用便就荒废了。正所谓好记心不如烂笔头，多做笔记还是更有利于理解和记忆。自己做的总结也方便回头复习，所以决定踏上漫长的修炼之旅……">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="�ʼǡ�Node.js����API֮Util"/>
+  <meta property="og:title" content="笔记—Node.js核心API之Util"/>
   <meta property="og:site_name" content="张小伦爱学习"/>
 
   
@@ -75,10 +75,10 @@
   <div class="post-content">
     <header>
       
-      <time datetime="2014-05-12T09:36:00.000Z"><a href="/2014/05/12/笔记—Node.js核心API之Util/">周一, 5月 12 2014, 5:36:00 下午</a></time>
+      <time datetime="2014-05-15T13:16:00.000Z"><a href="/2014/05/15/笔记—Node.js核心API之Util/">周四, 5月 15 2014, 9:16:00 晚上</a></time>
 
   
-    <h1 class="title">�ʼǡ�Node.js����API֮Util</h1>
+    <h1 class="title">笔记—Node.js核心API之Util</h1>
   
 
 
@@ -86,7 +86,7 @@
   
   <div class="tags">
   	<i class="fa fa-tag"></i>
-    <a href="/tags/�ʼ�/">�ʼ�</a>, <a href="/tags/Node.js/">Node.js</a>
+    <a href="/tags/笔记/">笔记</a>, <a href="/tags/Node.js/">Node.js</a>
   </div>
 
 <div class="clear"></div>
@@ -94,36 +94,36 @@
     </header>
     <div class="entry">
       
-        <p>��������ѧϰNode����ͼ���ݽ��˻�������Node���飬ͬʱ�����ϲ������ϣ������ջ񣬵��������о���Node�����⻹��ͣ����һ����ģ�����ɵ�״̬������Node�е�ģ�飬ƽʱ��ϰ�ͽӴ�����ô������������һЩģ����ʱֻ����ѧϰ��ʱ���Ӵ����������ñ��ͻķ��ˡ�����ν�ü��Ĳ����ñ�ͷ�������ʼǻ��Ǹ������������ͼ��䡣�Լ������ܽ�Ҳ������ͷ��ϰ�����Ծ���̤������������֮�á���</p>
+        <p>最近正在学习Node，在图书馆借了基本关于Node的书，同时在网上查阅资料，颇有收获，但是整体感觉对Node的理解还是停留在一个很模棱两可的状态。比如Node中的模块，平时练习就接触到那么几个，其他的一些模块暂时只会在学习的时候接触到，不常用便就荒废了。正所谓好记心不如烂笔头，多做笔记还是更有利于理解和记忆。自己做的总结也方便回头复习，所以决定踏上漫长的修炼之旅……</p>
 <a id="more"></a>
 
-<h2 id="utilģ��">utilģ��</h2>
-<p>util ��һ�� Node.js ����ģ�飬�ṩ��һЩ���ú����������ֲ����� JavaScript �Ĺ��ܹ��ھ����Ĳ��㡣��Щ������������ <code>util</code> ģ���У�����ͨ������ģ����ʹ�����ǡ�</p>
+<h2 id="util模块">util模块</h2>
+<p>util 是一个 Node.js 核心模块，提供了一些常用函数，用于弥补核心 JavaScript 的功能过于精简的不足。这些函数都包含在 <code>util</code> 模块中，可以通过引用模块来使用它们。</p>
 <h3 id="util-format(format,_[…])">util.format(format, […])</h3>
-<p>����һ����ʽ�����ַ�����������Ч���е����� <code>printf</code>����һ��������һ���������ɸ�ռλ�����ַ�������ÿ������ת������ֵ����������Ӧ��ռλ����֧��ռλ���У�</p>
+<p>返回一个格式化的字符串，其作用效果有点类似 <code>printf</code>。第一个参数是一个包含若干个占位符的字符串。将每个参数转换后的值代替参数对应的占位符。支持占位符有：</p>
 <ul>
 <li>%s - String.</li>
 <li>%d - Number (both integer and float).</li>
 <li>%j - JSON.</li>
 <li>% - single percent sign (‘%’). This does not consume an argument.</li>
 </ul>
-<p>������һ�������е�ռλ���Ҳ�����֮��Ӧ�Ĳ����� ��ô����ռλ�������ᱻ�滻</p>
+<p>如果第一个参数中的占位符找不到与之对应的参数， 那么这个占位符将不会被替换</p>
 <pre><code>util.format(<span class="string">'%s:%s'</span>, <span class="string">'foo'</span>); <span class="regexp">//</span> <span class="string">'foo:%s'</span>
-</code></pre><p>����ռλ��̫�٣������Ĳ��������� <code>util.inspect()</code> ת�����ַ�����Ȼ���ÿո񽫶������ַ���ƴ����һ����</p>
+</code></pre><p>如果占位符太少，多余的参数会调用 <code>util.inspect()</code> 转换成字符串，然后用空格将多余的字符串拼接在一起。</p>
 <pre><code>util.format(<span class="string">'%s:%s'</span>, <span class="string">'foo'</span>, <span class="string">'bar'</span>, <span class="string">'baz'</span>, <span class="string">'zhanglun'</span>); <span class="regexp">//</span> <span class="string">'foo:bar baz zhanglun'</span>
-</code></pre><p>������һ����������һ����Ҫ��ʽ�����ַ�������ô���򷽷��Ὣ���еĲ����ÿո�ƴ�ӳ�һ���µ��ַ�����Ȼ�󷵻������ַ�����</p>
+</code></pre><p>如果第一个参数不是一个需要格式化的字符串，那么这个方法会将所有的参数用空格拼接成一个新的字符串，然后返回这个字符串。</p>
 <pre><code>util.format(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">"zhanglun"</span>); // <span class="string">'1 2 3 \'</span>zhanglun\<span class="string">''</span>
 </code></pre><h3 id="util-debug(string)">util.debug(string)</h3>
-<p>����һ��ͬ�������ķ�������ִ�е���һ��������ʱ�����������̣������Ա�׼��������ʽ������ string ������</p>
+<p>这是一个同步输出的方法。当执行到这一句代码的时候会阻塞进程，并且以标准错误的形式将参数 string 输出。</p>
 <pre><code><span class="keyword">require</span>(<span class="string">'util'</span>).debug(<span class="string">'message on stderr'</span>); <span class="regexp">//message</span> on stderr
 </code></pre><h3 id="util-log(string)">util.log(string)</h3>
-<p>�Ա�׼��������ʽ������������ȡ��ǰ��ʱ���������Ͳ��� string һ���������м��� “ - “ ���ӡ�</p>
+<p>以标准输出的形式输出。它将获取当前的时间戳，并和参数 string 一起输出，中间用 “ - “ 连接。</p>
 <pre><code><span class="built_in">require</span>(<span class="string">'util'</span>).<span class="built_in">log</span>(<span class="string">'Timestmaped message.'</span>);<span class="comment"> //15 May 21:41:33 - Timestmaped message</span>
 </code></pre><h3 id="util-inspect(object,_showHidden=false,_depth=2)">util.inspect(object, showHidden=false, depth=2)</h3>
-<p>���򷽷�����������ת��Ϊ�ַ������Ե�����˵�����á����ٽ���һ������ object������Ҫ�������ַ�����</p>
-<p>�ڶ������� showHidden ��һ����ѡ���������� showHidden = true����ô���򷽷������Ѳ��� object �в���ö�ٵ�����������</p>
-<p>���������� depth ��ʾ�����ĵݹ�����������ָ���� depth��Ҳ��ָ���˸�ʽ������ʱ</p>
-<p>��������~~</p>
+<p>这个方法将任意对象转换为字符串，对调试来说很有用。至少接受一个参数 object，即需要处理的字符串。</p>
+<p>第二个参数 showHidden 是一个可选参数，如果 showHidden = true，那么这个方法将会把参数 object 中不可枚举的属性输出。</p>
+<p>第三个参数 depth 表示最大的递归层数。如果指定了 depth，也就指定了格式化代码时</p>
+<p>明天继续~~</p>
 
       
     </div>
@@ -148,10 +148,8 @@
           <div class="clearfix"></div>
           <nav id="pagination">
   
-    <a href="/2014/05/12/笔记—Node.js核心API之Events/" class="alignleft prev"><i class="fa fa-long-arrow-left"></i>Next</a>
   
-  
-    <a href="/2014/05/12/笔记—Node.js核心API之HTTP/" class="alignright next">Prev<i class="fa fa-long-arrow-right"></i></a>
+    <a href="/2014/05/13/笔记—Node.js核心API之HTTP/" class="alignright next">Prev<i class="fa fa-long-arrow-right"></i></a>
   
   <div class="clearfix"></div>
 </nav>
@@ -168,7 +166,7 @@
 
 
 	<!-- 多说评论框 start -->
-<div class="ds-thread" data-thread-key="/2014/05/12/笔记—Node.js核心API之Util/"></div>
+<div class="ds-thread" data-thread-key="/2014/05/15/笔记—Node.js核心API之Util/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
