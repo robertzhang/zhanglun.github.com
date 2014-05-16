@@ -169,10 +169,6 @@ console.<span class="built_in">log</span>(<span class="string">"你的服务器�
 <p>关于 Node 中的 HTTP 模块肯定不止上面说到的这些，上面所讲到的只是一些常用的内容，通常用来处理简单的内容。如果想构建复杂的，全面的 Web 服务器，远远不够。当需要的时候多翻翻<a href="http://nodejs.org/api/http.html" target="_blank">手册</a>，熟能生巧~</p>
   
 	</div>
-	<div class="blog-statement">
-		<p>本博客所有博文皆为原创，转载请注明出处，谢谢</p>
-		
-	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
@@ -233,15 +229,13 @@ var duoshuoQuery = {short_name:"crispelite"};
 <!-- 多说公共JS代码 end -->
 
 </div>  
-      <!--<div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>-->
-
+      
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
   <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP服务器"><span class="toc-number">1.</span> <span class="toc-text">HTTP服务器</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http-Server"><span class="toc-number">1.1.</span> <span class="toc-text">http.Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-ServerResponse"><span class="toc-number">1.2.</span> <span class="toc-text">http.ServerResponse</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#response-writeHead(statusCode,_[header])"><span class="toc-number">1.2.1.</span> <span class="toc-text">response.writeHead(statusCode, [header])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#response-write(data,_[encoding])"><span class="toc-number">1.2.2.</span> <span class="toc-text">response.write(data, [encoding])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#response-end([data],_[encoding])"><span class="toc-number">1.2.3.</span> <span class="toc-text">response.end([data], [encoding])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event:’close’"><span class="toc-number">1.2.4.</span> <span class="toc-text">Event:’close’</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event:’finish’"><span class="toc-number">1.2.5.</span> <span class="toc-text">Event:’finish’</span></a></li></ol></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP客户端"><span class="toc-number">2.</span> <span class="toc-text">HTTP客户端</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http-request(options,_callback)"><span class="toc-number">2.1.</span> <span class="toc-text">http.request(options, callback)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-get(options,_callback)"><span class="toc-number">2.2.</span> <span class="toc-text">http.get(options, callback)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-ClientRequest"><span class="toc-number">2.3.</span> <span class="toc-text">http.ClientRequest</span></a></li></ol>
   </div>
 
 <div id="asidepart">
-<!--<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>-->
 <aside class="clearfix">
 
   
@@ -341,7 +335,7 @@ $(document).ready(function(){
   var m = $('#main'),
       a = $('#asidepart'),
       c = $('.closeaside'),
-      o = $('.openaside');
+      ta = $('#toc.toc-aside');
   $(window).resize(function(){
     getSize(); 
     if (myWidth >= 1024) {
@@ -350,37 +344,28 @@ $(document).ready(function(){
     {
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
       
       $('#toc.toc-aside').css('display', 'none');
         
     }
   });
-//  c.click(function(){
-//    a.addClass('fadeOut').css('display', 'none');
-//    o.css('display', 'block').addClass('fadeIn');
-//    m.addClass('moveMain');
-//  });
-//  o.click(function(){
-//    o.css('display', 'none').removeClass('beforeFadeIn');
-//    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-//    m.removeClass('moveMain');
-//  });
-  var show = false;
+
+  var show = true;
   c.click(function(){
-    show = !show;
     if(show == true){
         a.addClass('fadeOut').css('display', 'none');
-        o.css('display', 'block').addClass('fadeIn');
+        ta.css('display', 'block').addClass('fadeIn');
         m.addClass('moveMain');  
     }else{
-        o.css('display', 'none').removeClass('beforeFadeIn');
-        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
         m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
     }
+    show = !show;
   });
   $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
+    o.css("top",Math.max(80,-$(this).scrollTop()));
   });
 });
 </script>
@@ -404,14 +389,9 @@ $(document).ready(function(){
   if(ah.length==0){
     t.css('display','none');
   }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
+
     $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
     });
   };
 });
