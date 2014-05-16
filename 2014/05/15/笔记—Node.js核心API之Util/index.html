@@ -1,0 +1,525 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>笔记—Node.js核心API之Util | 张小伦爱学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="张小伦爱学习">
+    
+    <meta name="description" content="最近正在学习Node，在图书馆借了基本关于Node的书，同时在网上查阅资料，颇有收获，但是整体感觉对Node的理解还是停留在一个很模棱两可的状态。比如Node中的模块，平时练习就接触到那么几个，其他的一些模块暂时只会在学习的时候接触到，不常用便就荒废了。正所谓好记心不如烂笔头，多做笔记还是更有利于理解和记忆。自己做的总结也方便回头复习，所以决定踏上漫长的修炼之旅……">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="张小伦爱学习">张小伦爱学习</a></h1>
+				<h2 class="blog-motto">勿忘初心  方得始终</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">存档</a></li>
+					
+						<li><a href="http://ncuey.sinaapp.com/CrispElite/">关于</a></li>
+					
+						<li><a href="https://github.com/zhanglun">Github</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/05/15/笔记—Node.js核心API之Util/" title="笔记—Node.js核心API之Util" itemprop="url">笔记—Node.js核心API之Util</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-05-15T13:16:00.000Z" itemprop="datePublished">5月 15 2014</time>
+    更新日期:<time datetime="2014-05-16T11:39:53.000Z" itemprop="dateModified">5月 16 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#util模块"><span class="toc-number">1.</span> <span class="toc-text">util模块</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#util-format(format,_[…])"><span class="toc-number">1.1.</span> <span class="toc-text">util.format(format, […])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-debug(string)"><span class="toc-number">1.2.</span> <span class="toc-text">util.debug(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-log(string)"><span class="toc-number">1.3.</span> <span class="toc-text">util.log(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inspect(object,[options])"><span class="toc-number">1.4.</span> <span class="toc-text">util.inspect(object,[options])</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定制颜色"><span class="toc-number">1.4.1.</span> <span class="toc-text">定制颜色</span></a></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isArray(object)"><span class="toc-number">1.5.</span> <span class="toc-text">util.isArray(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isRegExp(object)"><span class="toc-number">1.6.</span> <span class="toc-text">util.isRegExp(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isDate(object)"><span class="toc-number">1.7.</span> <span class="toc-text">util.isDate(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isError(object)"><span class="toc-number">1.8.</span> <span class="toc-text">util.isError(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inherits(constructor,_superConstructor)"><span class="toc-number">1.9.</span> <span class="toc-text">util.inherits(constructor, superConstructor)</span></a></li></ol>
+		</div>
+		
+		<p>最近正在学习Node，在图书馆借了基本关于Node的书，同时在网上查阅资料，颇有收获，但是整体感觉对Node的理解还是停留在一个很模棱两可的状态。比如Node中的模块，平时练习就接触到那么几个，其他的一些模块暂时只会在学习的时候接触到，不常用便就荒废了。正所谓好记心不如烂笔头，多做笔记还是更有利于理解和记忆。自己做的总结也方便回头复习，所以决定踏上漫长的修炼之旅……</p>
+<a id="more"></a>
+
+<h2 id="util模块">util模块</h2>
+<p>util 是一个 Node.js 核心模块，提供了一些常用函数，用于弥补核心 JavaScript 的功能过于精简的不足。这些函数都包含在 <code>util</code> 模块中，可以通过引用模块来使用它们。</p>
+<h3 id="util-format(format,_[…])">util.format(format, […])</h3>
+<p>返回一个格式化的字符串，其作用效果有点类似 <code>printf</code>。第一个参数是一个包含若干个占位符的字符串。将每个参数转换后的值代替参数对应的占位符。支持占位符有：</p>
+<ul>
+<li>%s - String.</li>
+<li>%d - Number (both integer and float).</li>
+<li>%j - JSON.</li>
+<li>% - single percent sign (‘%’). This does not consume an argument.</li>
+</ul>
+<p>如果第一个参数中的占位符找不到与之对应的参数， 那么这个占位符将不会被替换</p>
+<pre><code>util.format(<span class="string">'%s:%s'</span>, <span class="string">'foo'</span>); <span class="regexp">//</span> <span class="string">'foo:%s'</span>
+</code></pre><p>如果占位符太少，多余的参数会调用 <code>util.inspect()</code> 转换成字符串，然后用空格将多余的字符串拼接在一起。</p>
+<pre><code>util.format(<span class="string">'%s:%s'</span>, <span class="string">'foo'</span>, <span class="string">'bar'</span>, <span class="string">'baz'</span>, <span class="string">'zhanglun'</span>); <span class="regexp">//</span> <span class="string">'foo:bar baz zhanglun'</span>
+</code></pre><p>如果第一个参数不是一个需要格式化的字符串，那么这个方法会将所有的参数用空格拼接成一个新的字符串，然后返回这个字符串。</p>
+<pre><code>util.format(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">"zhanglun"</span>); // <span class="string">'1 2 3 \'</span>zhanglun\<span class="string">''</span>
+</code></pre><h3 id="util-debug(string)">util.debug(string)</h3>
+<p>这是一个同步输出的方法。当执行到这一句代码的时候会阻塞进程，并且以标准错误的形式将参数 string 输出。</p>
+<pre><code><span class="keyword">require</span>(<span class="string">'util'</span>).debug(<span class="string">'message on stderr'</span>); <span class="regexp">//message</span> on stderr
+</code></pre><h3 id="util-log(string)">util.log(string)</h3>
+<p>以标准输出的形式输出。它将获取当前的时间戳，并和参数 string 一起输出，中间用 “ - “ 连接。</p>
+<pre><code><span class="built_in">require</span>(<span class="string">'util'</span>).<span class="built_in">log</span>(<span class="string">'Timestmaped message.'</span>);<span class="comment"> //15 May 21:41:33 - Timestmaped message</span>
+</code></pre><h3 id="util-inspect(object,[options])">util.inspect(object,[options])</h3>
+<p>这个方法将任意对象转换为字符串，对调试来说很有用。至少接受一个参数 object，即需要处理的字符串。此外还可以传递一个可选的参数 options，用来控制字符串的输出格式。</p>
+<ul>
+<li><code>showHidden</code>——如果<code>showHidden</code>为 true，那么这个方法将会把参数 object 中不可枚举的属性输出。</li>
+<li><code>depth</code>——表示最大的递归层数。如果指定了 depth，也就指定了格式化代码时递归的次数。如果不指定depth，默认会递归2次，指定为 null 时将不限定次数，完整地遍历对象。</li>
+<li><code>color</code>——如果<code>color</code>为 true，输出的格式将会以 ANSI 颜色编码，可以在终端显示更漂亮的效果。</li>
+<li><code>customInspect</code>——如果为 false，那么将要被遍历检查的对象（参数object）中定义的<code>inspect（）</code>函数将不会被调用。 默认值为 true。</li>
+</ul>
+<p>下面先来看一个例子：</p>
+<pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);
+<span class="keyword">var</span> obj1 = {
+        <span class="string">"aa"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+            console.log(<span class="string">"aa"</span>);
+        },
+        <span class="string">"inspect"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+            console.log(<span class="string">"obj1's inspect()"</span>);
+        },
+        <span class="string">"bb"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+            console.log(<span class="string">"bb"</span>);
+        }
+    },
+    obj2 = {
+        <span class="string">"cc"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+            console.log(<span class="string">"cc"</span>);
+        },
+        <span class="string">"inspect"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+            console.log(<span class="string">"obj2's inspect()"</span>);
+            <span class="keyword">return</span> <span class="string">"Hello"</span>;
+        },
+        <span class="string">"dd"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+            console.log(<span class="string">"dd"</span>);
+        }
+    };
+
+<span class="keyword">var</span> str1 = util.inspect(obj1, {
+    showHidden: <span class="literal">false</span>,
+    depth: <span class="literal">null</span>,
+    customInspect: <span class="literal">false</span>
+}),
+    str2 = util.inspect(obj2, {
+        showHidden: <span class="literal">false</span>,
+        depth: <span class="literal">null</span>,
+        customInspect: <span class="literal">true</span>
+    });
+
+console.log(<span class="string">"str1 : "</span> + str1);
+console.log(<span class="string">"str2 : "</span> + str2);
+</code></pre><p>其输出结果：</p>
+<pre><code>obj2's inspect()
+str1 : { aa: [<span class="keyword">Function</span>], inspacet: [<span class="keyword">Function</span>], bb: [<span class="keyword">Function</span>] }
+str2 : Hello
+</code></pre><p>暂时先忽略颜色，待会接着说，先看<code>customInspect</code>。上面的例子中，有两个对象：obj1 和 obj2，内部都定义了一个 inspect()函数，调用<code>util.inspect()</code>方法时，只有<code>customInspect</code>不同。当<code>customInspect</code>为 true 时，比如 obj2，其内部的 <code>util.inspect()</code>函数在执行<code>util.inspect()</code>时就被调用了，同时只会返回这个内部的 <code>util.inspect()</code>执行后的返回值，如果没有函数显示地调用 return 语句，则返回 undefined。可以试试修改上面的示例代码中 obj2 的<code>inspect()</code>的返回值。而对于 obj1，其<code>customInspect</code>，所以其内部的<code>inspect()</code>并不会被调用。</p>
+<h4 id="定制颜色">定制颜色</h4>
+<p>可以通过两个对象：<code>util.inspect.styles</code>和<code>util.inspect.colors</code>全局定制输出的颜色。<code>util.inspect.styles</code>是一个<code>util.inspect.colors</code>中的颜色到样式的映射。后面的没搞懂怎么回事，以后再补上。</p>
+<h3 id="util-isArray(object)">util.isArray(object)</h3>
+<p>如果参数 object 是一个数组，返回 true，否则返回 false。<br>    var util = require(‘util’);</p>
+<pre><code>util.isArray([])
+  <span class="comment">// true</span>
+util.isArray(<span class="keyword">new</span> <span class="built_in">Array</span>)
+  <span class="comment">// true</span>
+util.isArray({})
+  <span class="comment">// false</span>
+</code></pre><h3 id="util-isRegExp(object)">util.isRegExp(object)</h3>
+<p>如果参数 object 是一个 RegExp 对象，返回 true，否则返回 false。</p>
+<pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);
+
+util.isRegExp(<span class="regexp">/some regexp/</span>)
+  <span class="comment">// true</span>
+util.isRegExp(<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'another regexp'</span>))
+  <span class="comment">// true</span>
+util.isRegExp({})
+  <span class="comment">// false</span>
+</code></pre><h3 id="util-isDate(object)">util.isDate(object)</h3>
+<p>如果参数 object 是一个 Date 对象，返回 true，否则返回 false。</p>
+<pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);
+
+util.isDate(<span class="keyword">new</span> <span class="built_in">Date</span>())
+  <span class="comment">// true</span>
+util.isDate(<span class="built_in">Date</span>())
+  <span class="comment">// false (without 'new' returns a String)</span>
+util.isDate({})
+  <span class="comment">// false</span>
+</code></pre><h3 id="util-isError(object)">util.isError(object)</h3>
+<p>如果参数 object 是一个 Error 对象，返回 true，否则返回 false。</p>
+<pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);
+
+util.isError(<span class="keyword">new</span> <span class="built_in">Error</span>())
+  <span class="comment">// true</span>
+util.isError(<span class="keyword">new</span> <span class="built_in">TypeError</span>())
+  <span class="comment">// true</span>
+util.isError({ name: <span class="string">'Error'</span>, message: <span class="string">'an error occurred'</span> })
+  <span class="comment">// false</span>
+</code></pre><h3 id="util-inherits(constructor,_superConstructor)">util.inherits(constructor, superConstructor)</h3>
+<p>这是一个实现对象之间原型继承的函数。constructor 将会继承 superConstructor。另外，通过<code>constructor.super_</code>可以访问到 superConstructor。</p>
+<pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);
+<span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">"events"</span>);
+
+<span class="function"><span class="keyword">function</span> <span class="title">MyStream</span><span class="params">()</span> {</span>
+}
+util.inherits(MyStream, events.EventEmitter);
+
+MyStream.prototype.write = <span class="function"><span class="keyword">function</span><span class="params">(data)</span> {</span>
+    <span class="keyword">this</span>.emit(<span class="string">"data"</span>, data);
+}
+
+<span class="keyword">var</span> stream = <span class="keyword">new</span> MyStream();
+
+
+console.log(stream <span class="keyword">instanceof</span> events.EventEmitter); <span class="comment">// true</span>
+console.log(MyStream.super_); 
+<span class="comment">//{ [Function: EventEmitter] listenerCount: [Function] }</span>
+console.log(MyStream.super_ === events.EventEmitter); <span class="comment">// true</span>
+
+stream.on(<span class="string">"data"</span>, <span class="function"><span class="keyword">function</span><span class="params">(data)</span> {</span>
+    console.log(<span class="string">'Received data: "'</span> + data + <span class="string">'"'</span>);
+})
+stream.write(<span class="string">"It works!"</span>); <span class="comment">// Received data: "It works!"</span>
+</code></pre><p>util 模块还提供了其他的一些工具函数，更多详情请戳<a href="http://nodejs.org/api/util.html#util_util" target="_blank">这里</a>。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/笔记/">笔记</a><a href="/tags/Node.js/">Node.js</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://zhanglun.github.io/2014/05/15/笔记—Node.js核心API之Util/" data-title="笔记—Node.js核心API之Util | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2014/05/13/笔记—Node.js核心API之HTTP/"  title="笔记-Node.js中的核心API之HTTP">
+ <strong>NEXT:</strong><br/> 
+ <span>笔记-Node.js中的核心API之HTTP
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"crispelite"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#util模块"><span class="toc-number">1.</span> <span class="toc-text">util模块</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#util-format(format,_[…])"><span class="toc-number">1.1.</span> <span class="toc-text">util.format(format, […])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-debug(string)"><span class="toc-number">1.2.</span> <span class="toc-text">util.debug(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-log(string)"><span class="toc-number">1.3.</span> <span class="toc-text">util.log(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inspect(object,[options])"><span class="toc-number">1.4.</span> <span class="toc-text">util.inspect(object,[options])</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定制颜色"><span class="toc-number">1.4.1.</span> <span class="toc-text">定制颜色</span></a></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isArray(object)"><span class="toc-number">1.5.</span> <span class="toc-text">util.isArray(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isRegExp(object)"><span class="toc-number">1.6.</span> <span class="toc-text">util.isRegExp(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isDate(object)"><span class="toc-number">1.7.</span> <span class="toc-text">util.isDate(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isError(object)"><span class="toc-number">1.8.</span> <span class="toc-text">util.isError(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inherits(constructor,_superConstructor)"><span class="toc-number">1.9.</span> <span class="toc-text">util.inherits(constructor, superConstructor)</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/前端/" title="前端">前端<sup>5</sup></a></li>
+		
+			<li><a href="/categories/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+		
+			<li><a href="/tags/css/" title="css">css<sup>1</sup></a></li>
+		
+			<li><a href="/tags/sass/" title="sass">sass<sup>2</sup></a></li>
+		
+			<li><a href="/tags/web优化/" title="web优化">web优化<sup>3</sup></a></li>
+		
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>3</sup></a></li>
+		
+			<li><a href="/tags/译文/" title="译文">译文<sup>3</sup></a></li>
+		
+			<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m CrispElite in Google. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2671026564" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/zhanglun" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://zhanglun.github.io/" target="_blank" title="张小伦爱学习">张小伦爱学习</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>
