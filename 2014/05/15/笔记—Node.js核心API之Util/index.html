@@ -119,9 +119,11 @@
 </code></pre><h3 id="util-log(string)">util.log(string)</h3>
 <p>以标准输出的形式输出。它将获取当前的时间戳，并和参数 string 一起输出，中间用 “ - “ 连接。</p>
 <pre><code><span class="built_in">require</span>(<span class="string">'util'</span>).<span class="built_in">log</span>(<span class="string">'Timestmaped message.'</span>);<span class="comment"> //15 May 21:41:33 - Timestmaped message</span>
-</code></pre><h3 id="util-inspect(object,_showHidden=false,_depth=2)">util.inspect(object, showHidden=false, depth=2)</h3>
-<p>这个方法将任意对象转换为字符串，对调试来说很有用。至少接受一个参数 object，即需要处理的字符串。</p>
-<p>第二个参数 showHidden 是一个可选参数，如果 showHidden = true，那么这个方法将会把参数 object 中不可枚举的属性输出。</p>
+</code></pre><h3 id="util-inspect(object,[options])">util.inspect(object,[options])</h3>
+<p>这个方法将任意对象转换为字符串，对调试来说很有用。至少接受一个参数 object，即需要处理的字符串。此外还可以传递一个可选的参数 options，用来控制字符串的输出格式。</p>
+<ul>
+<li><code>showHidden</code>——如果<code>showHidden = true</code>，那么这个方法将会把参数 object 中不可枚举的属性输出。</li>
+</ul>
 <p>第三个参数 depth 表示最大的递归层数。如果指定了 depth，也就指定了格式化代码时</p>
 <p>明天继续~~</p>
 
