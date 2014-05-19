@@ -131,8 +131,9 @@ btn.onclick=<span class="function"><span class="keyword">function</span><span cl
 btn.onclick=<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
     alert(<span class="keyword">this</span>.id);<span class="comment">//"myBtn"</span>
 }
-</code></pre><p>以这种当时添加的事件处理程序会在事件流的冒泡阶段被处理。<br>通过将事件处理程序属性的值设置成null就可以删除事件处理程序。<br>    btn.onclick=null;    </p>
-<h3 id="DOM2级事件处理程序">DOM2级事件处理程序</h3>
+</code></pre><p>以这种当时添加的事件处理程序会在事件流的冒泡阶段被处理。<br>通过将事件处理程序属性的值设置成null就可以删除事件处理程序。</p>
+<pre><code><span class="attribute">btn.onclick</span>=<span class="string">null;    </span>
+</code></pre><h3 id="DOM2级事件处理程序">DOM2级事件处理程序</h3>
 <p>“DOM2级事件”规定了两个方法用于操作事件处理程序：addEventListener()和removeEventListener()。所有的节点都包含这两个方法，接收三个参数：要处理的事件名，作为事件处理程序的函数和一个布尔值。最后的参数如果是true，表示在事件捕获阶段调用事件处理程序，如果是false，表示在事件冒泡阶段调用事件处理程序。</p>
 <pre><code><span class="keyword">var</span> btn=document.getElementById(<span class="string">"myBtn"</span>);    
 btn.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
