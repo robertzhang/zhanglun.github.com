@@ -4,12 +4,14 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>(译)Node.js的 EventEmitter 教程 | 张小伦爱学习</title>
+    <title>(译)取消事件冒泡的危害 | 张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
     
-    <meta name="description" content="原文标题：Node.js EventEmitter Tutorial 原文链接：http://www.hacksparrow.com/node-js-eventemitter-tutorial.html">
+    <meta name="description" content="原文标题：The Dangers of Stopping Event Propagation 原文链接：http://css-tricks.com/dangers-stopping-event-propagation/
+
+ 这是  Philip Walton 发布在 css-trick 上的一篇文章">
     
     
     
@@ -62,15 +64,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/05/05/(译)Node.js 的 EventEmitter 教程/" title="(译)Node.js的 EventEmitter 教程" itemprop="url">(译)Node.js的 EventEmitter 教程</a>
+      <a href="/2014/05/28/(译)取消事件冒泡的危害/" title="(译)取消事件冒泡的危害" itemprop="url">(译)取消事件冒泡的危害</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-05-05T13:23:00.000Z" itemprop="datePublished">5月 5 2014</time>
-    更新日期:<time datetime="2014-05-13T12:45:42.000Z" itemprop="dateModified">5月 13 2014</time>
+    <time datetime="2014-05-28T13:23:00.000Z" itemprop="datePublished">5月 28 2014</time>
+    更新日期:<time datetime="2014-05-28T14:47:59.000Z" itemprop="dateModified">5月 28 2014</time>
     
   </p>
 </header>
@@ -79,100 +81,34 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#取消冒泡会导致什么问题？"><span class="toc-number">1.</span> <span class="toc-text">取消冒泡会导致什么问题？</span></a></li></ol>
 		</div>
 		
 		<blockquote>
-<p>原文标题：Node.js EventEmitter Tutorial<br> 原文链接：<a href="http://www.hacksparrow.com/node-js-eventemitter-tutorial.html" target="_blank">http://www.hacksparrow.com/node-js-eventemitter-tutorial.html</a></p>
+<p>原文标题：The Dangers of Stopping Event Propagation<br> 原文链接：<a href="http://css-tricks.com/dangers-stopping-event-propagation/" target="_blank">http://css-tricks.com/dangers-stopping-event-propagation/</a></p>
 </blockquote>
-<a id="more"></a>
-
-<p>听说过 Node.js 中的 <code>EventEmitter</code> 吗？也许你知道大部分内置的 Node.js 库 都使用它，也许你总是对 <code>EventEmitter</code> 充满好奇，但是没有谁向你解释？</p>
-<p>在这个教程中，我会给你一些关于 <code>EventEmitter</code> 类的例子。</p>
-<p>你必须熟悉各种 Node.js 中的事件比如： <code>on data</code> ， <code>on end</code> ， <code>on error</code> 等等之类的。事件机制的工作做得天衣无缝，十分完美，难道不是吗？所有的基于事件的 Node.js 库都依赖于 <code>EventEmitter</code> 类，你可能会说那些库都继承了 <code>EventEmitter</code>。</p>
-<p> <code>EventEmitter</code> 的强大之处不仅限于内置的 Node.js 库，你也可以拥有它！</p>
-<p>展示 <code>EventEmitter</code> 能力的最好方法就是通过一个例子，看看这个：</p>
-<pre><code><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;
-<span class="keyword">var</span> radium = <span class="keyword">new</span> EventEmitter();
-
-<span class="comment">//绑定 radiation 事件</span>
-radium.on(<span class="string">'radiation'</span>, <span class="function"><span class="keyword">function</span><span class="params">(ray)</span> {</span>
-    console.log(ray);
+<p> 这是  <a href="http://philipwalton.com/" target="_blank">Philip Walton</a> 发布在 <a href="http://css-tricks.com/" target="_blank">css-trick</a> 上的一篇文章。他将会向我们解释为什么不能轻易地取消事件冒泡，而是尽可能的去避免。</p>
+<p> 如果你是一个前端开发人员，在你的工作中，应该有过这样的经历：编写一个自定义的弹出窗口或者对话框，当用户点击页面中弹窗的之外的其他地方，弹窗隐藏。如果你试着在网上搜索试图找到最好的解决方案，没准你会遇到这个 Stack Overflow 上的一个问题：<a href="http://stackoverflow.com/questions/152975/how-to-detect-a-click-outside-an-element" target="_blank">How to detect a click outside an element?</a>。</p>
+<p> 下面的代码是投票最高的回答推荐的方案：</p>
+<pre><code>$(<span class="string">'html'</span>).click(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+  <span class="comment">// Hide the menus if visible.</span>
 });
 
-setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-    <span class="comment">//触发 radiation 事件</span>
-    radium.emit(<span class="string">'radiation'</span>, <span class="string">'GAMMA'</span>);
-}, <span class="number">1000</span>);
-</code></pre><p>注意到了吧，创建一个事件，添加一个事件监听器，触发事件，通过事件传递数据是多么的简单。所有的这些因为 <code>EventEmitter</code> 的魔力而实现。 <code>EventEmitter</code> 让编写令人惊讶的 Node.js 库变得可能。</p>
-<p>上面的例子基于一个 <code>EventEmitter</code> 的实例，我们怎么做才能创建一个继承自 <code>EventEmitter</code> 的类呢？Node.js 有一个，叫做 <code>util</code> 的库，它有一个方法： <code>inherits</code>，实现对象之间原型继承的函数。我们可以很轻松的通过它让一个类继承另一个类（准确的说不能叫类）：</p>
-<pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);
-util.inherits(MyClass, SuperClass);
-</code></pre><p>使用 <code>util.inherits()</code> ，我们创建了一个继承自 <code>EventEmitter</code> 的模块，注意下面的代码：</p>
-<p><em>radio.js</em> 中的内容：</p>
-<pre><code><span class="keyword">var</span> util = <span class="keyword">require</span>(<span class="string">'util'</span>);
-<span class="keyword">var</span> EventEmitter = <span class="keyword">require</span>(<span class="string">'events'</span>).EventEmitter;
-
-<span class="comment">//一个包含 "freq" 和 "name" 属性的对象</span>
-<span class="keyword">var</span> Radio = <span class="function"><span class="keyword">function</span><span class="params">(station)</span> {</span>
-    <span class="comment">//保存 指向Radio的this，在setTimeout()中使用</span>
-    <span class="keyword">var</span> <span class="keyword">self</span> = this;
-
-    setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-        <span class="keyword">self</span>.emit(<span class="string">'open'</span>, station);
-    }, <span class="number">0</span>);
-
-    setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-        <span class="keyword">self</span>.emit(<span class="string">'close'</span>, station);
-    }, <span class="number">5000</span>);
-
-    this.on(<span class="string">'newListener'</span>, <span class="function"><span class="keyword">function</span><span class="params">(listener)</span> {</span>
-        console.log(<span class="string">'Event Listener: '</span> + listener);
-    });
-
-};
-
-<span class="comment">//Radio 继承 EventEmitter</span>
-util.inherits(Radio, EventEmitter);
-module.exports = Radio;
-</code></pre><p>我们创建了一个继承自 <code>EventEmitter</code> 的模块。接下来让我们看看如何在一个例子中使用创建的模块。</p>
-<p><em>example.js</em> 中的内容：</p>
-<pre><code><span class="keyword">var</span> Radio = <span class="built_in">require</span>(<span class="string">'./radio.js'</span>);
-
-<span class="keyword">var</span> station = {
-    freq: <span class="string">'80.16'</span>,
-    name: <span class="string">'Rock N Roll Radio'</span>,
-};
-<span class="comment">// 创建一个Radio实例</span>
-<span class="keyword">var</span> radio = <span class="keyword">new</span> Radio(station);
-
-<span class="comment">//添加一个“open”事件监听器</span>
-radio.on(<span class="string">'open'</span>, <span class="function"><span class="keyword">function</span><span class="params">(station)</span> {</span>
-    console.log(<span class="string">'"%s" FM %s OPENED'</span>, station.name, station.freq);
-    console.log(<span class="string">'? ??'</span>);
+$(<span class="string">'#menucontainer'</span>).click(<span class="function"><span class="keyword">function</span><span class="params">(event)</span>{</span>
+  event.stopPropagation();
 });
-
-<span class="comment">//添加一个“close”事件监听器</span>
-radio.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span><span class="params">(station)</span> {</span>
-    console.log(<span class="string">'"%s" FM %s CLOSED'</span>, station.name, station.freq);
-});
-</code></pre><p>运行 example.js 准备好见证 <code>EventEmitter</code> 的魔力。</p>
-<p>如果因为某些原因你不想使用 <code>util</code> 模块，你可以用这种方法来拓展一个类。</p>
-<pre><code>Apple.<span class="keyword">prototype</span> = Object.create(<span class="keyword">require</span>(<span class="string">'events'</span>).EventEmitter.<span class="keyword">prototype</span>);
-</code></pre><p> <code>EventEmitter</code> 可以帮你编写令人印象深刻的基于事件的 Node.js 模块。同时，作为作为一个 Node.js 的开发人员，你掌握的关于<code>EventEmitter</code>的知识会大大影响你的工作效率。所以，确保你阅读了<a href="http://nodejs.org/api/events.html#events_class_events_eventemitter" target="_blank">关于 <code>EventEmitter</code> 的更详细的资料</a>，并且掌握里里外外它是如何工作的。如果你不了解<code>EventEmitter</code>，那你也不了解 Nodejs.js</p>
-<p>(完)</p>
-<p><strong>翻译水平有待提高，所翻译的博文并不是按照原文一句一句翻译，而是添加了自己对文章的理解。如有不正之处，欢迎指正！</strong><br><strong>个人笔记，仅供参考。</strong></p>
-<blockquote>
-<p>参考:<br><a href="http://www.hacksparrow.com/node-js-eventemitter-tutorial.html">http://www.hacksparrow.com/node-js-eventemitter-tutorial.html
-</a></p>
-</blockquote>
+</code></pre><p> 这个例子可能说的不太明显。简单的解释一下：如果一个鼠标点击事件冒泡到 &lt;\html&gt; 元素上时，隐藏菜单。如果点击事件是在元素 #menucontainer 内部触发的，则阻止在这个事件使得事件永远不会到达 &lt;\html&gt;元素上。因此只有在元素 #menucontainer 外触发点击事件时菜单才会被隐藏。</p>
+<p> 上面的方案一直以来都是如此的简单优雅。然后，不幸的是，这绝对是一个很可怕的建议！<br> 这种办法就像是：通过关掉浴室的水来解决淋浴漏水问题。这有效果，但是却完完全全忽略了页面其他代码可能需要监听这个事件的可能性。</p>
+<h3 id="取消冒泡会导致什么问题？">取消冒泡会导致什么问题？</h3>
+<p> 你可能会说：谁还会自己去写这种代码？我使用经过良好测试的库，比如 Bootstrap，所以我不用担心这个问题，不是吗？</p>
+<p> 可是，真的是这样的吗？</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/译文/">译文</a><a href="/tags/Node.js/">Node.js</a>
+  <span></span> <a href="/tags/译文/">译文</a><a href="/tags/JavaScript/">JavaScript</a>
   </div>
 
 
@@ -180,7 +116,7 @@ radio.on(<span class="string">'close'</span>, <span class="function"><span class
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/05/05/(译)Node.js 的 EventEmitter 教程/" data-title="(译)Node.js的 EventEmitter 教程 | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/05/28/(译)取消事件冒泡的危害/" data-title="(译)取消事件冒泡的危害 | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -189,19 +125,11 @@ radio.on(<span class="string">'close'</span>, <span class="function"><span class
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/05/08/学习sass时了解到的一些好玩特性/" title="学习sass时了解到的一些好玩特性">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  学习sass时了解到的一些好玩特性</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/04/28/(译)Node.js的全局变量/"  title="(译)Node.js的全局变量">
+<a href="/2014/05/15/笔记—Node.js核心API之Util/"  title="笔记—Node.js核心API之Util">
  <strong>NEXT:</strong><br/> 
- <span>(译)Node.js的全局变量
+ <span>笔记—Node.js核心API之Util
 </span>
 </a>
 </div>
@@ -231,7 +159,7 @@ var duoshuoQuery = {short_name:"crispelite"};
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#取消冒泡会导致什么问题？"><span class="toc-number">1.</span> <span class="toc-text">取消冒泡会导致什么问题？</span></a></li></ol>
   </div>
 
 <div id="asidepart">
