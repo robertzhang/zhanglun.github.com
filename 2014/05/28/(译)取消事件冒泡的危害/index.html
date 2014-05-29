@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>(译)取消事件冒泡的危害 | 张小伦爱学习</title>
+    <title>(译)阻止事件传播的危害 | 张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
@@ -64,7 +64,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/05/28/(译)取消事件冒泡的危害/" title="(译)取消事件冒泡的危害" itemprop="url">(译)取消事件冒泡的危害</a>
+      <a href="/2014/05/28/(译)取消事件冒泡的危害/" title="(译)阻止事件传播的危害" itemprop="url">(译)阻止事件传播的危害</a>
   </h1>
   <p class="article-author">By
     
@@ -72,7 +72,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-05-28T13:23:00.000Z" itemprop="datePublished">5月 28 2014</time>
-    更新日期:<time datetime="2014-05-28T14:47:59.000Z" itemprop="dateModified">5月 28 2014</time>
+    更新日期:<time datetime="2014-05-29T06:40:52.000Z" itemprop="dateModified">5月 29 2014</time>
     
   </p>
 </header>
@@ -87,7 +87,7 @@
 		<blockquote>
 <p>原文标题：The Dangers of Stopping Event Propagation<br> 原文链接：<a href="http://css-tricks.com/dangers-stopping-event-propagation/" target="_blank">http://css-tricks.com/dangers-stopping-event-propagation/</a></p>
 </blockquote>
-<p> 这是  <a href="http://philipwalton.com/" target="_blank">Philip Walton</a> 发布在 <a href="http://css-tricks.com/" target="_blank">css-trick</a> 上的一篇文章。他将会向我们解释为什么不能轻易地取消事件冒泡，而是尽可能的去避免。</p>
+<p> 这是  <a href="http://philipwalton.com/" target="_blank">Philip Walton</a> 发布在 <a href="http://css-tricks.com/" target="_blank">css-trick</a> 上的一篇文章。他将会向我们解释为什么不能轻易地阻止事件的传播，而是尽可能的去避免。</p>
 <p> 如果你是一个前端开发人员，在你的工作中，应该有过这样的经历：编写一个自定义的弹出窗口或者对话框，当用户点击页面中弹窗的之外的其他地方，弹窗隐藏。如果你试着在网上搜索试图找到最好的解决方案，没准你会遇到这个 Stack Overflow 上的一个问题：<a href="http://stackoverflow.com/questions/152975/how-to-detect-a-click-outside-an-element" target="_blank">How to detect a click outside an element?</a>。</p>
 <p> 下面的代码是投票最高的回答推荐的方案：</p>
 <pre><code>$(<span class="string">'html'</span>).click(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
@@ -98,10 +98,13 @@ $(<span class="string">'#menucontainer'</span>).click(<span class="function"><sp
   event.stopPropagation();
 });
 </code></pre><p> 这个例子可能说的不太明显。简单的解释一下：如果一个鼠标点击事件冒泡到 &lt;\html&gt; 元素上时，隐藏菜单。如果点击事件是在元素 #menucontainer 内部触发的，则阻止在这个事件使得事件永远不会到达 &lt;\html&gt;元素上。因此只有在元素 #menucontainer 外触发点击事件时菜单才会被隐藏。</p>
-<p> 上面的方案一直以来都是如此的简单优雅。然后，不幸的是，这绝对是一个很可怕的建议！<br> 这种办法就像是：通过关掉浴室的水来解决淋浴漏水问题。这有效果，但是却完完全全忽略了页面其他代码可能需要监听这个事件的可能性。</p>
+<p> 上面的方案一直以来都是如此的简单优雅。然后，不幸的是，这绝对是一个很可怕的建议！<br> 这种办法就像是：通过关掉浴室的水来解决淋浴漏水问题。这有效果，但是却完完全全忽略了页面其他代码可能需要监听这个事件的可能性。好比你的蓬头漏水了但是你还得用洗手盆的水龙头。</p>
 <h3 id="取消冒泡会导致什么问题？">取消冒泡会导致什么问题？</h3>
 <p> 你可能会说：谁还会自己去写这种代码？我使用经过良好测试的库，比如 Bootstrap，所以我不用担心这个问题，不是吗？</p>
-<p> 可是，真的是这样的吗？</p>
+<p> 可是，真的是这样的吗？在现在流行的一些库中，也有一些库在处理事件中阻止了事件的传播。为了证明这一点，让我来为你演示一下在 Ruby on Rail 中使用 Bootstrap 搞出一个bug是多么的容易。Rails 使用了一个叫做 <a href="https://github.com/rails/jquery-ujs" target="_blank">jquery-ujs</a> 的JavaScript库，它可以让开发者通过 <code>data-remote</code> 以声明的方式为链接添加远程的 Ajax 调用。在下面的例子中，如果你点开了 <code>Dropdown</code> ，点击窗体的其他地方这个 dropdown 会自动隐藏。但是，如果点开 <code>Dropdown</code> 之后再点击 <code>Remote Link</code> ，dropdown将不会隐藏。</p>
+ <iframe id="cp_embed_KzHjc" src="http://codepen.io/anon/embed/KzHjc?height=268&amp;theme-id=1&amp;slug-hash=KzHjc&amp;default-tab=result" scrolling="no" frameborder="0" height="268" allowtransparency="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+
+
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -116,7 +119,7 @@ $(<span class="string">'#menucontainer'</span>).click(<span class="function"><sp
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/05/28/(译)取消事件冒泡的危害/" data-title="(译)取消事件冒泡的危害 | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/05/28/(译)取消事件冒泡的危害/" data-title="(译)阻止事件传播的危害 | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
