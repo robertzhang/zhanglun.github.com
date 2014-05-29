@@ -72,7 +72,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-05-28T13:23:00.000Z" itemprop="datePublished">5月 28 2014</time>
-    更新日期:<time datetime="2014-05-29T14:26:49.000Z" itemprop="dateModified">5月 29 2014</time>
+    更新日期:<time datetime="2014-05-29T14:31:56.000Z" itemprop="dateModified">5月 29 2014</time>
     
   </p>
 </header>
@@ -140,7 +140,7 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
 </code></pre><p>由于 <code>return false</code> 的混乱，同时 jQuery 中的处理程序阻止了事件的传播，我建议不要使用。更好的做法是明确你的目的，然后直接调用这些事件的方法。</p>
 <h3 id="性能(Performance)">性能(Performance)</h3>
 <p>在老式的浏览器中，一个复杂的 DOM 结构真的会减慢你的站点加载速度。同时由于事件的传播需要经过整个 DOM ，所以文档中的节点越多，事件到达目标元素的速度就越慢。</p>
-<p>Peter Paul Koch 中的(一篇文章)[<a href="http://www.quirksmode.org/js/events_order.html]中提到了一个具体的例子：" target="_blank">http://www.quirksmode.org/js/events_order.html]中提到了一个具体的例子：</a></p>
+<p>Peter Paul Koch 中的<a href="http://www.quirksmode.org/js/events_order.html" target="_blank">一篇文章</a>中提到了一个具体的例子：</p>
 <blockquote>
 <p>If your document structure is very complex (lots of nested tables and such) you may save system resources by turning off bubbling. The browser has to go through every single ancestor element of the event target to see if it has an event handler. Even if none are found, the search still takes time.</p>
 <p>如果你的文档结构十分复杂（有很多嵌套的表格或者其他类似的结构），你可以通过取消事件冒泡来节约系统的资源。浏览器不得不检查事件的对象元素的每一个祖先元素是否绑定了事件处理程序。即使没有绑定，这个搜索也依旧会花费时间。</p>
@@ -151,8 +151,8 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
 <p>首先作为一般的规则，阻止事件的传递不应该是一个问题的解决方法。假设你的页面上有几个事件处理程序，它们之间有时候互相干扰，同时你发现阻止事件的传递可以让代码很好的工作，这是一个很糟糕的事情！这可能可以解决暂时的问题，但是很有可能产生其他的你不知道的问题。</p>
 <p>阻止事件的传播应该像取消一个事件一样仔细考虑，并且只有在你想取消一个事件的时候才去阻止事件的传播。可能你想阻止一个表单的提交或者不允许将页面的焦点聚集在某个区域上。在这些情况下，你会选择阻止事件的传递，是因为你不想触发默认的事件，而不是因为你不想有一个注册在 DOM 更深处的事件处理程序。</p>
 <p>在之前提到的 Stack Overflow 上的那个问题中，总而言之，其调用 <code>stopPropagation</code> 的目的不是为了摆脱点击事件，而是避免在页面上运行其他代码。</p>
-<p>之所以说它是个不好的方案，除了是因为它改变了到了全局对象的行为，还有它将菜单的隐藏逻辑代码放在了两个不同的而且没有联系的地方，这使得代码变得脆弱。</p>
-<p>有一个更好的解决办法就是创建单一的事件处理程序，它的逻辑完全的封闭，这个处理程序唯一的作用就是通过给定的事件决定这个菜单是否隐藏。事实证明这个更好的方案也介绍了代码量：</p>
+<p>之所以说它是个不好的方案，除了是因为它改变了全局对象的行为，还有它将菜单的隐藏逻辑代码放在了两个不同的而且没有联系的地方，这使得代码变得脆弱。</p>
+<p>有一个更好的解决办法就是创建单一的事件处理程序，它的逻辑完全的封闭，这个处理程序唯一的作用就是通过给定的事件决定这个菜单是否隐藏。事实证明这个更好的方案也减少了代码量：</p>
 <pre><code>$(document).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> {</span>
   <span class="keyword">if</span> (!$(event.target).closest(<span class="string">'#menucontainer'</span>).length) {
     <span class="comment">// Hide the menus.</span>
