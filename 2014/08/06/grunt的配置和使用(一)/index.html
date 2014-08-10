@@ -1,0 +1,454 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Grunt的配置和使用(一) | 张小伦爱学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="张小伦爱学习">
+    
+    <meta name="description" content="Grunt 和 Grunt 的插件都是通过 Node.js 的包管理器 npm 来安装和管理的。为了方便使用 Grunt ，你应该在全局范围内安装 Grunt 的命令行接口(CLI)。要做到这一点，你可能需要使用 sudo (OS X，*nix，BSD 等平台中)权限或者作为超级管理员( Windo">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="张小伦爱学习">张小伦爱学习</a></h1>
+				<h2 class="blog-motto">勿忘初心  方得始终</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="http://www.cnblogs.com/zhanglun/">博客园</a></li>
+					
+						<li><a href="https://github.com/zhanglun">github</a></li>
+					
+						<li><a href="http://ncuey.sinaapp.com/CrispElite/">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/08/06/grunt的配置和使用(一)/" title="Grunt的配置和使用(一)" itemprop="url">Grunt的配置和使用(一)</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-08-06T13:39:47.000Z" itemprop="datePublished">8月 6 2014</time>
+    更新日期:<time datetime="2014-08-01T22:43:52.000Z" itemprop="dateModified">8月 2 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何工作"><span class="toc-number">1.</span> <span class="toc-text">如何工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构建一个新的_Grunt_项目"><span class="toc-number">2.</span> <span class="toc-text">构建一个新的 Grunt 项目</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#package-json"><span class="toc-number">2.1.</span> <span class="toc-text">package.json</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Gruntfile"><span class="toc-number">2.2.</span> <span class="toc-text">Gruntfile</span></a></li><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#wrapper_函数"><span class="toc-number">2.2.1.</span> <span class="toc-text">wrapper 函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#项目和任务配置"><span class="toc-number">2.2.2.</span> <span class="toc-text">项目和任务配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#加载_grunt_插件和任务"><span class="toc-number">2.2.3.</span> <span class="toc-text">加载 grunt 插件和任务</span></a></li></ol>
+		</div>
+		
+		<p>Grunt 和 Grunt 的插件都是通过 Node.js 的包管理器 npm 来安装和管理的。为了方便使用 Grunt ，你应该在全局范围内安装 Grunt 的命令行接口(CLI)。要做到这一点，你可能需要使用 sudo (OS X，*nix，BSD 等平台中)权限或者作为超级管理员( Windows 平台)来运行 shell 命令。</p>
+<pre><code>npm install <span class="attribute">-g</span> grunt<span class="attribute">-cli</span>
+</code></pre><p>使用全局安装之后，可以在任何一个目录中运行 grunt 命令。</p>
+<h3 id="如何工作">如何工作</h3>
+<p>每次运行 grunt 时，它都会使用 node 的 require() 系统查找本地已安装好的 grunt。在本地装好 Grunt 之后，运行 gurnt 命令时，CLI 就会加载这个本地安装好的 Grunt 库，然后应用你项目中的 Gruntfile 中的配置(这个文件用于配置项目中使用的任务)，并执行你所指定的所有任务。而 Grunt 库的安装则依赖 package.json 文件。</p>
+<p>假设已经安装好 Grunt CLI 并且项目也已经使用一个 package.json 和一个 Gruntfile 文件配置好了，那么接下来用 Grunt 进行工作就非常容易了：</p>
+<ol>
+<li>进入到项目的根目录(在命令行面板定位到项目根目录。在 windows 系统下，也可以进入项目根目录的文件夹后，按Shift+鼠标右键，打开右键菜单，选择“在此处打开命令窗口(W)”)。</li>
+<li>运行 npm install 安装项目相关依赖(插件，Grunt 内置任务等依赖)。</li>
+<li>使用 grunt (命令)运行 Grunt。</li>
+</ol>
+<h3 id="构建一个新的_Grunt_项目">构建一个新的 Grunt 项目</h3>
+<p>最简单的配置需要两个文件：<code>package.json</code> 和 <code>Gruntfile</code></p>
+<p><strong>package.json</strong>：这个文件被用来存储已经作为 npm 模块发布的项目元数据(也就是依赖模块)。你将在这个文件中列出你的项目所依赖的Grunt(通常我们在这里配置Grunt版本)和Grunt插件(相应版本的插件)。使用命令 <code>npm install</code> 安装依赖模块。</p>
+<p><strong>Gruntfile</strong>：通常这个文件被命名为Gruntfile.js或者Gruntfile.coffee，它用于配置或者定义Grunt任务和加载Grunt插件。</p>
+<h4 id="package-json">package.json</h4>
+<p><code>package.json</code> 与 <code>Gruntfile</code> 相邻，都归属在项目的根目录中。在目录中运行 <code>npm install</code> 安装需要的依赖模块。其创建方式有几种：</p>
+<ol>
+<li><code>grunt-init</code> 命令创建 Grunt 模板时，会自动为项目创建一个 <code>package.json</code> 文件。</li>
+<li><code>npm init</code> 会自动创建一个基本的 <code>package.json</code> 文件。</li>
+<li>新建一个文件，重命名为 <code>package.json</code>。</li>
+</ol>
+<p>一个 <code>package.json</code> 文件示例：</p>
+<pre><code>{
+    <span class="string">"name"</span>: <span class="string">"my-project-name"</span>, <span class="comment">// 项目名称</span>
+    <span class="string">"version"</span>: <span class="string">"0.1.0"</span>, <span class="comment">// 项目版本</span>
+    <span class="string">"devDependencies"</span>: { <span class="comment">// 项目依赖</span>
+        <span class="string">"grunt"</span>: <span class="string">"~0.4.1"</span>, <span class="comment">// Grunt库</span>
+        <span class="string">"grunt-contrib-jshint"</span>: <span class="string">"~0.6.0"</span>, <span class="comment">//grunt中的工具</span>
+        <span class="string">"grunt-contrib-nodeunit"</span>: <span class="string">"~0.2.0"</span>, <span class="comment">//grunt中的工具</span>
+        <span class="string">"grunt-contrib-uglify"</span>: <span class="string">"~0.2.2"</span> <span class="comment">//grunt中的工具，可以按照这种方式在 dependencies 中添加自己想要的工具</span>
+    }
+}
+</code></pre><h4 id="Gruntfile">Gruntfile</h4>
+<p><code>Gruntfile.js</code> 和 <code>Gruntfile.coffee</code> 文件都是归属于项目根目录中的一个有效的 JavaScript 或者 CoffeeScript 文件。<br>一个 Gruntfile 由下面几部分组成：</p>
+<ul>
+<li>“wrapper” 函数，一个包装函数</li>
+<li>项目和任务配置</li>
+<li>加载的 Grunt 插件和任务</li>
+<li>自定义任务</li>
+</ul>
+<h5 id="wrapper_函数">wrapper 函数</h5>
+<p>每个 Gruntfile 都使用这个基本格式，同时所有的 Grunt 戴玛都必须指点在这个函数里面：</p>
+<pre><code>module.exports=<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+    <span class="comment">//在这里添加 Grunt 相关</span>
+}
+</code></pre><h5 id="项目和任务配置">项目和任务配置</h5>
+<p>通常 Grunt 任务所依赖的配置素据都被定义在一个对象中，而这个对象将会被传递给 <code>grunt.initConfig</code> 方法。</p>
+<pre><code><span class="comment">// 项目配置</span>
+grunt.initConfig({
+    pkg: grunt.<span class="keyword">file</span>.readJSON(<span class="string">'package.json'</span>),
+    uglify: {
+        options: {
+            banner: <span class="string">'/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */\n'</span>
+        },
+        build: {
+            src: <span class="string">'src/&lt;%=pkg.name %&gt;.js'</span>,
+            dest: <span class="string">'build/&lt;%= pkg.name %&gt;.min.js'</span>
+        }
+    }
+});
+</code></pre><p>在上面的代码中，<code>grunt.file.readJSON(&#39;package.json&#39;)</code> 会把存储在 <code>package.json</code> 中的 JSON 元数据导入到 Grunt 配置中。由于 <code>&lt;% %&gt;</code> 模板字符串可以引用任意的配置属性，因此可以通过这种方式来制定诸如<strong>文件路径</strong>和<strong>文件列表类型的配置数据</strong>。</p>
+<p>与大多数的任务一样， grunt-contrib-uglify 插件的 <code>uglify</code> 任务要求他的配置被指定在一个同名属性中。在这个例子中，我们指定了一个 <code>banner</code> 选项，用于在文件顶部生成一个注释。紧接着是一个名为 <code>build</code> 的 uglify 目标，用于将一个js文件压缩为一个目标文件，比如：将 src 目录中的 <code>jQuery-1.9.0.js</code> 压缩成 <code>jQuery-1.9.0.min.js</code>，然后存储到 dest 目录中。<br>插件一般都托管在 github 上，其使用方法都会有说明。比如 <a href="https://github.com/gruntjs/grunt-contrib-uglify" target="_blank">grunt-contrib-uglify</a></p>
+<h5 id="加载_grunt_插件和任务">加载 grunt 插件和任务</h5>
+<p>只要一个插件被作为一个依赖指定在项目的 <code>package.json</code> 文件中，并且通过 <code>npm install</code> 安装好，都可以在 <code>Gruntfile</code> 文件中使用下面的简单命令启用.</p>
+<pre><code>//加载提供 <span class="string">"uglify"</span> 任务的插件
+grunt<span class="preprocessor">.loadNpmTasks</span>(<span class="string">"grunt-contrib-uglify"</span>)<span class="comment">;</span>
+</code></pre><p><strong>tips:</strong> 使用 <code>grunt --help</code> 命令可以列出所有可用的任务</p>
+<p>同时，你可以通过定义一个 <code>default</code> 任务来配置 Grunt，让他默认运行一个过着多个任务。</p>
+<pre><code><span class="comment">// 默认任务</span>
+grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>]);
+</code></pre><p>可以将你允许默认运行的任务名称以数组的形式作为参数传递。</p>
+<p>如果你想要的任务没有对应的 Grunt 插件提供相应的功能，你可以在 Gruntfile 内定义自定义的任务：</p>
+<pre><code>module.exports=<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+    <span class="comment">//一个很基础的default任务</span>
+    grunt.registerTask(<span class="string">"default"</span>,<span class="string">"load some stuff."</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+        grunt.log.write(<span class="string">"Loggin some stuff……"</span>).ok();
+    });
+};
+</code></pre><p>自定义的项目特定的任务可以不定义在 Gruntfile 中；它们可以定义在一个外部 .js 文件中，然后通过 grunt.loadTasks 方法来加载。</p>
+<p>参考自：<a href="http://www.gruntjs.org/docs/getting-started.html" target="_blank">Grunt新手教程</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Grunt/">Grunt</a><a href="/tags/工具/">工具</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://zhanglun.github.io/2014/08/06/grunt的配置和使用(一)/" data-title="Grunt的配置和使用(一) | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/08/10/填坑日记-CSS实现两端对齐/" title="专业填坑-CSS 实现两端对齐">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  专业填坑-CSS 实现两端对齐</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/07/18/填坑日记-IE下 A 标签的虚线框/"  title="专业填坑-IE下 A 标签的虚线框和必须要会用的 CSS 选择器">
+ <strong>NEXT:</strong><br/> 
+ <span>专业填坑-IE下 A 标签的虚线框和必须要会用的 CSS 选择器
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何工作"><span class="toc-number">1.</span> <span class="toc-text">如何工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构建一个新的_Grunt_项目"><span class="toc-number">2.</span> <span class="toc-text">构建一个新的 Grunt 项目</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#package-json"><span class="toc-number">2.1.</span> <span class="toc-text">package.json</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Gruntfile"><span class="toc-number">2.2.</span> <span class="toc-text">Gruntfile</span></a></li><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#wrapper_函数"><span class="toc-number">2.2.1.</span> <span class="toc-text">wrapper 函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#项目和任务配置"><span class="toc-number">2.2.2.</span> <span class="toc-text">项目和任务配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#加载_grunt_插件和任务"><span class="toc-number">2.2.3.</span> <span class="toc-text">加载 grunt 插件和任务</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		<p> Hello ,I&#39;m CrispElite in Google.</p>
+		<p>	This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2671026564" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/zhanglun" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+  
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/前端/" title="前端">前端<sup>5</sup></a></li>
+		
+			<li><a href="/categories/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+		
+			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
+		
+			<li><a href="/tags/css/" title="css">css<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+		
+			<li><a href="/tags/jQuery/" title="jQuery">jQuery<sup>1</sup></a></li>
+		
+			<li><a href="/tags/sass/" title="sass">sass<sup>2</sup></a></li>
+		
+			<li><a href="/tags/web优化/" title="web优化">web优化<sup>3</sup></a></li>
+		
+			<li><a href="/tags/兼容性/" title="兼容性">兼容性<sup>2</sup></a></li>
+		
+			<li><a href="/tags/命令行/" title="命令行">命令行<sup>1</sup></a></li>
+		
+			<li><a href="/tags/填坑日记/" title="填坑日记">填坑日记<sup>2</sup></a></li>
+		
+			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
+		
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>8</sup></a></li>
+		
+			<li><a href="/tags/译文/" title="译文">译文<sup>4</sup></a></li>
+		
+			<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
