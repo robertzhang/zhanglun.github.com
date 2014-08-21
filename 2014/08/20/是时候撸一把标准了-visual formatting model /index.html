@@ -1,0 +1,428 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>张小伦爱学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="张小伦爱学习">
+    
+    <meta name="description" content="是时候撸一把标准了-visual formatting model
+视觉格式化模型介绍
+CSS 视觉格式化模型（visual formatting model）是一种用来处理文档，将其呈现在可视化媒体中的算法。这是 CSS 中的一个最基本的概念。可视化格式模型会转化文档中的每一个元素，并且形成零个，">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="张小伦爱学习">张小伦爱学习</a></h1>
+				<h2 class="blog-motto">勿忘初心  方得始终</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="http://www.cnblogs.com/zhanglun/">博客园</a></li>
+					
+						<li><a href="https://github.com/zhanglun">github</a></li>
+					
+						<li><a href="http://ncuey.sinaapp.com/CrispElite/">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/08/20/是时候撸一把标准了-visual formatting model /" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-08-20T15:14:46.000Z" itemprop="datePublished">8月 20 2014</time>
+    更新日期:<time datetime="2014-08-21T15:29:56.000Z" itemprop="dateModified">8月 21 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#是时候撸一把标准了-visual_formatting_model"><span class="toc-number">1.</span> <span class="toc-text">是时候撸一把标准了-visual formatting model</span></a></li><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#视觉格式化模型介绍"><span class="toc-number">1.1.</span> <span class="toc-text">视觉格式化模型介绍</a></span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子的生成（Box_generation）"><span class="toc-number">1.1.1.</span> <span class="toc-text">盒子的生成（Box generation）</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#块级元素和块级盒子（block-level_element_and_block_boxes）"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">块级元素和块级盒子（block-level element and block boxes）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#还有一个叫”匿名块盒“(Anonymous_block_boxes)的东西"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">还有一个叫”匿名块盒“(Anonymous block boxes)的东西</span></a></li></ol>
+		</div>
+		
+		<h1 id="是时候撸一把标准了-visual_formatting_model">是时候撸一把标准了-visual formatting model</h1>
+<h2 id="视觉格式化模型介绍"><a href="http://www.w3.org/TR/CSS21/visuren.html" target="_blank">视觉格式化模型介绍</a></h2>
+<p>CSS 视觉格式化模型（visual formatting model）是一种用来处理文档，将其呈现在可视化媒体中的算法。这是 CSS 中的一个最基本的概念。可视化格式模型会转化文档中的每一个元素，并且形成零个，一个或者多个符合CSS盒模型规范的盒子（boxes）。每个盒子的布局由下面的内容来控制：</p>
+<ul>
+<li>盒子的尺寸：精确定义，或者被限制，或者都没有；</li>
+<li>盒子的类型：inline，inline-level，atomic inline-level，block box；</li>
+<li>定位方式：普通文档流，浮动或者绝对定位；</li>
+<li>DOM树中的其他元素：它的子元素和相邻元素；</li>
+<li>视口的大小和位置；</li>
+<li>包含的图像的固定尺寸（因为盒子包裹着图片，图片有大小，从而影响了盒子的大小）；</li>
+<li>其他的外部信息（？？？）</li>
+</ul>
+<p>总的来说，VFM 决定了用户代理（浏览器）在视觉媒体（visual media）如何处理 DOM 树。</p>
+<h3>containing block</h3>
+
+<p>在 CSS2.1 中定义了 “containing block”。一些盒子的大小和位置是相对于一个矩形盒子计算的，这个矩形的盒子，就是 <code>containing block</code> 。</p>
+<p>一个盒子相对于它的包含块(containing block) 的边界来渲染。一般来说，生成的盒子会表现得像一个 <code>containing block</code> （就像它爹一样），它内部的盒子相对于它的边界来渲染。这就是所谓的：盒子为它的后代元素建立包含块。而我们说的”一个盒子的包含块“指的是这个盒子赖以生存的包含块，而不是盒子生成的包含块。注意盒子并不受它的包含块的限制，当它的布局跑到包含块的外面时称为溢出(overflow)。</p>
+<p>关于 containing block 具体的细节 <a href="http://www.w3.org/TR/CSS21/visudet.html#containing-block-details" target="_blank">link</a>，暂时先放一边，稍后在整理。现在只是按照 W3C 的文档顺序集合其他资料做一个整理。</p>
+<h3 id="盒子的生成（Box_generation）">盒子的生成（Box generation）</h3>
+<p>CSS 视觉格式化模型的一部分工作就是从文档（document）生成盒子。一个盒子的类型在一定程度上会影响它在 VFM 中的表现。一般元素都有一个默认的盒子类型，可以通过 CSS 的 display 属性修改。</p>
+<h4 id="块级元素和块级盒子（block-level_element_and_block_boxes）">块级元素和块级盒子（block-level element and block boxes）</h4>
+<p>块级元素（block-level element）就是那些在 document 中在视觉上被渲染成块的元素，比如 \<p>。当元素的 CSS 属性  display 为 block, list-item 或 table 时，它是块级元素(block-level)，被块级化。</p>
+<p>每一个块级元素（block-level element）生成一个主块级盒子（principal block-level box）。主块级盒子包含后代元素生成的盒子以及生成的内容，它可以采用任意一种<a href="#positioning-schemes">定位方案（positioning schemes）</a>。有的块级元素会生成除了主块级盒子之外额外的盒子：比如 “list-item” 元素，会生成额外的盒子来放置项目符号</p>
+<p><img src="http://img5.tuchuang.org/uploads/2014/08/QQ20140816_1(1" alt="li">.png)</p>
+<p>不过多数元素只生成一个主要块级盒。<br>每个块级盒子都会涉及到一个 <a href="#block-formatting-context">块级格式化上下文（block formatting context）</a>。</p>
+<p>除了表格盒子（table box，表格元素形成的盒子）和被替换的元素，一个块级盒子同时也是一个块容器盒子（block container box），一个块容器盒子只能包含块级盒子或者生成一个行内格式化上下文（inline formatting context），这个时候块容器盒子只能包含行级盒子（inline-level block）。<br>总是感觉上面的话很绕，说直白一点其实就是这么回事：</p>
+<pre><code>一个用来装酒的瓶子，我们自然只会用它来装酒，但是如果在这个瓶子里面装了水，你还会把酒装进去嘛？
+</code></pre><p>并不是所有的块容器盒子都是块级盒子：非替换的行内块和非替换的表格单元是块容器（可以理解成它们可以作为一个容纳新的块级盒子的容器），但是它们本身不是块级盒子。而块盒子（block boxes ）则是是块级盒子（block-level boxes）和块容器(block container)的交集。</p>
+<p><img src="http://img1.picbed.org/uploads/2014/08/_venn_inlines.png" alt="image"></p>
+<h4 id="还有一个叫”匿名块盒“(Anonymous_block_boxes)的东西">还有一个叫”匿名块盒“(Anonymous block boxes)的东西</h4>
+<p>有一种盒子叫”匿名块盒子“，比如说下面的代码中：</p>
+<pre><code><span class="tag">&lt;<span class="title">div</span>&gt;</span>
+    hello,
+    <span class="tag">&lt;<span class="title">p</span>&gt;</span>world!<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</code></pre><p><img src="http://ncuey.sinaapp.com/blog_files/images/2014-08-21_224544.png" alt="image"></p>
+<p>div 中同时出现了行内内容和块级内容，为了更加方便的定义格式，我们假定在文本 “hello,”外部包裹着一个匿名的块级盒子（anonymous block）。 换句话说，如果一个块级容器盒子（就是一个用来装会块级盒子的大盒子）中只要包含任何一个块级盒子，我们就认为它只包含块级盒子。<br>对于匿名盒子还要注意的是，和 \<p> 元素不同, 开发者不能控制这个匿名盒子。对于可继承属性， 它们将取 \<div> 的属性值, 比如 color。对于非继承属性，值为初始值 ，比如没有指定 background-color, 值为初始值即 transparent，于是 \<div> 背景可见。而 \<p> 可以指定 background-color 。类似的，这个匿名盒文本是一样的颜色。</p>
+<p>另外一种创建匿名块盒子的情况是：当一个行内盒包含了一个或几个块盒时，包含块盒的盒将拆分为两个行内盒放置于块盒前后，然后分别由两个匿名块盒包含。这样块盒就与两个包含行内元素的匿名块盒形成了兄弟关系。如果行内盒包含多个块盒，并且这些块盒之间没有夹杂内容，将在这些块盒前后创建匿名块盒。<a class="jsbin-embed" href="http://jsbin.com/japinularoji/1/embed?html,css,output" target="_blank">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<pre><code>CSS：
+.two p    { display: inline }
+.two span { display: block }
+
+
+HTML：
+&lt;h2&gt;块盒包含行内盒子&lt;/h2&gt;
+    &lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"one"</span>&gt;
+        &lt;P&gt;This <span class="keyword">is</span> anonymous <span class="type">text</span> <span class="keyword">before</span> <span class="keyword">the</span> SPAN.
+        &lt;span&gt;This <span class="keyword">is</span> <span class="keyword">the</span> content <span class="keyword">of</span> SPAN.&lt;/span&gt;This <span class="keyword">is</span> anonymous <span class="type">text</span> <span class="keyword">after</span> <span class="keyword">the</span> SPAN.
+        &lt;/P&gt;
+    &lt;/<span class="keyword">div</span>&gt;
+&lt;h2&gt;一个行内盒包含了一个或几个块盒&lt;/h2&gt;
+    &lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"two"</span>&gt;
+        &lt;P&gt;This <span class="keyword">is</span> anonymous <span class="type">text</span> <span class="keyword">before</span> <span class="keyword">the</span> SPAN.
+        &lt;span&gt;This <span class="keyword">is</span> <span class="keyword">the</span> content <span class="keyword">of</span> SPAN.&lt;/span&gt;This <span class="keyword">is</span> anonymous <span class="type">text</span> <span class="keyword">after</span> <span class="keyword">the</span> SPAN.
+        &lt;/P&gt;
+    &lt;/<span class="keyword">div</span>&gt;
+</code></pre><p><img src="http://ncuey.sinaapp.com/blog_files/images/2014-08-21_230945.png" alt="image"></p>
+<p>前面说到的，匿名盒子无法被选中，但是会继承离他最近的非匿名盒子的样式。在触发匿名盒子形成的元素上添加的属性也会应用在元素的盒子和内容中，比如上面的例子，p元素师导致匿名盒子形成的元素，如果给它加上border，border也会应用的它形成的匿名盒子上</p>
+<p><img src="http://ncuey.sinaapp.com/blog_files/images/2014-08-21_232806.png" alt="image"></p>
+<p>撸的好累，这一篇小小文章都搞了几天，现在已经快十二点了，要睡觉了。之后还需要把定位和浮动好好复习一下。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://zhanglun.github.io/2014/08/20/是时候撸一把标准了-visual formatting model /" data-title="张小伦爱学习" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/08/20/git使用笔记(二)-撤销操作/" title="git 使用笔记(二)">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  git 使用笔记(二)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/08/12/踩坑日记-IE中的 hasLayout 属性/"  title="踩坑日记-IE中的 hasLayout 属性">
+ <strong>NEXT:</strong><br/> 
+ <span>踩坑日记-IE中的 hasLayout 属性
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#是时候撸一把标准了-visual_formatting_model"><span class="toc-number">1.</span> <span class="toc-text">是时候撸一把标准了-visual formatting model</span></a></li><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#视觉格式化模型介绍"><span class="toc-number">1.1.</span> <span class="toc-text">视觉格式化模型介绍</a></span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子的生成（Box_generation）"><span class="toc-number">1.1.1.</span> <span class="toc-text">盒子的生成（Box generation）</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#块级元素和块级盒子（block-level_element_and_block_boxes）"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">块级元素和块级盒子（block-level element and block boxes）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#还有一个叫”匿名块盒“(Anonymous_block_boxes)的东西"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">还有一个叫”匿名块盒“(Anonymous block boxes)的东西</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		<p> Hello ,I&#39;m CrispElite in Google.</p>
+		<p>	This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2671026564" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/zhanglun" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+  
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/前端/" title="前端">前端<sup>5</sup></a></li>
+		
+			<li><a href="/categories/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+		
+			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
+		
+			<li><a href="/tags/css/" title="css">css<sup>1</sup></a></li>
+		
+			<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
+		
+			<li><a href="/tags/sass/" title="sass">sass<sup>2</sup></a></li>
+		
+			<li><a href="/tags/web优化/" title="web优化">web优化<sup>3</sup></a></li>
+		
+			<li><a href="/tags/兼容性/" title="兼容性">兼容性<sup>2</sup></a></li>
+		
+			<li><a href="/tags/命令行/" title="命令行">命令行<sup>1</sup></a></li>
+		
+			<li><a href="/tags/填坑日记/" title="填坑日记">填坑日记<sup>2</sup></a></li>
+		
+			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
+		
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>8</sup></a></li>
+		
+			<li><a href="/tags/译文/" title="译文">译文<sup>4</sup></a></li>
+		
+			<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

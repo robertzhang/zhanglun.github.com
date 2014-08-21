@@ -4,15 +4,16 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>监听输入框值的变化 | 张小伦爱学习</title>
+    <title>利用pip安装Django | 张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
     
-    <meta name="description" content="在进入正题之前，先回顾一下待会涉及到的 JavaScript 中的一些事件类型。
-事件类型回顾
-通常用户修改输入框的值都是键盘输入或者复制粘贴，因此监听输入框值的变化其实就是监听键盘的输入和复制粘贴操作。先说说键盘事件：keydown，keyup，keypress。
-在 JavaScript 中，按">
+    <meta name="description" content="pip的安装
+先下载一个 python 文件 : get-pip.py。然后运行下面这条命令（可能需要管理员权限）：
+python get-pip.py
+如果 setuptools 还没有安装，pip会帮你安装。如果想更新已经存在的 setuptools，只要运行
+pip install -U se">
     
     
     
@@ -67,15 +68,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/07/10/监听输入框值的变化/" title="监听输入框值的变化" itemprop="url">监听输入框值的变化</a>
+      <a href="/2014/08/20/利用pip安装Django/" title="利用pip安装Django" itemprop="url">利用pip安装Django</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-07-10T12:30:00.000Z" itemprop="datePublished">7月 10 2014</time>
-    更新日期:<time datetime="2014-08-01T22:43:52.000Z" itemprop="dateModified">8月 2 2014</time>
+    <time datetime="2014-08-20T15:15:04.000Z" itemprop="datePublished">8月 20 2014</time>
+    更新日期:<time datetime="2014-08-20T15:15:05.000Z" itemprop="dateModified">8月 20 2014</time>
     
   </p>
 </header>
@@ -84,22 +85,35 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件类型回顾"><span class="toc-number">1.</span> <span class="toc-text">事件类型回顾</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip的安装"><span class="toc-number">1.</span> <span class="toc-text">pip的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#升级_pip"><span class="toc-number">2.</span> <span class="toc-text">升级 pip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_packages"><span class="toc-number">3.</span> <span class="toc-text">安装 packages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#卸载_packages"><span class="toc-number">4.</span> <span class="toc-text">卸载 packages</span></a></li></ol>
 		</div>
 		
-		<p>在进入正题之前，先回顾一下待会涉及到的 JavaScript 中的一些事件类型。</p>
-<h3 id="事件类型回顾">事件类型回顾</h3>
-<p>通常用户修改输入框的值都是键盘输入或者复制粘贴，因此监听输入框值的变化其实就是监听键盘的输入和复制粘贴操作。先说说键盘事件：keydown，keyup，keypress。</p>
-<p>在 JavaScript 中，按下一个键盘中的一个键，会触发一个事件，而这个事件可以被捕捉和处理。而这三个事件的执行顺序如下：</p>
-<pre><code><span class="title">keydown</span> -&gt; keypress -&gt;keyup
-</code></pre><p>具体来说，keyDown</p>
-  
+		<h3 id="pip的安装">pip的安装</h3>
+<p>先下载一个 python 文件 : <a href="https://bootstrap.pypa.io/get-pip.py" target="_blank">get-pip.py</a>。<br>然后运行下面这条命令（可能需要管理员权限）：</p>
+<pre><code>python <span class="keyword">get</span>-pip.py
+</code></pre><p>如果 <a href="https://pypi.python.org/pypi/setuptools" target="_blank">setuptools</a> 还没有安装，pip会帮你安装。如果想更新已经存在的 setuptools，只要运行</p>
+<pre><code>pip <span class="keyword">install</span> -U setuptools
+</code></pre><p>为了确保能够在命令行中使用 <code>pip</code> 命令，确保将 Python 安装目录中的 <code>Scripts</code> 文件夹路径添加到系统的环境变量中。这个必须手动添加！</p>
+<h3 id="升级_pip">升级 pip</h3>
+<p>在 Linux 或者 Mac 中：</p>
+<pre><code>pip <span class="keyword">install</span> -U pip
+</code></pre><p>在 Window 中：</p>
+<pre><code>python <span class="attribute">-m</span> pip install <span class="attribute">-U</span> pip
+</code></pre><h3 id="安装_packages">安装 packages</h3>
+<pre><code><span class="variable">$ </span>pip install <span class="constant">SomePackage</span>            <span class="comment"># latest version</span>
+<span class="variable">$ </span>pip install <span class="constant">SomePackage</span>==<span class="number">1.0</span>.<span class="number">4</span>     <span class="comment"># specific version</span>
+<span class="variable">$ </span>pip install <span class="string">'SomePackage&gt;=1.0.4'</span>     <span class="comment"># minimum version</span>
+</code></pre><h3 id="卸载_packages">卸载 packages</h3>
+<pre><code>    <span class="variable">$ </span>pip install <span class="constant">SomePackage</span>
+</code></pre><p>所以，在成功安装了 pip之后，可以使用 pip 安装 Django</p>
+<pre><code><span class="attribute">pip install Django=</span>=<span class="string">1.6.5</span>
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/笔记/">笔记</a>
+  <span></span> <a href="/tags/Python/">Python</a>
   </div>
 
 
@@ -107,7 +121,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/07/10/监听输入框值的变化/" data-title="监听输入框值的变化 | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/08/20/利用pip安装Django/" data-title="利用pip安装Django | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -116,19 +130,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/07/11/GET 和 POST 的那些事/" title="GET 和 POST 的区别">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  GET 和 POST 的区别</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/07/04/利用pip安装Django/"  title="利用pip安装Django">
+<a href="/2014/08/20/grunt的配置和使用(一)/"  title="Grunt的配置和使用(一)">
  <strong>NEXT:</strong><br/> 
- <span>利用pip安装Django
+ <span>Grunt的配置和使用(一)
 </span>
 </a>
 </div>
@@ -140,7 +146,7 @@
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件类型回顾"><span class="toc-number">1.</span> <span class="toc-text">事件类型回顾</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip的安装"><span class="toc-number">1.</span> <span class="toc-text">pip的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#升级_pip"><span class="toc-number">2.</span> <span class="toc-text">升级 pip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_packages"><span class="toc-number">3.</span> <span class="toc-text">安装 packages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#卸载_packages"><span class="toc-number">4.</span> <span class="toc-text">卸载 packages</span></a></li></ol>
   </div>
 
 <div id="asidepart">
@@ -184,7 +190,7 @@
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -197,7 +203,7 @@
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
-			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
 		
 			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		
@@ -207,9 +213,7 @@
 		
 			<li><a href="/tags/css/" title="css">css<sup>1</sup></a></li>
 		
-			<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
-		
-			<li><a href="/tags/jQuery/" title="jQuery">jQuery<sup>1</sup></a></li>
+			<li><a href="/tags/git/" title="git">git<sup>2</sup></a></li>
 		
 			<li><a href="/tags/sass/" title="sass">sass<sup>2</sup></a></li>
 		
