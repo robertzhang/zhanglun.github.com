@@ -4,18 +4,18 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>边用边学—Linux命令行(持续更新) | 张小伦爱学习</title>
+    <title>张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
     
-    <meta name="description" content="文件操作
-删除空目录  ---&amp;gt;  rmdir dir  
-删除非空目录 ---&amp;gt;  rm -rf dir
-Nignx
-切换至 nginx.conf 所在的目录，执行下面的命令：
-sudo nginx
-如果不知道 nginx.conf 具体的路径，可以使用 nginx -t 来查看。当你">
+    <meta name="description" content="title: 如何将页面的footer保持在页面的底部date: 2014-08-25 22:25
+tag:[‘CSS’, ‘兼容性’]
+我敢说这一定是很常见的问题，因为到处都是页面不够长而上吊的footer，而。比如这里：
+
+或者这里(￣◇￣;)：
+
+这是随手找到，没别的意思。只是想说明一下这个问">
     
     
     
@@ -70,15 +70,15 @@ sudo nginx
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/07/12/边用边学—linux命令行/" title="边用边学—Linux命令行(持续更新)" itemprop="url">边用边学—Linux命令行(持续更新)</a>
+      <a href="/2014/08/26/将footer始终保持在页面底部的方法一/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
     
       <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-07-12T10:12:00.000Z" itemprop="datePublished">7月 12 2014</time>
-    更新日期:<time datetime="2014-08-20T15:14:48.000Z" itemprop="dateModified">8月 20 2014</time>
+    <time datetime="2014-08-26T15:03:39.000Z" itemprop="datePublished">8月 26 2014</time>
+    更新日期:<time datetime="2014-08-26T15:02:46.000Z" itemprop="dateModified">8月 26 2014</time>
     
   </p>
 </header>
@@ -87,34 +87,65 @@ sudo nginx
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件操作"><span class="toc-number">1.</span> <span class="toc-text">文件操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Nignx"><span class="toc-number">2.</span> <span class="toc-text">Nignx</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tag:[‘CSS’,_‘兼容性’]"><span class="toc-number">1.</span> <span class="toc-text">tag:[‘CSS’, ‘兼容性’]</span></a></li></ol>
 		</div>
 		
-		<h4 id="文件操作">文件操作</h4>
-<pre><code><span class="comment">删除空目录</span>  <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;  <span class="comment">rmdir</span> <span class="comment">dir</span>  
-<span class="comment">删除非空目录</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;  <span class="comment">rm</span> <span class="literal">-</span><span class="comment">rf</span> <span class="comment">dir</span>
-</code></pre><h4 id="Nignx">Nignx</h4>
-<p>切换至 nginx.conf 所在的目录，执行下面的命令：</p>
-<pre><code><span class="built_in">sudo</span> nginx
-</code></pre><p>如果不知道 nginx.conf 具体的路径，可以使用 <code>nginx -t</code> 来查看。当你执行 nginx -t 得时候，nginx会去测试你得配置文件得语法，并告诉你配置文件是否写得正确，同时也告诉了你配置文件得路径：</p>
-<pre><code><span class="comment"># nginx -t</span>
-nginx: <span class="keyword">the</span> configuration <span class="type">file</span> /usr/<span class="keyword">local</span>/etc/nginx/        nginx.conf syntax <span class="keyword">is</span> ok
-nginx: configuration <span class="type">file</span> /usr/<span class="keyword">local</span>/etc/nginx/    nginx.conf test <span class="keyword">is</span> successful
-</code></pre>  
+		<p>title: 如何将页面的footer保持在页面的底部<br>date: 2014-08-25 22:25</p>
+<h2 id="tag:[‘CSS’,_‘兼容性’]">tag:[‘CSS’, ‘兼容性’]</h2>
+<p>我敢说这一定是很常见的问题，因为到处都是页面不够长而上吊的footer，而。比如这里：</p>
+<p><img src="http://ncuey-crispelite.stor.sinaapp.com/QQ20140825-1.png" alt="image"></p>
+<p>或者这里(￣◇￣;)：</p>
+<p><img src="http://ncuey-crispelite.stor.sinaapp.com/QQ20140826-1.png" alt="image"></p>
+<p>这是随手找到，没别的意思。只是想说明一下这个问题的普遍程度。以前自己也曾遇到过，查阅一番之后解决了，但是日子长了记忆早已模糊。最近在重构项目页面时，重新遇到了这个问题，遂决定好好理一理。在网上查阅一番之后发现，解决方案还是挺多的。一个个慢慢来。</p>
+<p>第一次方法来自[《How to keep footers at the bottom of the page》]<a href="http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page)，作者是" target="_blank">http://matthewjamestaylor.com/blog/keeping-footers-at-the-bottom-of-the-page)，作者是</a> <a href="http://matthewjamestaylor.com/about" target="_blank">Matthew James Taylor的</a>。他的博客很有意思，几乎每一篇文章都有一个很有趣的banner，文章中还加着丰富的插图用以解释。</p>
+<p>这个方法不算复杂，只需要 HTML 和 CSS 就能实现。</p>
+<pre><code>HTML：
+
+&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"wrapper"</span>&gt;
+   &lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"header"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
+   &lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"container"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
+   &lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"footer"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
+&lt;/<span class="keyword">div</span>&gt;
+
+CSS:
+
+html,body {
+    margin:<span class="number">0</span>;
+       padding:<span class="number">0</span>;
+       height:<span class="number">100</span>%;
+}
+<span class="comment">#wrapper {</span>
+     min-height:<span class="number">100</span>%;
+     position:relative;
+}
+<span class="comment">#header {</span>
+     background:<span class="comment">#ff0;</span>
+     padding:<span class="number">10</span>px;
+}
+<span class="comment">#container {</span>
+     padding:<span class="number">10</span>px;
+     padding-bottom:<span class="number">60</span>px;   /* Height <span class="keyword">of</span> <span class="keyword">the</span> footer */
+}
+<span class="comment">#footer {</span>
+     position:absolute;
+     bottom:<span class="number">0</span>;
+     width:<span class="number">100</span>%;
+     height:<span class="number">60</span>px;   /* Height <span class="keyword">of</span> <span class="keyword">the</span> footer */
+     background:<span class="comment">#6cf;</span>
+}
+</code></pre><p>在原文中，作者为了兼容 IE6 和 IE5.5（原文发布的时间是2007年），为 #wrapper 添加了 <code>height:100%</code> ，在这里我就不加上去了。</p>
+<p>上面的两串代码就能很好的将footer保持在页面的底部，页面的高度小于屏幕高度时，footer 会保持在屏幕的底部。原文demo请戳<a href="http://matthewjamestaylor.com/blog/bottom-footer-demo.htm" target="_blank">这里</a><br>稍微分析一下：为 html 和 body 定义 height 为1 00%，目的是为了在页面内容高度不够的时候，将页面撑开。CSS中 height 使用百分比定义时，参考的是父元素的高度，如果父元素没有定义高度，哪怕你设置个1 000%，高度也依旧是由内容决定。为 html 标签定义百分比高度时，它的参考值是浏览器窗口的高度，所以设置成100%时，html元素会铺满整个屏幕，不过没关系。只有在为 body 的父元素设置了高度之后，才能够为 body 设置百分比的高度。好的，这一步结束之后，设置wrapper的min-height为100%，这样即使wrapper中的内容高度不及浏览器的窗口高度或者说body的高度，wrapper的高度也会是100%，同时wrapper的高度也能随着内容的高度而变化，从body中溢出。因此，才能够做footer始终居于底部。</p>
+<p>这种方法简单明了，今天就先说这一种方法吧，好晚了该睡觉了⊙﹏⊙b汗。</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/命令行/">命令行</a><a href="/tags/笔记/">笔记</a>
-  </div>
 
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/07/12/边用边学—linux命令行/" data-title="边用边学—Linux命令行(持续更新) | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/08/26/将footer始终保持在页面底部的方法一/" data-title="张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -123,19 +154,11 @@ nginx: configuration <span class="type">file</span> /usr/<span class="keyword">l
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/07/12/利用pip安装Django/" title="利用pip安装Django">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  利用pip安装Django</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/05/28/(译)取消事件冒泡的危害/"  title="(译)阻止事件传播的危害">
+<a href="/2014/08/21/是时候撸一把标准了-visual formatting model /"  title="是时候撸一把标准了-visual formatting model">
  <strong>NEXT:</strong><br/> 
- <span>(译)阻止事件传播的危害
+ <span>是时候撸一把标准了-visual formatting model
 </span>
 </a>
 </div>
@@ -147,7 +170,7 @@ nginx: configuration <span class="type">file</span> /usr/<span class="keyword">l
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件操作"><span class="toc-number">1.</span> <span class="toc-text">文件操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Nignx"><span class="toc-number">2.</span> <span class="toc-text">Nignx</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tag:[‘CSS’,_‘兼容性’]"><span class="toc-number">1.</span> <span class="toc-text">tag:[‘CSS’, ‘兼容性’]</span></a></li></ol>
   </div>
 
 <div id="asidepart">

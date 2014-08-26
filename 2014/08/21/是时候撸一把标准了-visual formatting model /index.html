@@ -9,9 +9,8 @@
     
     <meta name="author" content="张小伦爱学习">
     
-    <meta name="description" content="是时候撸一把标准了-visual formatting model
-视觉格式化模型介绍
-CSS 视觉格式化模型（visual formatting model）是一种用来处理文档，将其呈现在可视化媒体中的算法。这是 CSS 中的一个最基本的概念。可视化格式模型会转化文档中的每一个元素，并且形成零个，">
+    <meta name="description" content="视觉格式化模型
+CSS 视觉格式化模型（visual formatting model）是一种用来处理文档，将其呈现在可视化媒体中的算法。这是 CSS 中的一个最基本的概念。可视化格式模型会转化文档中的每一个元素，并且形成零个，一个或者多个符合CSS盒模型规范的盒子（boxes）。每个盒子的布局由下">
     
     
     
@@ -74,7 +73,7 @@ CSS 视觉格式化模型（visual formatting model）是一种用来处理文�
     </p>
   <p class="article-time">
     <time datetime="2014-08-21T12:39:00.000Z" itemprop="datePublished">8月 21 2014</time>
-    更新日期:<time datetime="2014-08-21T15:45:34.000Z" itemprop="dateModified">8月 21 2014</time>
+    更新日期:<time datetime="2014-08-26T13:17:43.000Z" itemprop="dateModified">8月 26 2014</time>
     
   </p>
 </header>
@@ -83,11 +82,10 @@ CSS 视觉格式化模型（visual formatting model）是一种用来处理文�
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#视觉格式化模型介绍"><span class="toc-number">1.</span> <span class="toc-text">视觉格式化模型介绍</a></span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子的生成（Box_generation）"><span class="toc-number">1.1.</span> <span class="toc-text">盒子的生成（Box generation）</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#块级元素和块级盒子（block-level_element_and_block_boxes）"><span class="toc-number">1.1.1.</span> <span class="toc-text">块级元素和块级盒子（block-level element and block boxes）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#还有一个叫”匿名块盒“(Anonymous_block_boxes)的东西"><span class="toc-number">1.1.2.</span> <span class="toc-text">还有一个叫”匿名块盒“(Anonymous block boxes)的东西</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#视觉格式化模型"><span class="toc-number">1.</span> <span class="toc-text">视觉格式化模型</a></span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子的生成（Box_generation）"><span class="toc-number">1.1.</span> <span class="toc-text">盒子的生成（Box generation）</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#块级元素和块级盒子（block-level_element_and_block_boxes）"><span class="toc-number">1.1.1.</span> <span class="toc-text">块级元素和块级盒子（block-level element and block boxes）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#还有一个叫”匿名块盒“(Anonymous_block_boxes)的东西"><span class="toc-number">1.1.2.</span> <span class="toc-text">还有一个叫”匿名块盒“(Anonymous block boxes)的东西</span></a></li></ol>
 		</div>
 		
-		<p>是时候撸一把标准了-visual formatting model</p>
-<h2 id="视觉格式化模型介绍"><a href="http://www.w3.org/TR/CSS21/visuren.html" target="_blank">视觉格式化模型介绍</a></h2>
+		<h2 id="视觉格式化模型"><a href="http://www.w3.org/TR/CSS21/visuren.html" target="_blank">视觉格式化模型</a></h2>
 <p>CSS 视觉格式化模型（visual formatting model）是一种用来处理文档，将其呈现在可视化媒体中的算法。这是 CSS 中的一个最基本的概念。可视化格式模型会转化文档中的每一个元素，并且形成零个，一个或者多个符合CSS盒模型规范的盒子（boxes）。每个盒子的布局由下面的内容来控制：</p>
 <ul>
 <li>盒子的尺寸：精确定义，或者被限制，或者都没有；</li>
@@ -109,7 +107,7 @@ CSS 视觉格式化模型（visual formatting model）是一种用来处理文�
 <h4 id="块级元素和块级盒子（block-level_element_and_block_boxes）">块级元素和块级盒子（block-level element and block boxes）</h4>
 <p>块级元素（block-level element）就是那些在 document 中在视觉上被渲染成块的元素，比如 \<p>。当元素的 CSS 属性  display 为 block, list-item 或 table 时，它是块级元素(block-level)，被块级化。</p>
 <p>每一个块级元素（block-level element）生成一个主块级盒子（principal block-level box）。主块级盒子包含后代元素生成的盒子以及生成的内容，它可以采用任意一种<a href="#positioning-schemes">定位方案（positioning schemes）</a>。有的块级元素会生成除了主块级盒子之外额外的盒子：比如 “list-item” 元素，会生成额外的盒子来放置项目符号</p>
-<p><img src="http://img5.tuchuang.org/uploads/2014/08/QQ20140816_1(1" alt="li">.png)</p>
+<p><img src="http://ncuey-crispelite.stor.sinaapp.com/QQ20140816_1(1" alt="li">.png)</p>
 <p>不过多数元素只生成一个主要块级盒。<br>每个块级盒子都会涉及到一个 <a href="#block-formatting-context">块级格式化上下文（block formatting context）</a>。</p>
 <p>除了表格盒子（table box，表格元素形成的盒子）和被替换的元素，一个块级盒子同时也是一个块容器盒子（block container box），一个块容器盒子只能包含块级盒子或者生成一个行内格式化上下文（inline formatting context），这个时候块容器盒子只能包含行级盒子（inline-level block）。<br>总是感觉上面的话很绕，说直白一点其实就是这么回事：</p>
 <pre><code>一个用来装酒的瓶子，我们自然只会用它来装酒，但是如果在这个瓶子里面装了水，你还会把酒装进去嘛？
@@ -123,7 +121,7 @@ CSS 视觉格式化模型（visual formatting model）是一种用来处理文�
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </code></pre><p><img src="http://ncuey.sinaapp.com/blog_files/images/2014-08-21_224544.png" alt="image"></p>
 <p>div 中同时出现了行内内容和块级内容，为了更加方便的定义格式，我们假定在文本 “hello,”外部包裹着一个匿名的块级盒子（anonymous block）。 换句话说，如果一个块级容器盒子（就是一个用来装会块级盒子的大盒子）中只要包含任何一个块级盒子，我们就认为它只包含块级盒子。<br>对于匿名盒子还要注意的是，和 \<p> 元素不同, 开发者不能控制这个匿名盒子。对于可继承属性， 它们将取 \<div> 的属性值, 比如 color。对于非继承属性，值为初始值 ，比如没有指定 background-color, 值为初始值即 transparent，于是 \<div> 背景可见。而 \<p> 可以指定 background-color 。类似的，这个匿名盒文本是一样的颜色。</p>
-<p>另外一种创建匿名块盒子的情况是：当一个行内盒包含了一个或几个块盒时，包含块盒的盒将拆分为两个行内盒放置于块盒前后，然后分别由两个匿名块盒包含。这样块盒就与两个包含行内元素的匿名块盒形成了兄弟关系。如果行内盒包含多个块盒，并且这些块盒之间没有夹杂内容，将在这些块盒前后创建匿名块盒。<a class="jsbin-embed" href="http://jsbin.com/japinularoji/1/embed?html,css,output" target="_blank">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p>另外一种创建匿名块盒子的情况是：当一个行内盒包含了一个或几个块盒时，包含块盒的盒将拆分为两个行内盒放置于块盒前后，然后分别由两个匿名块盒包含。这样块盒就与两个包含行内元素的匿名块盒形成了兄弟关系。如果行内盒包含多个块盒，并且这些块盒之间没有夹杂内容，将在这些块盒前后创建匿名块盒。</p>
 <pre><code>CSS：
 .two p    { display: inline }
 .two span { display: block }
@@ -169,6 +167,14 @@ HTML：
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2014/08/26/将footer始终保持在页面底部的方法一/" title="">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  (no title)</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2014/08/12/踩坑日记-IE中的 hasLayout 属性/"  title="踩坑日记-IE中的 hasLayout 属性">
@@ -185,7 +191,7 @@ HTML：
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#视觉格式化模型介绍"><span class="toc-number">1.</span> <span class="toc-text">视觉格式化模型介绍</a></span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子的生成（Box_generation）"><span class="toc-number">1.1.</span> <span class="toc-text">盒子的生成（Box generation）</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#块级元素和块级盒子（block-level_element_and_block_boxes）"><span class="toc-number">1.1.1.</span> <span class="toc-text">块级元素和块级盒子（block-level element and block boxes）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#还有一个叫”匿名块盒“(Anonymous_block_boxes)的东西"><span class="toc-number">1.1.2.</span> <span class="toc-text">还有一个叫”匿名块盒“(Anonymous block boxes)的东西</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#视觉格式化模型"><span class="toc-number">1.</span> <span class="toc-text">视觉格式化模型</a></span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子的生成（Box_generation）"><span class="toc-number">1.1.</span> <span class="toc-text">盒子的生成（Box generation）</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#块级元素和块级盒子（block-level_element_and_block_boxes）"><span class="toc-number">1.1.1.</span> <span class="toc-text">块级元素和块级盒子（block-level element and block boxes）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#还有一个叫”匿名块盒“(Anonymous_block_boxes)的东西"><span class="toc-number">1.1.2.</span> <span class="toc-text">还有一个叫”匿名块盒“(Anonymous block boxes)的东西</span></a></li></ol>
   </div>
 
 <div id="asidepart">
@@ -231,7 +237,7 @@ HTML：
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
