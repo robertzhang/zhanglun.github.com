@@ -76,7 +76,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-08-25T14:25:00.000Z" itemprop="datePublished">8月 25 2014</time>
-    更新日期:<time datetime="2014-09-02T07:14:35.000Z" itemprop="dateModified">9月 2 2014</time>
+    更新日期:<time datetime="2014-09-03T11:28:43.000Z" itemprop="dateModified">9月 3 2014</time>
     
   </p>
 </header>
@@ -129,7 +129,8 @@ html,body {
      height:<span class="number">60</span>px;   /* Height <span class="keyword">of</span> <span class="keyword">the</span> footer */
      background:<span class="comment">#6cf;</span>
 }
-</code></pre><p>在原文中，作者为了兼容 IE6 和 IE5.5（原文发布的时间是2007年），为 #wrapper 添加了 <code>height:100%</code> ，在这里我就不加上去了。</p>
+</code></pre><p><a class="jsbin-embed" href="http://jsbin.com/ziqim/15/embed?html,css,output" target="_blank">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+<p>在原文中，作者为了兼容 IE6 和 IE5.5（原文发布的时间是2007年），为 #wrapper 添加了 <code>height:100%</code> ，在这里我就不加上去了。</p>
 <p>上面的两串代码就能很好的将footer保持在页面的底部，页面的高度小于屏幕高度时，footer 会保持在屏幕的底部。原文demo请戳<a href="http://matthewjamestaylor.com/blog/bottom-footer-demo.htm" target="_blank">这里</a><br>稍微分析一下：为 html 和 body 定义 height 为1 00%，目的是为了在页面内容高度不够的时候，将页面撑开。CSS中 height 使用百分比定义时，参考的是父元素的高度，如果父元素没有定义高度，哪怕你设置个1 000%，高度也依旧是由内容决定。为 html 标签定义百分比高度时，它的参考值是浏览器窗口的高度，所以设置成100%时，html元素会铺满整个屏幕，不过没关系。只有在为 body 的父元素设置了高度之后，才能够为 body 设置百分比的高度。好的，这一步结束之后，设置wrapper的min-height为100%，这样即使wrapper中的内容高度不及浏览器的窗口高度或者说body的高度，wrapper的高度也会是100%，同时wrapper的高度也能随着内容的高度而变化，从body中溢出。因此，才能够做footer始终居于底部。</p>
 <p>这种方法简单明了，今天就先说这一种方法吧，好晚了该睡觉了⊙﹏⊙b汗。</p>
   
