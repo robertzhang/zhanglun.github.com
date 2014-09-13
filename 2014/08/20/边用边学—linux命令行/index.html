@@ -10,12 +10,34 @@
     <meta name="author" content="张小伦爱学习">
     
     <meta name="description" content="文件操作
-删除空目录  ---&amp;gt;  rmdir dir  
-删除非空目录 ---&amp;gt;  rm -rf dir
+
+
+
+操作
+指令
+
+
+
+
+删除空目录
+rmdir dir  
+
+
+删除非空目录
+rm -rf dir
+
+
+复制文件
+cp source_dir aim_dir
+
+
+复制文件夹
+cp -R source_dir aim_dir
+
+
+
 Nignx
-切换至 nginx.conf 所在的目录，执行下面的命令：
-sudo nginx
-如果不知道 nginx.conf 具体的路径，可以使用 nginx -t 来查看。当你">
+切换至 nginx.conf 所在的目录，执行">
     
     
     
@@ -70,15 +92,15 @@ sudo nginx
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/07/12/边用边学—linux命令行/" title="边用边学—Linux命令行(持续更新)" itemprop="url">边用边学—Linux命令行(持续更新)</a>
+      <a href="/2014/08/20/边用边学—linux命令行/" title="边用边学—Linux命令行(持续更新)" itemprop="url">边用边学—Linux命令行(持续更新)</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-07-12T10:12:00.000Z" itemprop="datePublished">7月 12 2014</time>
-    更新日期:<time datetime="2014-08-20T15:14:48.000Z" itemprop="dateModified">8月 20 2014</time>
+    <time datetime="2014-08-20T15:14:48.000Z" itemprop="datePublished">8月 20 2014</time>
+    更新日期:<time datetime="2014-09-13T14:27:32.000Z" itemprop="dateModified">9月 13 2014</time>
     
   </p>
 </header>
@@ -91,9 +113,33 @@ sudo nginx
 		</div>
 		
 		<h4 id="文件操作">文件操作</h4>
-<pre><code><span class="comment">删除空目录</span>  <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;  <span class="comment">rmdir</span> <span class="comment">dir</span>  
-<span class="comment">删除非空目录</span> <span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>&gt;  <span class="comment">rm</span> <span class="literal">-</span><span class="comment">rf</span> <span class="comment">dir</span>
-</code></pre><h4 id="Nignx">Nignx</h4>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>指令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>删除空目录</td>
+<td>rmdir dir  </td>
+</tr>
+<tr>
+<td>删除非空目录</td>
+<td>rm -rf dir</td>
+</tr>
+<tr>
+<td>复制文件</td>
+<td>cp source_dir aim_dir</td>
+</tr>
+<tr>
+<td>复制文件夹</td>
+<td>cp -R source_dir aim_dir</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Nignx">Nignx</h4>
 <p>切换至 nginx.conf 所在的目录，执行下面的命令：</p>
 <pre><code><span class="built_in">sudo</span> nginx
 </code></pre><p>如果不知道 nginx.conf 具体的路径，可以使用 <code>nginx -t</code> 来查看。当你执行 nginx -t 得时候，nginx会去测试你得配置文件得语法，并告诉你配置文件是否写得正确，同时也告诉了你配置文件得路径：</p>
@@ -114,7 +160,7 @@ nginx: configuration <span class="type">file</span> /usr/<span class="keyword">l
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/07/12/边用边学—linux命令行/" data-title="边用边学—Linux命令行(持续更新) | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/08/20/边用边学—linux命令行/" data-title="边用边学—Linux命令行(持续更新) | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -124,18 +170,18 @@ nginx: configuration <span class="type">file</span> /usr/<span class="keyword">l
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2014/07/12/利用pip安装Django/" title="利用pip安装Django">
+ <a href="/2014/08/21/规范之路-visual formatting model概述 /" title="规范之路-visual formatting model 概述">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  利用pip安装Django</span>
+  规范之路-visual formatting model 概述</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2014/05/28/(译)取消事件冒泡的危害/"  title="(译)阻止事件传播的危害">
+<a href="/2014/08/12/踩坑日记-IE中的 hasLayout 属性/"  title="踩坑日记-IE中的 hasLayout 属性">
  <strong>NEXT:</strong><br/> 
- <span>(译)阻止事件传播的危害
+ <span>踩坑日记-IE中的 hasLayout 属性
 </span>
 </a>
 </div>
@@ -169,7 +215,7 @@ nginx: configuration <span class="type">file</span> /usr/<span class="keyword">l
 		
 		
 		
-		<a href="https://github.com/https://github.com/zhanglun" target="_blank" title="github"></a>
+		<a href="https://github.com/zhanglun" target="_blank" title="github"></a>
 		
 		
 	</div>
@@ -195,7 +241,7 @@ nginx: configuration <span class="type">file</span> /usr/<span class="keyword">l
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -204,7 +250,7 @@ nginx: configuration <span class="type">file</span> /usr/<span class="keyword">l
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>5</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>6</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -232,7 +278,7 @@ nginx: configuration <span class="type">file</span> /usr/<span class="keyword">l
 		
 			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>9</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>10</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>4</sup></a></li>
 		
