@@ -22,6 +22,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -68,7 +69,7 @@
   </h1>
   <p class="article-author">By
     
-      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
     <time datetime="2014-05-05T13:23:00.000Z" itemprop="datePublished">5月 5 2014</time>
@@ -85,7 +86,7 @@
 		</div>
 		
 		<blockquote>
-<p>原文标题：Node.js EventEmitter Tutorial<br> 原文链接：<a href="http://www.hacksparrow.com/node-js-eventemitter-tutorial.html" target="_blank">http://www.hacksparrow.com/node-js-eventemitter-tutorial.html</a></p>
+<p>原文标题：Node.js EventEmitter Tutorial<br> 原文链接：<a href="http://www.hacksparrow.com/node-js-eventemitter-tutorial.html" target="_blank" rel="external">http://www.hacksparrow.com/node-js-eventemitter-tutorial.html</a></p>
 </blockquote>
 <a id="more"></a>
 
@@ -98,11 +99,11 @@
 <span class="keyword">var</span> radium = <span class="keyword">new</span> EventEmitter();
 
 <span class="comment">//绑定 radiation 事件</span>
-radium.on(<span class="string">'radiation'</span>, <span class="function"><span class="keyword">function</span><span class="params">(ray)</span> {</span>
-    console.log(ray);
+radium.on(<span class="string">'radiation'</span>, <span class="function"><span class="keyword">function</span><span class="params">(ray)</span> </span>{
+    <span class="built_in">console</span>.log(ray);
 });
 
-setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
     <span class="comment">//触发 radiation 事件</span>
     radium.emit(<span class="string">'radiation'</span>, <span class="string">'GAMMA'</span>);
 }, <span class="number">1000</span>);
@@ -112,31 +113,31 @@ setInterval(<span class="function"><span class="keyword">function</span><span cl
 util.inherits(MyClass, SuperClass);
 </code></pre><p>使用 <code>util.inherits()</code> ，我们创建了一个继承自 <code>EventEmitter</code> 的模块，注意下面的代码：</p>
 <p><em>radio.js</em> 中的内容：</p>
-<pre><code><span class="keyword">var</span> util = <span class="keyword">require</span>(<span class="string">'util'</span>);
-<span class="keyword">var</span> EventEmitter = <span class="keyword">require</span>(<span class="string">'events'</span>).EventEmitter;
+<pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);
+<span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;
 
 <span class="comment">//一个包含 "freq" 和 "name" 属性的对象</span>
-<span class="keyword">var</span> Radio = <span class="function"><span class="keyword">function</span><span class="params">(station)</span> {</span>
+<span class="keyword">var</span> Radio = <span class="function"><span class="keyword">function</span><span class="params">(station)</span> </span>{
     <span class="comment">//保存 指向Radio的this，在setTimeout()中使用</span>
-    <span class="keyword">var</span> <span class="keyword">self</span> = this;
+    <span class="keyword">var</span> self = <span class="keyword">this</span>;
 
-    setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-        <span class="keyword">self</span>.emit(<span class="string">'open'</span>, station);
+    setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+        self.emit(<span class="string">'open'</span>, station);
     }, <span class="number">0</span>);
 
-    setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-        <span class="keyword">self</span>.emit(<span class="string">'close'</span>, station);
+    setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+        self.emit(<span class="string">'close'</span>, station);
     }, <span class="number">5000</span>);
 
-    this.on(<span class="string">'newListener'</span>, <span class="function"><span class="keyword">function</span><span class="params">(listener)</span> {</span>
-        console.log(<span class="string">'Event Listener: '</span> + listener);
+    <span class="keyword">this</span>.on(<span class="string">'newListener'</span>, <span class="function"><span class="keyword">function</span><span class="params">(listener)</span> </span>{
+        <span class="built_in">console</span>.log(<span class="string">'Event Listener: '</span> + listener);
     });
 
 };
 
 <span class="comment">//Radio 继承 EventEmitter</span>
 util.inherits(Radio, EventEmitter);
-module.exports = Radio;
+<span class="built_in">module</span>.exports = Radio;
 </code></pre><p>我们创建了一个继承自 <code>EventEmitter</code> 的模块。接下来让我们看看如何在一个例子中使用创建的模块。</p>
 <p><em>example.js</em> 中的内容：</p>
 <pre><code><span class="keyword">var</span> Radio = <span class="built_in">require</span>(<span class="string">'./radio.js'</span>);
@@ -149,23 +150,23 @@ module.exports = Radio;
 <span class="keyword">var</span> radio = <span class="keyword">new</span> Radio(station);
 
 <span class="comment">//添加一个“open”事件监听器</span>
-radio.on(<span class="string">'open'</span>, <span class="function"><span class="keyword">function</span><span class="params">(station)</span> {</span>
-    console.log(<span class="string">'"%s" FM %s OPENED'</span>, station.name, station.freq);
-    console.log(<span class="string">'? ??'</span>);
+radio.on(<span class="string">'open'</span>, <span class="function"><span class="keyword">function</span><span class="params">(station)</span> </span>{
+    <span class="built_in">console</span>.log(<span class="string">'"%s" FM %s OPENED'</span>, station.name, station.freq);
+    <span class="built_in">console</span>.log(<span class="string">'? ??'</span>);
 });
 
 <span class="comment">//添加一个“close”事件监听器</span>
-radio.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span><span class="params">(station)</span> {</span>
-    console.log(<span class="string">'"%s" FM %s CLOSED'</span>, station.name, station.freq);
+radio.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span><span class="params">(station)</span> </span>{
+    <span class="built_in">console</span>.log(<span class="string">'"%s" FM %s CLOSED'</span>, station.name, station.freq);
 });
 </code></pre><p>运行 example.js 准备好见证 <code>EventEmitter</code> 的魔力。</p>
 <p>如果因为某些原因你不想使用 <code>util</code> 模块，你可以用这种方法来拓展一个类。</p>
 <pre><code>Apple.<span class="keyword">prototype</span> = Object.create(<span class="keyword">require</span>(<span class="string">'events'</span>).EventEmitter.<span class="keyword">prototype</span>);
-</code></pre><p> <code>EventEmitter</code> 可以帮你编写令人印象深刻的基于事件的 Node.js 模块。同时，作为作为一个 Node.js 的开发人员，你掌握的关于<code>EventEmitter</code>的知识会大大影响你的工作效率。所以，确保你阅读了<a href="http://nodejs.org/api/events.html#events_class_events_eventemitter" target="_blank">关于 <code>EventEmitter</code> 的更详细的资料</a>，并且掌握里里外外它是如何工作的。如果你不了解<code>EventEmitter</code>，那你也不了解 Nodejs.js</p>
+</code></pre><p> <code>EventEmitter</code> 可以帮你编写令人印象深刻的基于事件的 Node.js 模块。同时，作为作为一个 Node.js 的开发人员，你掌握的关于<code>EventEmitter</code>的知识会大大影响你的工作效率。所以，确保你阅读了<a href="http://nodejs.org/api/events.html#events_class_events_eventemitter" target="_blank" rel="external">关于 <code>EventEmitter</code> 的更详细的资料</a>，并且掌握里里外外它是如何工作的。如果你不了解<code>EventEmitter</code>，那你也不了解 Nodejs.js</p>
 <p>(完)</p>
 <p><strong>翻译水平有待提高，所翻译的博文并不是按照原文一句一句翻译，而是添加了自己对文章的理解。如有不正之处，欢迎指正！</strong><br><strong>个人笔记，仅供参考。</strong></p>
 <blockquote>
-<p>参考:<br><a href="http://www.hacksparrow.com/node-js-eventemitter-tutorial.html">http://www.hacksparrow.com/node-js-eventemitter-tutorial.html
+<p>参考:<br><a href="http://www.hacksparrow.com/node-js-eventemitter-tutorial.html" target="_blank" rel="external">http://www.hacksparrow.com/node-js-eventemitter-tutorial.html
 </a></p>
 </blockquote>
   
@@ -174,7 +175,7 @@ radio.on(<span class="string">'close'</span>, <span class="function"><span class
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/译文/">译文</a><a href="/tags/Node.js/">Node.js</a>
+  <span></span> <a href="/tags/译文/">译文</a><a href="/tags/Node-js/">Node.js</a>
   </div>
 
 
@@ -263,7 +264,7 @@ radio.on(<span class="string">'close'</span>, <span class="function"><span class
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -272,7 +273,7 @@ radio.on(<span class="string">'close'</span>, <span class="function"><span class
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>6</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>7</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -280,7 +281,7 @@ radio.on(<span class="string">'close'</span>, <span class="function"><span class
 		
 			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
 		
 			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
 		

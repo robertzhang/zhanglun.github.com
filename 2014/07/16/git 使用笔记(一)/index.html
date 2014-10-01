@@ -34,6 +34,7 @@ $">
     <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -80,7 +81,7 @@ $">
   </h1>
   <p class="article-author">By
     
-      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
     <time datetime="2014-07-16T13:09:00.000Z" itemprop="datePublished">7月 16 2014</time>
@@ -93,7 +94,7 @@ $">
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般处理"><span class="toc-number">1.</span> <span class="toc-text">一般处理</span></a></li><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#常用指令:"><span class="toc-number">1.0.1.</span> <span class="toc-text">常用指令:</span></a></li></ol></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#Git_记录的方式"><span class="toc-number">2.</span> <span class="toc-text">Git 记录的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支"><span class="toc-number">3.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#_"><span class="toc-number">4.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较提交_-_git_diff"><span class="toc-number">5.</span> <span class="toc-text">比较提交 - git diff</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般处理"><span class="toc-number">1.</span> <span class="toc-text">一般处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#常用指令:"><span class="toc-number">1.0.1.</span> <span class="toc-text">常用指令:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git_记录的方式"><span class="toc-number">2.</span> <span class="toc-text">Git 记录的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支"><span class="toc-number">3.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#_"><span class="toc-number">4.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较提交_-_git_diff"><span class="toc-number">5.</span> <span class="toc-text">比较提交 - git diff</span></a></li></ol>
 		</div>
 		
 		<h3 id="一般处理">一般处理</h3>
@@ -102,7 +103,7 @@ $">
 </code></pre><p>这样就会在当前目录创建版本库.</p>
 <h5 id="常用指令:">常用指令:</h5>
 <p>添加文件：</p>
-<pre><code><span class="variable">$ </span>git add <span class="constant">FILENAME</span>
+<pre><code>$ git <span class="built_in">add</span> FILENAME
 </code></pre><p>删除文件索引,<strong>并且删除文件</strong>：</p>
 <pre><code><span class="variable">$ </span>git rm <span class="constant">FILENAME</span>
 </code></pre><p>重命名：</p>
@@ -110,9 +111,9 @@ $">
 </code></pre><p>提交更新,全部：</p>
 <pre><code>$ git commit <span class="operator">-a</span>
 </code></pre><p>查看日志.</p>
-<pre><code><span class="variable">$ </span>git log
+<pre><code>$ git <span class="built_in">log</span>
 </code></pre><p>查看指定版本日志.</p>
-<pre><code><span class="variable">$ </span>git show xxxxx
+<pre><code>$ git <span class="literal">show</span> xxxxx
 </code></pre><p>切换分支.</p>
 <pre><code><span class="variable">$ </span>git checkout <span class="constant">BRANCHNAME</span>
 </code></pre><p>创建新的分支.</p>
@@ -133,21 +134,21 @@ $">
 <h3 id="Git_记录的方式">Git 记录的方式</h3>
 <p>Git 是一种分布式版本控制系统，客户端并不只提取最新版本的文件快照，而是把代码仓库完整</p>
 <p><img src="http://git-scm.com/figures/18333fig0103-tn.png" alt="image"></p>
-<p>图片来源：<a href="http://git-scm.com/figures/18333fig0103-tn.png" target="_blank">http://git-scm.com/figures/18333fig0103-tn.png</a></p>
+<p>图片来源：<a href="http://git-scm.com/figures/18333fig0103-tn.png" target="_blank" rel="external">http://git-scm.com/figures/18333fig0103-tn.png</a></p>
 <p>每次修改之后，Git 并不是保存这些修改之后的差异变化，实际上就像一个照相机一样，将修改后的文件拍下作为文件快照，记录在一个微型的文件系统中。每次提交更新时，检查一遍所有文件的信息</p>
 <p>对于任何一个文件，在 Git 内都只有三种状态：已提交（committed），已修改（modified）和已暂存（staged）。已提交表示该文件已经被安全地保存在本地数据库中了；已修改表示修改了某个文件，但还没有提交保存；已暂存表示把已修改的文件放在下次提交时要保存的清单中。</p>
 <p>Git 管理项目时，文件流转的三个工作区域：Git 的<strong>工作目录</strong>，<strong>暂存区域</strong>，以及<strong>本地仓库</strong>。</p>
 <p><img src="http://git-scm.com/figures/18333fig0106-tn.png" alt="image"></p>
-<p>图片来源：<a href="http://git-scm.com/figures/18333fig0106-tn.png" target="_blank">http://git-scm.com/figures/18333fig0106-tn.png</a></p>
+<p>图片来源：<a href="http://git-scm.com/figures/18333fig0106-tn.png" target="_blank" rel="external">http://git-scm.com/figures/18333fig0106-tn.png</a></p>
 <p><strong>工作区</strong>：就是电脑中可以看到的目录。<br><strong>版本库</strong>：工作区中有一个隐藏目录 “.git” ，这个不算做是工作区，而是 Git 的版本库。</p>
 <p>基本的 Git 工作流程如下：</p>
 <p>第一步是用 <code>git add</code> 把文件添加进去，实际上就是把文件修改添加到暂存区（对修改后的文件进行快照，然后保存到暂存区域。）；<br>第二步是用 <code>git commit</code> 提交更改，实际上就是把暂存区的所有内容提交到当前分支；<br>第三步是用 <code>git push</code> 推送更改，将保存在暂存区域的文件快照永久转储到 Git 目录中。</p>
 <p>如果是 Git 目录中保存着的特定版本文件，就属于<strong>已提交状态</strong>；如果作了修改并已<strong>放入暂存区域</strong>，就属于<strong>已暂存状态</strong>；如果自上次取出后，作了修改但还没有放到暂存区域，<strong>就是已修改状态</strong>。</p>
-<p>图片来源：<img src="http://rogerdudler.github.io/git-guide/img/trees.png" alt="image"><br><a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank">git简明教程</a></p>
+<p>图片来源：<img src="http://rogerdudler.github.io/git-guide/img/trees.png" alt="image"><br><a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">git简明教程</a></p>
 <h3 id="分支">分支</h3>
 <p>分支是用来将特性开发绝缘开来的。在你创建仓库的时候，master 是“默认的”分支。在其他分支上进行开发，完成后再将它们合并到主分支上。</p>
 <p>从开发主线上分离开来，形成的分支可以在不影响主线的同时继续工作。git中的分支，不会创建源代码目录的完整备份，它的操作几乎在瞬间完成，在不同分支之间切换也很轻松 <code>git checkout brachname</code> 。</p>
-<p><img src="http://rogerdudler.github.io/git-guide/img/branches.png" alt="image"><br>图片来源：<a href="http://rogerdudler.github.io/git-guide/img/branches.png" target="_blank">http://rogerdudler.github.io/git-guide/img/branches.png</a> <a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank">git简明教程</a></p>
+<p><img src="http://rogerdudler.github.io/git-guide/img/branches.png" alt="image"><br>图片来源：<a href="http://rogerdudler.github.io/git-guide/img/branches.png" target="_blank" rel="external">http://rogerdudler.github.io/git-guide/img/branches.png</a> <a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">git简明教程</a></p>
 <p>创建一个叫做“feature_x”的分支，并切换过去：</p>
 <pre><code><span class="variable">$ </span>git checkout -b feature_x
 </code></pre><p>切换回主分支：</p>
@@ -225,7 +226,7 @@ $">
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般处理"><span class="toc-number">1.</span> <span class="toc-text">一般处理</span></a></li><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#常用指令:"><span class="toc-number">1.0.1.</span> <span class="toc-text">常用指令:</span></a></li></ol></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#Git_记录的方式"><span class="toc-number">2.</span> <span class="toc-text">Git 记录的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支"><span class="toc-number">3.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#_"><span class="toc-number">4.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较提交_-_git_diff"><span class="toc-number">5.</span> <span class="toc-text">比较提交 - git diff</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般处理"><span class="toc-number">1.</span> <span class="toc-text">一般处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#常用指令:"><span class="toc-number">1.0.1.</span> <span class="toc-text">常用指令:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git_记录的方式"><span class="toc-number">2.</span> <span class="toc-text">Git 记录的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支"><span class="toc-number">3.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#_"><span class="toc-number">4.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较提交_-_git_diff"><span class="toc-number">5.</span> <span class="toc-text">比较提交 - git diff</span></a></li></ol>
   </div>
 
 <div id="asidepart">
@@ -273,7 +274,7 @@ $">
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -282,7 +283,7 @@ $">
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>6</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>7</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -290,7 +291,7 @@ $">
 		
 			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
 		
 			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
 		

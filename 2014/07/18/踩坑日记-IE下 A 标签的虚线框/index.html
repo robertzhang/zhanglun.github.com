@@ -27,6 +27,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -73,7 +74,7 @@
   </h1>
   <p class="article-author">By
     
-      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
     <time datetime="2014-07-18T12:39:00.000Z" itemprop="datePublished">7月 18 2014</time>
@@ -86,7 +87,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#IE_下_a标签的虚线框"><span class="toc-number">1.</span> <span class="toc-text">IE 下 a标签的虚线框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强大的CSS选择器"><span class="toc-number">2.</span> <span class="toc-text">强大的CSS选择器</span></a></li><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#直接相邻选择器_X+Y_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）"><span class="toc-number">2.0.1.</span> <span class="toc-text">直接相邻选择器 X+Y （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子选择器_X&gt;Y_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）"><span class="toc-number">2.0.2.</span> <span class="toc-text">子选择器 X&gt;Y （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）</span></a></li></ol><li class="toc-item toc-level-4"><a class="toc-link" href="#间接相邻选择器_X_~_Y_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera_）"><span class="toc-number">2.1.</span> <span class="toc-text">间接相邻选择器 X ~ Y （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera  ）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#属性选择器_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）"><span class="toc-number">2.2.</span> <span class="toc-text">属性选择器 （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）</span></a></li><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#X[title]——匹配的是带有_title_属性的链接元素"><span class="toc-number">2.2.1.</span> <span class="toc-text"> 属性的链接元素</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[title=”foo”]——匹配所有拥有href属性，且href为http://css9-net的所有链接"><span class="toc-number">2.2.2.</span> <span class="toc-text">的所有链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[title=”zhanglun”]——匹配的是href中*包含”zhanglun”的所有链接"><span class="toc-number">2.2.3.</span> <span class="toc-text">的所有链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[href^=”http”]——匹配的是href中所有以http开头的链接"><span class="toc-number">2.2.4.</span> <span class="toc-text">的链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[href$=”-jpg”]——匹配的是所有链接到扩展名为-jpg图片的链接"><span class="toc-number">2.2.5.</span> <span class="toc-text">所有链接到扩展名为.jpg图片的链接</strong></span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[data-=”foo”]——匹配属性_data-_为_“foo”_的元素"><span class="toc-number">2.2.6.</span> <span class="toc-text"> 为 “foo” 的元素</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[foo~=”bar”]——匹配属性值中用空格分隔的多个值中的一个"><span class="toc-number">2.2.7.</span> <span class="toc-text">X[foo~=”bar”]——匹配属性值中用空格分隔的多个值中的一个</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#IE_下_a标签的虚线框"><span class="toc-number">1.</span> <span class="toc-text">IE 下 a标签的虚线框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强大的CSS选择器"><span class="toc-number">2.</span> <span class="toc-text">强大的CSS选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#直接相邻选择器_X+Y_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）"><span class="toc-number">2.0.1.</span> <span class="toc-text">直接相邻选择器 X+Y （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子选择器_X>Y_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）"><span class="toc-number">2.0.2.</span> <span class="toc-text">子选择器 X>Y （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#间接相邻选择器_X_~_Y_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera_）"><span class="toc-number">2.1.</span> <span class="toc-text">间接相邻选择器 X ~ Y （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera  ）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#属性选择器_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）"><span class="toc-number">2.2.</span> <span class="toc-text">属性选择器 （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#X[title]——匹配的是带有_title_属性的链接元素"><span class="toc-number">2.2.1.</span> <span class="toc-text">X[title]——匹配的是带有 title 属性的链接元素</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[title=”foo”]——匹配所有拥有href属性，且href为http://css9-net的所有链接"><span class="toc-number">2.2.2.</span> <span class="toc-text">X[title=”foo”]——匹配所有拥有href属性，且href为http://css9.net的所有链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[title=”zhanglun”]——匹配的是href中*包含”zhanglun”的所有链接"><span class="toc-number">2.2.3.</span> <span class="toc-text">X[title=”zhanglun”]——匹配的是href中*包含”zhanglun”的所有链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[href^=”http”]——匹配的是href中所有以http开头的链接"><span class="toc-number">2.2.4.</span> <span class="toc-text">X[href^=”http”]——匹配的是href中所有以http开头的链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[href$=”-jpg”]——匹配的是所有链接到扩展名为-jpg图片的链接"><span class="toc-number">2.2.5.</span> <span class="toc-text">X[href$=”.jpg”]——匹配的是所有链接到扩展名为.jpg图片的链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[data-=”foo”]——匹配属性_data-_为_“foo”_的元素"><span class="toc-number">2.2.6.</span> <span class="toc-text">X[data-=”foo”]——匹配属性 data- 为 “foo” 的元素</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[foo~=”bar”]——匹配属性值中用空格分隔的多个值中的一个"><span class="toc-number">2.2.7.</span> <span class="toc-text">X[foo~=”bar”]——匹配属性值中用空格分隔的多个值中的一个</span></a></li></ol></li></ol></li></ol>
 		</div>
 		
 		<h3 id="IE_下_a标签的虚线框">IE 下 a标签的虚线框</h3>
@@ -95,7 +96,7 @@
 <p>不同版本的IE解决方案不同：IE8 下只需为 a 标签添加一条 CSS 属性就可以 <code>outline:none</code>，顺便一提 ，这条属性可以取消浏览器中输入框获得焦点是丑逼逼的外框</p>
 <p><img src="http://img3.picbed.org/uploads/2014/07/QQ20140718_2.png" alt="image"></p>
 <p>但是在高贵的 IE7 中，即使是添加了 <code>outline: none</code>，虚线框依旧存在，在 HTML 上加 <code>hidefocus=&quot;true&quot;</code>　如 </p>
-<pre><code>&lt;a href=<span class="string">"http://www.zhanglun.github.io/"</span> <span class="keyword">class</span>=<span class="string">"active"</span> hidefocus=<span class="string">"true"</span>&gt;
+<pre><code>&lt;a <span class="variable">href=</span><span class="string">"http://www.zhanglun.github.io/"</span> <span class="variable">class=</span><span class="string">"active"</span> <span class="variable">hidefocus=</span><span class="string">"true"</span>&gt;
 </code></pre><hr>
 <h3 id="强大的CSS选择器">强大的CSS选择器</h3>
 <p>项目最低的兼容要求是 IE8 ，所有很多以前由于兼容性问题而不常用的CSS选择器和属性都可以使用。下面记录的都是以前基本上没有用到的但是却很有用的选择器，就拿属性选择器来说，简直遍地都是。</p>
@@ -133,7 +134,7 @@
 <pre><code><span class="tag">a</span><span class="attr_selector">[title]</span> <span class="rules">{
     <span class="rule"><span class="attribute">color</span>:<span class="value"> green</span></span>;
 <span class="rule">}</span></span>
-</code></pre><h5 id="X[title=”foo”]——匹配所有拥有href属性，且href为http://css9-net的所有链接">X[title=”foo”]——匹配所有拥有href属性，且<strong>href为<a href="http://css9.net" target="_blank">http://css9.net</a></strong>的所有链接</h5>
+</code></pre><h5 id="X[title=”foo”]——匹配所有拥有href属性，且href为http://css9-net的所有链接">X[title=”foo”]——匹配所有拥有href属性，且<strong>href为<a href="http://css9.net" target="_blank" rel="external">http://css9.net</a></strong>的所有链接</h5>
 <pre><code><span class="tag">a</span><span class="attr_selector">[href="http://css9.net"]</span> <span class="rules">{
     <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#1f6053</span></span></span>; 
 <span class="rule">}</span></span>
@@ -143,13 +144,13 @@
 <span class="rule">}</span></span>
 </code></pre><h5 id="X[href^=”http”]——匹配的是href中所有以http开头的链接">X[href^=”http”]——匹配的是href中<strong>所有以http开头</strong>的链接</h5>
 <pre><code><span class="tag">a</span><span class="attr_selector">[href^="http"]</span> <span class="rules">{
-    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="function">url(path/to/external/icon.png)</span> no-repeat</span></span>;
-    <span class="rule"><span class="attribute">padding-left</span>:<span class="value"> <span class="number">10</span>px</span></span>;
+    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="function">url</span>(path/to/external/icon.png) no-repeat</span></span>;
+    <span class="rule"><span class="attribute">padding-left</span>:<span class="value"> <span class="number">10px</span></span></span>;
 <span class="rule">}</span></span>
 </code></pre><h5 id="X[href$=”-jpg”]——匹配的是所有链接到扩展名为-jpg图片的链接">X[href$=”.jpg”]——匹配的是<strong>所有链接到扩展名为.jpg图片的链接</strong></h5>
 <pre><code><span class="tag">a</span><span class="attr_selector">[href^="http"]</span> <span class="rules">{
-    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="function">url(path/to/external/icon.png)</span> no-repeat</span></span>;
-    <span class="rule"><span class="attribute">padding-left</span>:<span class="value"> <span class="number">10</span>px</span></span>;
+    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="function">url</span>(path/to/external/icon.png) no-repeat</span></span>;
+    <span class="rule"><span class="attribute">padding-left</span>:<span class="value"> <span class="number">10px</span></span></span>;
 <span class="rule">}</span></span>   
 </code></pre><h5 id="X[data-=”foo”]——匹配属性_data-_为_“foo”_的元素">X[data-<em>=”foo”]——匹配属性 data-</em> 为 “foo” 的元素</h5>
 <p>在上一个选择器中提到如何匹配所有图片链接。如果使用X[href$=”.jpg”]实现，需要这样做：</p>
@@ -160,25 +161,25 @@ a[href<span class="variable">$=</span><span class="string">".gif"</span>] {
     <span class="keyword">color</span>: red;
 }
 </code></pre><p>看上去比较麻烦。另一个解决办法是为所有的图片链接加一个特定的属性，例如‘data-file’</p>
-<pre><code>html代码
-<span class="subst">&lt;</span>a href<span class="subst">=</span><span class="string">"path/to/image.jpg"</span> <span class="built_in">data</span><span class="attribute">-filetype</span><span class="subst">=</span><span class="string">"image"</span><span class="subst">&gt;</span> 图片链接 <span class="subst">&lt;</span>/a<span class="subst">&gt;</span> 
+<pre><code><span class="title">html</span>代码
+&lt;a href=<span class="string">"path/to/image.jpg"</span> <span class="typedef"><span class="keyword">data</span>-filetype="image"&gt; 图片链接 &lt;/a&gt; </span>
 
-css代码如下：
-a<span class="preprocessor">[</span><span class="built_in">data</span><span class="attribute">-filetype</span><span class="subst">=</span><span class="string">"image"</span><span class="preprocessor">]</span><span class="markup"> {
-    color: red;
-}</span>
+<span class="title">css</span>代码如下：
+<span class="title">a</span>[<span class="typedef"><span class="keyword">data</span>-filetype="image"] <span class="container">{
+    <span class="title">color</span>: <span class="title">red</span>;
+}</span></span>
 </code></pre><p>这样所有链接到图片的链接字体颜色为红色。  </p>
 <h5 id="X[foo~=”bar”]——匹配属性值中用空格分隔的多个值中的一个">X[foo~=”bar”]——匹配属性值中用空格分隔的多个值中的一个</h5>
-<pre><code>html代码
-<span class="subst">&lt;</span>a href<span class="subst">=</span><span class="string">"path/to/image.jpg"</span> <span class="built_in">data</span><span class="attribute">-info</span><span class="subst">=</span><span class="string">"external image"</span><span class="subst">&gt;</span> Click Me, Fool <span class="subst">&lt;</span>/a<span class="subst">&gt;</span> 
+<pre><code><span class="title">html</span>代码
+&lt;a href=<span class="string">"path/to/image.jpg"</span> <span class="typedef"><span class="keyword">data</span>-info="external image"&gt; <span class="type">Click</span> <span class="type">Me</span>, <span class="type">Fool</span> &lt;/a&gt; </span>
 
-css代码
-a<span class="preprocessor">[</span><span class="built_in">data</span><span class="attribute">-info</span>~<span class="subst">=</span><span class="string">"external"</span><span class="preprocessor">]</span><span class="markup"> {
-    color: red;
-}
-a</span><span class="preprocessor">[</span><span class="built_in">data</span><span class="attribute">-info</span>~<span class="subst">=</span><span class="string">"image"</span><span class="preprocessor">]</span><span class="markup"> {
-    border: 1px solid black;
-}</span>
+<span class="title">css</span>代码
+<span class="title">a</span>[<span class="typedef"><span class="keyword">data</span>-info~="external"] <span class="container">{
+    <span class="title">color</span>: <span class="title">red</span>;
+}</span></span>
+<span class="title">a</span>[<span class="typedef"><span class="keyword">data</span>-info~="image"] <span class="container">{
+    <span class="title">border</span>: 1<span class="title">px</span> <span class="title">solid</span> <span class="title">black</span>;
+}</span></span>
 </code></pre><p>在上面例子中，匹配data-info属性中包含“external”链接的字体颜色为红色。匹配data-info属性中包含“image”的链接设置黑色边框。<br>兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera    </p>
   
 	</div>
@@ -227,7 +228,7 @@ a</span><span class="preprocessor">[</span><span class="built_in">data</span><sp
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#IE_下_a标签的虚线框"><span class="toc-number">1.</span> <span class="toc-text">IE 下 a标签的虚线框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强大的CSS选择器"><span class="toc-number">2.</span> <span class="toc-text">强大的CSS选择器</span></a></li><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#直接相邻选择器_X+Y_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）"><span class="toc-number">2.0.1.</span> <span class="toc-text">直接相邻选择器 X+Y （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子选择器_X&gt;Y_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）"><span class="toc-number">2.0.2.</span> <span class="toc-text">子选择器 X&gt;Y （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）</span></a></li></ol><li class="toc-item toc-level-4"><a class="toc-link" href="#间接相邻选择器_X_~_Y_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera_）"><span class="toc-number">2.1.</span> <span class="toc-text">间接相邻选择器 X ~ Y （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera  ）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#属性选择器_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）"><span class="toc-number">2.2.</span> <span class="toc-text">属性选择器 （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）</span></a></li><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#X[title]——匹配的是带有_title_属性的链接元素"><span class="toc-number">2.2.1.</span> <span class="toc-text"> 属性的链接元素</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[title=”foo”]——匹配所有拥有href属性，且href为http://css9-net的所有链接"><span class="toc-number">2.2.2.</span> <span class="toc-text">的所有链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[title=”zhanglun”]——匹配的是href中*包含”zhanglun”的所有链接"><span class="toc-number">2.2.3.</span> <span class="toc-text">的所有链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[href^=”http”]——匹配的是href中所有以http开头的链接"><span class="toc-number">2.2.4.</span> <span class="toc-text">的链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[href$=”-jpg”]——匹配的是所有链接到扩展名为-jpg图片的链接"><span class="toc-number">2.2.5.</span> <span class="toc-text">所有链接到扩展名为.jpg图片的链接</strong></span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[data-=”foo”]——匹配属性_data-_为_“foo”_的元素"><span class="toc-number">2.2.6.</span> <span class="toc-text"> 为 “foo” 的元素</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[foo~=”bar”]——匹配属性值中用空格分隔的多个值中的一个"><span class="toc-number">2.2.7.</span> <span class="toc-text">X[foo~=”bar”]——匹配属性值中用空格分隔的多个值中的一个</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#IE_下_a标签的虚线框"><span class="toc-number">1.</span> <span class="toc-text">IE 下 a标签的虚线框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强大的CSS选择器"><span class="toc-number">2.</span> <span class="toc-text">强大的CSS选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#直接相邻选择器_X+Y_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）"><span class="toc-number">2.0.1.</span> <span class="toc-text">直接相邻选择器 X+Y （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子选择器_X>Y_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）"><span class="toc-number">2.0.2.</span> <span class="toc-text">子选择器 X>Y （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#间接相邻选择器_X_~_Y_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera_）"><span class="toc-number">2.1.</span> <span class="toc-text">间接相邻选择器 X ~ Y （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera  ）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#属性选择器_（兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）"><span class="toc-number">2.2.</span> <span class="toc-text">属性选择器 （兼容浏览器：IE7+、Firefox、Chrome、Safari、Opera）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#X[title]——匹配的是带有_title_属性的链接元素"><span class="toc-number">2.2.1.</span> <span class="toc-text">X[title]——匹配的是带有 title 属性的链接元素</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[title=”foo”]——匹配所有拥有href属性，且href为http://css9-net的所有链接"><span class="toc-number">2.2.2.</span> <span class="toc-text">X[title=”foo”]——匹配所有拥有href属性，且href为http://css9.net的所有链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[title=”zhanglun”]——匹配的是href中*包含”zhanglun”的所有链接"><span class="toc-number">2.2.3.</span> <span class="toc-text">X[title=”zhanglun”]——匹配的是href中*包含”zhanglun”的所有链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[href^=”http”]——匹配的是href中所有以http开头的链接"><span class="toc-number">2.2.4.</span> <span class="toc-text">X[href^=”http”]——匹配的是href中所有以http开头的链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[href$=”-jpg”]——匹配的是所有链接到扩展名为-jpg图片的链接"><span class="toc-number">2.2.5.</span> <span class="toc-text">X[href$=”.jpg”]——匹配的是所有链接到扩展名为.jpg图片的链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[data-=”foo”]——匹配属性_data-_为_“foo”_的元素"><span class="toc-number">2.2.6.</span> <span class="toc-text">X[data-=”foo”]——匹配属性 data- 为 “foo” 的元素</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#X[foo~=”bar”]——匹配属性值中用空格分隔的多个值中的一个"><span class="toc-number">2.2.7.</span> <span class="toc-text">X[foo~=”bar”]——匹配属性值中用空格分隔的多个值中的一个</span></a></li></ol></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
@@ -275,7 +276,7 @@ a</span><span class="preprocessor">[</span><span class="built_in">data</span><sp
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -284,7 +285,7 @@ a</span><span class="preprocessor">[</span><span class="built_in">data</span><sp
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>6</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>7</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -292,7 +293,7 @@ a</span><span class="preprocessor">[</span><span class="built_in">data</span><sp
 		
 			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
 		
 			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
 		

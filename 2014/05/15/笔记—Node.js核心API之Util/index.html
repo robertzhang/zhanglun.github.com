@@ -22,6 +22,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -68,7 +69,7 @@
   </h1>
   <p class="article-author">By
     
-      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
     <time datetime="2014-05-15T13:16:00.000Z" itemprop="datePublished">5月 15 2014</time>
@@ -81,7 +82,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#util模块"><span class="toc-number">1.</span> <span class="toc-text">util模块</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#util-format(format,_[…])"><span class="toc-number">1.1.</span> <span class="toc-text">util.format(format, […])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-debug(string)"><span class="toc-number">1.2.</span> <span class="toc-text">util.debug(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-log(string)"><span class="toc-number">1.3.</span> <span class="toc-text">util.log(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inspect(object,[options])"><span class="toc-number">1.4.</span> <span class="toc-text">util.inspect(object,[options])</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定制颜色"><span class="toc-number">1.4.1.</span> <span class="toc-text">定制颜色</span></a></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isArray(object)"><span class="toc-number">1.5.</span> <span class="toc-text">util.isArray(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isRegExp(object)"><span class="toc-number">1.6.</span> <span class="toc-text">util.isRegExp(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isDate(object)"><span class="toc-number">1.7.</span> <span class="toc-text">util.isDate(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isError(object)"><span class="toc-number">1.8.</span> <span class="toc-text">util.isError(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inherits(constructor,_superConstructor)"><span class="toc-number">1.9.</span> <span class="toc-text">util.inherits(constructor, superConstructor)</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#util模块"><span class="toc-number">1.</span> <span class="toc-text">util模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#util-format(format,_[…])"><span class="toc-number">1.1.</span> <span class="toc-text">util.format(format, […])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-debug(string)"><span class="toc-number">1.2.</span> <span class="toc-text">util.debug(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-log(string)"><span class="toc-number">1.3.</span> <span class="toc-text">util.log(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inspect(object,[options])"><span class="toc-number">1.4.</span> <span class="toc-text">util.inspect(object,[options])</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定制颜色"><span class="toc-number">1.4.1.</span> <span class="toc-text">定制颜色</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isArray(object)"><span class="toc-number">1.5.</span> <span class="toc-text">util.isArray(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isRegExp(object)"><span class="toc-number">1.6.</span> <span class="toc-text">util.isRegExp(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isDate(object)"><span class="toc-number">1.7.</span> <span class="toc-text">util.isDate(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isError(object)"><span class="toc-number">1.8.</span> <span class="toc-text">util.isError(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inherits(constructor,_superConstructor)"><span class="toc-number">1.9.</span> <span class="toc-text">util.inherits(constructor, superConstructor)</span></a></li></ol></li></ol>
 		</div>
 		
 		<p>最近正在学习Node，在图书馆借了基本关于Node的书，同时在网上查阅资料，颇有收获，但是整体感觉对Node的理解还是停留在一个很模棱两可的状态。比如Node中的模块，平时练习就接触到那么几个，其他的一些模块暂时只会在学习的时候接触到，不常用便就荒废了。正所谓好记心不如烂笔头，多做笔记还是更有利于理解和记忆。自己做的总结也方便回头复习，所以决定踏上漫长的修炼之旅……</p>
@@ -105,7 +106,7 @@
 <pre><code>util.format(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">"zhanglun"</span>); // <span class="string">'1 2 3 \'</span>zhanglun\<span class="string">''</span>
 </code></pre><h3 id="util-debug(string)">util.debug(string)</h3>
 <p>这是一个同步输出的方法。当执行到这一句代码的时候会阻塞进程，并且以标准错误的形式将参数 string 输出。</p>
-<pre><code><span class="keyword">require</span>(<span class="string">'util'</span>).debug(<span class="string">'message on stderr'</span>); <span class="regexp">//message</span> on stderr
+<pre><code>require(<span class="string">'util'</span>).<span class="keyword">debug</span>(<span class="string">'message on stderr'</span>); //message <span class="keyword">on</span> stderr
 </code></pre><h3 id="util-log(string)">util.log(string)</h3>
 <p>以标准输出的形式输出。它将获取当前的时间戳，并和参数 string 一起输出，中间用 “ - “ 连接。</p>
 <pre><code><span class="built_in">require</span>(<span class="string">'util'</span>).<span class="built_in">log</span>(<span class="string">'Timestmaped message.'</span>);<span class="comment"> //15 May 21:41:33 - Timestmaped message</span>
@@ -120,26 +121,26 @@
 <p>下面先来看一个例子：</p>
 <pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);
 <span class="keyword">var</span> obj1 = {
-        <span class="string">"aa"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-            console.log(<span class="string">"aa"</span>);
+        <span class="string">"aa"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+            <span class="built_in">console</span>.log(<span class="string">"aa"</span>);
         },
-        <span class="string">"inspect"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-            console.log(<span class="string">"obj1's inspect()"</span>);
+        <span class="string">"inspect"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+            <span class="built_in">console</span>.log(<span class="string">"obj1's inspect()"</span>);
         },
-        <span class="string">"bb"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-            console.log(<span class="string">"bb"</span>);
+        <span class="string">"bb"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+            <span class="built_in">console</span>.log(<span class="string">"bb"</span>);
         }
     },
     obj2 = {
-        <span class="string">"cc"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-            console.log(<span class="string">"cc"</span>);
+        <span class="string">"cc"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+            <span class="built_in">console</span>.log(<span class="string">"cc"</span>);
         },
-        <span class="string">"inspect"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-            console.log(<span class="string">"obj2's inspect()"</span>);
+        <span class="string">"inspect"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+            <span class="built_in">console</span>.log(<span class="string">"obj2's inspect()"</span>);
             <span class="keyword">return</span> <span class="string">"Hello"</span>;
         },
-        <span class="string">"dd"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-            console.log(<span class="string">"dd"</span>);
+        <span class="string">"dd"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+            <span class="built_in">console</span>.log(<span class="string">"dd"</span>);
         }
     };
 
@@ -154,11 +155,11 @@
         customInspect: <span class="literal">true</span>
     });
 
-console.log(<span class="string">"str1 : "</span> + str1);
-console.log(<span class="string">"str2 : "</span> + str2);
+<span class="built_in">console</span>.log(<span class="string">"str1 : "</span> + str1);
+<span class="built_in">console</span>.log(<span class="string">"str2 : "</span> + str2);
 </code></pre><p>其输出结果：</p>
-<pre><code>obj2's inspect()
-str1 : { aa: [<span class="keyword">Function</span>], inspacet: [<span class="keyword">Function</span>], bb: [<span class="keyword">Function</span>] }
+<pre><code>obj2<span class="comment">'s inspect()</span>
+str1 : { aa: [<span class="function"><span class="keyword">Function</span>], <span class="title">inspacet</span>:</span> [<span class="function"><span class="keyword">Function</span>], <span class="title">bb</span>:</span> [<span class="function"><span class="keyword">Function</span>] }</span>
 str2 : Hello
 </code></pre><p>暂时先忽略颜色，待会接着说，先看<code>customInspect</code>。上面的例子中，有两个对象：obj1 和 obj2，内部都定义了一个 inspect()函数，调用<code>util.inspect()</code>方法时，只有<code>customInspect</code>不同。当<code>customInspect</code>为 true 时，比如 obj2，其内部的 <code>util.inspect()</code>函数在执行<code>util.inspect()</code>时就被调用了，同时只会返回这个内部的 <code>util.inspect()</code>执行后的返回值，如果没有函数显示地调用 return 语句，则返回 undefined。可以试试修改上面的示例代码中 obj2 的<code>inspect()</code>的返回值。而对于 obj1，其<code>customInspect</code>，所以其内部的<code>inspect()</code>并不会被调用。</p>
 <h4 id="定制颜色">定制颜色</h4>
@@ -206,34 +207,34 @@ util.isError({ name: <span class="string">'Error'</span>, message: <span class="
 <pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);
 <span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">"events"</span>);
 
-<span class="function"><span class="keyword">function</span> <span class="title">MyStream</span><span class="params">()</span> {</span>
+<span class="function"><span class="keyword">function</span> <span class="title">MyStream</span><span class="params">()</span> </span>{
 }
 util.inherits(MyStream, events.EventEmitter);
 
-MyStream.prototype.write = <span class="function"><span class="keyword">function</span><span class="params">(data)</span> {</span>
+MyStream.prototype.write = <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>{
     <span class="keyword">this</span>.emit(<span class="string">"data"</span>, data);
 }
 
 <span class="keyword">var</span> stream = <span class="keyword">new</span> MyStream();
 
 
-console.log(stream <span class="keyword">instanceof</span> events.EventEmitter); <span class="comment">// true</span>
-console.log(MyStream.super_); 
+<span class="built_in">console</span>.log(stream <span class="keyword">instanceof</span> events.EventEmitter); <span class="comment">// true</span>
+<span class="built_in">console</span>.log(MyStream.super_); 
 <span class="comment">//{ [Function: EventEmitter] listenerCount: [Function] }</span>
-console.log(MyStream.super_ === events.EventEmitter); <span class="comment">// true</span>
+<span class="built_in">console</span>.log(MyStream.super_ === events.EventEmitter); <span class="comment">// true</span>
 
-stream.on(<span class="string">"data"</span>, <span class="function"><span class="keyword">function</span><span class="params">(data)</span> {</span>
-    console.log(<span class="string">'Received data: "'</span> + data + <span class="string">'"'</span>);
+stream.on(<span class="string">"data"</span>, <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>{
+    <span class="built_in">console</span>.log(<span class="string">'Received data: "'</span> + data + <span class="string">'"'</span>);
 })
 stream.write(<span class="string">"It works!"</span>); <span class="comment">// Received data: "It works!"</span>
-</code></pre><p>util 模块还提供了其他的一些工具函数，更多详情请戳<a href="http://nodejs.org/api/util.html#util_util" target="_blank">这里</a>。</p>
+</code></pre><p>util 模块还提供了其他的一些工具函数，更多详情请戳<a href="http://nodejs.org/api/util.html#util_util" target="_blank" rel="external">这里</a>。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/笔记/">笔记</a><a href="/tags/Node.js/">Node.js</a>
+  <span></span> <a href="/tags/笔记/">笔记</a><a href="/tags/Node-js/">Node.js</a>
   </div>
 
 
@@ -274,7 +275,7 @@ stream.write(<span class="string">"It works!"</span>); <span class="comment">// 
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#util模块"><span class="toc-number">1.</span> <span class="toc-text">util模块</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#util-format(format,_[…])"><span class="toc-number">1.1.</span> <span class="toc-text">util.format(format, […])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-debug(string)"><span class="toc-number">1.2.</span> <span class="toc-text">util.debug(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-log(string)"><span class="toc-number">1.3.</span> <span class="toc-text">util.log(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inspect(object,[options])"><span class="toc-number">1.4.</span> <span class="toc-text">util.inspect(object,[options])</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定制颜色"><span class="toc-number">1.4.1.</span> <span class="toc-text">定制颜色</span></a></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isArray(object)"><span class="toc-number">1.5.</span> <span class="toc-text">util.isArray(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isRegExp(object)"><span class="toc-number">1.6.</span> <span class="toc-text">util.isRegExp(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isDate(object)"><span class="toc-number">1.7.</span> <span class="toc-text">util.isDate(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isError(object)"><span class="toc-number">1.8.</span> <span class="toc-text">util.isError(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inherits(constructor,_superConstructor)"><span class="toc-number">1.9.</span> <span class="toc-text">util.inherits(constructor, superConstructor)</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#util模块"><span class="toc-number">1.</span> <span class="toc-text">util模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#util-format(format,_[…])"><span class="toc-number">1.1.</span> <span class="toc-text">util.format(format, […])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-debug(string)"><span class="toc-number">1.2.</span> <span class="toc-text">util.debug(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-log(string)"><span class="toc-number">1.3.</span> <span class="toc-text">util.log(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inspect(object,[options])"><span class="toc-number">1.4.</span> <span class="toc-text">util.inspect(object,[options])</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定制颜色"><span class="toc-number">1.4.1.</span> <span class="toc-text">定制颜色</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isArray(object)"><span class="toc-number">1.5.</span> <span class="toc-text">util.isArray(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isRegExp(object)"><span class="toc-number">1.6.</span> <span class="toc-text">util.isRegExp(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isDate(object)"><span class="toc-number">1.7.</span> <span class="toc-text">util.isDate(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-isError(object)"><span class="toc-number">1.8.</span> <span class="toc-text">util.isError(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#util-inherits(constructor,_superConstructor)"><span class="toc-number">1.9.</span> <span class="toc-text">util.inherits(constructor, superConstructor)</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
@@ -322,7 +323,7 @@ stream.write(<span class="string">"It works!"</span>); <span class="comment">// 
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -331,7 +332,7 @@ stream.write(<span class="string">"It works!"</span>); <span class="comment">// 
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>6</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>7</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -339,7 +340,7 @@ stream.write(<span class="string">"It works!"</span>); <span class="comment">// 
 		
 			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
 		
 			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
 		

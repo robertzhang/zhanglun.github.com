@@ -25,6 +25,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -71,7 +72,7 @@
   </h1>
   <p class="article-author">By
     
-      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
     <time datetime="2014-07-22T13:09:00.000Z" itemprop="datePublished">7月 22 2014</time>
@@ -84,7 +85,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#撤消操作"><span class="toc-number">1.</span> <span class="toc-text">撤消操作</span></a></li><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#取消已经暂存的修改"><span class="toc-number">1.0.1.</span> <span class="toc-text">取消已经暂存的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#取消对文件的修改"><span class="toc-number">1.0.2.</span> <span class="toc-text">取消对文件的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改最后一次的提交"><span class="toc-number">1.0.3.</span> <span class="toc-text">修改最后一次的提交</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#撤消操作"><span class="toc-number">1.</span> <span class="toc-text">撤消操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#取消已经暂存的修改"><span class="toc-number">1.0.1.</span> <span class="toc-text">取消已经暂存的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#取消对文件的修改"><span class="toc-number">1.0.2.</span> <span class="toc-text">取消对文件的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改最后一次的提交"><span class="toc-number">1.0.3.</span> <span class="toc-text">修改最后一次的提交</span></a></li></ol></li></ol></li></ol>
 		</div>
 		
 		<h3 id="撤消操作">撤消操作</h3>
@@ -107,25 +108,25 @@ Changes <span class="keyword">to</span> be committed:
     modified:   processing/source/css/_base/variables.scss
     modified:   processing/source/css/_partial/navigation.scss
     modified:   processing/source/css/style.scss
-</code></pre><p>可以使用 git reset HEAD <file>… 的方式取消暂存。</p>
-<pre><code>➜  hexo-theme git:(master) ✗ git reset HEAD *
-Unstaged changes after reset:
-M    processing/README<span class="preprocessor">.md</span>
-M    processing/layout/_partial/navigation<span class="preprocessor">.jade</span>
-M    processing/layout/_widget/archive<span class="preprocessor">.jade</span>
-M    processing/layout/_widget/categories<span class="preprocessor">.jade</span>
-M    processing/source/css/_base/base<span class="preprocessor">.scss</span>
-M    processing/source/css/_base/variables<span class="preprocessor">.scss</span>
-M    processing/source/css/_partial/navigation<span class="preprocessor">.scss</span>
-M    processing/source/css/style<span class="preprocessor">.scss</span>
+</code></pre><p>可以使用 git reset HEAD <file>… 的方式取消暂存。</file></p>
+<pre><code>➜  hexo-theme gi<span class="variable">t:</span>(master) ✗ git reset HEAD *
+Unstaged <span class="keyword">changes</span> after rese<span class="variable">t:</span>
+M    processing/README.md
+M    processing/layout/_partial/navigation.jade
+M    processing/layout/_widget/archive.jade
+M    processing/layout/_widget/categories.jade
+M    processing/<span class="keyword">source</span>/css/_base/base.scss
+M    processing/<span class="keyword">source</span>/css/_base/variables.scss
+M    processing/<span class="keyword">source</span>/css/_partial/navigation.scss
+M    processing/<span class="keyword">source</span>/css/style.scss
 </code></pre><p>这时再使用 <code>git status</code> 查看文件状态可以看到</p>
 <pre><code>➜  hexo-theme git:(master) ✗ git status
-<span class="keyword">On</span> branch master
-Your branch <span class="keyword">is</span> ahead <span class="keyword">of</span> <span class="attribute">'origin</span>/master' by <span class="number">2</span> commits.
-  (<span class="keyword">use</span> <span class="string">"git push"</span> <span class="keyword">to</span> publish your local commits)
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (<span class="operator"><span class="keyword">use</span> <span class="string">"git push"</span> <span class="keyword">to</span> publish your <span class="keyword">local</span> commits)
 
-Changes <span class="keyword">not</span> staged <span class="keyword">for</span> commit:
-  (<span class="keyword">use</span> <span class="string">"git add &lt;file&gt;..."</span> <span class="keyword">to</span> update what will be committed)
+Changes <span class="keyword">not</span> staged <span class="keyword">for</span> <span class="keyword">commit</span>:
+  (<span class="keyword">use</span> <span class="string">"git add &lt;file&gt;..."</span> <span class="keyword">to</span> <span class="keyword">update</span> what will be committed)
   (<span class="keyword">use</span> <span class="string">"git checkout -- &lt;file&gt;..."</span> <span class="keyword">to</span> discard changes <span class="keyword">in</span> working directory)
 
     modified:   processing/README.md
@@ -133,11 +134,11 @@ Changes <span class="keyword">not</span> staged <span class="keyword">for</span>
     modified:   processing/layout/_widget/archive.jade
     modified:   processing/layout/_widget/categories.jade
     modified:   processing/source/css/_base/base.scss
-    modified:   processing/source/css/_base/variables.scss
+    modified:   processing/source/css/_base/<span class="keyword">variables</span>.scss
     modified:   processing/source/css/_partial/navigation.scss
     modified:   processing/source/css/style.scss
 
-no changes added <span class="keyword">to</span> commit (<span class="keyword">use</span> <span class="string">"git add"</span> <span class="keyword">and</span>/<span class="keyword">or</span> <span class="string">"git commit -a"</span>)
+<span class="keyword">no</span> changes added <span class="keyword">to</span> <span class="keyword">commit</span> (<span class="keyword">use</span> <span class="string">"git add"</span> <span class="keyword">and</span>/<span class="keyword">or</span> <span class="string">"git commit -a"</span>)</span>
 </code></pre><p>可以看到，现在所有的修改都没有被暂存。</p>
 <h5 id="取消对文件的修改">取消对文件的修改</h5>
 <p>有一次，我正修复一个bug，修改本地仓库的一个文件，还没有完成时，同伴告诉我他已经修改好了，并且已经提交到远程了。我停下手头的工作，准备 pull ，这时候意识到，如果直接 pull，merge 的时候必然会冲突，因为我和同事同时修改了同一个文件的差不多相同的地方。但是我自己修改了文件很多地方，一味的 CTRL+Z 也难以解决问题，此时我需要将我修改的文件返回到修改之前的状态。很凑巧的是，在执行 <code>git status</code> 时，同样也给出了具体的撤销方法。</p>
@@ -166,13 +167,13 @@ Your branch <span class="keyword">is</span> up-<span class="keyword">to</span>-<
 </code></pre><p>效果显而易见！！这条命令有些危险，所有对文件的修改都没有了。如果一个不小心将自己需要的修改 discard 了，那就只有哭了……</p>
 <h5 id="修改最后一次的提交">修改最后一次的提交</h5>
 <p>有时候在提交时，发现自己漏掉或者多选了几个文件，亦或者提交信息写错了，想要撤销刚才的提交操作，可以使用 <code>--amend</code> 这个选项，重新提交</p>
-<pre><code>➜  hexo<span class="attribute">-theme</span> git:(master) ✗ git add <span class="attribute">-A</span>
-➜  hexo<span class="attribute">-theme</span> git:(master) ✗ git commit <span class="attribute">-m</span> <span class="string">"commit wrong"</span>
-<span class="preprocessor">[</span>master ebcbab2<span class="preprocessor">]</span><span class="markup"> commit wrong
- 4 files changed, 78 insertions(+), 106 deletions(-)
- rewrite processing/source/css/_base/base.scss (64%)</span>
+<pre><code>➜  hexo-theme gi<span class="variable">t:</span>(master) ✗ git <span class="built_in">add</span> -A
+➜  hexo-theme gi<span class="variable">t:</span>(master) ✗ git commit -<span class="keyword">m</span> <span class="string">"commit wrong"</span>
+[master ebcbab2] commit wrong
+ <span class="number">4</span> <span class="keyword">files</span> changed, <span class="number">78</span> insertions(+), <span class="number">106</span> deletions(-)
+ rewrite processing/<span class="keyword">source</span>/css/_base/base.scss (<span class="number">64</span>%)
 </code></pre><p>发现自己提交了一个 “commit wrong” 的错误提交信息，也不用太紧张，输入指令</p>
-<pre><code><span class="comment">git</span> <span class="comment">commit</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">amend</span> 
+<pre><code>git <span class="operator"><span class="keyword">commit</span> <span class="comment">--amend </span></span>
 </code></pre><p>之后，会跳转到命令行中的 vim 中，提示你修改提交信息。只要没有推送到远程端，一切都好说～</p>
   
 	</div>
@@ -221,7 +222,7 @@ Your branch <span class="keyword">is</span> up-<span class="keyword">to</span>-<
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#撤消操作"><span class="toc-number">1.</span> <span class="toc-text">撤消操作</span></a></li><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#取消已经暂存的修改"><span class="toc-number">1.0.1.</span> <span class="toc-text">取消已经暂存的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#取消对文件的修改"><span class="toc-number">1.0.2.</span> <span class="toc-text">取消对文件的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改最后一次的提交"><span class="toc-number">1.0.3.</span> <span class="toc-text">修改最后一次的提交</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#撤消操作"><span class="toc-number">1.</span> <span class="toc-text">撤消操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#取消已经暂存的修改"><span class="toc-number">1.0.1.</span> <span class="toc-text">取消已经暂存的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#取消对文件的修改"><span class="toc-number">1.0.2.</span> <span class="toc-text">取消对文件的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改最后一次的提交"><span class="toc-number">1.0.3.</span> <span class="toc-text">修改最后一次的提交</span></a></li></ol></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
@@ -269,7 +270,7 @@ Your branch <span class="keyword">is</span> up-<span class="keyword">to</span>-<
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -278,7 +279,7 @@ Your branch <span class="keyword">is</span> up-<span class="keyword">to</span>-<
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>6</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>7</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -286,7 +287,7 @@ Your branch <span class="keyword">is</span> up-<span class="keyword">to</span>-<
 		
 			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
 		
 			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
 		

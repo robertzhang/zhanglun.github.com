@@ -22,6 +22,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -68,7 +69,7 @@
   </h1>
   <p class="article-author">By
     
-      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
     <time datetime="2014-04-06T11:40:00.000Z" itemprop="datePublished">4月 6 2014</time>
@@ -81,7 +82,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流"><span class="toc-number">1.</span> <span class="toc-text">事件流</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件冒泡"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件捕获"><span class="toc-number">1.2.</span> <span class="toc-text">事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM事件流"><span class="toc-number">1.3.</span> <span class="toc-text">DOM事件流</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#事件处理程序"><span class="toc-number">2.</span> <span class="toc-text">事件处理程序</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML事件处理程序"><span class="toc-number">2.1.</span> <span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM0级事件处理程序"><span class="toc-number">2.2.</span> <span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2级事件处理程序"><span class="toc-number">2.3.</span> <span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE中的事件处理程序"><span class="toc-number">2.4.</span> <span class="toc-text">IE中的事件处理程序</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流"><span class="toc-number">1.</span> <span class="toc-text">事件流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件冒泡"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件捕获"><span class="toc-number">1.2.</span> <span class="toc-text">事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM事件流"><span class="toc-number">1.3.</span> <span class="toc-text">DOM事件流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件处理程序"><span class="toc-number">2.</span> <span class="toc-text">事件处理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML事件处理程序"><span class="toc-number">2.1.</span> <span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM0级事件处理程序"><span class="toc-number">2.2.</span> <span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2级事件处理程序"><span class="toc-number">2.3.</span> <span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE中的事件处理程序"><span class="toc-number">2.4.</span> <span class="toc-text">IE中的事件处理程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
 		</div>
 		
 		<p>JavaScript和HTML之间的交互是通过事件实现的。事件，就是文档或者浏览器窗口中发生的一些特定的交互瞬间。可以使用事件处理程序来预订事件，以便在事件发生的时候执行响应的代码。这种观察者模式的模型，使得JavaScript代码与HTML和CSS代码之间形成了松散耦合。<br><a id="more"></a></p>
@@ -117,36 +118,36 @@
 <p>document-&gt;html-&gt;body-&gt;div-&gt;body-&gt;html-&gt;document</p>
 </blockquote>
 <p><img src="http://cl.ly/image/3b1P2i0D1m1q/event-dom.png" alt="DOM事件流"></p>
-<p>在DOM事件流中，实际的目标在捕获阶段不会接收到事件。也就是说在捕获阶段中，事件从document到<html\>再到<body\>后就停止了。下一个阶段是“处于目标”阶段，于是事件在目标元素上面发生，并且在事件处理中被看成了冒泡阶段的一部分。紧接着冒泡阶段发生，事件传回文档</p>
+<p>在DOM事件流中，实际的目标在捕获阶段不会接收到事件。也就是说在捕获阶段中，事件从document到<html\>再到<body\>后就停止了。下一个阶段是“处于目标”阶段，于是事件在目标元素上面发生，并且在事件处理中被看成了冒泡阶段的一部分。紧接着冒泡阶段发生，事件传回文档</body\></html\></p>
 <h2 id="事件处理程序">事件处理程序</h2>
 <h3 id="HTML事件处理程序">HTML事件处理程序</h3>
-<pre><code>&lt;input <span class="class"><span class="keyword">type</span>=</span><span class="string">"button"</span> <span class="keyword">value</span>=<span class="string">"Click"</span> id=<span class="string">"go"</span> onclick=<span class="string">"showMessage()"</span> /&gt;
+<pre><code>&lt;input <span class="variable">type=</span><span class="string">"button"</span> <span class="variable">value=</span><span class="string">"Click"</span> <span class="variable">id=</span><span class="string">"go"</span> <span class="variable">onclick=</span><span class="string">"showMessage()"</span> /&gt;
 </code></pre><p>这玩意儿就是传说中的HTML事件处理程序。最明显的缺点就是：HTML与JavaScript代码紧密耦合。如果要更换事件处理程序，就要同时修改HTML和JavaScript代码。</p>
 <h3 id="DOM0级事件处理程序">DOM0级事件处理程序</h3>
 <p>通过JavaScript制定事件处理程序的传统方法，就是讲一个函数赋值给一个叫做“事件处理程序”的属性。每个元素都有自己的事件处理程序属性，这些属性通常全部都是小写，例如onclick。将事件处理程序设置为一个函数，就可以指定事件处理程序。</p>
-<pre><code><span class="keyword">var</span> btn=document.getElementById(<span class="string">"myBtn"</span>);    
-btn.onclick=<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+<pre><code><span class="keyword">var</span> btn=<span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);    
+btn.onclick=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
     alert(<span class="string">"Clicked!"</span>);
 }
 </code></pre><p>要使用JavaScript指定事件处理程序，必须先获得对象元素的引用，然后为其指定事件处理程序的函数。<br>事件处理程序是在元素的作用域中运行的，也就是说程序中的this指向的是当前元素。</p>
-<pre><code><span class="keyword">var</span> btn=document.getElementById(<span class="string">"myBtn"</span>);    
-btn.onclick=<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+<pre><code><span class="keyword">var</span> btn=<span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);    
+btn.onclick=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
     alert(<span class="keyword">this</span>.id);<span class="comment">//"myBtn"</span>
 }
 </code></pre><p>以这种当时添加的事件处理程序会在事件流的冒泡阶段被处理。<br>通过将事件处理程序属性的值设置成null就可以删除事件处理程序。</p>
-<pre><code><span class="attribute">btn.onclick</span>=<span class="string">null;    </span>
+<pre><code>btn.<span class="variable">onclick=</span><span class="constant">null</span>;    
 </code></pre><h3 id="DOM2级事件处理程序">DOM2级事件处理程序</h3>
 <p>“DOM2级事件”规定了两个方法用于操作事件处理程序：addEventListener()和removeEventListener()。所有的节点都包含这两个方法，接收三个参数：要处理的事件名，作为事件处理程序的函数和一个布尔值。最后的参数如果是true，表示在事件捕获阶段调用事件处理程序，如果是false，表示在事件冒泡阶段调用事件处理程序。</p>
-<pre><code><span class="keyword">var</span> btn=document.getElementById(<span class="string">"myBtn"</span>);    
-btn.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+<pre><code><span class="keyword">var</span> btn=<span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);    
+btn.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
     alert(<span class="keyword">this</span>.id);
 },<span class="literal">false</span>);
 </code></pre><p>DOM0级事件处理程序只能为一个元素添加唯一的某一个事件的处理程序。如果为一个元素添加了两个click的处理程序，后定义的程序会覆盖掉之前定义的程序，其实也就是给变量a多次赋值一样。使用DOM2级事件处理程序的好处之一就是：可以添加多个添加多个事件处理程序。</p>
-<pre><code><span class="keyword">var</span> btn=document.getElementById(<span class="string">"myBtn"</span>);
-btn.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+<pre><code><span class="keyword">var</span> btn=<span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);
+btn.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
     alert(<span class="keyword">this</span>.id);
 },<span class="literal">false</span>);
-btn.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+btn.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
     alert(<span class="string">"hello,world"</span>);
 },<span class="literal">false</span>);
 </code></pre><p>这两个事件处理程序会按照添加的顺序触发。</p>
@@ -154,13 +155,13 @@ btn.addEventListener(<span class="string">"click"</span>,<span class="function">
 <p>为了最大限度地兼容浏览器，建议在大多数情况下豆浆事件处理程序添加到事件流的冒泡阶段。</p>
 <h3 id="IE中的事件处理程序">IE中的事件处理程序</h3>
 <p>IE中有类似于DOM的两个方法：attachEvent()和detachEvent()。这两个方法接受两个参数：事件处理程序名称和事件处理程序函数。attachEvent()添加的事件处理程序都会添加到冒泡阶段</p>
-<pre><code><span class="keyword">var</span> btn=document.getElementById(<span class="string">"myBtn"</span>);
-btn.attachEvent(<span class="string">"onclick"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+<pre><code><span class="keyword">var</span> btn=<span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);
+btn.attachEvent(<span class="string">"onclick"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
     alert(<span class="string">"alert"</span>);
 });
 </code></pre><p>要注意哟，第一个参数是“onclick”而不是“click”。前面说到，在DOM0级事件中，事件处理程序的作用域是元素的作用域，而在使用attachEvent()时，作用域变成了全局作用域，此时this等于window </p>
-<pre><code><span class="keyword">var</span> btn=document.getElementById(<span class="string">"myBtn"</span>);
-btn.attachEvent(<span class="string">"onclick"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+<pre><code><span class="keyword">var</span> btn=<span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);
+btn.attachEvent(<span class="string">"onclick"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
     alert(<span class="keyword">this</span>==widnow);<span class="comment">//"true"</span>
 });
 </code></pre><p>与addEventListener()一样，attachEvent()也可以用来为一个元素天剑多个事件处理程序，不过与DOM方法不同的是，事件处理程序不是按照添加的顺序执行，而是以相反的顺序执行。<br>可以使用detachEvent()移除使用attachEvent()添加的事件处理程序。与DOM方法一样必须提供相同的参数，添加的匿名函数不能被移除。</p>
@@ -172,7 +173,7 @@ btn.attachEvent(<span class="string">"onclick"</span>,<span class="function"><sp
         } <span class="keyword">else</span> <span class="keyword">if</span> (element.attachEvent) {
             element.attachEvent(<span class="string">"on"</span> + <span class="class"><span class="keyword">type</span>, <span class="title">handler</span>);</span>
         } <span class="keyword">else</span> {
-            element[<span class="string">"on"</span> + <span class="class"><span class="keyword">type</span>] =</span> handler;
+            element[<span class="string">"on"</span> + <span class="class"><span class="keyword">type</span>] </span>= handler;
         }
     },
     removeHandler: <span class="keyword">function</span> (element, <span class="class"><span class="keyword">type</span>, <span class="title">handler</span>) {</span>
@@ -181,7 +182,7 @@ btn.attachEvent(<span class="string">"onclick"</span>,<span class="function"><sp
         } <span class="keyword">else</span> <span class="keyword">if</span> (element.detachEvent) {
             element.detachEvent(<span class="string">"on"</span> + <span class="class"><span class="keyword">type</span>, <span class="title">handler</span>);</span>
         } <span class="keyword">else</span> {
-            element[<span class="string">"on"</span> + <span class="class"><span class="keyword">type</span>] =</span> <span class="keyword">null</span>;
+            element[<span class="string">"on"</span> + <span class="class"><span class="keyword">type</span>] </span>= <span class="keyword">null</span>;
         }
     }
 };
@@ -247,7 +248,7 @@ EventUtil.removeHandler(btn, <span class="string">"click"</span>, handler);
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流"><span class="toc-number">1.</span> <span class="toc-text">事件流</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件冒泡"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件捕获"><span class="toc-number">1.2.</span> <span class="toc-text">事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM事件流"><span class="toc-number">1.3.</span> <span class="toc-text">DOM事件流</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#事件处理程序"><span class="toc-number">2.</span> <span class="toc-text">事件处理程序</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML事件处理程序"><span class="toc-number">2.1.</span> <span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM0级事件处理程序"><span class="toc-number">2.2.</span> <span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2级事件处理程序"><span class="toc-number">2.3.</span> <span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE中的事件处理程序"><span class="toc-number">2.4.</span> <span class="toc-text">IE中的事件处理程序</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流"><span class="toc-number">1.</span> <span class="toc-text">事件流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件冒泡"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件捕获"><span class="toc-number">1.2.</span> <span class="toc-text">事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM事件流"><span class="toc-number">1.3.</span> <span class="toc-text">DOM事件流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件处理程序"><span class="toc-number">2.</span> <span class="toc-text">事件处理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML事件处理程序"><span class="toc-number">2.1.</span> <span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM0级事件处理程序"><span class="toc-number">2.2.</span> <span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2级事件处理程序"><span class="toc-number">2.3.</span> <span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE中的事件处理程序"><span class="toc-number">2.4.</span> <span class="toc-text">IE中的事件处理程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
   </div>
 
 <div id="asidepart">
@@ -295,7 +296,7 @@ EventUtil.removeHandler(btn, <span class="string">"click"</span>, handler);
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -304,7 +305,7 @@ EventUtil.removeHandler(btn, <span class="string">"click"</span>, handler);
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>6</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>7</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -312,7 +313,7 @@ EventUtil.removeHandler(btn, <span class="string">"click"</span>, handler);
 		
 			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
 		
 			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
 		

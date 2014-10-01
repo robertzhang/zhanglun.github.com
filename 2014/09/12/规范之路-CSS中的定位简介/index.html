@@ -24,6 +24,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -70,7 +71,7 @@
   </h1>
   <p class="article-author">By
     
-      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
     <time datetime="2014-09-12T12:30:00.000Z" itemprop="datePublished">9月 12 2014</time>
@@ -107,7 +108,7 @@
 <span class="at_rule">@<span class="keyword">media</span> print </span>{ 
     <span class="tag">h1</span><span class="id">#first</span> <span class="rules">{ <span class="rule"><span class="attribute">position</span>:<span class="value"> static </span></span></span>}
 }
-</code></pre><p>用户代理不能对固定的盒子中的内容做翻页处理，因为用户代理有可能以某种方式将不可见的内容输出（我没有实践过，see <a href="http://www.w3.org/TR/CSS21/page.html#outside-page-box" target="_blank">“Content outside the page box”</a>）。暂时先搁着，先看完 chapter 9 (￣◇￣;)</p>
+</code></pre><p>用户代理不能对固定的盒子中的内容做翻页处理，因为用户代理有可能以某种方式将不可见的内容输出（我没有实践过，see <a href="http://www.w3.org/TR/CSS21/page.html#outside-page-box" target="_blank" rel="external">“Content outside the page box”</a>）。暂时先搁着，先看完 chapter 9 (￣◇￣;)</p>
 <h3 id="盒子的偏移量（Box_offsets）">盒子的偏移量（Box offsets）</h3>
 <p>一个元素的 position 属性的值不是 “static“ 的时候，我们可以说这个元素使用了定位（is positioned）。使用了定位后的元素形成一个 “定位盒子“（positioned boxes），这个定位盒子的位置根据’top’, ‘right’, ‘bottom’, 和 ‘left’四个属性来计算，这四个属性决定了盒子的offset。</p>
 <table>
@@ -120,8 +121,8 @@
 <tbody>
 <tr>
 <td>Value</td>
-<td>\<length></td>
-<td>\<percentage></td>
+<td>\<length></length></td>
+<td>\<percentage></percentage></td>
 <td>auto</td>
 <td>inherit</td>
 </tr>
@@ -153,7 +154,7 @@
 </table>
 <p>‘top’/‘right’/‘bottom’/‘left’四个属性的作用也很好理解，分别定义绝对定位的盒子的上/右/下/左部的margin边缘到这个盒子的包含块的上/右/下/左部边缘的距离。对于相对定位的盒子，偏移量参照的是盒子自身的上/右/下/左部边缘（包含marign），即相对于盒子处于标准流中的位置。</p>
 <p>当它们的值定义为百分比时，偏离量的计算方法是：包含块的宽度的百分比（定义 left 或者 right）或者高度的百分比（定义 top 或者 bottom）。</p>
-<p>先记录到这里，回头在看一下 标准中的 <a href="http://www.w3.org/TR/CSS21/visuren.html#normal-flow" target="_blank">Normal flow</a> 和 <a href="http://www.w3.org/TR/CSS21/visuren.html#floats" target="_blank">Floats</a> 以及 <a href="http://www.w3.org/TR/CSS21/visuren.html#absolute-positioning" target="_blank">absolute-positioning</a></p>
+<p>先记录到这里，回头在看一下 标准中的 <a href="http://www.w3.org/TR/CSS21/visuren.html#normal-flow" target="_blank" rel="external">Normal flow</a> 和 <a href="http://www.w3.org/TR/CSS21/visuren.html#floats" target="_blank" rel="external">Floats</a> 以及 <a href="http://www.w3.org/TR/CSS21/visuren.html#absolute-positioning" target="_blank" rel="external">absolute-positioning</a></p>
 <p>(￣◇￣;)</p>
   
 	</div>
@@ -178,6 +179,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2014/09/26/CSS 中的权重问题 /" title="CSS 中的权重问题">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  CSS 中的权重问题</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2014/08/25/将footer始终保持在页面底部的方法一/"  title="如何将页面的footer保持在页面的底部一">
@@ -242,7 +251,7 @@
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -251,7 +260,7 @@
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>6</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>7</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -259,7 +268,7 @@
 		
 			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
 		
 			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
 		

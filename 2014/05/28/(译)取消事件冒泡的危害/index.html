@@ -24,6 +24,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -70,7 +71,7 @@
   </h1>
   <p class="article-author">By
     
-      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
     <time datetime="2014-05-28T13:23:00.000Z" itemprop="datePublished">5月 28 2014</time>
@@ -83,27 +84,27 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#取消冒泡会导致什么问题（What_Can_Go_Wrong?）？"><span class="toc-number">1.</span> <span class="toc-text">取消冒泡会导致什么问题（What Can Go Wrong?）？</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Events_带来的问题（The_Problem_with_Events）"><span class="toc-number">1.1.</span> <span class="toc-text">Events 带来的问题（The Problem with Events）</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要阻止事件的传播（Why_Do_People_Stop_Event_Propagation?）？"><span class="toc-number">2.</span> <span class="toc-text">为什么要阻止事件的传播（Why Do People Stop Event Propagation?）？</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Return_false"><span class="toc-number">2.1.</span> <span class="toc-text">Return false</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性能(Performance)"><span class="toc-number">2.2.</span> <span class="toc-text">性能(Performance)</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#如何代替（What_to_Do_Instead）"><span class="toc-number">3.</span> <span class="toc-text">如何代替（What to Do Instead）</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#取消默认事件（Default_Prevented）？"><span class="toc-number">3.1.</span> <span class="toc-text">取消默认事件（Default Prevented）？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结论（Conclusion）"><span class="toc-number">3.2.</span> <span class="toc-text">结论（Conclusion）</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#取消冒泡会导致什么问题（What_Can_Go_Wrong?）？"><span class="toc-number">1.</span> <span class="toc-text">取消冒泡会导致什么问题（What Can Go Wrong?）？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Events_带来的问题（The_Problem_with_Events）"><span class="toc-number">1.1.</span> <span class="toc-text">Events 带来的问题（The Problem with Events）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要阻止事件的传播（Why_Do_People_Stop_Event_Propagation?）？"><span class="toc-number">2.</span> <span class="toc-text">为什么要阻止事件的传播（Why Do People Stop Event Propagation?）？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Return_false"><span class="toc-number">2.1.</span> <span class="toc-text">Return false</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性能(Performance)"><span class="toc-number">2.2.</span> <span class="toc-text">性能(Performance)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何代替（What_to_Do_Instead）"><span class="toc-number">3.</span> <span class="toc-text">如何代替（What to Do Instead）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#取消默认事件（Default_Prevented）？"><span class="toc-number">3.1.</span> <span class="toc-text">取消默认事件（Default Prevented）？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结论（Conclusion）"><span class="toc-number">3.2.</span> <span class="toc-text">结论（Conclusion）</span></a></li></ol></li></ol>
 		</div>
 		
 		<blockquote>
-<p>原文标题：The Dangers of Stopping Event Propagation<br> 原文链接：<a href="http://css-tricks.com/dangers-stopping-event-propagation/" target="_blank">http://css-tricks.com/dangers-stopping-event-propagation/</a></p>
+<p>原文标题：The Dangers of Stopping Event Propagation<br> 原文链接：<a href="http://css-tricks.com/dangers-stopping-event-propagation/" target="_blank" rel="external">http://css-tricks.com/dangers-stopping-event-propagation/</a></p>
 </blockquote>
-<p> 这是  <a href="http://philipwalton.com/" target="_blank">Philip Walton</a> 发布在 <a href="http://css-tricks.com/" target="_blank">css-trick</a> 上的一篇文章。他将会向我们解释为什么不能轻易地阻止事件的传播，而是尽可能的去避免。</p>
-<p> 如果你是一个前端开发人员，在你的工作中，应该有过这样的经历：编写一个自定义的弹出窗口或者对话框，当用户点击页面中弹窗的之外的其他地方，弹窗隐藏。如果你试着在网上搜索试图找到最好的解决方案，没准你会遇到这个 Stack Overflow 上的一个问题：<a href="http://stackoverflow.com/questions/152975/how-to-detect-a-click-outside-an-element" target="_blank">How to detect a click outside an element?</a>。</p>
+<p> 这是  <a href="http://philipwalton.com/" target="_blank" rel="external">Philip Walton</a> 发布在 <a href="http://css-tricks.com/" target="_blank" rel="external">css-trick</a> 上的一篇文章。他将会向我们解释为什么不能轻易地阻止事件的传播，而是尽可能的去避免。</p>
+<p> 如果你是一个前端开发人员，在你的工作中，应该有过这样的经历：编写一个自定义的弹出窗口或者对话框，当用户点击页面中弹窗的之外的其他地方，弹窗隐藏。如果你试着在网上搜索试图找到最好的解决方案，没准你会遇到这个 Stack Overflow 上的一个问题：<a href="http://stackoverflow.com/questions/152975/how-to-detect-a-click-outside-an-element" target="_blank" rel="external">How to detect a click outside an element?</a>。</p>
 <p> 下面的代码是投票最高的回答推荐的方案：</p>
-<pre><code>$(<span class="string">'html'</span>).click(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+<pre><code>$(<span class="string">'html'</span>).click(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
   <span class="comment">// Hide the menus if visible.</span>
 });
 
-$(<span class="string">'#menucontainer'</span>).click(<span class="function"><span class="keyword">function</span><span class="params">(event)</span>{</span>
+$(<span class="string">'#menucontainer'</span>).click(<span class="function"><span class="keyword">function</span><span class="params">(event)</span></span>{
   event.stopPropagation();
 });
 </code></pre><p> 这个例子可能说的不太明显。简单的解释一下：如果一个鼠标点击事件冒泡到 &lt;\html&gt; 元素上时，隐藏菜单。如果点击事件是在元素 #menucontainer 内部触发的，则阻止在这个事件使得事件永远不会到达 &lt;\html&gt;元素上。因此只有在元素 #menucontainer 外触发点击事件时菜单才会被隐藏。</p>
 <p> 上面的方案一直以来都是如此的简单优雅。然后，不幸的是，这绝对是一个很可怕的建议！<br> 这种办法就像是：通过关掉浴室的水来解决淋浴漏水问题。这有效果，但是却完完全全忽略了页面其他代码可能需要监听这个事件的可能性。好比你的蓬头漏水了但是你还得用洗手盆的水龙头。</p>
 <h2 id="取消冒泡会导致什么问题（What_Can_Go_Wrong?）？">取消冒泡会导致什么问题（What Can Go Wrong?）？</h2>
 <p> 你可能会说：谁还会自己去写这种代码？我使用经过良好测试的库，比如 Bootstrap，所以我不用担心这个问题，不是吗？</p>
-<p> 可是，真的是这样的吗？在现在流行的一些库中，也有一些库在处理事件中阻止了事件的传播。为了证明这一点，让我来为你演示一下在 Ruby on Rail 中使用 Bootstrap 搞出一个bug是多么的容易。Rails 使用了一个叫做 <a href="https://github.com/rails/jquery-ujs" target="_blank">jquery-ujs</a> 的JavaScript库，它可以让开发者通过 <code>data-remote</code> 以声明的方式为链接添加远程的 Ajax 调用。在下面的例子中，如果你点开了 <code>Dropdown</code> ，点击窗体的其他地方这个 dropdown 会自动隐藏。但是，如果点开 <code>Dropdown</code> 之后再点击 <code>Remote Link</code> ，dropdown将不会隐藏。</p>
+<p> 可是，真的是这样的吗？在现在流行的一些库中，也有一些库在处理事件中阻止了事件的传播。为了证明这一点，让我来为你演示一下在 Ruby on Rail 中使用 Bootstrap 搞出一个bug是多么的容易。Rails 使用了一个叫做 <a href="https://github.com/rails/jquery-ujs" target="_blank" rel="external">jquery-ujs</a> 的JavaScript库，它可以让开发者通过 <code>data-remote</code> 以声明的方式为链接添加远程的 Ajax 调用。在下面的例子中，如果你点开了 <code>Dropdown</code> ，点击窗体的其他地方这个 dropdown 会自动隐藏。但是，如果点开 <code>Dropdown</code> 之后再点击 <code>Remote Link</code> ，dropdown将不会隐藏。</p>
  <iframe id="cp_embed_KzHjc" src="http://codepen.io/anon/embed/KzHjc?height=268&amp;theme-id=1&amp;slug-hash=KzHjc&amp;default-tab=result" scrolling="no" frameborder="0" height="268" allowtransparency="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
 
 <p>之所以会产生这个bug，是因为在 Bootstrap 框架中，负责监听关闭 下拉菜单的事件绑定在 document 上。但是由于 jquery-ujs 中，它的属性 <code>data-remote</code> 绑定了阻止事件传播的处理程序，这些鼠标点击事件永远都不会到达 document，因此在 Bootstrap 中的代码永远都不会实现。</p>
@@ -120,13 +121,13 @@ $(<span class="string">'#menucontainer'</span>).click(<span class="function"><sp
 <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://google.com"</span> <span class="attribute">onclick</span>=<span class="value">"return false"</span>&gt;</span>Google<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
 </code></pre><p><strong>Jquery</strong> :</p>
 <pre><code><span class="comment">// 一个 jQuery 事件处理程序.</span>
-$(<span class="string">'a'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+$(<span class="string">'a'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
   <span class="keyword">return</span> <span class="literal">false</span>;
 });
 </code></pre><p><strong>JavaScript</strong> :</p>
 <pre><code><span class="comment">//一个原生的事件处理程序</span>
-<span class="keyword">var</span> link = document.querySelector(<span class="string">'a'</span>);
-link.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+<span class="keyword">var</span> link = <span class="built_in">document</span>.querySelector(<span class="string">'a'</span>);
+link.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
   <span class="keyword">return</span> <span class="literal">false</span>;
 });
 </code></pre><p>这三个例子都只做一件相同的事情：返回 false，但是实际上返回的结果却是大相径庭，来看看上述的每个例子到底发生了什么。</p>
@@ -142,7 +143,7 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
 </code></pre><p>由于 <code>return false</code> 的混乱，同时 jQuery 中的处理程序阻止了事件的传播，我建议不要使用。更好的做法是明确你的目的，然后直接调用这些事件的方法。</p>
 <h3 id="性能(Performance)">性能(Performance)</h3>
 <p>在老式的浏览器中，一个复杂的 DOM 结构真的会减慢你的站点加载速度。同时由于事件的传播需要经过整个 DOM ，所以文档中的节点越多，事件到达目标元素的速度就越慢。</p>
-<p>Peter Paul Koch 中的<a href="http://www.quirksmode.org/js/events_order.html" target="_blank">一篇文章</a>中提到了一个具体的例子：</p>
+<p>Peter Paul Koch 中的<a href="http://www.quirksmode.org/js/events_order.html" target="_blank" rel="external">一篇文章</a>中提到了一个具体的例子：</p>
 <blockquote>
 <p>If your document structure is very complex (lots of nested tables and such) you may save system resources by turning off bubbling. The browser has to go through every single ancestor element of the event target to see if it has an event handler. Even if none are found, the search still takes time.</p>
 <p>如果你的文档结构十分复杂（有很多嵌套的表格或者其他类似的结构），你可以通过取消事件冒泡来节约系统的资源。浏览器不得不检查事件的对象元素的每一个祖先元素是否绑定了事件处理程序。即使没有绑定，这个搜索也依旧会花费时间。</p>
@@ -155,7 +156,7 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
 <p>在之前提到的 Stack Overflow 上的那个问题中，总而言之，其调用 <code>stopPropagation</code> 的目的不是为了摆脱点击事件，而是避免在页面上运行其他代码。</p>
 <p>之所以说它是个不好的方案，除了是因为它改变了全局对象的行为，还有它将菜单的隐藏逻辑代码放在了两个不同的而且没有联系的地方，这使得代码变得脆弱。</p>
 <p>有一个更好的解决办法就是创建单一的事件处理程序，它的逻辑完全的封闭，这个处理程序唯一的作用就是通过给定的事件决定这个菜单是否隐藏。事实证明这个更好的方案也减少了代码量：</p>
-<pre><code>$(document).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> {</span>
+<pre><code>$(<span class="built_in">document</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>{
   <span class="keyword">if</span> (!$(event.target).closest(<span class="string">'#menucontainer'</span>).length) {
     <span class="comment">// Hide the menus.</span>
   }
@@ -167,15 +168,15 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
 <p>As it turned out, I never ended up needing this library. In 100% of the cases where I found myself wanting to check if an event hand been “handled”, I noticed that a previous listener had called preventDefault. And the DOM API already provides a way to inspect this: the defaultPrevented property.</p>
 <p>忽略了原文中的这些，直接跳到重点</p>
 </blockquote>
-<p>DOM API 已经提供了一个属性 <code><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/event.defaultPrevented" target="_blank">defaultPrevented</a></code>，用以检查当前事件的默认动作是否被取消,也就是是否执行了 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/event.defaultPrevented" target="_blank">event.preventDefault()</a> 方法。为了证明这个。让我举一个例子，想象一下你在文档上添加了一个事件监听器，当用户点击链接到外域的链接是使用谷歌分析跟踪用户。就想这样：</p>
-<pre><code>$(document).on(<span class="string">'click'</span>, <span class="string">'a'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> {</span>
+<p>DOM API 已经提供了一个属性 <code><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/event.defaultPrevented" target="_blank" rel="external">defaultPrevented</a></code>，用以检查当前事件的默认动作是否被取消,也就是是否执行了 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/event.defaultPrevented" target="_blank" rel="external">event.preventDefault()</a> 方法。为了证明这个。让我举一个例子，想象一下你在文档上添加了一个事件监听器，当用户点击链接到外域的链接是使用谷歌分析跟踪用户。就想这样：</p>
+<pre><code>$(<span class="built_in">document</span>).on(<span class="string">'click'</span>, <span class="string">'a'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>{
   <span class="keyword">if</span> (<span class="keyword">this</span>.hostname != <span class="string">'css-tricks.com'</span>) {
     ga(<span class="string">'send'</span>, <span class="string">'event'</span>, <span class="string">'Outbound Link'</span>, <span class="keyword">this</span>.href);
   }
 });
 </code></pre><p>这段代码的问题是：不是所有的链接都是将用户引向其他页面的，有时候 JavaScript 会调用 preventDefault 拦截事件，然后去做其他的事情。另一个例子是，Twitter 的分享按钮打开的是一个窗口而不是跳转到 twitter.com。</p>
 <p>为了避免跟踪到这些不一样的链接，阻止事件的传播变得很有诱惑力，但是使用 <code>defaultPrevented</code> 来检查事件是一个更好的方法。</p>
-<pre><code>$(document).on(<span class="string">'click'</span>, <span class="string">'a'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> {</span>
+<pre><code>$(<span class="built_in">document</span>).on(<span class="string">'click'</span>, <span class="string">'a'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>{
   <span class="comment">// 如果事件的 preventDefault() 已经被调用，则忽略该事件.</span>
   <span class="keyword">if</span> (event.defaultPrevented) <span class="keyword">return</span>;
   <span class="keyword">if</span> (<span class="keyword">this</span>.hostname != <span class="string">'css-tricks.com'</span>) {
@@ -234,7 +235,7 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#取消冒泡会导致什么问题（What_Can_Go_Wrong?）？"><span class="toc-number">1.</span> <span class="toc-text">取消冒泡会导致什么问题（What Can Go Wrong?）？</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Events_带来的问题（The_Problem_with_Events）"><span class="toc-number">1.1.</span> <span class="toc-text">Events 带来的问题（The Problem with Events）</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要阻止事件的传播（Why_Do_People_Stop_Event_Propagation?）？"><span class="toc-number">2.</span> <span class="toc-text">为什么要阻止事件的传播（Why Do People Stop Event Propagation?）？</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Return_false"><span class="toc-number">2.1.</span> <span class="toc-text">Return false</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性能(Performance)"><span class="toc-number">2.2.</span> <span class="toc-text">性能(Performance)</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#如何代替（What_to_Do_Instead）"><span class="toc-number">3.</span> <span class="toc-text">如何代替（What to Do Instead）</span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#取消默认事件（Default_Prevented）？"><span class="toc-number">3.1.</span> <span class="toc-text">取消默认事件（Default Prevented）？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结论（Conclusion）"><span class="toc-number">3.2.</span> <span class="toc-text">结论（Conclusion）</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#取消冒泡会导致什么问题（What_Can_Go_Wrong?）？"><span class="toc-number">1.</span> <span class="toc-text">取消冒泡会导致什么问题（What Can Go Wrong?）？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Events_带来的问题（The_Problem_with_Events）"><span class="toc-number">1.1.</span> <span class="toc-text">Events 带来的问题（The Problem with Events）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要阻止事件的传播（Why_Do_People_Stop_Event_Propagation?）？"><span class="toc-number">2.</span> <span class="toc-text">为什么要阻止事件的传播（Why Do People Stop Event Propagation?）？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Return_false"><span class="toc-number">2.1.</span> <span class="toc-text">Return false</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性能(Performance)"><span class="toc-number">2.2.</span> <span class="toc-text">性能(Performance)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何代替（What_to_Do_Instead）"><span class="toc-number">3.</span> <span class="toc-text">如何代替（What to Do Instead）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#取消默认事件（Default_Prevented）？"><span class="toc-number">3.1.</span> <span class="toc-text">取消默认事件（Default Prevented）？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结论（Conclusion）"><span class="toc-number">3.2.</span> <span class="toc-text">结论（Conclusion）</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
@@ -282,7 +283,7 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -291,7 +292,7 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>6</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>7</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -299,7 +300,7 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
 		
 			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
 		
 			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
 		

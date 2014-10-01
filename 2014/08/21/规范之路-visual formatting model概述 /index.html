@@ -23,6 +23,7 @@ CSS 视觉格式化模型（visual formatting model）是一种用来处理文�
     <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -69,7 +70,7 @@ CSS 视觉格式化模型（visual formatting model）是一种用来处理文�
   </h1>
   <p class="article-author">By
     
-      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
     <time datetime="2014-08-21T12:39:00.000Z" itemprop="datePublished">8月 21 2014</time>
@@ -82,10 +83,10 @@ CSS 视觉格式化模型（visual formatting model）是一种用来处理文�
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#视觉格式化模型"><span class="toc-number">1.</span> <span class="toc-text">视觉格式化模型</a></span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子的生成（Box_generation）"><span class="toc-number">1.1.</span> <span class="toc-text">盒子的生成（Box generation）</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#块级元素和块级盒子（block-level_element_and_block_boxes）"><span class="toc-number">1.1.1.</span> <span class="toc-text">块级元素和块级盒子（block-level element and block boxes）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#还有一个叫”匿名块盒“(Anonymous_block_boxes)的东西"><span class="toc-number">1.1.2.</span> <span class="toc-text">还有一个叫”匿名块盒“(Anonymous block boxes)的东西</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#视觉格式化模型"><span class="toc-number">1.</span> <span class="toc-text">视觉格式化模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">containing block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子的生成（Box_generation）"><span class="toc-number">1.2.</span> <span class="toc-text">盒子的生成（Box generation）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#块级元素和块级盒子（block-level_element_and_block_boxes）"><span class="toc-number">1.2.1.</span> <span class="toc-text">块级元素和块级盒子（block-level element and block boxes）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#还有一个叫”匿名块盒“(Anonymous_block_boxes)的东西"><span class="toc-number">1.2.2.</span> <span class="toc-text">还有一个叫”匿名块盒“(Anonymous block boxes)的东西</span></a></li></ol></li></ol></li></ol>
 		</div>
 		
-		<h2 id="视觉格式化模型"><a href="http://www.w3.org/TR/CSS21/visuren.html" target="_blank">视觉格式化模型</a></h2>
+		<h2 id="视觉格式化模型"><a href="http://www.w3.org/TR/CSS21/visuren.html" target="_blank" rel="external">视觉格式化模型</a></h2>
 <p>CSS 视觉格式化模型（visual formatting model）是一种用来处理文档，将其呈现在可视化媒体中的算法。这是 CSS 中的一个最基本的概念。可视化格式模型会转化文档中的每一个元素，并且形成零个，一个或者多个符合CSS盒模型规范的盒子（boxes）。每个盒子的布局由下面的内容来控制：</p>
 <ul>
 <li>盒子的尺寸：精确定义，或者被限制，或者都没有；</li>
@@ -101,11 +102,11 @@ CSS 视觉格式化模型（visual formatting model）是一种用来处理文�
 
 <p>在 CSS2.1 中定义了 “containing block”。一些盒子的大小和位置是相对于一个矩形盒子计算的，这个矩形的盒子，就是 <code>containing block</code> 。</p>
 <p>一个盒子相对于它的包含块(containing block) 的边界来渲染。一般来说，生成的盒子会表现得像一个 <code>containing block</code> （就像它爹一样），它内部的盒子相对于它的边界来渲染。这就是所谓的：盒子为它的后代元素建立包含块。而我们说的”一个盒子的包含块“指的是这个盒子赖以生存的包含块，而不是盒子生成的包含块。注意盒子并不受它的包含块的限制，当它的布局跑到包含块的外面时称为溢出(overflow)。</p>
-<p>关于 containing block 具体的细节 <a href="http://www.w3.org/TR/CSS21/visudet.html#containing-block-details" target="_blank">link</a>，暂时先放一边，稍后在整理。现在只是按照 W3C 的文档顺序集合其他资料做一个整理。</p>
+<p>关于 containing block 具体的细节 <a href="http://www.w3.org/TR/CSS21/visudet.html#containing-block-details" target="_blank" rel="external">link</a>，暂时先放一边，稍后在整理。现在只是按照 W3C 的文档顺序集合其他资料做一个整理。</p>
 <h3 id="盒子的生成（Box_generation）">盒子的生成（Box generation）</h3>
 <p>CSS 视觉格式化模型的一部分工作就是从文档（document）生成盒子。一个盒子的类型在一定程度上会影响它在 VFM 中的表现。一般元素都有一个默认的盒子类型，可以通过 CSS 的 display 属性修改。</p>
 <h4 id="块级元素和块级盒子（block-level_element_and_block_boxes）">块级元素和块级盒子（block-level element and block boxes）</h4>
-<p>块级元素（block-level element）就是那些在 document 中在视觉上被渲染成块的元素，比如 \<p>。当元素的 CSS 属性  display 为 block, list-item 或 table 时，它是块级元素(block-level)，被块级化。</p>
+<p>块级元素（block-level element）就是那些在 document 中在视觉上被渲染成块的元素，比如 \</p><p>。当元素的 CSS 属性  display 为 block, list-item 或 table 时，它是块级元素(block-level)，被块级化。</p>
 <p>每一个块级元素（block-level element）生成一个主块级盒子（principal block-level box）。主块级盒子包含后代元素生成的盒子以及生成的内容，它可以采用任意一种<a href="#positioning-schemes">定位方案（positioning schemes）</a>。有的块级元素会生成除了主块级盒子之外额外的盒子：比如 “list-item” 元素，会生成额外的盒子来放置项目符号</p>
 <p><img src="http://ncuey-crispelite.stor.sinaapp.com/QQ20140816_1\(1\" alt="li">.png)</p>
 <p>不过多数元素只生成一个主要块级盒。<br>每个块级盒子都会涉及到一个 <a href="#block-formatting-context">块级格式化上下文（block formatting context）</a>。</p>
@@ -120,31 +121,31 @@ CSS 视觉格式化模型（visual formatting model）是一种用来处理文�
     <span class="tag">&lt;<span class="title">p</span>&gt;</span>world!<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </code></pre><p><img src="http://ncuey.sinaapp.com/blog_files/images/2014-08-21_224544.png" alt="image"></p>
-<p>div 中同时出现了行内内容和块级内容，为了更加方便的定义格式，我们假定在文本 “hello,”外部包裹着一个匿名的块级盒子（anonymous block）。 换句话说，如果一个块级容器盒子（就是一个用来装会块级盒子的大盒子）中只要包含任何一个块级盒子，我们就认为它只包含块级盒子。<br>对于匿名盒子还要注意的是，和 \<p> 元素不同, 开发者不能控制这个匿名盒子。对于可继承属性， 它们将取 \<div> 的属性值, 比如 color。对于非继承属性，值为初始值 ，比如没有指定 background-color, 值为初始值即 transparent，于是 \<div> 背景可见。而 \<p> 可以指定 background-color 。类似的，这个匿名盒文本是一样的颜色。</p>
+<p>div 中同时出现了行内内容和块级内容，为了更加方便的定义格式，我们假定在文本 “hello,”外部包裹着一个匿名的块级盒子（anonymous block）。 换句话说，如果一个块级容器盒子（就是一个用来装会块级盒子的大盒子）中只要包含任何一个块级盒子，我们就认为它只包含块级盒子。<br>对于匿名盒子还要注意的是，和 \</p><p> 元素不同, 开发者不能控制这个匿名盒子。对于可继承属性， 它们将取 \<div> 的属性值, 比如 color。对于非继承属性，值为初始值 ，比如没有指定 background-color, 值为初始值即 transparent，于是 \<div> 背景可见。而 \<p> 可以指定 background-color 。类似的，这个匿名盒文本是一样的颜色。</p>
 <p>另外一种创建匿名块盒子的情况是：当一个行内盒包含了一个或几个块盒时，包含块盒的盒将拆分为两个行内盒放置于块盒前后，然后分别由两个匿名块盒包含。这样块盒就与两个包含行内元素的匿名块盒形成了兄弟关系。如果行内盒包含多个块盒，并且这些块盒之间没有夹杂内容，将在这些块盒前后创建匿名块盒。</p>
 <pre><code>CSS：
-.two p    { display: inline }
-.two span { display: block }
+.<span class="constant">two</span> p    { display: inline }
+.<span class="constant">two</span> span { display: block }
 
 
 HTML：
 &lt;h2&gt;块盒包含行内盒子&lt;/h2&gt;
-    &lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"one"</span>&gt;
-        &lt;P&gt;This <span class="keyword">is</span> anonymous <span class="type">text</span> <span class="keyword">before</span> <span class="keyword">the</span> SPAN.
-        &lt;span&gt;This <span class="keyword">is</span> <span class="keyword">the</span> content <span class="keyword">of</span> SPAN.&lt;/span&gt;This <span class="keyword">is</span> anonymous <span class="type">text</span> <span class="keyword">after</span> <span class="keyword">the</span> SPAN.
+    &lt;<span class="operator">div</span> class=<span class="string">"one"</span>&gt;
+        &lt;P&gt;This is anonymous <span class="keyword">text</span> <span class="keyword">before</span> <span class="operator">the</span> SPAN.
+        &lt;span&gt;This is <span class="operator">the</span> content <span class="operator">of</span> SPAN.&lt;/span&gt;This is anonymous <span class="keyword">text</span> <span class="keyword">after</span> <span class="operator">the</span> SPAN.
         &lt;/P&gt;
-    &lt;/<span class="keyword">div</span>&gt;
+    &lt;/<span class="operator">div</span>&gt;
 &lt;h2&gt;一个行内盒包含了一个或几个块盒&lt;/h2&gt;
-    &lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"two"</span>&gt;
-        &lt;P&gt;This <span class="keyword">is</span> anonymous <span class="type">text</span> <span class="keyword">before</span> <span class="keyword">the</span> SPAN.
-        &lt;span&gt;This <span class="keyword">is</span> <span class="keyword">the</span> content <span class="keyword">of</span> SPAN.&lt;/span&gt;This <span class="keyword">is</span> anonymous <span class="type">text</span> <span class="keyword">after</span> <span class="keyword">the</span> SPAN.
+    &lt;<span class="operator">div</span> class=<span class="string">"two"</span>&gt;
+        &lt;P&gt;This is anonymous <span class="keyword">text</span> <span class="keyword">before</span> <span class="operator">the</span> SPAN.
+        &lt;span&gt;This is <span class="operator">the</span> content <span class="operator">of</span> SPAN.&lt;/span&gt;This is anonymous <span class="keyword">text</span> <span class="keyword">after</span> <span class="operator">the</span> SPAN.
         &lt;/P&gt;
-    &lt;/<span class="keyword">div</span>&gt;
+    &lt;/<span class="operator">div</span>&gt;
 </code></pre><p><img src="http://ncuey.sinaapp.com/blog_files/images/2014-08-21_230945.png" alt="image"></p>
 <p>前面说到的，匿名盒子无法被选中，但是会继承离他最近的非匿名盒子的样式。在触发匿名盒子形成的元素上添加的属性也会应用在元素的盒子和内容中，比如上面的例子，p元素师导致匿名盒子形成的元素，如果给它加上border，border也会应用的它形成的匿名盒子上</p>
 <p><img src="http://ncuey.sinaapp.com/blog_files/images/2014-08-21_232806.png" alt="image"></p>
 <p>撸的好累，这一篇小小文章都搞了几天，现在已经快十二点了，要睡觉了。之后还需要把定位和浮动好好复习一下。</p>
-  
+</div></div></p>  
 	</div>
 		<footer class="article-footer clearfix">
 
@@ -191,7 +192,7 @@ HTML：
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#视觉格式化模型"><span class="toc-number">1.</span> <span class="toc-text">视觉格式化模型</a></span></a></li><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子的生成（Box_generation）"><span class="toc-number">1.1.</span> <span class="toc-text">盒子的生成（Box generation）</span></a></li><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#块级元素和块级盒子（block-level_element_and_block_boxes）"><span class="toc-number">1.1.1.</span> <span class="toc-text">块级元素和块级盒子（block-level element and block boxes）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#还有一个叫”匿名块盒“(Anonymous_block_boxes)的东西"><span class="toc-number">1.1.2.</span> <span class="toc-text">还有一个叫”匿名块盒“(Anonymous block boxes)的东西</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#视觉格式化模型"><span class="toc-number">1.</span> <span class="toc-text">视觉格式化模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">containing block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子的生成（Box_generation）"><span class="toc-number">1.2.</span> <span class="toc-text">盒子的生成（Box generation）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#块级元素和块级盒子（block-level_element_and_block_boxes）"><span class="toc-number">1.2.1.</span> <span class="toc-text">块级元素和块级盒子（block-level element and block boxes）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#还有一个叫”匿名块盒“(Anonymous_block_boxes)的东西"><span class="toc-number">1.2.2.</span> <span class="toc-text">还有一个叫”匿名块盒“(Anonymous block boxes)的东西</span></a></li></ol></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
@@ -239,7 +240,7 @@ HTML：
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -248,7 +249,7 @@ HTML：
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>6</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>7</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -256,7 +257,7 @@ HTML：
 		
 			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
 		
 			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
 		

@@ -22,6 +22,7 @@
     <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -68,7 +69,7 @@
   </h1>
   <p class="article-author">By
     
-      <a href="http://zhanglun.github.io/" title="张小伦爱学习">张小伦爱学习</a>
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
     <time datetime="2014-04-25T11:40:00.000Z" itemprop="datePublished">4月 25 2014</time>
@@ -92,24 +93,24 @@
 <p>模块是 Node.js 应用程序的基本组成部分。Node 有一套简单的模块加载机制。在 Node.js 中，文件和模块是一一对应的。也就是说，一个 Node.js 文件就可以看成是一个模块，所以在 Node 中创建一个模块非常简单。Node 提供了 exports 和 require 两个对象。exports 是模块公开的接口，意思就是创建模块得靠 exports；require 用于从外部获取一个模块的接口，也就是说使用模块要用 require 。</p>
 <p>举个例子方便了解模块： <em>foo.js</em> 加载同目录中的模块 <em>circle.js</em> 。</p>
 <p><em>foo.js</em> 中的内容：</p>
-<pre><code><span class="reserved">var</span> circle = <span class="built_in">require</span>(<span class="string">'./circle.js'</span>);
+<pre><code><span class="keyword">var</span> circle = <span class="built_in">require</span>(<span class="string">'./circle.js'</span>);
 <span class="built_in">console</span>.log( <span class="string">'The area of a circle of radius 4 is '</span> + circle.area(<span class="number">4</span>));
 </code></pre><p><em>circle.js</em> 中的内容：</p>
 <pre><code><span class="keyword">var</span> PI = <span class="built_in">Math</span>.PI;
 
-exports.area = <span class="function"><span class="keyword">function</span> <span class="params">(r)</span> {</span>
+exports.area = <span class="function"><span class="keyword">function</span> <span class="params">(r)</span> </span>{
   <span class="keyword">return</span> PI * r * r;
 };
 
-exports.circumference = <span class="function"><span class="keyword">function</span> <span class="params">(r)</span> {</span>
+exports.circumference = <span class="function"><span class="keyword">function</span> <span class="params">(r)</span> </span>{
   <span class="keyword">return</span> <span class="number">2</span> * PI * r;
 };
 </code></pre><p><em>circle.js</em> 模块通过 exports 对象输出了两个方法：area() 和 circumference()，在 <em>foo.js</em> 中使用 require() 加载这个模块，然后便可以直接访问 exports 对象的成员函数了。反言之，如果想为自定义的模块添加属性或者方法，将它们添加到 exports 这个特殊的对象上就可以达到目的。</p>
 <p>如果希望模块提供的接口是一个构造函数，或者输出的是一个完整的对象而不是一个属性，那么可以使用 <strong>module.exports</strong> 代替 exports。<br>但是注意，exports 是 module.exports 的一个引用，只是为了用起来方便。</p>
 <p>下面的 <em>bar.js</em> 使用了 square 模块，而 square 模块提供了一个构造函数的接口：</p>
 <p><em>bar.js</em> 中的内容：</p>
-<pre><code><span class="reserved">var</span> square = <span class="built_in">require</span>(<span class="string">'./square.js'</span>);
-<span class="reserved">var</span> mySquare = square(<span class="number">2</span>);
+<pre><code><span class="keyword">var</span> square = <span class="built_in">require</span>(<span class="string">'./square.js'</span>);
+<span class="keyword">var</span> mySquare = square(<span class="number">2</span>);
 <span class="built_in">console</span>.log(<span class="string">'The area of my square is '</span> + mySquare.area());
 </code></pre><p><em>square.js</em> 中的内容：</p>
 <pre><code>// 使用 exports 将无法创建 <span class="built_in">module</span>,必须使用 <span class="built_in">module</span>.exports
@@ -130,22 +131,22 @@ exports.circumference = <span class="function"><span class="keyword">function</s
 <p>当存在循环的模块引用时，有的模块可能在返回时不会执行。看看这个例子：</p>
 <p><em>a.js</em> 中的内容：</p>
 <pre><code><span class="built_in">console</span>.log(<span class="string">'模块 a 开始了！'</span>);
-<span class="built_in">exports</span>.done = <span class="literal">false</span>;
-<span class="reserved">var</span> b = <span class="built_in">require</span>(<span class="string">'./b.js'</span>);
+exports.done = <span class="literal">false</span>;
+<span class="keyword">var</span> b = <span class="built_in">require</span>(<span class="string">'./b.js'</span>);
 <span class="built_in">console</span>.log(<span class="string">'在 a 中, b.done = %j'</span>, b.done);
-<span class="built_in">exports</span>.done = <span class="literal">true</span>;
+exports.done = <span class="literal">true</span>;
 <span class="built_in">console</span>.log(<span class="string">'模块 a 结束了！'</span>);
 </code></pre><p><em>b.js</em> 中的内容：</p>
 <pre><code><span class="built_in">console</span>.log(<span class="string">'模块 b 开始了！'</span>);
-<span class="built_in">exports</span>.done = <span class="literal">false</span>;
-<span class="reserved">var</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);
+exports.done = <span class="literal">false</span>;
+<span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);
 <span class="built_in">console</span>.log(<span class="string">'在 b 中, a.done = %j'</span>, a.done);
-<span class="built_in">exports</span>.done = <span class="literal">true</span>;
+exports.done = <span class="literal">true</span>;
 <span class="built_in">console</span>.log(<span class="string">'模块 b 结束了！'</span>);
 </code></pre><p><em>main.js</em> 中的内容：</p>
 <pre><code><span class="built_in">console</span>.log(<span class="string">'main 开始了！'</span>);
-<span class="reserved">var</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);
-<span class="reserved">var</span> b = <span class="built_in">require</span>(<span class="string">'./b.js'</span>);
+<span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);
+<span class="keyword">var</span> b = <span class="built_in">require</span>(<span class="string">'./b.js'</span>);
 <span class="built_in">console</span>.log(<span class="string">'在 main 中, a.done=%j, b.done=%j'</span>, a.done, b.done);
 </code></pre><p>当 main.js 加载 a.js 时，a.js 又加载 b.js。这个时候，b.js 又会尝试去加载 a.js 。为了防止出现无限循环的加载，a.js 中的 exports 对象会返回一个 <strong>unfinished copy</strong> 给 b.js 模块。然后模块b完成加载，同时将提供模块a的接口。当 main.js 加载完a，b两个模块之后，输出如下：</p>
 <p><img src="http://cl.ly/image/263z0W3W0m0G/download/2014-04-25_212142.png" alt="cycles">  </p>
@@ -166,9 +167,9 @@ exports.circumference = <span class="function"><span class="keyword">function</s
 <blockquote>
 <p>参考:  </p>
 <ul>
-<li><a href="http://book.douban.com/subject/10789820/" target="_blank">《Node.js 开发指南》</a>  </li>
-<li><a href="http://nodejs.org/docs/latest/api/modules.html#modules_core_modules" target="_blank">Node.js API</a>  </li>
-<li><a href="http://www.infoq.com/cn/articles/nodejs-module-mechanism" target="_blank">深入浅出 Node.js 三</a></li>
+<li><a href="http://book.douban.com/subject/10789820/" target="_blank" rel="external">《Node.js 开发指南》</a>  </li>
+<li><a href="http://nodejs.org/docs/latest/api/modules.html#modules_core_modules" target="_blank" rel="external">Node.js API</a>  </li>
+<li><a href="http://www.infoq.com/cn/articles/nodejs-module-mechanism" target="_blank" rel="external">深入浅出 Node.js 三</a></li>
 </ul>
 </blockquote>
   
@@ -177,7 +178,7 @@ exports.circumference = <span class="function"><span class="keyword">function</s
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Node.js/">Node.js</a>
+  <span></span> <a href="/tags/Node-js/">Node.js</a>
   </div>
 
 
@@ -271,7 +272,7 @@ exports.circumference = <span class="function"><span class="keyword">function</s
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">八月 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">七月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">五月 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04">四月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">三月 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -280,7 +281,7 @@ exports.circumference = <span class="function"><span class="keyword">function</s
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>6</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>7</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -288,7 +289,7 @@ exports.circumference = <span class="function"><span class="keyword">function</s
 		
 			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Node.js/" title="Node.js">Node.js<sup>8</sup></a></li>
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
 		
 			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
 		
