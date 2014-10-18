@@ -26,6 +26,9 @@
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
 </head>
 
   <body>
@@ -76,7 +79,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-10-10T04:30:00.000Z" itemprop="datePublished">10月 10 2014</time>
-    更新日期:<time datetime="2014-10-18T09:03:33.000Z" itemprop="dateModified">10月 18 2014</time>
+    更新日期:<time datetime="2014-10-18T10:25:10.000Z" itemprop="dateModified">10月 18 2014</time>
     
   </p>
 </header>
@@ -94,33 +97,37 @@
 <p>响应式web设计并非新的技术，只不过将已有的开发技巧（弹性布局、弹性图片和媒体查询等）整合在了一起，</p>
 <h3 id="先来说说媒体查询（Media_Queries）">先来说说媒体查询（Media Queries）</h3>
 <p>早在 HTML4 和 CSS2 的时代，就已经支持采用不同的样式表来适配不同的媒体设备类型。比如，一个文档在屏幕上和打印时可能使用不同的样式表。在 HTML4中，可以这么写：</p>
-<figure class="highlight CSS"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;link rel="stylesheet" type="text/css" media="screen" href="sans-serif.css"&gt;</div><div class="line">&lt;link rel="stylesheet" type="text/css" media="print" href="serif.css"&gt;</div></pre></td></tr></table></figure>
-
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen&quot; href=&quot;sans-serif.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;print&quot; href=&quot;serif.css&quot;&gt;
+</code></pre>
 <p>在内联的 CSS 样式中，可以像这样指定一部分CSS样式块应用在指定的媒体设备上：</p>
-<pre><code><span class="at_rule">@<span class="keyword">media</span> screen </span>{
-    * <span class="rules">{ <span class="rule"><span class="attribute">font-family</span>:<span class="value"> sans-serif </span></span></span>}
+<pre><code class="css">@media screen {
+    * { font-family: sans-serif }
 }
-</code></pre><p>媒体类型就不在此列举了。如果想让多个媒体设备采用同一套样式，只需在media属性中添加媒体类型的名称，用逗号分开就可以了：</p>
-<pre><code><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">media</span>=<span class="value">"screen, print, resolution &gt; 90dpi"</span> <span class="attribute">href</span>=<span class="value">"serif.css"</span>&gt;</span>
-<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
-    <span class="at_rule">@<span class="keyword">media</span> screen </span>{
-      * <span class="rules">{ <span class="rule"><span class="attribute">font-family</span>:<span class="value"> sans-serif </span></span></span>}
+</code></pre>
+<p>媒体类型就不在此列举了。如果想让多个媒体设备采用同一套样式，只需在media属性中添加媒体类型的名称，用逗号分开就可以了：</p>
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen, print, resolution &gt; 90dpi&quot; href=&quot;serif.css&quot;&gt;
+&lt;style&gt;
+    @media screen {
+      * { font-family: sans-serif }
     }
-</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
-</code></pre><p>而CSS3 中的媒体查询（Media Queries）就是建立在 HTML4 的媒体查询的语法机制之上，其语法符合 HTML4 中保留的媒体类型语法。HTML4 中的 <code>media</code> 属性同样存在于 XHTML 和 一般的 XML 中。但是，媒体查询的解析规则不兼容 HTML4 的解析规则，因此，适用于 CSS 中的媒体查询。</p>
+&lt;/style&gt;
+</code></pre>
+<p>而CSS3 中的媒体查询（Media Queries）就是建立在 HTML4 的媒体查询的语法机制之上，其语法符合 HTML4 中保留的媒体类型语法。HTML4 中的 <code>media</code> 属性同样存在于 XHTML 和 一般的 XML 中。但是，媒体查询的解析规则不兼容 HTML4 的解析规则，因此，适用于 CSS 中的媒体查询。</p>
 <p>CSS3 中的媒体查询一个媒体类型和零个或者多个检查特定媒体功能的状况的表达式组成。<br>这些表达式会被解析成真或假。如果媒体查询中的媒体类型与文档要展示的设备相符则查询结果为真，并且媒体查询中的所有表达式为真。媒体类型默认情况是 <code>all</code></p>
-<pre><code><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">media</span>=<span class="value">"screen and (max-width: 800px)"</span> <span class="attribute">href</span>=<span class="value">"example.css"</span> /&gt;</span>
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; media=&quot;screen and (max-width: 800px)&quot; href=&quot;example.css&quot; /&gt;
 
 @import url(color.css) screen and (color);
 
-<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
-    <span class="at_rule">@<span class="keyword">media</span> screen and (max-width: <span class="number">600px</span>) </span>{
-      <span class="class">.facet_sidebar</span> <span class="rules">{
-        <span class="rule"><span class="attribute">display</span>:<span class="value"> none</span></span>;
-      <span class="rule">}</span></span>
+&lt;style&gt;
+    @media screen and (max-width: 600px) {
+      .facet_sidebar {
+        display: none;
+      }
     }
-</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
-</code></pre><p>当媒体查询为真时，相关的样式表或样式规则就会按照正常的级联规则被应用。即使媒体查询返回假， &lt;\link&gt; 标签上带有媒体查询的样式表 仍将被下载 （只不过不会被应用）。</p>
+&lt;/style&gt;
+</code></pre>
+<p>当媒体查询为真时，相关的样式表或样式规则就会按照正常的级联规则被应用。即使媒体查询返回假， &lt;\link&gt; 标签上带有媒体查询的样式表 仍将被下载 （只不过不会被应用）。</p>
 <p>可以这么理解：媒体查询无非就是检查当前用户代理是何种设备，设备的某些参数：媒体类型（media type） + CSS属性。</p>
 <h3 id="Media_Queries支持的属性">Media Queries支持的属性</h3>
 <table>
@@ -209,114 +216,120 @@
 </table>
 <h3 id="best_breakpoints">best breakpoints</h3>
 <p>我现在需要解决的问题是：针对不同屏幕大小的设备的的代码块的媒体查询判断条件该如何书写，在 stackoverflow 上看到的<a href="http://stackoverflow.com/questions/6370690/media-queries-how-to-target-desktop-tablet-and-mobile" target="_blank" rel="external">回答</a>，the best breakpoints:</p>
-<pre><code><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
-    <span class="at_rule">@<span class="keyword">media</span> (min-width:<span class="number">320px</span>) </span>{ <span class="comment">/* smartphones, iPhone, portrait 480x320 phones */</span> }
-    <span class="at_rule">@<span class="keyword">media</span> (min-width:<span class="number">481px</span>) </span>{ <span class="comment">/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */</span> }
-    <span class="at_rule">@<span class="keyword">media</span> (min-width:<span class="number">641px</span>) </span>{ <span class="comment">/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */</span> }
-    <span class="at_rule">@<span class="keyword">media</span> (min-width:<span class="number">961px</span>) </span>{ <span class="comment">/* tablet, landscape iPad, lo-res laptops ands desktops */</span> }
-    <span class="at_rule">@<span class="keyword">media</span> (min-width:<span class="number">1025px</span>) </span>{ <span class="comment">/* big landscape tablets, laptops, and desktops */</span> }
-    <span class="at_rule">@<span class="keyword">media</span> (min-width:<span class="number">1281px</span>) </span>{ <span class="comment">/* hi-res laptops and desktops */</span> }
-</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
-</code></pre><h3 id="如何在_sass_中使用编写媒体查询模块">如何在 sass 中使用编写媒体查询模块</h3>
+<pre><code class="html">&lt;style&gt;
+    @media (min-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ }
+    @media (min-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
+    @media (min-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+    @media (min-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+    @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+    @media (min-width:1281px) { /* hi-res laptops and desktops */ }
+&lt;/style&gt;
+</code></pre>
+<h3 id="如何在_sass_中使用编写媒体查询模块">如何在 sass 中使用编写媒体查询模块</h3>
 <p>可以参考这篇文章：<a href="http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32" target="_blank" rel="external">Responsive Web Design in Sass: Using media queries in Sass 3.2</a><br>首先，最简单的是使用 CSS 的语法：</p>
-<pre><code><span class="comment">// set a variable for the font size</span>
-<span class="variable">$h1</span>-<span class="keyword">size</span>: <span class="number">36</span>px
+<pre><code class="sass">// set a variable for the font size
+$h1-size: 36px
 
 h1 {
-  font-<span class="keyword">size</span>: <span class="variable">$h1</span>-<span class="keyword">size</span>;
+  font-size: $h1-size;
 }
 
-<span class="comment">// this will only affect wide screens</span>
-<span class="variable">@media</span> screen and (<span class="keyword">min</span>-width: <span class="number">1024</span>px) {
+// this will only affect wide screens
+@media screen and (min-width: 1024px) {
   h1 {
-    font-<span class="keyword">size</span>: <span class="variable">$h1</span>-<span class="keyword">size</span> * <span class="number">1.5</span>;
+    font-size: $h1-size * 1.5;
   }
 }
-<span class="comment">// 编译后：</span>
+</code></pre>
+<pre><code class="css">// 编译后：
 h1 {
-  font-<span class="keyword">size</span>: <span class="number">36</span>px;
+  font-size: 36px;
 }
-<span class="variable">@media</span> screen and (<span class="keyword">min</span>-width: <span class="number">1024</span>px) {
+@media screen and (min-width: 1024px) {
   h1 {
-    font-<span class="keyword">size</span>: <span class="number">54</span>px;
+    font-size: 54px;
   }
 }
-</code></pre><p>同时，sass 为 CSS 的书写提供了是一个相当杀手级功能：当你在其它选择器中嵌套 <code>@media</code> 时，如果在嵌套的 @media 中添加的属性，sass 会向上一层层查找选择器，将@media中添加的属属性应用在查找到的选择器上，并将其插入到 @media 的代码块中：</p>
-<pre><code><span class="class">.profile-pic</span> {
-    <span class="attribute">float</span><span class="value">: left;</span>
-    <span class="attribute">width</span><span class="value">: <span class="number">250px</span>;</span>
-    <span class="tag">a</span> {
-        <span class="attribute">color</span><span class="value">: black;</span>
-        <span class="at_rule">@<span class="keyword">media</span><span class="preprocessor"> screen</span><span class="preprocessor"> and</span> (max-width:<span class="preprocessor"> 320px</span>) {</span>
-            <span class="attribute">width</span><span class="value">: <span class="number">100px</span>;</span>
-            <span class="attribute">color</span><span class="value">: red;</span>
+</code></pre>
+<p>同时，sass 为 CSS 的书写提供了是一个相当杀手级功能：当你在其它选择器中嵌套 <code>@media</code> 时，如果在嵌套的 @media 中添加的属性，sass 会向上一层层查找选择器，将@media中添加的属属性应用在查找到的选择器上，并将其插入到 @media 的代码块中：</p>
+<pre><code class="sass">.profile-pic {
+    float: left;
+    width: 250px;
+    a {
+        color: black;
+        @media screen and (max-width: 320px) {
+            width: 100px;
+            color: red;
         }
-        <span class="at_rule">@<span class="keyword">media</span><span class="preprocessor"> screen</span><span class="preprocessor"> and</span> (min-width:<span class="preprocessor"> 1200px</span>) {</span>
-            <span class="attribute">float</span><span class="value">: none;</span>
-            <span class="attribute">color</span><span class="value">: blue;</span>
+        @media screen and (min-width: 1200px) {
+            float: none;
+            color: blue;
         }
     }
 }
-
-<span class="comment">// 编译后：</span>
-<span class="class">.profile-pic</span> {
-    <span class="attribute">float</span><span class="value">: left;</span>
-    <span class="attribute">width</span><span class="value">: <span class="number">250px</span>
+</code></pre>
+<pre><code class="css">// 编译后：
+.profile-pic {
+    float: left;
+    width: 250px
 }
 .profile-pic a {
     color: black
 }
-@media screen and (max-width: <span class="number">320px</span>) {
+@media screen and (max-width: 320px) {
     .profile-pic a {
-        width: <span class="number">100px</span>;</span>
-        <span class="attribute">color</span><span class="value">: red
+        width: 100px;
+        color: red
     }
 }
-@media screen and (min-width: <span class="number">1200px</span>) {
+@media screen and (min-width: 1200px) {
     .profile-pic a {
-        float: none;</span>
-        <span class="attribute">color</span><span class="value">: blue
+        float: none;
+        color: blue
     }
-}</span>
-</code></pre><p>其实这个东西也是很好理解的，就不过多解释了，省得啰嗦。但是要记住：还有很多种变化的写法，比如在query中使用变量，在代码块中使用 <code>@extend</code>.etc。多用用就好了</p>
+}
+</code></pre>
+<p>其实这个东西也是很好理解的，就不过多解释了，省得啰嗦。但是要记住：还有很多种变化的写法，比如在query中使用变量，在代码块中使用 <code>@extend</code>.etc。多用用就好了</p>
 <h3 id="关于_min-width/min-height_和_max-width/max-height_的补充：2014/10/18">关于 min-width/min-height 和 max-width/max-height 的补充：2014/10/18</h3>
 <p>min-width(height): 最小宽度(高度)；在媒体查询中作为检查条件时，指的是渲染界面的最小宽度（高度）。也就是说当宽度（高度）大于给定的数值时才使用这一块代码块（没有使用的 Media Queries 代码块也会加载）；相反地，max-width(height) 意思就是：当宽度（高度）小于给定的数值时才使用这一块代码块。指定的数值是一个临界值。</p>
 <p>有意思的东西来了！</p>
 <p>看下面的代码：</p>
-<pre><code><span class="class">.container</span><span class="rules">{
-    <span class="rule"><span class="attribute">background</span>:<span class="value">white</span></span>;
-<span class="rule">}</span></span>
-<span class="at_rule">@<span class="keyword">media</span> screen and (min-width:<span class="number">320px</span>) </span>{ 
-    <span class="class">.container</span><span class="rules">{
-        <span class="rule"><span class="attribute">background</span>:<span class="value">red</span></span>;
-    <span class="rule">}</span></span>
+<pre><code class="css">.container{
+    background:white;
 }
-<span class="at_rule">@<span class="keyword">media</span> screen and (min-width:<span class="number">481px</span>) </span>{ 
-    <span class="class">.container</span><span class="rules">{
-        <span class="rule"><span class="attribute">background</span>:<span class="value">blue</span></span>;
-    <span class="rule">}</span></span>
+@media screen and (min-width:320px) { 
+    .container{
+        background:red;
+    }
 }
-</code></pre><p>根据CSS的解析规则，过程如下：</p>
+@media screen and (min-width:481px) { 
+    .container{
+        background:blue;
+    }
+}
+</code></pre>
+<p>根据CSS的解析规则，过程如下：</p>
 <ol>
 <li>container的背景色为white；</li>
 <li>当宽度大于320px时，container的背景色为red；</li>
 <li>当宽度大于481px时，container的背景色为blue；</li>
 </ol>
 <p>这可能是你想要的顺序，但是如果 你这样：</p>
-<pre><code><span class="class">.container</span><span class="rules">{
-    <span class="rule"><span class="attribute">background</span>:<span class="value">white</span></span>;
-<span class="rule">}</span></span>
-<span class="at_rule">@<span class="keyword">media</span> screen and (max-width:<span class="number">320px</span>) </span>{ 
-    <span class="class">.container</span><span class="rules">{
-        <span class="rule"><span class="attribute">background</span>:<span class="value">red</span></span>;
-    <span class="rule">}</span></span>
+<pre><code class="css">.container{
+    background:white;
 }
-<span class="at_rule">@<span class="keyword">media</span> screen and (max-width:<span class="number">481px</span>) </span>{ 
-    <span class="class">.container</span><span class="rules">{
-        <span class="rule"><span class="attribute">background</span>:<span class="value">blue</span></span>;
-    <span class="rule">}</span></span>
+@media screen and (max-width:320px) { 
+    .container{
+        background:red;
+    }
 }
-</code></pre><p>根据CSS的解析规则，过程如下：</p>
+@media screen and (max-width:481px) { 
+    .container{
+        background:blue;
+    }
+}
+</code></pre>
+<p>根据CSS的解析规则，过程如下：</p>
 <ol>
 <li>container的背景色为white；</li>
 <li>当宽度小于320px时，container的背景色为red；</li>
@@ -324,22 +337,23 @@ h1 {
 </ol>
 <p>好问题来了，小于320 不就是 小于 481 了嘛？后面样式直接覆盖了前面的啊！所以在小于481px的渲染宽度中，颜色都是blue。</p>
 <p>同样的问题：</p>
-<pre><code><span class="class">.container</span><span class="rules">{
-    <span class="rule"><span class="attribute">background</span>:<span class="value">white</span></span>;
-<span class="rule">}</span></span>
-<span class="at_rule">@<span class="keyword">media</span> screen and (min-width:<span class="number">481px</span>) </span>{ 
-    <span class="class">.container</span><span class="rules">{
-        <span class="rule"><span class="attribute">background</span>:<span class="value">blue</span></span>;
-    <span class="rule">}</span></span>
+<pre><code class="css">.container{
+    background:white;
+}
+@media screen and (min-width:481px) { 
+    .container{
+        background:blue;
+    }
 }
 
 
-<span class="at_rule">@<span class="keyword">media</span> screen and (min-width:<span class="number">321px</span>) </span>{ 
-    <span class="class">.container</span><span class="rules">{
-        <span class="rule"><span class="attribute">background</span>:<span class="value">red</span></span>;
-    <span class="rule">}</span></span>
+@media screen and (min-width:321px) { 
+    .container{
+        background:red;
+    }
 }
-</code></pre><p>根据CSS的解析规则，过程如下：</p>
+</code></pre>
+<p>根据CSS的解析规则，过程如下：</p>
 <ol>
 <li>container的背景色为white；</li>
 <li>当宽度大于481px时，container的背景色为blue；</li>
@@ -347,11 +361,11 @@ h1 {
 </ol>
 <p>其结果显而易见，后面的样式（当宽度大于321px时）直接覆盖了前面的（当宽度大于481px时），所以在大于321px的渲染宽度中，颜色都是red。这也是我们不想看到的结果。</p>
 <p>为了避免出现上面这混乱的结果，我个人认为可以酱紫：</p>
-<pre><code>max大的。min小的。
+<pre><code>max大的。min小的。  
 
-使用max时，值从大到小，依次是，<span class="escape">`小</span>于<span class="number">1024</span>px<span class="escape">`,</span> <span class="escape">`小</span>于<span class="number">961</span>px<span class="escape">`,</span> <span class="escape">`小</span>于<span class="number">641</span>px<span class="escape">`.</span>etc。这是一种桌面端优先的方式，先考虑渲染宽度大的设备。
+使用max时，值从大到小，依次是，`小于1024px`, `小于961px`, `小于641px`.etc。这是一种桌面端优先的方式，先考虑渲染宽度大的设备。
 
-使用min时，值从小到大，依次是，<span class="escape">`大</span>于<span class="number">320</span>px<span class="escape">`,</span> <span class="escape">`大</span>于<span class="number">481</span>px<span class="escape">`,</span> <span class="escape">`小</span>于<span class="number">641</span>px<span class="escape">`.</span>etc。这是一种移动端优先的方式，先考虑渲染宽度小的设备。
+使用min时，值从小到大，依次是，`大于320px`, `大于481px`, `小于641px`.etc。这是一种移动端优先的方式，先考虑渲染宽度小的设备。
 
 如果这样理解的话，我感觉自己不会混乱了~~
 </code></pre><p>参考：</p>
@@ -384,14 +398,6 @@ h1 {
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/10/10/我的响应式web开发实践笔记-Media Queries 初探/" title="我的响应式web开发实践笔记-Media Queries 初探">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  我的响应式web开发实践笔记-Media Queries 初探</span>
-</a>
-</div>
-
 
 <div class="next">
 <a href="/2014/10/08/使用python抓取知乎日报的API数据/"  title="使用python抓取知乎日报的API数据">
@@ -445,9 +451,9 @@ h1 {
 		
 			<li><a href="/categories/Python/" title="Python">Python<sup>2</sup></a></li>
 		
-			<li><a href="/categories/前端/" title="前端">前端<sup>18</sup></a></li>
+			<li><a href="/categories/前端/" title="前端">前端<sup>10</sup></a></li>
 		
-			<li><a href="/categories/前端/笔记/" title="笔记">笔记<sup>9</sup></a></li>
+			<li><a href="/categories/前端/笔记/" title="笔记">笔记<sup>1</sup></a></li>
 		
 			<li><a href="/categories/前端/重构/" title="重构">重构<sup>3</sup></a></li>
 		
@@ -460,7 +466,7 @@ h1 {
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -469,7 +475,7 @@ h1 {
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>19</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -497,7 +503,7 @@ h1 {
 		
 			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
 		
-			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>9</sup></a></li>
+			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
 			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
 		
@@ -517,6 +523,9 @@ h1 {
 </div>
 </footer>
     <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 <script type="text/javascript">

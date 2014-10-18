@@ -23,6 +23,9 @@
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
 </head>
 
   <body>
@@ -73,7 +76,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-10-05T06:30:00.000Z" itemprop="datePublished">10月 5 2014</time>
-    更新日期:<time datetime="2014-10-14T11:29:10.000Z" itemprop="dateModified">10月 14 2014</time>
+    更新日期:<time datetime="2014-10-18T10:27:09.000Z" itemprop="dateModified">10月 18 2014</time>
     
   </p>
 </header>
@@ -101,7 +104,7 @@
 <p><img src="http://ncuey-crispelite.stor.sinaapp.com/2014-10-12_0948.png" alt="Chrome"></p>
 <p>在CSS中定义的宽和高，其实都是内容区域的宽和高，padding，border 和 margin 被排除在盒子尺寸之外。</p>
 <p>所以对于一个定义了宽度的盒子来说，其尺寸的计算方式：</p>
-<pre><code>实际宽度 = margin(<span class="keyword">left</span>+<span class="keyword">right</span>) + border(<span class="keyword">left</span>+<span class="keyword">right</span>) + padding(<span class="keyword">left</span>+<span class="keyword">right</span>) + width(定义的值)
+<pre><code>实际宽度 = margin(left+right) + border(left+right) + padding(left+right) + width(定义的值)
 
 实际高度 = margin(top+bottom) + border(top+bottom) + padding(top+bottom) + height(定义的值)
 </code></pre><p>可以利用margin调整两个元素之间的距离，用padding调整内容与元素边框之间的距离（留白）。这是标准的盒模型</p>
@@ -112,9 +115,8 @@
 <h2 id="box-sizing">box-sizing</h2>
 <p>不过在新的 CSS3 中，推出了一个新的属性 <code>box-sizing</code> 。有两个可选值，一个是默认的 content-box 一个是 border-box，选用后者，盒子模型将按 IE6 的方式进行处理</p>
 <h2 id="margin的重叠">margin的重叠</h2>
-<blockquote>
-<p>参考：<br><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box_model" target="_blank" rel="external">box model (MDN)</a><br><a href="http://css-tricks.com/the-css-box-model/" target="_blank" rel="external">The CSS Box Model</a><br><a href="http://zh.wikipedia.org/wiki/IE%E7%9B%92%E6%A8%A1%E5%9E%8B%E7%BC%BA%E9%99%B7" target="_blank" rel="external">IE盒模型缺陷</a><br><a href="http://www.w3.org/TR/CSS2/box.html#box-dimensions" target="_blank" rel="external">box model</a></p>
-</blockquote>
+<p>参考：  </p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box_model" target="_blank" rel="external">box model (MDN)</a><br><a href="http://css-tricks.com/the-css-box-model/" target="_blank" rel="external">The CSS Box Model</a><br><a href="http://zh.wikipedia.org/wiki/IE%E7%9B%92%E6%A8%A1%E5%9E%8B%E7%BC%BA%E9%99%B7" target="_blank" rel="external">IE盒模型缺陷</a><br><a href="http://www.w3.org/TR/CSS2/box.html#box-dimensions" target="_blank" rel="external">box model</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -204,9 +206,9 @@
 		
 			<li><a href="/categories/Python/" title="Python">Python<sup>2</sup></a></li>
 		
-			<li><a href="/categories/前端/" title="前端">前端<sup>18</sup></a></li>
+			<li><a href="/categories/前端/" title="前端">前端<sup>10</sup></a></li>
 		
-			<li><a href="/categories/前端/笔记/" title="笔记">笔记<sup>9</sup></a></li>
+			<li><a href="/categories/前端/笔记/" title="笔记">笔记<sup>1</sup></a></li>
 		
 			<li><a href="/categories/前端/重构/" title="重构">重构<sup>3</sup></a></li>
 		
@@ -219,7 +221,7 @@
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -228,7 +230,7 @@
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>19</sup></a></li>
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -256,7 +258,7 @@
 		
 			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
 		
-			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>9</sup></a></li>
+			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
 			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
 		
@@ -276,6 +278,9 @@
 </div>
 </footer>
     <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 <script type="text/javascript">
