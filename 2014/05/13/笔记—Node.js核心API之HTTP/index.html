@@ -104,40 +104,40 @@
 </blockquote>
 <h3 id="http-Server">http.Server</h3>
 <p>先用Node来创建一个简单的HTTP服务器：</p>
-<pre><code>var http=require(<span class="string">"http"</span>);
-http.createServer(<span class="keyword">function</span>(<span class="built_in">request</span>,<span class="built_in">response</span>){
-    <span class="built_in">response</span>.writeHead(<span class="number">200</span>,{
-        <span class="string">"Content-Type"</span>:<span class="string">"text/html"</span>
+<pre><code>var http=require(&quot;http&quot;);
+http.createServer(function(request,response){
+    response.writeHead(200,{
+        &quot;Content-Type&quot;:&quot;text/html&quot;
     });
-    <span class="built_in">response</span>.write(<span class="string">"&lt;h1&gt;Hello, CrispElite&lt;/h1&gt;"</span>);
-    <span class="built_in">response</span>.<span class="keyword">end</span>(<span class="string">"&lt;p&gt;Bye bye!&lt;/p&gt;"</span>);
-}).listen(<span class="number">3000</span>);
+    response.write(&quot;&lt;h1&gt;Hello, CrispElite&lt;/h1&gt;&quot;);
+    response.end(&quot;&lt;p&gt;Bye bye!&lt;/p&gt;&quot;);
+}).listen(3000);
 
-console.<span class="built_in">log</span>(<span class="string">"你的服务器已经启动！"</span>);
+console.log(&quot;你的服务器已经启动！&quot;);
 </code></pre><p>利用 http.createServer() 创建了一个 http.Server 的实例，将一个匿名函数用了处理请求。这个函数接收两个参数：请求对象和响应对象。createServer() 返回的还是 http.Server 的实例，方便链式调用。这个例子中，在 createServer() 之后直接调用了 http.Server 的 listen() 方法，监听3000端口。</p>
 <p>http.Server 是 http 模块中的 HTTP 服务器对象。它继承自 EventEmitter，有用一套属于它自己的事件。最常用的当属<code>request</code>：当客户端请求到来的时候，request 事件被触发，提供两个参数 request 和 response 给回调函数，表示请求和响应的信息。createServer(callback) 方法是Node为 request 提供的一个快捷方法，其功能是创建一个 HTTP 服务器并将 callback 作为 reuqest 事件的监听函数，就想上面的例子一样。如果要显示的使用 request 事件来实现，其实就是这么回事：</p>
-<pre><code>var http=require(<span class="string">"http"</span>),
-    <span class="built_in">server</span>=<span class="keyword">new</span> http.<span class="built_in">Server</span>();
+<pre><code>var http=require(&quot;http&quot;),
+    server=new http.Server();
 
-<span class="built_in">server</span>.<span class="keyword">on</span>(<span class="string">"request"</span>, <span class="keyword">function</span>(<span class="built_in">request</span>,<span class="built_in">response</span>){
-    <span class="built_in">response</span>.writeHead(<span class="number">200</span>,{
-        <span class="string">"Content-Type"</span>:<span class="string">"text/html"</span>
+server.on(&quot;request&quot;, function(request,response){
+    response.writeHead(200,{
+        &quot;Content-Type&quot;:&quot;text/html&quot;
     });
-    <span class="built_in">response</span>.write(<span class="string">"&lt;h1&gt;Hello, CrispElite&lt;/h1&gt;"</span>);
-    <span class="built_in">response</span>.<span class="keyword">end</span>(<span class="string">"&lt;p&gt;Bye bye!&lt;/p&gt;"</span>);
+    response.write(&quot;&lt;h1&gt;Hello, CrispElite&lt;/h1&gt;&quot;);
+    response.end(&quot;&lt;p&gt;Bye bye!&lt;/p&gt;&quot;);
 });
-<span class="built_in">server</span>.listen(<span class="number">3000</span>);
+server.listen(3000);
 
-console.<span class="built_in">log</span>(<span class="string">"你的服务器已经启动！"</span>);
+console.log(&quot;你的服务器已经启动！&quot;);
 </code></pre><h3 id="http-ServerResponse">http.ServerResponse</h3>
 <p>http.ServerResponse 是服务器返回给客户端的信息。一个由HTTP服务器内部创建的对象（不是由用户创建）。它将作为第二个参数传递到前面所说的 ‘request’ 事件的监听器中。</p>
 <p>http.ServerResponse 有很多方法，具体请戳<a href="http://nodejs.org/api/http.html#http_response_writecontinue" target="_blank" rel="external">这里</a>，其中有几个比较重要的成员函数。</p>
 <h4 id="response-writeHead(statusCode,_[header])">response.writeHead(statusCode, [header])</h4>
 <p>向请求的客户端发送响应头。这个函数在一个请求中最多只能调用一次，如果不调用则会自动生成一个响应头。注意，必须在调用 end()之前调用。</p>
-<pre><code>    <span class="keyword">var</span> body = <span class="string">'hello world'</span>;
-    response.writeHead(<span class="number">200</span>, {
-        <span class="string">'Content-Length'</span>: body.length,
-        <span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>
+<pre><code>    var body = &#39;hello world&#39;;
+    response.writeHead(200, {
+        &#39;Content-Length&#39;: body.length,
+        &#39;Content-Type&#39;: &#39;text/plain&#39;
     });
 </code></pre><p>要注意的是，Content-Length 以字节为单位而不是字符。上面的例子能够工作，是因为字符串 ‘hello world’ 只包含单字节字符。如果报文主体内包含高位数的编码字符，然后就要使用Buffer.byteLength（）来确定在给定编码格式下的字节数。<a href="http://nodejs.org/api/http.html#http_response_writecontinue" target="_blank" rel="external">原文</a>。</p>
 <h4 id="response-write(data,_[encoding])">response.write(data, [encoding])</h4>
@@ -167,10 +167,10 @@ console.<span class="built_in">log</span>(<span class="string">"你的服务器�
 <p><!-- http.request() 返回一个 http.ClientRequest的实例，这个实例是一个可写的流。如果想使用 "POST" 请求上传一个文件 --><br>使用 http.request() 时，必须调用 response.end()，以此来向服务器表明请求结束，即使请求的主体中没有任何数据。</p>
 <h3 id="http-get(options,_callback)">http.get(options, callback)</h3>
 <p>因为大部分请求都是没有主体的GET请求，所以 Node 提供了这个方便的方法。它与 http.request() 唯一的区别就是自动将请求设为GET请求，同时自动调用 response.end()。</p>
-<pre><code>http.<span class="built_in">get</span>(<span class="string">"http://www.google.com/index.html"</span>, <span class="function"><span class="keyword">function</span><span class="params">(res)</span> {</span>
-    console.<span class="built_in">log</span>(<span class="string">"Got response: "</span> + <span class="keyword">res</span>.statusCode);
-}).<span class="keyword">on</span>(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span><span class="params">(e)</span> {</span>
-    console.<span class="built_in">log</span>(<span class="string">"Got error: "</span> + <span class="keyword">e</span>.message);
+<pre><code>http.get(&quot;http://www.google.com/index.html&quot;, function(res) {
+    console.log(&quot;Got response: &quot; + res.statusCode);
+}).on(&#39;error&#39;, function(e) {
+    console.log(&quot;Got error: &quot; + e.message);
 });
 </code></pre><h3 id="http-ClientRequest">http.ClientRequest</h3>
 <p>http.ClientRequest 是 Node 内建的一个对象，调用 http.request() 和 http.get() 返回的就是这个对象。它表示一个已经产生并且正在进行的 HTTP 请求。它提供了一个 response 事件，当响应头被接收的时候，会在请求的对象上触发。http.request() 和 http.get() 第二个参数指定的回调函数的绑定对象就是它了。http.ClientRequest 和 http.ServerResponse 一样提供了 write() 和 end() 用于向服务器发送请求体。所有的写结束后必须调用 end() 通知服务器。更多详细信息请戳<a href="http://nodejs.org/api/http.html#http_class_http_clientrequest" target="_blank" rel="external">这里</a>。</p>
@@ -274,7 +274,7 @@ console.<span class="built_in">log</span>(<span class="string">"你的服务器�
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -284,6 +284,8 @@ console.<span class="built_in">log</span>(<span class="string">"你的服务器�
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -313,7 +315,7 @@ console.<span class="built_in">log</span>(<span class="string">"你的服务器�
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

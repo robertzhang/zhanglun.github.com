@@ -104,17 +104,17 @@
 <li>% - single percent sign (‘%’). This does not consume an argument.</li>
 </ul>
 <p>如果第一个参数中的占位符找不到与之对应的参数， 那么这个占位符将不会被替换</p>
-<pre><code>util.format(<span class="string">'%s:%s'</span>, <span class="string">'foo'</span>); <span class="regexp">//</span> <span class="string">'foo:%s'</span>
+<pre><code>util.format(&#39;%s:%s&#39;, &#39;foo&#39;); // &#39;foo:%s&#39;
 </code></pre><p>如果占位符太少，多余的参数会调用 <code>util.inspect()</code> 转换成字符串，然后用空格将多余的字符串拼接在一起。</p>
-<pre><code>util.format(<span class="string">'%s:%s'</span>, <span class="string">'foo'</span>, <span class="string">'bar'</span>, <span class="string">'baz'</span>, <span class="string">'zhanglun'</span>); <span class="regexp">//</span> <span class="string">'foo:bar baz zhanglun'</span>
+<pre><code>util.format(&#39;%s:%s&#39;, &#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;, &#39;zhanglun&#39;); // &#39;foo:bar baz zhanglun&#39;
 </code></pre><p>如果第一个参数不是一个需要格式化的字符串，那么这个方法会将所有的参数用空格拼接成一个新的字符串，然后返回这个字符串。</p>
-<pre><code>util.format(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">"zhanglun"</span>); // <span class="string">'1 2 3 \'</span>zhanglun\<span class="string">''</span>
+<pre><code>util.format(1, 2, 3, &quot;zhanglun&quot;); // &#39;1 2 3 \&#39;zhanglun\&#39;&#39;
 </code></pre><h3 id="util-debug(string)">util.debug(string)</h3>
 <p>这是一个同步输出的方法。当执行到这一句代码的时候会阻塞进程，并且以标准错误的形式将参数 string 输出。</p>
-<pre><code>require(<span class="string">'util'</span>).<span class="keyword">debug</span>(<span class="string">'message on stderr'</span>); //message <span class="keyword">on</span> stderr
+<pre><code>require(&#39;util&#39;).debug(&#39;message on stderr&#39;); //message on stderr
 </code></pre><h3 id="util-log(string)">util.log(string)</h3>
 <p>以标准输出的形式输出。它将获取当前的时间戳，并和参数 string 一起输出，中间用 “ - “ 连接。</p>
-<pre><code><span class="built_in">require</span>(<span class="string">'util'</span>).<span class="built_in">log</span>(<span class="string">'Timestmaped message.'</span>);<span class="comment"> //15 May 21:41:33 - Timestmaped message</span>
+<pre><code>require(&#39;util&#39;).log(&#39;Timestmaped message.&#39;); //15 May 21:41:33 - Timestmaped message
 </code></pre><h3 id="util-inspect(object,[options])">util.inspect(object,[options])</h3>
 <p>这个方法将任意对象转换为字符串，对调试来说很有用。至少接受一个参数 object，即需要处理的字符串。此外还可以传递一个可选的参数 options，用来控制字符串的输出格式。</p>
 <ul>
@@ -124,47 +124,47 @@
 <li><code>customInspect</code>——如果为 false，那么将要被遍历检查的对象（参数object）中定义的<code>inspect（）</code>函数将不会被调用。 默认值为 true。</li>
 </ul>
 <p>下面先来看一个例子：</p>
-<pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);
-<span class="keyword">var</span> obj1 = {
-        <span class="string">"aa"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-            <span class="built_in">console</span>.log(<span class="string">"aa"</span>);
+<pre><code>var util = require(&quot;util&quot;);
+var obj1 = {
+        &quot;aa&quot;: function() {
+            console.log(&quot;aa&quot;);
         },
-        <span class="string">"inspect"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-            <span class="built_in">console</span>.log(<span class="string">"obj1's inspect()"</span>);
+        &quot;inspect&quot;: function() {
+            console.log(&quot;obj1&#39;s inspect()&quot;);
         },
-        <span class="string">"bb"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-            <span class="built_in">console</span>.log(<span class="string">"bb"</span>);
+        &quot;bb&quot;: function() {
+            console.log(&quot;bb&quot;);
         }
     },
     obj2 = {
-        <span class="string">"cc"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-            <span class="built_in">console</span>.log(<span class="string">"cc"</span>);
+        &quot;cc&quot;: function() {
+            console.log(&quot;cc&quot;);
         },
-        <span class="string">"inspect"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-            <span class="built_in">console</span>.log(<span class="string">"obj2's inspect()"</span>);
-            <span class="keyword">return</span> <span class="string">"Hello"</span>;
+        &quot;inspect&quot;: function() {
+            console.log(&quot;obj2&#39;s inspect()&quot;);
+            return &quot;Hello&quot;;
         },
-        <span class="string">"dd"</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-            <span class="built_in">console</span>.log(<span class="string">"dd"</span>);
+        &quot;dd&quot;: function() {
+            console.log(&quot;dd&quot;);
         }
     };
 
-<span class="keyword">var</span> str1 = util.inspect(obj1, {
-    showHidden: <span class="literal">false</span>,
-    depth: <span class="literal">null</span>,
-    customInspect: <span class="literal">false</span>
+var str1 = util.inspect(obj1, {
+    showHidden: false,
+    depth: null,
+    customInspect: false
 }),
     str2 = util.inspect(obj2, {
-        showHidden: <span class="literal">false</span>,
-        depth: <span class="literal">null</span>,
-        customInspect: <span class="literal">true</span>
+        showHidden: false,
+        depth: null,
+        customInspect: true
     });
 
-<span class="built_in">console</span>.log(<span class="string">"str1 : "</span> + str1);
-<span class="built_in">console</span>.log(<span class="string">"str2 : "</span> + str2);
+console.log(&quot;str1 : &quot; + str1);
+console.log(&quot;str2 : &quot; + str2);
 </code></pre><p>其输出结果：</p>
-<pre><code>obj2<span class="comment">'s inspect()</span>
-str1 : { aa: [<span class="function"><span class="keyword">Function</span>], <span class="title">inspacet</span>:</span> [<span class="function"><span class="keyword">Function</span>], <span class="title">bb</span>:</span> [<span class="function"><span class="keyword">Function</span>] }</span>
+<pre><code>obj2&#39;s inspect()
+str1 : { aa: [Function], inspacet: [Function], bb: [Function] }
 str2 : Hello
 </code></pre><p>暂时先忽略颜色，待会接着说，先看<code>customInspect</code>。上面的例子中，有两个对象：obj1 和 obj2，内部都定义了一个 inspect()函数，调用<code>util.inspect()</code>方法时，只有<code>customInspect</code>不同。当<code>customInspect</code>为 true 时，比如 obj2，其内部的 <code>util.inspect()</code>函数在执行<code>util.inspect()</code>时就被调用了，同时只会返回这个内部的 <code>util.inspect()</code>执行后的返回值，如果没有函数显示地调用 return 语句，则返回 undefined。可以试试修改上面的示例代码中 obj2 的<code>inspect()</code>的返回值。而对于 obj1，其<code>customInspect</code>，所以其内部的<code>inspect()</code>并不会被调用。</p>
 <h4 id="定制颜色">定制颜色</h4>
@@ -172,66 +172,66 @@ str2 : Hello
 <h3 id="util-isArray(object)">util.isArray(object)</h3>
 <p>如果参数 object 是一个数组，返回 true，否则返回 false。<br>    var util = require(‘util’);</p>
 <pre><code>util.isArray([])
-  <span class="comment">// true</span>
-util.isArray(<span class="keyword">new</span> <span class="built_in">Array</span>)
-  <span class="comment">// true</span>
+  // true
+util.isArray(new Array)
+  // true
 util.isArray({})
-  <span class="comment">// false</span>
+  // false
 </code></pre><h3 id="util-isRegExp(object)">util.isRegExp(object)</h3>
 <p>如果参数 object 是一个 RegExp 对象，返回 true，否则返回 false。</p>
-<pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);
+<pre><code>var util = require(&#39;util&#39;);
 
-util.isRegExp(<span class="regexp">/some regexp/</span>)
-  <span class="comment">// true</span>
-util.isRegExp(<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'another regexp'</span>))
-  <span class="comment">// true</span>
+util.isRegExp(/some regexp/)
+  // true
+util.isRegExp(new RegExp(&#39;another regexp&#39;))
+  // true
 util.isRegExp({})
-  <span class="comment">// false</span>
+  // false
 </code></pre><h3 id="util-isDate(object)">util.isDate(object)</h3>
 <p>如果参数 object 是一个 Date 对象，返回 true，否则返回 false。</p>
-<pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);
+<pre><code>var util = require(&#39;util&#39;);
 
-util.isDate(<span class="keyword">new</span> <span class="built_in">Date</span>())
-  <span class="comment">// true</span>
-util.isDate(<span class="built_in">Date</span>())
-  <span class="comment">// false (without 'new' returns a String)</span>
+util.isDate(new Date())
+  // true
+util.isDate(Date())
+  // false (without &#39;new&#39; returns a String)
 util.isDate({})
-  <span class="comment">// false</span>
+  // false
 </code></pre><h3 id="util-isError(object)">util.isError(object)</h3>
 <p>如果参数 object 是一个 Error 对象，返回 true，否则返回 false。</p>
-<pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);
+<pre><code>var util = require(&#39;util&#39;);
 
-util.isError(<span class="keyword">new</span> <span class="built_in">Error</span>())
-  <span class="comment">// true</span>
-util.isError(<span class="keyword">new</span> <span class="built_in">TypeError</span>())
-  <span class="comment">// true</span>
-util.isError({ name: <span class="string">'Error'</span>, message: <span class="string">'an error occurred'</span> })
-  <span class="comment">// false</span>
+util.isError(new Error())
+  // true
+util.isError(new TypeError())
+  // true
+util.isError({ name: &#39;Error&#39;, message: &#39;an error occurred&#39; })
+  // false
 </code></pre><h3 id="util-inherits(constructor,_superConstructor)">util.inherits(constructor, superConstructor)</h3>
 <p>这是一个实现对象之间原型继承的函数。constructor 将会继承 superConstructor。另外，通过<code>constructor.super_</code>可以访问到 superConstructor。</p>
-<pre><code><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);
-<span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">"events"</span>);
+<pre><code>var util = require(&quot;util&quot;);
+var events = require(&quot;events&quot;);
 
-<span class="function"><span class="keyword">function</span> <span class="title">MyStream</span><span class="params">()</span> </span>{
+function MyStream() {
 }
 util.inherits(MyStream, events.EventEmitter);
 
-MyStream.prototype.write = <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>{
-    <span class="keyword">this</span>.emit(<span class="string">"data"</span>, data);
+MyStream.prototype.write = function(data) {
+    this.emit(&quot;data&quot;, data);
 }
 
-<span class="keyword">var</span> stream = <span class="keyword">new</span> MyStream();
+var stream = new MyStream();
 
 
-<span class="built_in">console</span>.log(stream <span class="keyword">instanceof</span> events.EventEmitter); <span class="comment">// true</span>
-<span class="built_in">console</span>.log(MyStream.super_); 
-<span class="comment">//{ [Function: EventEmitter] listenerCount: [Function] }</span>
-<span class="built_in">console</span>.log(MyStream.super_ === events.EventEmitter); <span class="comment">// true</span>
+console.log(stream instanceof events.EventEmitter); // true
+console.log(MyStream.super_); 
+//{ [Function: EventEmitter] listenerCount: [Function] }
+console.log(MyStream.super_ === events.EventEmitter); // true
 
-stream.on(<span class="string">"data"</span>, <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>{
-    <span class="built_in">console</span>.log(<span class="string">'Received data: "'</span> + data + <span class="string">'"'</span>);
+stream.on(&quot;data&quot;, function(data) {
+    console.log(&#39;Received data: &quot;&#39; + data + &#39;&quot;&#39;);
 })
-stream.write(<span class="string">"It works!"</span>); <span class="comment">// Received data: "It works!"</span>
+stream.write(&quot;It works!&quot;); // Received data: &quot;It works!&quot;
 </code></pre><p>util 模块还提供了其他的一些工具函数，更多详情请戳<a href="http://nodejs.org/api/util.html#util_util" target="_blank" rel="external">这里</a>。</p>
   
 	</div>
@@ -332,7 +332,7 @@ stream.write(<span class="string">"It works!"</span>); <span class="comment">// 
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -342,6 +342,8 @@ stream.write(<span class="string">"It works!"</span>); <span class="comment">// 
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -371,7 +373,7 @@ stream.write(<span class="string">"It works!"</span>); <span class="comment">// 
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

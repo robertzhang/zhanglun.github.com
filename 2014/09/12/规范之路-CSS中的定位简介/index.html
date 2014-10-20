@@ -107,11 +107,11 @@
 <p><strong>relative</strong><br>    元素的位置按照标准流（中的位置）计算（the position in normal flow），然后盒子相对它标准流中的位置偏移。比如B元素相对原来的位置发生偏移之后，它后面的元素的位置计算不会受到影响，就像B元素一直在原来的位置上呆着一样。对于 table-row-group, table-header-group, table-footer-group, table-row, table-column-group, table-column, table-cell, and table-caption 这些元素，没有定义 <code>position:relative</code>。  </p>
 <p><strong>absolute</strong><br>    盒子的位置由’top’, ‘right’, ‘bottom’, 和 ‘left’ 指定。这四个值指定的偏移都是相对于盒子的包含块（containing block）。绝对定位的盒子从标准流中被移除，这一位置它们不会对接下来的相邻元素的布局产生影响。同时绝对定位的元素也有 magin ，不会与任何的 元素发生 margin坍塌现象。  </p>
 <p><strong>fixed</strong><br>    盒子的位置根据 ‘absolute’ model 来计算，除此之外，在不同的设备中，盒子固定的位置不太一样。在手持设备，投影设备，屏幕，电子打字机和电视上（handheld, projection, screen, tty, and tv media types），盒子的位置相对于视口（viewport）固定，当视口滚动的时候，盒子也不会移动；在打印机<br>上时，盒子在每个page（就是每张纸）上都会被渲染，位置相对page形成的盒子固定，即使页面是通过一个视口看到的（比如 打印预览）。对于其他的媒体类型来说，这种固定的盒子是未定义的。有时候可能想让一个盒子一直保持在屏幕的顶部，但是不想在打印的时候出现在每个页面上。使用媒体查询（@media rule）可以很轻松的做到这一定。</p>
-<pre><code><span class="at_rule">@<span class="keyword">media</span> screen </span>{ 
-    <span class="tag">h1</span><span class="id">#first</span> <span class="rules">{ <span class="rule"><span class="attribute">position</span>:<span class="value"> fixed </span></span></span>} 
+<pre><code>@media screen { 
+    h1#first { position: fixed } 
 }
-<span class="at_rule">@<span class="keyword">media</span> print </span>{ 
-    <span class="tag">h1</span><span class="id">#first</span> <span class="rules">{ <span class="rule"><span class="attribute">position</span>:<span class="value"> static </span></span></span>}
+@media print { 
+    h1#first { position: static }
 }
 </code></pre><p>用户代理不能对固定的盒子中的内容做翻页处理，因为用户代理有可能以某种方式将不可见的内容输出（我没有实践过，see <a href="http://www.w3.org/TR/CSS21/page.html#outside-page-box" target="_blank" rel="external">“Content outside the page box”</a>）。暂时先搁着，先看完 chapter 9 (￣◇￣;)</p>
 <h3 id="盒子的偏移量（Box_offsets）">盒子的偏移量（Box offsets）</h3>
@@ -185,10 +185,10 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2014/09/26/CSS 中的权重问题 /" title="CSS 中的权重问题">
+ <a href="/2014/09/14/git 使用笔记(三)-分支的使用/" title="git 使用笔记(三)-分支的使用">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  CSS 中的权重问题</span>
+  git 使用笔记(三)-分支的使用</span>
 </a>
 </div>
 
@@ -260,7 +260,7 @@
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -270,6 +270,8 @@
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -299,7 +301,7 @@
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

@@ -91,7 +91,7 @@
 		</div>
 		
 		<p>Grunt 和 Grunt 的插件都是通过 Node.js 的包管理器 npm 来安装和管理的。为了方便使用 Grunt ，你应该在全局范围内安装 Grunt 的命令行接口(CLI)。要做到这一点，你可能需要使用 sudo (OS X，*nix，BSD 等平台中)权限或者作为超级管理员( Windows 平台)来运行 shell 命令。</p>
-<pre><code>npm install -g grunt-<span class="keyword">cli</span>
+<pre><code>npm install -g grunt-cli
 </code></pre><p>使用全局安装之后，可以在任何一个目录中运行 grunt 命令。</p>
 <h3 id="如何工作">如何工作</h3>
 <p>每次运行 grunt 时，它都会使用 node 的 require() 系统查找本地已安装好的 grunt。在本地装好 Grunt 之后，运行 gurnt 命令时，CLI 就会加载这个本地安装好的 Grunt 库，然后应用你项目中的 Gruntfile 中的配置(这个文件用于配置项目中使用的任务)，并执行你所指定的所有任务。而 Grunt 库的安装则依赖 package.json 文件。</p>
@@ -114,13 +114,13 @@
 </ol>
 <p>一个 <code>package.json</code> 文件示例：</p>
 <pre><code>{
-    <span class="string">"name"</span>: <span class="string">"my-project-name"</span>, <span class="comment">// 项目名称</span>
-    <span class="string">"version"</span>: <span class="string">"0.1.0"</span>, <span class="comment">// 项目版本</span>
-    <span class="string">"devDependencies"</span>: { <span class="comment">// 项目依赖</span>
-        <span class="string">"grunt"</span>: <span class="string">"~0.4.1"</span>, <span class="comment">// Grunt库</span>
-        <span class="string">"grunt-contrib-jshint"</span>: <span class="string">"~0.6.0"</span>, <span class="comment">//grunt中的工具</span>
-        <span class="string">"grunt-contrib-nodeunit"</span>: <span class="string">"~0.2.0"</span>, <span class="comment">//grunt中的工具</span>
-        <span class="string">"grunt-contrib-uglify"</span>: <span class="string">"~0.2.2"</span> <span class="comment">//grunt中的工具，可以按照这种方式在 dependencies 中添加自己想要的工具</span>
+    &quot;name&quot;: &quot;my-project-name&quot;, // 项目名称
+    &quot;version&quot;: &quot;0.1.0&quot;, // 项目版本
+    &quot;devDependencies&quot;: { // 项目依赖
+        &quot;grunt&quot;: &quot;~0.4.1&quot;, // Grunt库
+        &quot;grunt-contrib-jshint&quot;: &quot;~0.6.0&quot;, //grunt中的工具
+        &quot;grunt-contrib-nodeunit&quot;: &quot;~0.2.0&quot;, //grunt中的工具
+        &quot;grunt-contrib-uglify&quot;: &quot;~0.2.2&quot; //grunt中的工具，可以按照这种方式在 dependencies 中添加自己想要的工具
     }
 }
 </code></pre><h4 id="Gruntfile">Gruntfile</h4>
@@ -133,21 +133,21 @@
 </ul>
 <h5 id="wrapper_函数">wrapper 函数</h5>
 <p>每个 Gruntfile 都使用这个基本格式，同时所有的 Grunt 戴玛都必须指点在这个函数里面：</p>
-<pre><code><span class="built_in">module</span>.exports=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
-    <span class="comment">//在这里添加 Grunt 相关</span>
+<pre><code>module.exports=function(){
+    //在这里添加 Grunt 相关
 }
 </code></pre><h5 id="项目和任务配置">项目和任务配置</h5>
 <p>通常 Grunt 任务所依赖的配置素据都被定义在一个对象中，而这个对象将会被传递给 <code>grunt.initConfig</code> 方法。</p>
 <pre><code>// 项目配置
 grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON(&#39;package.json&#39;),
     uglify: {
         options: {
-            banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.<span class="keyword">template</span>.today(<span class="string">"yyyy-mm-dd"</span>) %&gt; */\n'
+            banner: &#39;/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today(&quot;yyyy-mm-dd&quot;) %&gt; */\n&#39;
         },
         build: {
-            src: 'src/&lt;%=pkg.name %&gt;.js',
-            dest: 'build/&lt;%= pkg.name %&gt;.min.js'
+            src: &#39;src/&lt;%=pkg.name %&gt;.js&#39;,
+            dest: &#39;build/&lt;%= pkg.name %&gt;.min.js&#39;
         }
     }
 });
@@ -155,18 +155,18 @@ grunt.initConfig({
 <p>与大多数的任务一样， grunt-contrib-uglify 插件的 <code>uglify</code> 任务要求他的配置被指定在一个同名属性中。在这个例子中，我们指定了一个 <code>banner</code> 选项，用于在文件顶部生成一个注释。紧接着是一个名为 <code>build</code> 的 uglify 目标，用于将一个js文件压缩为一个目标文件，比如：将 src 目录中的 <code>jQuery-1.9.0.js</code> 压缩成 <code>jQuery-1.9.0.min.js</code>，然后存储到 dest 目录中。<br>插件一般都托管在 github 上，其使用方法都会有说明。比如 <a href="https://github.com/gruntjs/grunt-contrib-uglify" target="_blank" rel="external">grunt-contrib-uglify</a></p>
 <h5 id="加载_grunt_插件和任务">加载 grunt 插件和任务</h5>
 <p>只要一个插件被作为一个依赖指定在项目的 <code>package.json</code> 文件中，并且通过 <code>npm install</code> 安装好，都可以在 <code>Gruntfile</code> 文件中使用下面的简单命令启用.</p>
-<pre><code>//加载提供 <span class="string">"uglify"</span> 任务的插件
-grunt.loadNpmTasks(<span class="string">"grunt-contrib-uglify"</span>);
+<pre><code>//加载提供 &quot;uglify&quot; 任务的插件
+grunt.loadNpmTasks(&quot;grunt-contrib-uglify&quot;);
 </code></pre><p><strong>tips:</strong> 使用 <code>grunt --help</code> 命令可以列出所有可用的任务</p>
 <p>同时，你可以通过定义一个 <code>default</code> 任务来配置 Grunt，让他默认运行一个过着多个任务。</p>
-<pre><code><span class="comment">// 默认任务</span>
-grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>]);
+<pre><code>// 默认任务
+grunt.registerTask(&#39;default&#39;, [&#39;uglify&#39;]);
 </code></pre><p>可以将你允许默认运行的任务名称以数组的形式作为参数传递。</p>
 <p>如果你想要的任务没有对应的 Grunt 插件提供相应的功能，你可以在 Gruntfile 内定义自定义的任务：</p>
-<pre><code><span class="built_in">module</span>.exports=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
-    <span class="comment">//一个很基础的default任务</span>
-    grunt.registerTask(<span class="string">"default"</span>,<span class="string">"load some stuff."</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
-        grunt.log.write(<span class="string">"Loggin some stuff……"</span>).ok();
+<pre><code>module.exports=function(){
+    //一个很基础的default任务
+    grunt.registerTask(&quot;default&quot;,&quot;load some stuff.&quot;,function(){
+        grunt.log.write(&quot;Loggin some stuff……&quot;).ok();
     });
 };
 </code></pre><p>自定义的项目特定的任务可以不定义在 Gruntfile 中；它们可以定义在一个外部 .js 文件中，然后通过 grunt.loadTasks 方法来加载。</p>
@@ -270,7 +270,7 @@ grunt.registerTask(<span class="string">'default'</span>, [<span class="string">
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -280,6 +280,8 @@ grunt.registerTask(<span class="string">'default'</span>, [<span class="string">
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -309,7 +311,7 @@ grunt.registerTask(<span class="string">'default'</span>, [<span class="string">
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

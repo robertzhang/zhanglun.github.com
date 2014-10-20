@@ -100,21 +100,21 @@
 <p>有时候你会发现自己辛辛苦苦写的CSS样式不起作用，文件引入了，浏览器也加载了，但就是不按照你想要的方式显示，这个时候你就需要考虑 CSS权重的问题。如果你对权重的工作方式有所了解，将会大大减少调试bug的时间。</p>
 <p>如果想解释权重的工作方式，最好的办法就是针对问题来分析。下面就是一个 CSS 样式没有按照期待的方式显示的例子。</p>
 <p>一个简单的无序列表</p>
-<pre><code><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">id</span>=<span class="value">"summer-drinks"</span>&gt;</span>
-   <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"favorite"</span>&gt;</span>Whiskey and Ginger Ale<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-   <span class="tag">&lt;<span class="title">li</span>&gt;</span>Wheat Beer<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-   <span class="tag">&lt;<span class="title">li</span>&gt;</span>Mint Julip<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+<pre><code>&lt;ul id=&quot;summer-drinks&quot;&gt;
+   &lt;li class=&quot;favorite&quot;&gt;Whiskey and Ginger Ale&lt;/li&gt;
+   &lt;li&gt;Wheat Beer&lt;/li&gt;
+   &lt;li&gt;Mint Julip&lt;/li&gt;
+&lt;/ul&gt;
 </code></pre><p>而在CSS中，是酱紫的：</p>
-<pre><code><span class="tag">ul</span><span class="id">#summer-drinks</span> <span class="tag">li</span> <span class="rules">{
-   <span class="rule"><span class="attribute">font-weight</span>:<span class="value"> normal</span></span>;
-   <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">12px</span></span></span>;
-   <span class="rule"><span class="attribute">color</span>:<span class="value"> black</span></span>;
-<span class="rule">}</span></span>
-<span class="class">.favorite</span> <span class="rules">{
-  <span class="rule"><span class="attribute">color</span>:<span class="value"> red</span></span>;
-  <span class="rule"><span class="attribute">font-weight</span>:<span class="value"> bold</span></span>;
-<span class="rule">}</span></span>
+<pre><code>ul#summer-drinks li {
+   font-weight: normal;
+   font-size: 12px;
+   color: black;
+}
+.favorite {
+  color: red;
+  font-weight: bold;
+}
 </code></pre><p>但是你会发现，拥有class为favorite的li元素中的内容并没有像你期待的那样加粗变红。这就是权重引发的“血案“！别急别急，我们可以好好的捋一捋。</p>
 <h4 id="什么是CSS的权重">什么是CSS的权重</h4>
 <p>我的理解就是：CSS规则的优先顺序，权重高的优先。权利大的才有发言权。</p>
@@ -137,24 +137,24 @@
 </ul>
 <p>就象这样：<br><img src="http://ncuey-crispelite.stor.sinaapp.com/specificity-calculationbase.png" alt="http://ncuey-crispelite.stor.sinaapp.com/specificity-calculationbase.png">  </p>
 <p>最后的到的权重就是 <code>0(1), x, y, z</code>，把它看作一个4位数的数字，数字越大权重越高。可以这么记：从0开始，一个行内样式+1000，一个id+100，一个属性选择器/class或者伪类+10，一个元素名，或者伪元素+1.比如：</p>
-<pre><code> <span class="keyword">*</span>             {}  /<span class="keyword">*</span> a=0 b=0 c=0 d=0 -&gt; specificity = 0,0,0,0 <span class="keyword">*</span>/
- li            {}  /<span class="keyword">*</span> a=0 b=0 c=0 d=1 -&gt; specificity = 0,0,0,1 <span class="keyword">*</span>/
- li:first-line {}  /<span class="keyword">*</span> a=0 b=0 c=0 d=2 -&gt; specificity = 0,0,0,2 <span class="keyword">*</span>/
- ul li         {}  /<span class="keyword">*</span> a=0 b=0 c=0 d=2 -&gt; specificity = 0,0,0,2 <span class="keyword">*</span>/
- ul ol+li      {}  /<span class="keyword">*</span> a=0 b=0 c=0 d=3 -&gt; specificity = 0,0,0,3 <span class="keyword">*</span>/
- h1 + <span class="keyword">*</span>[rel=up]{}  /<span class="keyword">*</span> a=0 b=0 c=1 d=1 -&gt; specificity = 0,0,1,1 <span class="keyword">*</span>/
- ul ol li.red  {}  /<span class="keyword">*</span> a=0 b=0 c=1 d=3 -&gt; specificity = 0,0,1,3 <span class="keyword">*</span>/
- li.red.level  {}  /<span class="keyword">*</span> a=0 b=0 c=2 d=1 -&gt; specificity = 0,0,2,1 <span class="keyword">*</span>/
- <span class="comment">#x34y         {}  /* a=0 b=1 c=0 d=0 -&gt; specificity = 0,1,0,0 */</span>
- style=<span class="string">""</span>          /<span class="keyword">*</span> a=1 b=0 c=0 d=0 -&gt; specificity = 1,0,0,0 <span class="keyword">*</span>/
-<span class="variable">&lt;head&gt;</span>
-<span class="variable">&lt;style type="text/css"&gt;</span>
-  <span class="comment">#x97z { color: red }</span>
-<span class="variable">&lt;/style&gt;</span>
-<span class="variable">&lt;/head&gt;</span>
-<span class="variable">&lt;body&gt;</span>
-<span class="variable">&lt;P id="x97z" style="color: green"&gt;</span>
-<span class="variable">&lt;/body&gt;</span>
+<pre><code> *             {}  /* a=0 b=0 c=0 d=0 -&gt; specificity = 0,0,0,0 */
+ li            {}  /* a=0 b=0 c=0 d=1 -&gt; specificity = 0,0,0,1 */
+ li:first-line {}  /* a=0 b=0 c=0 d=2 -&gt; specificity = 0,0,0,2 */
+ ul li         {}  /* a=0 b=0 c=0 d=2 -&gt; specificity = 0,0,0,2 */
+ ul ol+li      {}  /* a=0 b=0 c=0 d=3 -&gt; specificity = 0,0,0,3 */
+ h1 + *[rel=up]{}  /* a=0 b=0 c=1 d=1 -&gt; specificity = 0,0,1,1 */
+ ul ol li.red  {}  /* a=0 b=0 c=1 d=3 -&gt; specificity = 0,0,1,3 */
+ li.red.level  {}  /* a=0 b=0 c=2 d=1 -&gt; specificity = 0,0,2,1 */
+ #x34y         {}  /* a=0 b=1 c=0 d=0 -&gt; specificity = 0,1,0,0 */
+ style=&quot;&quot;          /* a=1 b=0 c=0 d=0 -&gt; specificity = 1,0,0,0 */
+&lt;head&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+  #x97z { color: red }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;P id=&quot;x97z&quot; style=&quot;color: green&quot;&gt;
+&lt;/body&gt;
 </code></pre><p>P标签的颜色将会是绿色，因为权重的关系，行内样式会覆盖其他定义的样式。</p>
 <p>借鉴一下老外的图：</p>
 <p><img src="http://ncuey-crispelite.stor.sinaapp.com/cssspecificity-calc-1.png" alt="1"><br>或者<br><img src="http://ncuey-crispelite.stor.sinaapp.com/cssspecificity-calc-2.png" alt="2"><br>然后<br><img src="http://ncuey-crispelite.stor.sinaapp.com/cssspecificity-calc-4.png" alt="4"><br>还有<br><img src="http://ncuey-crispelite.stor.sinaapp.com/cssspecificity-calc-5.png" alt="5">  </p>
@@ -167,17 +167,17 @@
 <h3 id="特殊的_!important">特殊的 !important</h3>
 <p>!important 用于单独指定某条样式中的单个属性。对于被指定的属性，有 !important 指定的权重值大于所有未用 !important 指定的规则。</p>
 <p>例如：</p>
-<pre><code><span class="id">#header</span> <span class="tag">nav</span> <span class="tag">ul</span> <span class="tag">li</span><span class="class">.current</span> {
-    <span class="attribute">color</span><span class="value">: red;</span> <span class="attribute">font-weight</span><span class="value">: bold;</span>
+<pre><code>#header nav ul li.current {
+    color: red; font-weight: bold;
 }
-<span class="comment">// 权重值为 0, 1, 1, 3</span>
+// 权重值为 0, 1, 1, 3
 
-<span class="tag">li</span><span class="pseudo">:hover</span> {
-    <span class="attribute">color</span><span class="value">: blue <span class="important">!important</span>;</span>
-    <span class="attribute">font-weight</span><span class="value">: normal;</span>
+li:hover {
+    color: blue !important;
+    font-weight: normal;
 }
 
-<span class="comment">// 权重值仅为0, 0, 0, 2</span>
+// 权重值仅为0, 0, 0, 2
 </code></pre><p>所以应用于相同元素时，前者生效。但是对于color这个属性，由于在后者中用 !important 做了指定，因此color将应用后者的规则。而font-weight则按照规定用前者的规则。</p>
 <p>如果多条规则中都对同一个属性指定了 !important ，这时 !important 的作用相互抵销，依然按abcd四组计算比较。</p>
 <p>参考自：</p>
@@ -220,9 +220,9 @@
 
 
 <div class="next">
-<a href="/2014/09/12/规范之路-CSS中的定位简介/"  title="规范之路-CSS中的定位简介">
+<a href="/2014/09/14/git 使用笔记(三)-分支的使用/"  title="git 使用笔记(三)-分支的使用">
  <strong>NEXT:</strong><br/> 
- <span>规范之路-CSS中的定位简介
+ <span>git 使用笔记(三)-分支的使用
 </span>
 </a>
 </div>
@@ -286,7 +286,7 @@
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -296,6 +296,8 @@
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -325,7 +327,7 @@
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

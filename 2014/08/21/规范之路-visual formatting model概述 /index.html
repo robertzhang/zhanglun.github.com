@@ -121,31 +121,31 @@ CSS 视觉格式化模型（visual formatting model）是一种用来处理文�
 <p><img src="http://img1.picbed.org/uploads/2014/08/_venn_inlines.png" alt="image"></p>
 <h4 id="还有一个叫”匿名块盒“(Anonymous_block_boxes)的东西">还有一个叫”匿名块盒“(Anonymous block boxes)的东西</h4>
 <p>有一种盒子叫”匿名块盒子“，比如说下面的代码中：</p>
-<pre><code><span class="tag">&lt;<span class="title">div</span>&gt;</span>
+<pre><code>&lt;div&gt;
     hello,
-    <span class="tag">&lt;<span class="title">p</span>&gt;</span>world!<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    &lt;p&gt;world!&lt;/p&gt;
+&lt;/div&gt;
 </code></pre><p><img src="http://ncuey.sinaapp.com/blog_files/images/2014-08-21_224544.png" alt="image"></p>
 <p>div 中同时出现了行内内容和块级内容，为了更加方便的定义格式，我们假定在文本 “hello,”外部包裹着一个匿名的块级盒子（anonymous block）。 换句话说，如果一个块级容器盒子（就是一个用来装会块级盒子的大盒子）中只要包含任何一个块级盒子，我们就认为它只包含块级盒子。<br>对于匿名盒子还要注意的是，和 \</p><p> 元素不同, 开发者不能控制这个匿名盒子。对于可继承属性， 它们将取 \<div> 的属性值, 比如 color。对于非继承属性，值为初始值 ，比如没有指定 background-color, 值为初始值即 transparent，于是 \<div> 背景可见。而 \<p> 可以指定 background-color 。类似的，这个匿名盒文本是一样的颜色。</p>
 <p>另外一种创建匿名块盒子的情况是：当一个行内盒包含了一个或几个块盒时，包含块盒的盒将拆分为两个行内盒放置于块盒前后，然后分别由两个匿名块盒包含。这样块盒就与两个包含行内元素的匿名块盒形成了兄弟关系。如果行内盒包含多个块盒，并且这些块盒之间没有夹杂内容，将在这些块盒前后创建匿名块盒。</p>
 <pre><code>CSS：
-.<span class="constant">two</span> p    { display: inline }
-.<span class="constant">two</span> span { display: block }
+.two p    { display: inline }
+.two span { display: block }
 
 
 HTML：
 &lt;h2&gt;块盒包含行内盒子&lt;/h2&gt;
-    &lt;<span class="operator">div</span> class=<span class="string">"one"</span>&gt;
-        &lt;P&gt;This is anonymous <span class="keyword">text</span> <span class="keyword">before</span> <span class="operator">the</span> SPAN.
-        &lt;span&gt;This is <span class="operator">the</span> content <span class="operator">of</span> SPAN.&lt;/span&gt;This is anonymous <span class="keyword">text</span> <span class="keyword">after</span> <span class="operator">the</span> SPAN.
+    &lt;div class=&quot;one&quot;&gt;
+        &lt;P&gt;This is anonymous text before the SPAN.
+        &lt;span&gt;This is the content of SPAN.&lt;/span&gt;This is anonymous text after the SPAN.
         &lt;/P&gt;
-    &lt;/<span class="operator">div</span>&gt;
+    &lt;/div&gt;
 &lt;h2&gt;一个行内盒包含了一个或几个块盒&lt;/h2&gt;
-    &lt;<span class="operator">div</span> class=<span class="string">"two"</span>&gt;
-        &lt;P&gt;This is anonymous <span class="keyword">text</span> <span class="keyword">before</span> <span class="operator">the</span> SPAN.
-        &lt;span&gt;This is <span class="operator">the</span> content <span class="operator">of</span> SPAN.&lt;/span&gt;This is anonymous <span class="keyword">text</span> <span class="keyword">after</span> <span class="operator">the</span> SPAN.
+    &lt;div class=&quot;two&quot;&gt;
+        &lt;P&gt;This is anonymous text before the SPAN.
+        &lt;span&gt;This is the content of SPAN.&lt;/span&gt;This is anonymous text after the SPAN.
         &lt;/P&gt;
-    &lt;/<span class="operator">div</span>&gt;
+    &lt;/div&gt;
 </code></pre><p><img src="http://ncuey.sinaapp.com/blog_files/images/2014-08-21_230945.png" alt="image"></p>
 <p>前面说到的，匿名盒子无法被选中，但是会继承离他最近的非匿名盒子的样式。在触发匿名盒子形成的元素上添加的属性也会应用在元素的盒子和内容中，比如上面的例子，p元素师导致匿名盒子形成的元素，如果给它加上border，border也会应用的它形成的匿名盒子上</p>
 <p><img src="http://ncuey.sinaapp.com/blog_files/images/2014-08-21_232806.png" alt="image"></p>
@@ -249,7 +249,7 @@ HTML：
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -259,6 +259,8 @@ HTML：
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -288,7 +290,7 @@ HTML：
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>高性能网站优化-创建快速响应的Web | 张小伦爱学习</title>
+    <title>git 使用笔记(三)-分支的使用 | 张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
     
-    <meta name="description" content="《高性能网站建设进阶指南》">
+    <meta name="description" content="简单介绍
+之前说过，每次修改之后，Git 并不是保存这些修改之后的差异变化，实际上就像一个照相机一样，将修改后的文件拍下作为文件快照，记录在一个微型的文件系统中。在 Git 中提交时，会保存一个提交对象，这个对象包含一个暂存内容快照的指针。而 Git 中的分支其本质上是一个指向 commit 对象的">
     
     
     
@@ -70,15 +71,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/03/15/高性能网站优化-创建快速响应的Web/" title="高性能网站优化-创建快速响应的Web" itemprop="url">高性能网站优化-创建快速响应的Web</a>
+      <a href="/2014/09/14/git 使用笔记(三)-分支的使用/" title="git 使用笔记(三)-分支的使用" itemprop="url">git 使用笔记(三)-分支的使用</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-03-15T13:55:00.000Z" itemprop="datePublished">3月 15 2014</time>
-    更新日期:<time datetime="2014-08-20T15:14:50.000Z" itemprop="dateModified">8月 20 2014</time>
+    <time datetime="2014-09-14T08:06:00.000Z" itemprop="datePublished">9月 14 2014</time>
+    更新日期:<time datetime="2014-09-25T14:34:22.000Z" itemprop="dateModified">9月 25 2014</time>
     
   </p>
 </header>
@@ -87,48 +88,53 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#优化原则"><span class="toc-number">1.</span> <span class="toc-text">优化原则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#减少开销"><span class="toc-number">1.1.</span> <span class="toc-text">减少开销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化循环"><span class="toc-number">1.2.</span> <span class="toc-text">优化循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#合理利用Ajax"><span class="toc-number">1.3.</span> <span class="toc-text">合理利用Ajax</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意DOM"><span class="toc-number">1.4.</span> <span class="toc-text">注意DOM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伪多线程"><span class="toc-number">2.</span> <span class="toc-text">伪多线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定时器"><span class="toc-number">2.1.</span> <span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web_Workers"><span class="toc-number">2.2.</span> <span class="toc-text">Web Workers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存管理"><span class="toc-number">2.3.</span> <span class="toc-text">内存管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过拆分节省下载"><span class="toc-number">2.4.</span> <span class="toc-text">通过拆分节省下载</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单介绍"><span class="toc-number">1.</span> <span class="toc-text">简单介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建与合并"><span class="toc-number">2.</span> <span class="toc-text">创建与合并</span></a></li></ol>
 		</div>
 		
-		<blockquote>
-<p>《高性能网站建设进阶指南》</p>
-</blockquote>
-<p><a id="more"></a></p>
-<h2 id="优化原则">优化原则</h2>
-<p>优化的目的是希望降低程序的整体开销。</p>
-<h3 id="减少开销">减少开销</h3>
-<p>通常认为开销就是程序的执行时间。而在进行优化工作时，应该把重点放在对程序开销影响最大的那部分。<br>假设我们有四个模块：A，B，C，D，其中模块A运行所需开销54%，模块B运行所需开销4%，模块C运行开销30%，模块D运行开销12%。<br>即使可以通过某种方法将模块B性能开销减少到2%，其实也只是降低了整体开销的2%。如果A的开销减少10%，却可以获得更好的效果，而显然模块A更值得去优化。优化那些开销不大的模块回报太低。</p>
-<h3 id="优化循环">优化循环</h3>
-<p>程序大部分的时间都消耗在循环上，优化那些只执行一次的代码得到的回报微不足道。但优化循环得到的好处却总是让人欣慰。</p>
-<h3 id="合理利用Ajax">合理利用Ajax</h3>
-<p>利用Ajax技术，客户端将较小的数据包发送到服务端，然后服务端响应请求返回另一个较小的数据包，客户端的JavaScript程序处理服务端返回的数据包，更新浏览器中的页面。这样数据的传输量和反馈时间间隔都大大减少，同时客户端和服务端工作量也减少。万万不可将所有的应用数据都发送给浏览器，这样反而会增加服务端的响应时间，而返回给客户端的数据也增加程序运行的压力，从而降低性能。  </p>
-<h3 id="注意DOM">注意DOM</h3>
-<p>浏览器不是为应用平台而设计的，所以在处理Ajax应用程序的时候具有挑战。但是浏览器的发展速度很快，远远超出想象，已经有足够的能力去处理和执行复杂的应用。通过Ajax库可以碾碎很多障碍。<br>但是浏览器对DOM的解析依然低效。浏览器运行时，最大的开销往往是解析DOM而不是JavaScript 。注意优化DOM结构，避免多余的开销大的DOM操作。</p>
-<hr>
-<h2 id="伪多线程">伪多线程</h2>
-<p>就像所有的GUI应用程序一样，浏览器按队列顺序完成其队列中单独事件的处理。它按照先进先出的顺序从队列中取出，然后决定如何处理。但是，在浏览器中这个过程是单线程的，浏览器每次只能处理这些任务中的一个，并且其他任意一个任务都可以阻止其他任务的执行。由于JavaScript现在不支持多线程，所以无法创建一个后台程序执行开销很大的代码。而实际上，我们有一些方法可以在JavaScript中实现多线程的工作，但是却没有线程之间相互入侵的危险。</p>
-<h3 id="定时器">定时器</h3>
-<p>待完善</p>
-<h3 id="Web_Workers">Web Workers</h3>
-<p>使用 setTimeout()、setInterval()、XMLHttpRequest 和事件处理程序等技术模拟“并行”，确实都是异步运行的。但没有阻碍未必就意味着并行。系统会在生成当前执行脚本后处理异步事件。可以通过Web Worker执行一些操作，同时却不会阻碍UI和其他脚本。</p>
-<h3 id="内存管理">内存管理</h3>
-<p>JavaScript中<strong>绝大部分的运行环境（？为什么是绝大部分？）</strong>都实现了垃圾回收。但是自动管理内存是有开销的。在执行回收时，它们会冻结整个运行环境，包括正在调用的主线程，直到遍历完整整个创建对象的“堆”。在这个过程中查找不再使用或者能够回收内存的对象。<br>对于大部分应用程序而言，GC是完全透明的。冻结运行环境的时间短到完全可以忽略。但是随着内存占用的增加，遍历整个内存中保存着对象的“堆”查找不再使用的对象的时间将增长，最终引起注意。<br>当这种情况发生是，应用程序开始定期出现间歇迟钝，更严重一点整个浏览器可能出现反映迟钝。<br>在编写代码时要注意：  </p>
-<ul>
-<li><p>使用delete关键词从内存中移除不再需要的对象；</p>
-</li>
-<li><p>从网页DOM树中移除不再需要的节点</p>
-</li>
-</ul>
-<h3 id="通过拆分节省下载">通过拆分节省下载</h3>
-<p>将JavaScript分成两部分：一部分是渲染初始页面必须的，剩下的作为另一部分。在初始化时只加载必要的  JavaScript，其余的JavaScript稍后再加载。<br>拆分JavaScript代码的一个难点就是要避免出现未定义标识符错误。如果在执行的时候引用到了一个被延时加载的标识符时，就会出现这种问题。不过也有解决方法：<br>在延迟加载的代码和UI界面相关联的情况下，可以通过提示来巧妙的避开与用户的冲突。比如菜单中可以添加一个“加载中”的图标，告诉用户正在加载。或者干脆在延迟加载的代码里绑定事件处理程序，这样一来代码还未加载执行时，点击不会执行任何JavaScript代码。将两者结合更佳。</p>
-<p>延时加载的代码不与页面元素相关联的情况下，可以使用模拟函数（stub function）来解决这个问题。模拟函数是一个与原函数名称相同但是函数体为空，或者包含一些临时代码的函数。当调用它们时，动态加载其他的JavaScript代码。当增的JavaScript代码下载完成之后，模拟函数便被新的函数覆盖。JavaScript函数没有重载。 </p>
-  
+		<h2 id="简单介绍">简单介绍</h2>
+<p>之前说过，每次修改之后，Git 并不是保存这些修改之后的差异变化，实际上就像一个照相机一样，将修改后的文件拍下作为文件快照，记录在一个微型的文件系统中。在 Git 中提交时，会保存一个提交对象，这个对象包含一个暂存内容快照的指针。而 Git 中的分支其本质上是一个指向 commit 对象的可变的指针，使用 master 作为分支的默认名字，通常指向的是最新的一次提交。</p>
+<p>每次的提交，Git 把他们穿起来连成一条线，而主分支master就在这条线上随着提交测更新移动，而 HEAD 指向master，表示我们当前处在 master 分支上（不好意思，直接就用廖雪峰老师的图了，他的教程请戳<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">这里</a>）</p>
+<p><img src="http://ncuey-crispelite.stor.sinaapp.com/18333fig0304-tn.png" alt="images"></p>
+<p>创建一个叫做 dev 分支，这个分支默认会只想当前你所处在的提交对象上，切换到这个分支上后，HEAD 便指向了 dev。</p>
+<p><img src="http://ncuey-crispelite.stor.sinaapp.com/new-branch-dev.png" alt="images"></p>
+<p>从这个时候开始，对工作区的操作都只是在 dev 分支上发生了，在 dev 的上提交一次之后，master 指向原来的那个提交对象，而 dev 会指向最新的提交对象。我们称：master 落后了 dev 一个 commit。当我们试图将 master 指向 dev 当前的提交时，这个操作就是合并分支。</p>
+<p>在上述的这几个过程中，工作区的内容没有变化，整个过程就是修改几个指针而已，几乎就是瞬间完成。</p>
+<h2 id="创建与合并">创建与合并</h2>
+<p>创建一个 crisp 分支，然后切换到这个分支：</p>
+<pre><code>git checkout -b crisp
+Switched to a new branch &#39;crisp&#39;
+</code></pre><p><code>git checkout -b</code> 表示创建并切换分支，相当于将下面两步操作合并成一步来做</p>
+<pre><code>git branch crisp         // 创建分支
+git checkout crisp        // 切换到指定的分支
+</code></pre><p>同时，可以用 <code>git branch</code> 查看分支，这个命令会列出所有的分支，在当前的分支前面会表上一个 * 号。</p>
+<p>分支与分支之间相互独立，彼此绝缘，所以可以在 主分支master的基础上分出若干个分支，进行不同的操作，比如不同模块的开发，bug的修复等，工作完成之后合并到主分支就行了。怎么合并分支呢？</p>
+<p>假设我们正在 dev 分之上开发，当开发完成后，在这个分之上提交代码</p>
+<pre><code>git add .
+git commit -m &quot;dev 开发完成！&quot;
+</code></pre><p>此时的提交是在 dev 分支上的提交，当你切回 master 上是，dev 上的修改你都看不到。此时的 master 如果没有人提交过的话，则停留在切换分支之前的那个提交点上，也就是落后与 dev 分支。这个时候我们就需要将分支合并了。</p>
+<pre><code>git checkout master        // 先切回 master 分支 
+git merge dev             // 手动将dev 分支上的提交合并到 master 上
+</code></pre><p>当某一个分支不在需要的时候，可以将它删除</p>
+<pre><code>git branch -d branchname
+</code></pre><p>小小的总结一下：</p>
+<pre><code>查看分支：git branch
+
+创建分支：git branch name
+
+切换分支：git checkout name
+
+创建+切换分支：git checkout -b name
+
+合并某分支到当前分支：git merge name
+
+删除分支：git branch -d name
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/web优化/">web优化</a>
+  <span></span> <a href="/tags/Git/">Git</a><a href="/tags/笔记/">笔记</a>
   </div>
 
 
@@ -136,7 +142,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/03/15/高性能网站优化-创建快速响应的Web/" data-title="高性能网站优化-创建快速响应的Web | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/09/14/git 使用笔记(三)-分支的使用/" data-title="git 使用笔记(三)-分支的使用 | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -146,18 +152,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2014/03/30/高性能网站优化-无阻塞加载脚本/" title="高性能网站优化-无阻塞加载脚本">
+ <a href="/2014/09/26/CSS 中的权重问题 /" title="CSS 中的权重问题">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  高性能网站优化-无阻塞加载脚本</span>
+  CSS 中的权重问题</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2014/03/10/sass语法/"  title="sass基本语法">
+<a href="/2014/09/12/规范之路-CSS中的定位简介/"  title="规范之路-CSS中的定位简介">
  <strong>NEXT:</strong><br/> 
- <span>sass基本语法
+ <span>规范之路-CSS中的定位简介
 </span>
 </a>
 </div>
@@ -169,7 +175,7 @@
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#优化原则"><span class="toc-number">1.</span> <span class="toc-text">优化原则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#减少开销"><span class="toc-number">1.1.</span> <span class="toc-text">减少开销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化循环"><span class="toc-number">1.2.</span> <span class="toc-text">优化循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#合理利用Ajax"><span class="toc-number">1.3.</span> <span class="toc-text">合理利用Ajax</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意DOM"><span class="toc-number">1.4.</span> <span class="toc-text">注意DOM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伪多线程"><span class="toc-number">2.</span> <span class="toc-text">伪多线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定时器"><span class="toc-number">2.1.</span> <span class="toc-text">定时器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web_Workers"><span class="toc-number">2.2.</span> <span class="toc-text">Web Workers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存管理"><span class="toc-number">2.3.</span> <span class="toc-text">内存管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过拆分节省下载"><span class="toc-number">2.4.</span> <span class="toc-text">通过拆分节省下载</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单介绍"><span class="toc-number">1.</span> <span class="toc-text">简单介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建与合并"><span class="toc-number">2.</span> <span class="toc-text">创建与合并</span></a></li></ol>
   </div>
 
 <div id="asidepart">

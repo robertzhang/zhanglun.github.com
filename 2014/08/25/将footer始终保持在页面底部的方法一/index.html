@@ -103,37 +103,37 @@
 <p>这个方法不算复杂，只需要 HTML 和 CSS 就能实现。</p>
 <pre><code>HTML：
 
-&lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"wrapper"</span>&gt;
-   &lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"header"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-   &lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"container"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-   &lt;<span class="keyword">div</span> <span class="property">id</span>=<span class="string">"footer"</span>&gt;&lt;/<span class="keyword">div</span>&gt;
-&lt;/<span class="keyword">div</span>&gt;
+&lt;div id=&quot;wrapper&quot;&gt;
+   &lt;div id=&quot;header&quot;&gt;&lt;/div&gt;
+   &lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
+   &lt;div id=&quot;footer&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
 
 CSS:
 
 html,body {
-    margin:<span class="number">0</span>;
-       padding:<span class="number">0</span>;
-       height:<span class="number">100</span>%;
+    margin:0;
+       padding:0;
+       height:100%;
 }
-<span class="comment">#wrapper {</span>
-     min-height:<span class="number">100</span>%;
+#wrapper {
+     min-height:100%;
      position:relative;
 }
-<span class="comment">#header {</span>
-     background:<span class="comment">#ff0;</span>
-     padding:<span class="number">10</span>px;
+#header {
+     background:#ff0;
+     padding:10px;
 }
-<span class="comment">#container {</span>
-     padding:<span class="number">10</span>px;
-     padding-bottom:<span class="number">60</span>px;   /* Height <span class="keyword">of</span> <span class="keyword">the</span> footer */
+#container {
+     padding:10px;
+     padding-bottom:60px;   /* Height of the footer */
 }
-<span class="comment">#footer {</span>
+#footer {
      position:absolute;
-     bottom:<span class="number">0</span>;
-     width:<span class="number">100</span>%;
-     height:<span class="number">60</span>px;   /* Height <span class="keyword">of</span> <span class="keyword">the</span> footer */
-     background:<span class="comment">#6cf;</span>
+     bottom:0;
+     width:100%;
+     height:60px;   /* Height of the footer */
+     background:#6cf;
 }
 </code></pre><p><a class="jsbin-embed" href="http://jsbin.com/ziqim/15/embed?html,css,output" target="_blank" rel="external">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
 <p>在原文中，作者为了兼容 IE6 和 IE5.5（原文发布的时间是2007年），为 #wrapper 添加了 <code>height:100%</code> ，在这里我就不加上去了。</p>
@@ -238,7 +238,7 @@ html,body {
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -248,6 +248,8 @@ html,body {
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -277,7 +279,7 @@ html,body {
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

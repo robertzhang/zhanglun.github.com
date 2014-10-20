@@ -114,13 +114,13 @@
 <blockquote>
 <p>这是一个inline box 建立的过程。p元素的内容中包含一段匿名的文本，并穿插着em元素和strong元素：</p>
 </blockquote>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>
+<pre><code>&lt;p&gt;
     Several 
-    <span class="tag">&lt;<span class="title">em</span>&gt;</span>emphasized words<span class="tag">&lt;/<span class="title">em</span>&gt;</span>
+    &lt;em&gt;emphasized words&lt;/em&gt;
      appear
-    <span class="tag">&lt;<span class="title">strong</span>&gt;</span>in this<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+    &lt;strong&gt;in this&lt;/strong&gt;
      sentence, dear.
-<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+&lt;/p&gt;
 </code></pre><p>p元素形成了一个块级盒子，包含着五个行内盒子，其中三个是匿名盒子：</p>
 <ul>
 <li>Anonymous: “Several”</li>
@@ -130,13 +130,13 @@
 <li>Anonymous: “sentence, dear.”</li>
 </ul>
 <p>为了格式化这个段落，用户代理将五个盒子绘入到 line box 中。在这个例子里面，p元素形成的盒子为inline box 建立了一个 containing block。如果包含块足够宽，所有行内盒子将放入一个单独的一行中：</p>
-<pre><code>Several emphasized words appear <span class="keyword">in</span> <span class="keyword">this</span> sentence, dear.
+<pre><code>Several emphasized words appear in this sentence, dear.
 </code></pre><p>如果不是，则行内盒子将被分裂并分布在几个 line box中。前一段可能会被分拆如下：</p>
 <pre><code>Several emphasized words appear
-<span class="keyword">in</span> <span class="keyword">this</span> sentence, dear.
+in this sentence, dear.
 </code></pre><p>或者这样：</p>
 <pre><code>Several emphasized  
-words appear <span class="keyword">in</span> <span class="keyword">this</span> 
+words appear in this 
 sentence, dear.
 </code></pre><p>下次就是<a href="http://www.w3.org/TR/CSS21/visuren.html#floats" target="_blank" rel="external">Floats</a></p>
 <p>Bye~</p>
@@ -244,7 +244,7 @@ sentence, dear.
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -254,6 +254,8 @@ sentence, dear.
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -283,7 +285,7 @@ sentence, dear.
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

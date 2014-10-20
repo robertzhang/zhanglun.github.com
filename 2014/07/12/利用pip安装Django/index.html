@@ -96,23 +96,23 @@ pip install -U se">
 		
 		<h3 id="pip的安装">pip的安装</h3>
 <p>先下载一个 python 文件 : <a href="https://bootstrap.pypa.io/get-pip.py" target="_blank" rel="external">get-pip.py</a>。<br>然后运行下面这条命令（可能需要管理员权限）：</p>
-<pre><code><span class="keyword">python</span> <span class="built_in">get</span>-pip.<span class="keyword">py</span>
+<pre><code>python get-pip.py
 </code></pre><p>如果 <a href="https://pypi.python.org/pypi/setuptools" target="_blank" rel="external">setuptools</a> 还没有安装，pip会帮你安装。如果想更新已经存在的 setuptools，只要运行</p>
-<pre><code>pip <span class="operator"><span class="keyword">install</span> -U setuptools</span>
+<pre><code>pip install -U setuptools
 </code></pre><p>为了确保能够在命令行中使用 <code>pip</code> 命令，确保将 Python 安装目录中的 <code>Scripts</code> 文件夹路径添加到系统的环境变量中。这个必须手动添加！</p>
 <h3 id="升级_pip">升级 pip</h3>
 <p>在 Linux 或者 Mac 中：</p>
-<pre><code>pip <span class="operator"><span class="keyword">install</span> -U pip</span>
+<pre><code>pip install -U pip
 </code></pre><p>在 Window 中：</p>
-<pre><code><span class="keyword">python</span> -<span class="keyword">m</span> pip install -U pip
+<pre><code>python -m pip install -U pip
 </code></pre><h3 id="安装_packages">安装 packages</h3>
-<pre><code><span class="variable">$ </span>pip install <span class="constant">SomePackage</span>            <span class="comment"># latest version</span>
-<span class="variable">$ </span>pip install <span class="constant">SomePackage</span>==<span class="number">1.0</span>.<span class="number">4</span>     <span class="comment"># specific version</span>
-<span class="variable">$ </span>pip install <span class="string">'SomePackage&gt;=1.0.4'</span>     <span class="comment"># minimum version</span>
+<pre><code>$ pip install SomePackage            # latest version
+$ pip install SomePackage==1.0.4     # specific version
+$ pip install &#39;SomePackage&gt;=1.0.4&#39;     # minimum version
 </code></pre><h3 id="卸载_packages">卸载 packages</h3>
-<pre><code>    <span class="variable">$ </span>pip install <span class="constant">SomePackage</span>
+<pre><code>    $ pip install SomePackage
 </code></pre><p>所以，在成功安装了 pip之后，可以使用 pip 安装 Django</p>
-<pre><code><span class="attribute">pip install Django=</span>=<span class="string">1.6.5</span>
+<pre><code>pip install Django==1.6.5
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -217,7 +217,7 @@ pip install -U se">
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -227,6 +227,8 @@ pip install -U se">
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -256,7 +258,7 @@ pip install -U se">
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

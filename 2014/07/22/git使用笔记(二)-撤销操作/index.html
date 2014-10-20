@@ -98,12 +98,12 @@
 <h5 id="取消已经暂存的修改">取消已经暂存的修改</h5>
 <p>就像前面说的，习惯性的 “add -A” 将暂时不想添加的修改添加到了暂存区。而取消已经暂存的修改的方法，git 已经在你每次使用 <code>git status</code> 查看文件状态的时候给出了解决方案，</p>
 <pre><code>➜  hexo-theme git:(master) ✗ git status
-<span class="keyword">On</span> branch master
-Your branch <span class="keyword">is</span> ahead <span class="keyword">of</span> <span class="attribute">'origin</span>/master' by <span class="number">2</span> commits.
-  (<span class="keyword">use</span> <span class="string">"git push"</span> <span class="keyword">to</span> publish your local commits)
+On branch master
+Your branch is ahead of &#39;origin/master&#39; by 2 commits.
+  (use &quot;git push&quot; to publish your local commits)
 
-Changes <span class="keyword">to</span> be committed:
-  (<span class="keyword">use</span> <span class="string">"git reset HEAD &lt;file&gt;..."</span> <span class="keyword">to</span> unstage)
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
 
     modified:   processing/README.md
     modified:   processing/layout/_partial/navigation.jade
@@ -114,46 +114,46 @@ Changes <span class="keyword">to</span> be committed:
     modified:   processing/source/css/_partial/navigation.scss
     modified:   processing/source/css/style.scss
 </code></pre><p>可以使用 git reset HEAD <file>… 的方式取消暂存。</file></p>
-<pre><code>➜  hexo-theme gi<span class="variable">t:</span>(master) ✗ git reset HEAD *
-Unstaged <span class="keyword">changes</span> after rese<span class="variable">t:</span>
+<pre><code>➜  hexo-theme git:(master) ✗ git reset HEAD *
+Unstaged changes after reset:
 M    processing/README.md
 M    processing/layout/_partial/navigation.jade
 M    processing/layout/_widget/archive.jade
 M    processing/layout/_widget/categories.jade
-M    processing/<span class="keyword">source</span>/css/_base/base.scss
-M    processing/<span class="keyword">source</span>/css/_base/variables.scss
-M    processing/<span class="keyword">source</span>/css/_partial/navigation.scss
-M    processing/<span class="keyword">source</span>/css/style.scss
+M    processing/source/css/_base/base.scss
+M    processing/source/css/_base/variables.scss
+M    processing/source/css/_partial/navigation.scss
+M    processing/source/css/style.scss
 </code></pre><p>这时再使用 <code>git status</code> 查看文件状态可以看到</p>
 <pre><code>➜  hexo-theme git:(master) ✗ git status
 On branch master
-Your branch is ahead of 'origin/master' by 2 commits.
-  (<span class="operator"><span class="keyword">use</span> <span class="string">"git push"</span> <span class="keyword">to</span> publish your <span class="keyword">local</span> commits)
+Your branch is ahead of &#39;origin/master&#39; by 2 commits.
+  (use &quot;git push&quot; to publish your local commits)
 
-Changes <span class="keyword">not</span> staged <span class="keyword">for</span> <span class="keyword">commit</span>:
-  (<span class="keyword">use</span> <span class="string">"git add &lt;file&gt;..."</span> <span class="keyword">to</span> <span class="keyword">update</span> what will be committed)
-  (<span class="keyword">use</span> <span class="string">"git checkout -- &lt;file&gt;..."</span> <span class="keyword">to</span> discard changes <span class="keyword">in</span> working directory)
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
 
     modified:   processing/README.md
     modified:   processing/layout/_partial/navigation.jade
     modified:   processing/layout/_widget/archive.jade
     modified:   processing/layout/_widget/categories.jade
     modified:   processing/source/css/_base/base.scss
-    modified:   processing/source/css/_base/<span class="keyword">variables</span>.scss
+    modified:   processing/source/css/_base/variables.scss
     modified:   processing/source/css/_partial/navigation.scss
     modified:   processing/source/css/style.scss
 
-<span class="keyword">no</span> changes added <span class="keyword">to</span> <span class="keyword">commit</span> (<span class="keyword">use</span> <span class="string">"git add"</span> <span class="keyword">and</span>/<span class="keyword">or</span> <span class="string">"git commit -a"</span>)</span>
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
 </code></pre><p>可以看到，现在所有的修改都没有被暂存。</p>
 <h5 id="取消对文件的修改">取消对文件的修改</h5>
 <p>有一次，我正修复一个bug，修改本地仓库的一个文件，还没有完成时，同伴告诉我他已经修改好了，并且已经提交到远程了。我停下手头的工作，准备 pull ，这时候意识到，如果直接 pull，merge 的时候必然会冲突，因为我和同事同时修改了同一个文件的差不多相同的地方。但是我自己修改了文件很多地方，一味的 CTRL+Z 也难以解决问题，此时我需要将我修改的文件返回到修改之前的状态。很凑巧的是，在执行 <code>git status</code> 时，同样也给出了具体的撤销方法。</p>
 <pre><code>➜  hexo-theme git:(master) git status
-<span class="keyword">On</span> branch master
-Your branch <span class="keyword">is</span> up-<span class="keyword">to</span>-date <span class="keyword">with</span> <span class="attribute">'origin</span>/master'.
+On branch master
+Your branch is up-to-date with &#39;origin/master&#39;.
 
-Changes <span class="keyword">not</span> staged <span class="keyword">for</span> commit:
-  (<span class="keyword">use</span> <span class="string">"git add &lt;file&gt;..."</span> <span class="keyword">to</span> update what will be committed)
-  (<span class="keyword">use</span> <span class="string">"git checkout -- &lt;file&gt;..."</span> <span class="keyword">to</span> discard changes <span class="keyword">in</span> working directory)
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
 
     modified:   processing/layout/_widget/archive.jade
     modified:   processing/layout/_widget/categories.jade
@@ -161,24 +161,24 @@ Changes <span class="keyword">not</span> staged <span class="keyword">for</span>
     modified:   processing/layout/layout.jade
     modified:   processing/source/css/_base/base.scss
 
-no changes added <span class="keyword">to</span> commit (<span class="keyword">use</span> <span class="string">"git add"</span> <span class="keyword">and</span>/<span class="keyword">or</span> <span class="string">"git commit -a"</span>)
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
 </code></pre><p>使用 <code>git checkout -- &lt;filename&gt;</code> 来取消工作目录中的修改。</p>
 <pre><code>➜  hexo-theme git:(master) ✗ git checkout -- *
 ➜  hexo-theme git:(master) git status
-<span class="keyword">On</span> branch master
-Your branch <span class="keyword">is</span> up-<span class="keyword">to</span>-<span class="built_in">date</span> <span class="keyword">with</span> <span class="comment">'origin/master'.</span>
+On branch master
+Your branch is up-to-date with &#39;origin/master&#39;.
 
-<span class="literal">nothing</span> <span class="keyword">to</span> commit, working directory clean
+nothing to commit, working directory clean
 </code></pre><p>效果显而易见！！这条命令有些危险，所有对文件的修改都没有了。如果一个不小心将自己需要的修改 discard 了，那就只有哭了……</p>
 <h5 id="修改最后一次的提交">修改最后一次的提交</h5>
 <p>有时候在提交时，发现自己漏掉或者多选了几个文件，亦或者提交信息写错了，想要撤销刚才的提交操作，可以使用 <code>--amend</code> 这个选项，重新提交</p>
-<pre><code>➜  hexo-theme gi<span class="variable">t:</span>(master) ✗ git <span class="built_in">add</span> -A
-➜  hexo-theme gi<span class="variable">t:</span>(master) ✗ git commit -<span class="keyword">m</span> <span class="string">"commit wrong"</span>
+<pre><code>➜  hexo-theme git:(master) ✗ git add -A
+➜  hexo-theme git:(master) ✗ git commit -m &quot;commit wrong&quot;
 [master ebcbab2] commit wrong
- <span class="number">4</span> <span class="keyword">files</span> changed, <span class="number">78</span> insertions(+), <span class="number">106</span> deletions(-)
- rewrite processing/<span class="keyword">source</span>/css/_base/base.scss (<span class="number">64</span>%)
+ 4 files changed, 78 insertions(+), 106 deletions(-)
+ rewrite processing/source/css/_base/base.scss (64%)
 </code></pre><p>发现自己提交了一个 “commit wrong” 的错误提交信息，也不用太紧张，输入指令</p>
-<pre><code>git <span class="operator"><span class="keyword">commit</span> <span class="comment">--amend </span></span>
+<pre><code>git commit --amend 
 </code></pre><p>之后，会跳转到命令行中的 vim 中，提示你修改提交信息。只要没有推送到远程端，一切都好说～</p>
   
 	</div>
@@ -279,7 +279,7 @@ Your branch <span class="keyword">is</span> up-<span class="keyword">to</span>-<
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -289,6 +289,8 @@ Your branch <span class="keyword">is</span> up-<span class="keyword">to</span>-<
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -318,7 +320,7 @@ Your branch <span class="keyword">is</span> up-<span class="keyword">to</span>-<
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

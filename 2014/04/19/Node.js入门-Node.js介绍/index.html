@@ -108,16 +108,16 @@
 <li>客户端JavaScript编译器</li>
 </ul>
 <p>Node.js 可以作为服务器提供服务，他跳过了类似 Apache，IIS 等 HTTP 服务器，内建了 HTTP 服务器支持，无需额外搭建一个 HTTP 服务器，便可以轻而易举地实现网站和服务器的组合。</p>
-<pre><code><span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">"http"</span>);
-http.createServer(<span class="function"><span class="keyword">function</span><span class="params">(req,res)</span></span>{
-    res.writeHead(<span class="number">200</span>,{<span class="string">"Content-Type"</span>:<span class="string">"text/plain"</span>});
-    res.end(<span class="string">"Hello,CrispElite!\n"</span>);
-}).listen(<span class="number">3000</span>,<span class="string">"127.0.0.1"</span>);<span class="comment">//</span>
-<span class="built_in">console</span>.log(<span class="string">"服务器已启动：http://127.0.0.14:3000/"</span>);
+<pre><code>var http=require(&quot;http&quot;);
+http.createServer(function(req,res){
+    res.writeHead(200,{&quot;Content-Type&quot;:&quot;text/plain&quot;});
+    res.end(&quot;Hello,CrispElite!\n&quot;);
+}).listen(3000,&quot;127.0.0.1&quot;);//
+console.log(&quot;服务器已启动：http://127.0.0.14:3000/&quot;);
 </code></pre><p>将代码保存为 server.js ，从终端或者CMD中运行这个程序：</p>
-<pre><code>node <span class="keyword">server</span>.js <span class="comment">// 必须先安装好Node.js环境</span>
+<pre><code>node server.js // 必须先安装好Node.js环境
 </code></pre><p>如果成功启动服务器，那么在终端或者CMD中可以看到类似这样的显示：</p>
-<pre><code>你的服务器已启动：http:<span class="comment">//127.0.0.14:3000/</span>
+<pre><code>你的服务器已启动：http://127.0.0.14:3000/
 </code></pre><p>用浏览器访问”<a href="http://127.0.0.14:3000/" target="_blank" rel="external">http://127.0.0.14:3000/</a>“ (代码中 listen() 指定的地址)<br><img src="http://cl.ly/image/1u2K2Y351b3O/nodeserver.png" alt="Node server"></p>
 <p>Node.js 还可以部署到非网络应用的环境下，比如命令行。甚至可以调用 C/C++ 的代码，充分利用已经拥有的诸多函数库。</p>
 <h2 id="异步式_I/O_与事件驱动">异步式 I/O 与事件驱动</h2>
@@ -129,29 +129,29 @@ http.createServer(<span class="function"><span class="keyword">function</span><s
 <p>阻塞模式下，一个线程只能处理一项任务，想提高吞吐量必须通过多线程。而非阻塞模式下，一个线程永远在执行计算操作， I/O 以事件的方式通知。多线程带来的好处仅仅是在多核 CPU 的情况下利用更多核，而 Node.js 的单线程也能带来同样的好处。这就是为什么 Node.js 使用了单线程，非阻塞的事件编程模式。  </p>
 <p>单线程事件驱动的异步I/O 比传统的多线程阻塞式 I/O 的好处在于：异步式 I/O  少了了多线程的开销。具体细节请看<a href="&quot;http://baike.baidu.com/view/65706.htm#4&quot;">link</a> </p>
 <p>比如：简单的数据库查询操作，按照传统的方式实现的代码如下：</p>
-<pre><code><span class="keyword">res</span>=db.query(<span class="string">"SELECT * from someTable"</span>);
-<span class="keyword">res</span>.output();
+<pre><code>res=db.query(&quot;SELECT * from someTable&quot;);
+res.output();
 </code></pre><p>执行到第一行的时候，线程会阻塞，直到数据库返回查询结果。然后再继续处理。当涉及到磁盘读写，网络通信时，时延可能非常大，线程会阻塞等待结果返回。对于高并发的访问，一方面线程长期阻塞等待，另一方面为了应付新的请求而不断增加线程，因此浪费大量系统资源。而对于 Node.js 来说，是这样的</p>
-<pre><code>db.query(<span class="string">"SELECT * from someTable"</span>,<span class="function"><span class="keyword">function</span><span class="params">(res)</span></span>{
+<pre><code>db.query(&quot;SELECT * from someTable&quot;,function(res){
     res.output();
 });
 </code></pre><p>进程在执行到 db.query 时，不会等待结果返回，而是直接继续执行后面的语句，直到进入事件循环。</p>
 <h2 id="Node-js_的模块(_Module_)和包(_Package_)">Node.js 的模块( Module )和包( Package )</h2>
 <p>模块( Module )和包( Package )是 Node.js 最重要的支柱。通过 npm 安装需要的模块，使用 require 函数来调用其他模块。<br>npm 是 Node.js 的包管理器。允许我们下载、安装、升级、删除包。npm 之于 Node.js ，就像 pip 之于 Python，gem 之于 Ruby。<br>安装好 npm 之后，可以从终端或者CMD开始安装模块。</p>
-<pre><code><span class="tag">npm</span> <span class="tag">install</span> <span class="attr_selector">[module_name]</span>
+<pre><code>npm install [module_name]
 </code></pre><p>模块安装成功后，会被放置在当前目录的 node_modules 文件夹中。在使用 npm 安装包的时候，有两种模式：<strong>本地模式</strong>和<strong>全局模式</strong>。默认情况下使用 npm install 命令就是本地模式，将包安装到当前目录的 node_modules 子文件夹中。另外一种被称为全局模式：npm install -g [modules_name] 。本地模式仅仅将包安装到 node_modules 文件夹中，并不会注册 PATH 环境变量，即无法在命令行中直接使用，在 window 上 会提示“不是内部命令”之类的。而使用全局模式的时候，包会安装在系统目录中，在 window 中会安装到 “C:\Users\yourUserName” 中，同时可以在命令行中直接使用命令。但是使用全局模式安装的包并不能直接在 JavaScript 文件中使用 require 获得。</p>
 <p>总而言之，当需要将某个包作为工程运作时的一部分时，通过本地模式获取，如果要在命令行中使用，则使用全局安装。</p>
 <h2 id="关于调试">关于调试</h2>
 <h3 id="我爱F5">我爱F5</h3>
 <p>在开发 Node.js 实现的 HTTP 应用时，无论修改了代码的哪一部分，都必须重新运行才能奏效。因为 Node.js 只有在第一次引用到某部分时才会解析脚本文件，之后都会直接访问内存，避免重复载入，以提高速度。 supervisor 可以监视代码的修改，并自动重启Node.js。使用 npm 以全局模式安装 supervisor 之后，可以直接在命令行中使用下面的命令启动 server.js。</p>
-<pre><code>supervisor <span class="keyword">server</span>.js 
+<pre><code>supervisor server.js 
 </code></pre><h3 id="调试方法">调试方法</h3>
 <p>调试的方法有：命令行调试，使用 Eclipse 调试等。个人倾向使用 node-inspector 进行调试。</p>
 <h4 id="使用_node-inspector">使用 node-inspector</h4>
-<pre><code>npm install -g node-inspector <span class="comment">//命令安装 node-inspector </span>
+<pre><code>npm install -g node-inspector //命令安装 node-inspector 
 </code></pre><p>然后在终端或者CMD中敲入</p>
-<pre><code>node --<span class="keyword">debug</span>-brk=<span class="number">5858</span> filename.js  <span class="comment">//连接你要测试的脚本的调试服务器</span>
-node-inspector                  <span class="comment">//另开一个窗口，启动 node-inspector 。</span>
+<pre><code>node --debug-brk=5858 filename.js  //连接你要测试的脚本的调试服务器
+node-inspector                  //另开一个窗口，启动 node-inspector 。
 </code></pre><p>在浏览器中打开 “<a href="http://127.0.0.1:3000/debug?port=5858”" target="_blank" rel="external">http://127.0.0.1:3000/debug?port=5858”</a> ，便可以看到调试工具。<br>具体可以<a href="http://www.cnblogs.com/dolphinX/p/3485345.html" target="_blank" rel="external">点这里</a> 。</p>
 <p><strong>个人笔记，仅供参考</strong></p>
 <blockquote>
@@ -259,7 +259,7 @@ node-inspector                  <span class="comment">//另开一个窗口，启
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -269,6 +269,8 @@ node-inspector                  <span class="comment">//另开一个窗口，启
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -298,7 +300,7 @@ node-inspector                  <span class="comment">//另开一个窗口，启
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

@@ -96,456 +96,456 @@
 <h2 id="变量(variable)">变量(variable)</h2>
 <p>sass可以像编程一样编写CSS。在sass中可以声明变量，并在整个样式表中调用，是不是很酷？你可以在文件的任意位置声明变量，但是必须先声明才能使用。</p>
 <p>变量的声明必须是<strong>$开头</strong>，后面接着变量名，（就像php一样），而变量名和变量值之间则用：连接（就像写CSS一样）。在值的后面加上<strong>!default</strong>表示默认值。如果变量需要镶嵌在字符串之中，就必须需要写在#{}之中。</p>
-<pre><code><span class="comment">//单行注释，不会被编译在CSS文件上</span>
-<span class="comment">/*基本样式定义*/</span>
+<pre><code>//单行注释，不会被编译在CSS文件上
+/*基本样式定义*/
 
-<span class="comment">//这里是声明变量</span>
-<span class="variable">$globalFontSize</span><span class="value">:<span class="number">1em</span>;</span>
-<span class="variable">$headerH1</span><span class="value">:<span class="number">1.5em</span>;</span>
-<span class="variable">$bodyBgRed</span><span class="value">:red;</span>
-<span class="variable">$textColor</span><span class="value">:<span class="hexcolor">#343</span> !default;</span><span class="comment">//默认值</span>
-<span class="variable">$SIZE</span><span class="value">:size;</span>
+//这里是声明变量
+$globalFontSize:1em;
+$headerH1:1.5em;
+$bodyBgRed:red;
+$textColor:#343 !default;//默认值
+$SIZE:size;
 
-<span class="comment">//这里调用变量，先声明才能调用</span>
-<span class="tag">body</span>{
-    <span class="attribute">font</span>-#{<span class="variable">$SIZE</span>}<span class="value">:<span class="variable">$globalFontSize</span>;</span>
-    <span class="attribute">background</span><span class="value">:<span class="variable">$bodyBgRed</span>;</span>
-    <span class="attribute">color</span><span class="value">:<span class="variable">$textColor</span>;</span>
+//这里调用变量，先声明才能调用
+body{
+    font-#{$SIZE}:$globalFontSize;
+    background:$bodyBgRed;
+    color:$textColor;
 }
 
 ------------
 
-<span class="comment">//编译后得到的CSS</span>
-<span class="comment">/*基本样式定义*/</span>
-<span class="tag">body</span> {
-  <span class="attribute">font-size</span><span class="value">: <span class="number">1em</span>;</span>
-  <span class="attribute">background</span><span class="value">: red;</span>
-  <span class="attribute">color</span><span class="value">: <span class="hexcolor">#334433</span>;</span> 
+//编译后得到的CSS
+/*基本样式定义*/
+body {
+  font-size: 1em;
+  background: red;
+  color: #334433; 
 }
 </code></pre><p>也可以在写CSS部分的时候重新定义属性值，这样我们就不用修改引用的文件，只要重新定义需要修改的变量就可以了。</p>
-<pre><code><span class="comment">//这里重新定义属性值</span>
-<span class="tag">body</span>{
-    <span class="attribute">font-size</span><span class="value">:<span class="variable">$globalFontSize</span>;</span>
-    <span class="attribute">background</span><span class="value">:<span class="variable">$bodyBgRed</span>;</span>
-    <span class="attribute">color</span><span class="value">:<span class="hexcolor">#999</span>;</span><span class="comment">//重新定义了color的值</span>
+<pre><code>//这里重新定义属性值
+body{
+    font-size:$globalFontSize;
+    background:$bodyBgRed;
+    color:#999;//重新定义了color的值
 }
 
 ------------
 
-<span class="comment">//编译后得到的CSS</span>
-<span class="tag">body</span> {
-  <span class="attribute">font-size</span><span class="value">: <span class="number">1em</span>;</span>
-  <span class="attribute">background</span><span class="value">: red;</span>
-  <span class="attribute">color</span><span class="value">: <span class="hexcolor">#999</span>;</span> 
+//编译后得到的CSS
+body {
+  font-size: 1em;
+  background: red;
+  color: #999; 
 }
 </code></pre><p>一个变量也可以设置多个值，通过<strong>nth($variables,index)</strong>来调用其中的值,<strong>其中index从1开始，不是0。</strong></p>
-<pre><code><span class="comment">//声明变量</span>
-<span class="variable">$textColor</span><span class="value">:<span class="hexcolor">#343434</span> <span class="hexcolor">#f00</span> <span class="hexcolor">#fff</span> <span class="hexcolor">#456</span> !default;</span>
-<span class="comment">//调用</span>
-<span class="tag">body</span>{
-    <span class="attribute">color</span><span class="value">:<span class="function">nth</span>(<span class="variable">$textColor</span>,<span class="number">1</span>);</span><span class="comment">//选择了$textColor的第一个值#343434</span>
+<pre><code>//声明变量
+$textColor:#343434 #f00 #fff #456 !default;
+//调用
+body{
+    color:nth($textColor,1);//选择了$textColor的第一个值#343434
 }
-<span class="tag">a</span>{
-    <span class="attribute">color</span><span class="value">:<span class="function">nth</span>(<span class="variable">$textColor</span>,<span class="number">2</span>);</span><span class="comment">//选择了$textColor的第二个值#f00</span>
+a{
+    color:nth($textColor,2);//选择了$textColor的第二个值#f00
 }
-<span class="tag">p</span>{
-    <span class="attribute">color</span><span class="value">:<span class="variable">$textColor</span>;</span>
+p{
+    color:$textColor;
 }
 
 ----------
 
-<span class="comment">//编译后得到的CSS</span>
-<span class="tag">body</span> {
-    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#343434</span>;</span>
+//编译后得到的CSS
+body {
+    color: #343434;
 }
-<span class="tag">a</span> {
-    <span class="attribute">color</span><span class="value">: red;</span>
+a {
+    color: red;
 }
-<span class="tag">p</span> {
-    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#343434</span> red white <span class="hexcolor">#445566</span>;</span>
+p {
+    color: #343434 red white #445566;
 }
 
-<span class="comment">//**p部分编译之后color的属性值包括了$textColor所有的值；**</span>
-<span class="comment">//color:#343434 #f00 #fff #456;</span>
+//**p部分编译之后color的属性值包括了$textColor所有的值；**
+//color:#343434 #f00 #fff #456;
 </code></pre><h2 id="嵌套(nesting)">嵌套(nesting)</h2>
 <p>sass分两种嵌套：一种是<strong>选择器嵌套</strong>；一种是<strong>属性嵌套</strong>。  </p>
 <h3 id="选择器嵌套">选择器嵌套</h3>
 <p>通过在一个选择器中嵌套另一个选择器实现继承。在嵌套过程中。可以用&amp;表示父元素选择器。  </p>
-<pre><code><span class="comment">//sass</span>
-<span class="variable">$float</span><span class="pseudo">:left</span> <span class="attribute">right</span>;
-<span class="variable">$navBg</span><span class="value">:<span class="hexcolor">#345</span>;</span>
-<span class="class">.nav</span>{
-    <span class="attribute">padding</span><span class="value">:<span class="number">10px</span>;</span>
-    <span class="attribute">width</span><span class="value">:<span class="number">960px</span>;</span>
-    <span class="attribute">background</span><span class="value">:<span class="variable">$navBg</span>;</span>
-    <span class="tag">li</span>{
-        <span class="attribute">float</span><span class="value">:<span class="function">nth</span>(<span class="variable">$float</span>,<span class="number">1</span>);</span>
+<pre><code>//sass
+$float:left right;
+$navBg:#345;
+.nav{
+    padding:10px;
+    width:960px;
+    background:$navBg;
+    li{
+        float:nth($float,1);
     }
-    <span class="tag">a</span>{
-        <span class="attribute">display</span><span class="value">:block;</span>
-        <span class="attribute">padding</span><span class="value">:<span class="number">5px</span> <span class="number">10px</span>;</span>
-        <span class="attribute">color</span><span class="value">:<span class="hexcolor">#fff</span>;</span>
+    a{
+        display:block;
+        padding:5px 10px;
+        color:#fff;
         &amp;{
-            <span class="comment">/*写在a的内部第一层*/</span>            
-            <span class="attribute">font-size</span><span class="value">:<span class="number">30px</span>;</span>
+            /*写在a的内部第一层*/            
+            font-size:30px;
         }
     }
     &amp;{
-        <span class="comment">/*写在a的外部，.nav的内部第一层*/</span>
-        <span class="attribute">font-size</span><span class="value">:<span class="number">30px</span>;</span>
+        /*写在a的外部，.nav的内部第一层*/
+        font-size:30px;
     }
 }
 
 --------
-<span class="comment">//编译后的CSS    </span>
- <span class="class">.nav</span> {
-    <span class="attribute">padding</span><span class="value">: <span class="number">10px</span>;</span>
-    <span class="attribute">width</span><span class="value">: <span class="number">960px</span>;</span>
-    <span class="attribute">background</span><span class="value">: <span class="hexcolor">#334455</span>;</span>
+//编译后的CSS    
+ .nav {
+    padding: 10px;
+    width: 960px;
+    background: #334455;
 }
-<span class="class">.nav</span> <span class="tag">li</span> {
-    <span class="attribute">float</span><span class="value">: left;</span>
+.nav li {
+    float: left;
 }
-<span class="class">.nav</span> <span class="tag">a</span> {
-    <span class="attribute">display</span><span class="value">: block;</span>
-    <span class="attribute">padding</span><span class="value">: <span class="number">5px</span> <span class="number">10px</span>;</span>
-    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#fff</span>;</span>
+.nav a {
+    display: block;
+    padding: 5px 10px;
+    color: #fff;
 }
-<span class="class">.nav</span> <span class="tag">a</span> {
-    <span class="comment">/*写在a的内部第一层*/</span>
-    <span class="attribute">font-size</span><span class="value">: <span class="number">30px</span>;</span>
+.nav a {
+    /*写在a的内部第一层*/
+    font-size: 30px;
 }
-<span class="class">.nav</span> {
-    <span class="comment">/*写在a的外部，.nav的内部第一层*/</span>
-    <span class="attribute">font-size</span><span class="value">: <span class="number">30px</span>;</span>
+.nav {
+    /*写在a的外部，.nav的内部第一层*/
+    font-size: 30px;
 }
 </code></pre><h3 id="属性嵌套">属性嵌套</h3>
 <p>有些CSS属性有相同的单词开头，如background，可以利用属性嵌套来编写。  </p>
-<pre><code><span class="comment">//sass</span>
-<span class="tag">body</span>{
-    <span class="attribute">background</span><span class="value">:{
-        color:<span class="hexcolor">#343</span>;</span>
-        image<span class="value">:<span class="function">url</span>(../images/bg.png);</span>
-        <span class="value">repeat</span><span class="value">:repeat;</span>
-        <span class="attribute">position</span><span class="pseudo">:left</span> <span class="attribute">top</span>;
-        attachment<span class="value">:scroll;</span>
-        <span class="attribute">clip</span><span class="value">:content-box;</span>
-        size<span class="value">:<span class="number">50%</span>;</span>
+<pre><code>//sass
+body{
+    background:{
+        color:#343;
+        image:url(../images/bg.png);
+        repeat:repeat;
+        position:left top;
+        attachment:scroll;
+        clip:content-box;
+        size:50%;
     }
 }
 
 -------
 
-<span class="comment">//编译后的CSS</span>
+//编译后的CSS
 
-<span class="tag">body</span> {
-  <span class="attribute">background-color</span><span class="value">: <span class="hexcolor">#343</span>;</span>
-  <span class="attribute">background-image</span><span class="value">: <span class="function">url</span>(../images/bg.png);</span>
-  <span class="attribute">background-repeat</span><span class="value">: repeat;</span>
-  <span class="attribute">background-position</span><span class="value">: left top;</span>
-  <span class="attribute">background-attachment</span><span class="value">: scroll;</span>
-  <span class="attribute">background-clip</span><span class="value">: content-box;</span>
-  <span class="attribute">background-size</span><span class="value">: <span class="number">50%</span>;</span>
+body {
+  background-color: #343;
+  background-image: url(../images/bg.png);
+  background-repeat: repeat;
+  background-position: left top;
+  background-attachment: scroll;
+  background-clip: content-box;
+  background-size: 50%;
 }
 </code></pre><h2 id="混合(mixin)">混合(mixin)</h2>
 <p>估计mixin可以算是sass中最强大的特性，利用mixin可以将一部分CSS从代码中抽出，定义成一个模块重复使用。可以在公用的样式中定义一个mixin模块，需要的时候直接调用就好了。同时，mixin还可以传递参数，尼玛越来越向编程了……</p>
 <h4 id="声明一个mixin模块">声明一个mixin模块</h4>
 <p>使用<strong>@mixin</strong>声明一个mixin，后面紧接着mixin的名，可以传递参数，同时给参数设定一个默认值。 但是要注意，参数也是要用$开始，而且参数名和参数值是用<strong>冒号</strong>分开。如果一个属性有多个值，比如box-shadow等，那参数就用变量名加上三个点表示” <strong>$variable…</strong> “ 。</p>
-<pre><code><span class="comment">//声明一个mixin模块</span>
-<span class="comment">//boxRect</span>
-<span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> boxRect</span>(<span class="variable">$W</span>:<span class="number">20px</span>,<span class="variable">$H</span>:<span class="number">20px</span>){</span>
-    <span class="attribute">width</span><span class="value">:<span class="variable">$W</span>;</span>
-    <span class="attribute">height</span><span class="value">:<span class="variable">$H</span>;</span>
+<pre><code>//声明一个mixin模块
+//boxRect
+@mixin boxRect($W:20px,$H:20px){
+    width:$W;
+    height:$H;
 }
-<span class="comment">//box-shadow</span>
-<span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> shadow</span>(<span class="variable">$shadow</span>...){</span>
-    -webkit-<span class="attribute">box-shadow</span><span class="value">:<span class="variable">$shadow</span>;</span>
-    -moz-<span class="attribute">box-shadow</span><span class="value">:<span class="variable">$shadow</span>;</span>
-    -o-<span class="attribute">box-shadow</span><span class="value">:<span class="variable">$shadow</span>;</span>
-    <span class="attribute">box-shadow</span><span class="value">:<span class="variable">$shadow</span>;</span>
+//box-shadow
+@mixin shadow($shadow...){
+    -webkit-box-shadow:$shadow;
+    -moz-box-shadow:$shadow;
+    -o-box-shadow:$shadow;
+    box-shadow:$shadow;
 }
 </code></pre><p>上述代码简单的声明了两个mixin模块。</p>
 <h4 id="调用声明的mixin模块">调用声明的mixin模块</h4>
 <p>用<strong>@include</strong>调用已经声明的模块。<br>在@include之后紧接着mixin模块名，就像调用函数一样（尼玛简直就是在编程啊），如果模块有默认参数。模块后面的括号可以省略。</p>
-<pre><code><span class="comment">//sass</span>
-<span class="class">.boxRect400</span>{
-    <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> boxRect</span>();</span><span class="comment">//不加参数，使用默认参数，可以省略括号,也可以留着</span>
+<pre><code>//sass
+.boxRect400{
+    @include boxRect();//不加参数，使用默认参数，可以省略括号,也可以留着
 }
-<span class="class">.boxRect200</span>{
-    <span class="comment">/*调用了boxRect模块*/</span>
-    <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> boxRect</span>(<span class="number">20px</span>,<span class="number">10px</span>);</span>
+.boxRect200{
+    /*调用了boxRect模块*/
+    @include boxRect(20px,10px);
 }
-<span class="class">.shadow</span>{
-    <span class="comment">/*调用了shadow模块*/</span>
-    <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> shadow</span>(<span class="number">0</span><span class="preprocessor"> 1px</span><span class="preprocessor"> 1px</span><span class="preprocessor"> rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.5</span>));</span>
+.shadow{
+    /*调用了shadow模块*/
+    @include shadow(0 1px 1px rgba(0,0,0,0.5));
 }    
-<span class="class">.nav</span>{
-    <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> boxRect</span>(<span class="number">10px</span>,<span class="number">10px</span>);</span>
-    <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> shadow</span>(<span class="number">0</span><span class="preprocessor"> 1px</span><span class="preprocessor"> 1px</span><span class="preprocessor"> rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.5</span>));</span>
-    &amp;<span class="pseudo">:hover</span>{
-        <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> shadow</span>(<span class="number">0</span><span class="preprocessor"> 2px</span><span class="preprocessor"> 3px</span><span class="preprocessor"> rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.7</span>));</span>
+.nav{
+    @include boxRect(10px,10px);
+    @include shadow(0 1px 1px rgba(0,0,0,0.5));
+    &amp;:hover{
+        @include shadow(0 2px 3px rgba(0,0,0,0.7));
     }
 } 
 
 -------
 
-<span class="comment">//编译后的CSS</span>
- <span class="class">.boxRect400</span> {
-    <span class="attribute">width</span><span class="value">: <span class="number">20px</span>;</span>
-    <span class="attribute">height</span><span class="value">: <span class="number">20px</span>;</span>
+//编译后的CSS
+ .boxRect400 {
+    width: 20px;
+    height: 20px;
 }
-<span class="class">.boxRect200</span> {
-    <span class="comment">/*调用了boxRect模块*/</span>
-    <span class="attribute">width</span><span class="value">: <span class="number">20px</span>;</span>
-    <span class="attribute">height</span><span class="value">: <span class="number">10px</span>;</span>
+.boxRect200 {
+    /*调用了boxRect模块*/
+    width: 20px;
+    height: 10px;
 }
-<span class="class">.shadow</span> {
-    <span class="comment">/*调用了shadow模块*/</span>
-    -webkit-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">1px</span> <span class="number">1px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>);</span>
-    -moz-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">1px</span> <span class="number">1px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>);</span>
-    -o-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">1px</span> <span class="number">1px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>);</span>
-    <span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">1px</span> <span class="number">1px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>);</span>
+.shadow {
+    /*调用了shadow模块*/
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
-<span class="class">.nav</span> {
-    <span class="attribute">width</span><span class="value">: <span class="number">10px</span>;</span>
-    <span class="attribute">height</span><span class="value">: <span class="number">10px</span>;</span>
-    -webkit-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">1px</span> <span class="number">1px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>);</span>
-    -moz-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">1px</span> <span class="number">1px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>);</span>
-    -o-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">1px</span> <span class="number">1px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>);</span>
-    <span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">1px</span> <span class="number">1px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>);</span>
+.nav {
+    width: 10px;
+    height: 10px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
-<span class="class">.nav</span><span class="pseudo">:hover</span> {
-    -webkit-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">2px</span> <span class="number">3px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.7</span>);</span>
-    -moz-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">2px</span> <span class="number">3px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.7</span>);</span>
-    -o-<span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">2px</span> <span class="number">3px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.7</span>);</span>
-    <span class="attribute">box-shadow</span><span class="value">: <span class="number">0</span> <span class="number">2px</span> <span class="number">3px</span> <span class="function">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.7</span>);</span>
+.nav:hover {
+    -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
+    -o-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
 }
 </code></pre><h4 id="@content的诞生">@content的诞生</h4>
 <p>为了解决CSS3中@media带来的麻烦，sass引入了<strong>@content</strong>使得mixin可以接受一整块的样式。</p>
-<pre><code><span class="comment">//声明模块</span>
-<span class="comment">//这个模块包含了要定义的属性，和前面的讲到的使用是一样的</span>
-<span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> mediaContent</span>(){</span>
-    <span class="attribute">width</span><span class="value">:<span class="number">200px</span>;</span>
-    <span class="attribute">height</span><span class="value">:<span class="number">100px</span>;</span>
-    <span class="attribute">color</span><span class="value">:<span class="hexcolor">#345</span>;</span>
-    <span class="attribute">font-size</span><span class="value">:<span class="number">20px</span>;</span>
+<pre><code>//声明模块
+//这个模块包含了要定义的属性，和前面的讲到的使用是一样的
+@mixin mediaContent(){
+    width:200px;
+    height:100px;
+    color:#345;
+    font-size:20px;
 }
-<span class="comment">//使用@content来引入一整块样式</span>
-<span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> max-screen</span>(<span class="variable">$max</span>){</span>
-    <span class="at_rule">@<span class="keyword">media</span><span class="preprocessor"> screen</span><span class="preprocessor"> and</span> (max-width:<span class="variable">$max</span>){</span>
-        <span class="at_rule">@<span class="keyword">content</span>;</span><span class="comment">//接受的样式块从这里开始</span>
+//使用@content来引入一整块样式
+@mixin max-screen($max){
+    @media screen and (max-width:$max){
+        @content;//接受的样式块从这里开始
     }
 }
-<span class="comment">//调用模块</span>
-<span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> max-screen</span>(<span class="number">720px</span>){</span>
-    <span class="tag">body</span>{
-        <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> mediaContent</span>();</span>
+//调用模块
+@include max-screen(720px){
+    body{
+        @include mediaContent();
     }
 }
 
 -------
 
-<span class="comment">//编译后的CSS</span>
-<span class="at_rule">@<span class="keyword">media</span><span class="preprocessor"> screen</span><span class="preprocessor"> and</span> (max-width:<span class="preprocessor"> 720px</span>) {</span>
-  <span class="tag">body</span> {
-    <span class="attribute">width</span><span class="value">: <span class="number">200px</span>;</span>
-    <span class="attribute">height</span><span class="value">: <span class="number">100px</span>;</span>
-    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#345</span>;</span>
-    <span class="attribute">font-size</span><span class="value">: <span class="number">20px</span>;</span>
+//编译后的CSS
+@media screen and (max-width: 720px) {
+  body {
+    width: 200px;
+    height: 100px;
+    color: #345;
+    font-size: 20px;
   }
 }
 </code></pre><h2 id="继承(extend)">继承(extend)</h2>
 <p>@extend可以复制一个class或者ID中的属性，然后将它们添加到另一个class或者ID的属性列中。</p>
-<pre><code><span class="comment">//sass</span>
-<span class="comment">//sass</span>
-<span class="class">.blue_button</span>{
-    <span class="attribute">background</span><span class="value">:<span class="hexcolor">#336699</span>;</span>
-    <span class="attribute">font-weight</span><span class="value">:bold;</span>
-    <span class="attribute">color</span><span class="value">:white;</span>
-    <span class="attribute">padding</span><span class="value">:<span class="number">5px</span>;</span>
+<pre><code>//sass
+//sass
+.blue_button{
+    background:#336699;
+    font-weight:bold;
+    color:white;
+    padding:5px;
 }
-<span class="class">.org_button</span>{
-    <span class="attribute">border-color</span><span class="value">:orange;</span>
+.org_button{
+    border-color:orange;
 }
-<span class="comment">//对比一下@include</span>
-<span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> red_button</span>(){</span>
-    <span class="attribute">background</span><span class="value">:<span class="hexcolor">#f00</span>;</span>
-    <span class="attribute">font-weight</span><span class="value">:bold;</span>
-    <span class="attribute">color</span><span class="value">:white;</span>
-    <span class="attribute">padding</span><span class="value">:<span class="number">5px</span>;</span>
+//对比一下@include
+@mixin red_button(){
+    background:#f00;
+    font-weight:bold;
+    color:white;
+    padding:5px;
 }
-<span class="at_rule">@<span class="keyword">mixin</span><span class="preprocessor"> org_button</span>(){</span>
-    <span class="attribute">border-color</span><span class="value">:orange;</span>
+@mixin org_button(){
+    border-color:orange;
 }
-<span class="class">.checkout_button</span>{
-    <span class="comment">//继承了两个class</span>
-    <span class="at_rule">@<span class="keyword">extend</span><span class="preprocessor"> .blue_button</span>;</span>
-    <span class="at_rule">@<span class="keyword">extend</span><span class="preprocessor"> .org_button</span>;</span>
-    <span class="comment">//引用了两个模块</span>
-    <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> red_button</span>();</span>
-    <span class="at_rule">@<span class="keyword">include</span><span class="preprocessor"> org_button</span>();</span>
+.checkout_button{
+    //继承了两个class
+    @extend .blue_button;
+    @extend .org_button;
+    //引用了两个模块
+    @include red_button();
+    @include org_button();
 }
 
 
 -------
 
-<span class="comment">//编译之后的CSS</span>
-<span class="class">.blue_button</span>, <span class="class">.checkout_button</span> {
-    <span class="attribute">background</span><span class="value">: <span class="hexcolor">#336699</span>;</span>
-    <span class="attribute">font-weight</span><span class="value">: bold;</span>
-    <span class="attribute">color</span><span class="value">: white;</span>
-    <span class="attribute">padding</span><span class="value">: <span class="number">5px</span>;</span>
+//编译之后的CSS
+.blue_button, .checkout_button {
+    background: #336699;
+    font-weight: bold;
+    color: white;
+    padding: 5px;
 }
-<span class="class">.checkout_button</span> {
-    <span class="attribute">background</span><span class="value">: <span class="hexcolor">#f00</span>;</span>
-    <span class="attribute">font-weight</span><span class="value">: bold;</span>
-    <span class="attribute">color</span><span class="value">: white;</span>
-    <span class="attribute">padding</span><span class="value">: <span class="number">5px</span>;</span>
+.checkout_button {
+    background: #f00;
+    font-weight: bold;
+    color: white;
+    padding: 5px;
 }
 </code></pre><p>可以看到，使用@include即引用模块时，其实是以复制的形式添加目标的属性，而使用@extend即<br>继承时，则是将被继承的对象和自身联合，在文件中一起声明一次，大家都叫“联合声明”。</p>
 <h4 id="占位选择器">占位选择器</h4>
 <p>从3.2。0之后可以定义占位选择器%。<br>假设在基础文件中定义了很多基础的样式，然后实际上不管是否使用@extend继承相应的样式，所有的代码都会编译解析成CSS，这样一来就会有很多多余的CSS。占位选择器的诞生很好的解决了这个问题。添加了占位选择器之后，只有被继承了的部分才会被解析出来。</p>
-<pre><code><span class="comment">//sass</span>
+<pre><code>//sass
 %bgRed{
-    <span class="attribute">background</span><span class="value">:red;</span>
+    background:red;
 }
 bgBlue{
-    <span class="attribute">background</span><span class="value">:blue;</span>
+    background:blue;
 }
 %bgYellow{
-    <span class="attribute">background</span><span class="value">:yellow;</span>
+    background:yellow;
 }
-<span class="tag">body</span>{
-    <span class="at_rule">@<span class="keyword">extend</span> %bgRed;</span>
+body{
+    @extend %bgRed;
 }
 
 -------
 
-<span class="comment">//编译之后的CSS</span>
-<span class="tag">body</span> {
-    <span class="attribute">background</span><span class="value">: red;</span>
+//编译之后的CSS
+body {
+    background: red;
 }
-<span class="class">.bgBlue</span> {
-    <span class="attribute">background</span><span class="value">: blue;</span>
+.bgBlue {
+    background: blue;
 }
 </code></pre><p>定义了两个占位选择器%bgRed和%bgYellow，但是%bgYellow没有调用，所以在解析的时候便不会包含bgYellow部分。<br>占位选择器可以使CSS文件更加精炼简洁。一般用在定义基础的样式定义上。  </p>
 <h2 id="运算">运算</h2>
 <p>sass可以对数值进行加减乘除四则运算。注意运算符前面要加上一个空格。  </p>
-<pre><code><span class="variable">$baseFontSize</span><span class="value">:<span class="number">14px</span>;</span>
-<span class="variable">$baseWidth</span><span class="value">:<span class="number">200</span>;</span>
+<pre><code>$baseFontSize:14px;
+$baseWidth:200;
 
-<span class="comment">//</span>
-<span class="variable">$baseHeight</span><span class="value">:(<span class="variable">$baseFontSize</span> *<span class="variable">$baseWidth</span>)/<span class="number">2</span>+<span class="number">30</span>;</span>
-<span class="tag">body</span>{
-    <span class="attribute">height</span><span class="value">:<span class="variable">$baseHeight</span>;</span>
+//
+$baseHeight:($baseFontSize *$baseWidth)/2+30;
+body{
+    height:$baseHeight;
 }
 
 -------
 
-<span class="comment">//编译之后的CSS</span>
-<span class="tag">body</span> {
-  <span class="attribute">height</span><span class="value">: <span class="number">1430px</span>;</span>
+//编译之后的CSS
+body {
+  height: 1430px;
 }
 </code></pre><p>值得注意的是：在运算表达式中，如果有多个变量，最好保证只有一个带单位的变量，不然很有可能报错。上述的代码中，如果将$baaeWidth中的”200”改成”200px”,就有多个单位，将会报错，无法通过编译。</p>
 <h2 id="函数">函数</h2>
 <p>sass定义了一些很多函数可以使用，同时也可以自己定义函数，@function。<br>使用函数的方法也很简单，使用函数名加上括号就可以了，有参数的话就带上参数。  </p>
-<pre><code><span class="comment">//sass</span>
-@<span class="function"><span class="keyword">function</span> <span class="title">pxToRem</span><span class="params">(<span class="variable">$px</span>)</span></span>{
-    @<span class="keyword">return</span> <span class="variable">$px</span> / <span class="variable">$baseFontSize</span> *<span class="number">1</span>rem;
+<pre><code>//sass
+@function pxToRem($px){
+    @return $px / $baseFontSize *1rem;
 }
 </code></pre><h5 id="sass几个常见用的颜色函数">sass几个常见用的颜色函数</h5>
 <p>Lighten/Darken函数，修改亮度</p>
-<pre><code><span class="id">#page</span>{
-    <span class="attribute">color</span><span class="value">:<span class="function">lighten</span>(<span class="hexcolor">#336699</span>,<span class="number">20%</span>);</span>
+<pre><code>#page{
+    color:lighten(#336699,20%);
 }
-<span class="comment">//编译后的CSS</span>
-<span class="id">#page</span>{
-    <span class="attribute">color</span><span class="value">:<span class="hexcolor">#6699cc</span>;</span>
+//编译后的CSS
+#page{
+    color:#6699cc;
 }
 </code></pre><p>Saturate/Desaturate函数，修改饱和度</p>
-<pre><code><span class="variable">$main_color</span><span class="value">:<span class="hexcolor">#336699</span>;</span>
-<span class="id">#page</span>{
-    <span class="attribute">color</span><span class="value">:<span class="function">saturate</span>(<span class="variable">$main_color</span>,<span class="number">30%</span>);</span>
+<pre><code>$main_color:#336699;
+#page{
+    color:saturate($main_color,30%);
 }
-<span class="comment">//编译后的CSS</span>
-<span class="id">#page</span>{
-    <span class="attribute">color</span><span class="value">:<span class="hexcolor">#1466b8</span>;</span>
+//编译后的CSS
+#page{
+    color:#1466b8;
 }
 </code></pre><p>adjust-hue函数，修改色度</p>
-<pre><code><span class="variable">$main_color</span><span class="value">:<span class="hexcolor">#336699</span>;</span>
-<span class="id">#page</span>{
-    <span class="attribute">color</span><span class="value">:<span class="function">adjust-hue</span>(<span class="variable">$main_color</span>,<span class="number">180</span>);</span>
+<pre><code>$main_color:#336699;
+#page{
+    color:adjust-hue($main_color,180);
 }
-<span class="id">#page</span>{
-    <span class="attribute">color</span><span class="value">:<span class="function">adjust-hue</span>(<span class="function">desaturate</span>(<span class="variable">$main_color</span>,<span class="number">10%</span>),<span class="number">90</span>);</span>
+#page{
+    color:adjust-hue(desaturate($main_color,10%),90);
 }
 
-<span class="comment">//编译之后的CSS</span>
-<span class="id">#page</span> {
-  <span class="attribute">color</span><span class="value">: <span class="hexcolor">#996633</span>;</span> }
+//编译之后的CSS
+#page {
+  color: #996633; }
 
-<span class="id">#page</span> {
-  <span class="attribute">color</span><span class="value">: <span class="hexcolor">#8f3d8f</span>;</span> 
+#page {
+  color: #8f3d8f; 
 }
 </code></pre><p>grayscale函数，100%\降低饱和度，这个方法与下面代码是一样的效果。</p>
-<pre><code>desaturate(<span class="comment">#336699,100%);</span>
+<pre><code>desaturate(#336699,100%);
 </code></pre><p>Mix函数，混合颜色</p>
-<pre><code><span class="id">#page</span>{
-    <span class="attribute">color</span><span class="value">:<span class="function">mix</span>(<span class="hexcolor">#336699</span>,<span class="hexcolor">#993266</span>);</span>
+<pre><code>#page{
+    color:mix(#336699,#993266);
 }
-<span class="comment">//编译后的CSS</span>
-<span class="id">#page</span> {
-    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#664c7f</span>;</span>
+//编译后的CSS
+#page {
+    color: #664c7f;
 }
 </code></pre><h2 id="选择和循环">选择和循环</h2>
 <p>条件判断<br>sass真的就是将CSS当成编程语言来折腾了。提供<strong>判断</strong>和<strong>循环</strong>来编写CSS。</p>
 <h4 id="选择">选择</h4>
 <p><strong>@if</strong>可可以和<strong>@else</strong>结合多条件使用，就像写程序一样。</p>
-<pre><code><span class="comment">//sass</span>
-<span class="variable">$type</span><span class="value">: monster;</span>
-<span class="tag">p</span> {
-  <span class="at_rule">@<span class="keyword">if</span> <span class="variable">$type</span> ==<span class="preprocessor"> ocean</span> {</span>
-    <span class="attribute">color</span><span class="value">: blue;</span>
-  } <span class="at_rule">@<span class="keyword">else</span><span class="preprocessor"> if</span> <span class="variable">$type</span> ==<span class="preprocessor"> matador</span> {</span>
-    <span class="attribute">color</span><span class="value">: red;</span>
-  } <span class="at_rule">@<span class="keyword">else</span><span class="preprocessor"> if</span> <span class="variable">$type</span> ==<span class="preprocessor"> monster</span> {</span>
-    <span class="attribute">color</span><span class="value">: green;</span>
-  } <span class="at_rule">@<span class="keyword">else</span> {</span>
-    <span class="attribute">color</span><span class="value">: black;</span>
+<pre><code>//sass
+$type: monster;
+p {
+  @if $type == ocean {
+    color: blue;
+  } @else if $type == matador {
+    color: red;
+  } @else if $type == monster {
+    color: green;
+  } @else {
+    color: black;
   }
 }
 
 -------
-<span class="comment">//编译之后的CSS</span>
-<span class="tag">p</span> {
-  <span class="attribute">color</span><span class="value">: green;</span> 
+//编译之后的CSS
+p {
+  color: green; 
 }
 </code></pre><h4 id="for循环">for循环</h4>
 <p>for循环有两种形式，分别为：  </p>
-<pre><code>@<span class="keyword">for</span> $var <span class="built_in">from</span> &lt;start&gt; through &lt;<span class="function"><span class="keyword">end</span>&gt;</span>
+<pre><code>@for $var from &lt;start&gt; through &lt;end&gt;
 </code></pre><p>和</p>
-<pre><code>@<span class="keyword">for</span> $var <span class="built_in">from</span> &lt;start&gt; <span class="built_in">to</span> &lt;<span class="function"><span class="keyword">end</span>&gt;。</span>
+<pre><code>@for $var from &lt;start&gt; to &lt;end&gt;。
 </code></pre><p>$i表示变量，start表示起始值，end表示结束值，这<strong>两个的区别</strong>是关键字<strong>through</strong>表示<strong>包括end</strong>这个数，而<strong>to</strong>则<strong>不包括end</strong>这个数。</p>
-<pre><code><span class="comment">//sass</span>
-<span class="at_rule">@<span class="keyword">for</span> <span class="variable">$i</span><span class="preprocessor"> from</span><span class="preprocessor"> 1</span><span class="preprocessor"> through</span><span class="preprocessor"> 3</span> {</span>
-      <span class="class">.item-</span>#{<span class="variable">$i</span>} { <span class="attribute">width</span><span class="value">: <span class="number">2em</span> * <span class="variable">$i</span>;</span> }
+<pre><code>//sass
+@for $i from 1 through 3 {
+      .item-#{$i} { width: 2em * $i; }
 }
 
 -------
-<span class="comment">//编译之后的CSS</span>
-<span class="class">.item-1</span> {
-  <span class="attribute">width</span><span class="value">: <span class="number">2em</span>;</span> 
+//编译之后的CSS
+.item-1 {
+  width: 2em; 
 }
-<span class="class">.item-2</span> {
-  <span class="attribute">width</span><span class="value">: <span class="number">4em</span>;</span> 
+.item-2 {
+  width: 4em; 
 }
-<span class="class">.item-3</span> {
-  <span class="attribute">width</span><span class="value">: <span class="number">6em</span>;</span> 
+.item-3 {
+  width: 6em; 
 }
 </code></pre><h4 id="sass中的三目运算">sass中的三目运算</h4>
 <p>if($condition, $if_true, $if_false) 。<br>三个参数分别表示条件，条件为真的值，条件为假的值。</p>
-<pre><code><span class="keyword">if</span><span class="function"><span class="params">(<span class="literal">true</span>, <span class="number">1</span>px, <span class="number">2</span>px)</span> =&gt;</span> <span class="number">1</span>px
-<span class="keyword">if</span><span class="function"><span class="params">(<span class="literal">false</span>, <span class="number">1</span>px, <span class="number">2</span>px)</span> =&gt;</span> <span class="number">2</span>px
+<pre><code>if(true, 1px, 2px) =&gt; 1px
+if(false, 1px, 2px) =&gt; 2px
 </code></pre><hr>
 <blockquote>
 <p>基本语法结束，在学习过程中感觉到了sass的魅力。编写CSS变得有趣，而且简单粗暴！！！！！</p>
@@ -646,7 +646,7 @@ bgBlue{
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -656,6 +656,8 @@ bgBlue{
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -685,7 +687,7 @@ bgBlue{
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

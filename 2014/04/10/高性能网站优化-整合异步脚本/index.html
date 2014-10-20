@@ -107,19 +107,19 @@
 </ul>
 <h3 id="方法1：硬编码回调_(Hardcoded_Callback)">方法1：硬编码回调 (Hardcoded Callback)</h3>
 <p>让外部的脚本调用内部脚本的函数，以确保代码的顺序执行。例如<a href="http://stevesouders.com/efws/hardcoded-callback.php?t=1398050691" target="_blank" rel="external">link</a></p>
-<pre><code><span class="comment">//行内代码</span>
-<span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{
-  createMenu(<span class="string">'examples'</span>);
+<pre><code>//行内代码
+function init() {
+  createMenu(&#39;examples&#39;);
 }
-<span class="keyword">var</span> domscript = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);
-domscript.src = <span class="string">"menu-with-init.js"</span>;
-<span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(domscript);
+var domscript = document.createElement(&#39;script&#39;);
+domscript.src = &quot;menu-with-init.js&quot;;
+document.getElementsByTagName(&#39;head&#39;)[0].appendChild(domscript);
 
-<span class="comment">//外部文件</span>
-<span class="function"><span class="keyword">function</span> <span class="title">createMenu</span><span class="params">(id)</span> </span>{
+//外部文件
+function createMenu(id) {
   [...]
 }
-<span class="comment">// callback to the main page</span>
+// callback to the main page
 init();
 </code></pre><p>如果开发人员可以同时控制主页面和外部脚本，这种技术是可行的的。但是我们常常会调用第三方的 JavaScript ，比如： jQuery ，我们不可能降回调添加在 jQuery 的文件中。而且这种方法也不太灵活，一旦改变了回调函数需要同时修改外部脚本。  </p>
 <h3 id="方法2：_Window_Onload">方法2： Window Onload</h3>
@@ -134,27 +134,27 @@ init();
 <p>Window Onload 整合技术有两个缺点：首先，必须确定异步脚本是通过阻塞 onload 事件的方式加载的。其次，可能会造成行内代码的延迟执行。如果页面还有很多其他的资源，比如图片等，那么外部脚本加载执行结束之后， window.onload内部的代码必须等到页面完全加载之后才能够执行。通常行内脚本最好在外部脚本下载和执行之后立即调用。</p>
 <h3 id="方法3：定时器(Timer)">方法3：定时器(Timer)</h3>
 <p>定时器技术指的是使用轮询方法来保证在行内代码执行之，前所依赖的外部脚本已经加载。《高性能网站建设进阶优化》一书给出的demo中可以看到<a href="&quot;http://stevesouders.com/efws/timer.php?t=1398076380&quot;">link</a>。修改行内代码，添加一个新函数 initTimer ，负责检查依赖的命名空间和标示符是否存在。如果存在，则调用需要调用的函数；如果不存在，就在指定的时间段之后再次调用 initTimer 函数检查命名空间和标示符。</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">initTimer</span><span class="params">()</span> </span>{
-    <span class="keyword">if</span> ( <span class="string">"undefined"</span> === <span class="keyword">typeof</span>(EFWS) ) {
-        setTimeout(initTimer, <span class="number">300</span>);
+<pre><code>function initTimer() {
+    if ( &quot;undefined&quot; === typeof(EFWS) ) {
+        setTimeout(initTimer, 300);
     }
-    <span class="keyword">else</span> {
+    else {
         init();
     }
 }
 </code></pre><p>这个技术也有它的缺点。如果setTimeout方法中设置的事件间隔太小，可能会增加页面的开销。相反，如果设置太大，又可能造成外部脚本加载完成和行内代码开始执行之间的延迟。就上面的例子来说，如果外部脚本加载失败，即行内脚本永远无法检测到指定的命名空间，轮询将会无限进行下去。同时稍微增加了维护的成本，如果外部文件的命名空间和标示符变了，行内代码也要更新。</p>
 <h3 id="方法4：Script_Onload">方法4：Script Onload</h3>
 <p>前面的那些整合技术会增加页面的脆弱性，开销，导致页面的延迟。Script Onload 方法通过监听脚本的 onload 事件解决了所有的这些问题。<a href="&quot;http://stevesouders.com/efws/script-onload.php?t=1398081543&quot;">link</a>。考虑到浏览器之间的差异，添加了 script 元素的 onload 和 onreadystatechange 事件处理程序。onload 在其他浏览器中有效，Opera 两者都有效。</p>
-<pre><code><span class="keyword">var</span> DOMScript=<span class="built_in">document</span>.createElement(<span class="string">"script"</span>);
-DOMScript.src=<span class="string">"someting.js"</span>;
-DOMScript.onloadDone=<span class="literal">false</span>;
-DOMScript.onload=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
-    DOMScript.onloadDone=<span class="literal">true</span>;
+<pre><code>var DOMScript=document.createElement(&quot;script&quot;);
+DOMScript.src=&quot;someting.js&quot;;
+DOMScript.onloadDone=false;
+DOMScript.onload=function(){
+    DOMScript.onloadDone=true;
     init();
 }
-DOMScript.onreadystatechange=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
-    <span class="keyword">if</span>((<span class="string">"loaded"</span> === DOMScript.readyState || <span class="string">"complete"</span> === DOMScript.readyState) &amp;&amp; ! DOMScript.onloadDone){
-        DOMScript.onloadDone=<span class="literal">true</span>;
+DOMScript.onreadystatechange=function(){
+    if((&quot;loaded&quot; === DOMScript.readyState || &quot;complete&quot; === DOMScript.readyState) &amp;&amp; ! DOMScript.onloadDone){
+        DOMScript.onloadDone=true;
         init();
     }
 }
@@ -264,7 +264,7 @@ DOMScript.onreadystatechange=<span class="function"><span class="keyword">functi
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -274,6 +274,8 @@ DOMScript.onreadystatechange=<span class="function"><span class="keyword">functi
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -303,7 +305,7 @@ DOMScript.onreadystatechange=<span class="function"><span class="keyword">functi
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

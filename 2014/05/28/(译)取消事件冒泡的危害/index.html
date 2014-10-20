@@ -98,11 +98,11 @@
 <p> 这是  <a href="http://philipwalton.com/" target="_blank" rel="external">Philip Walton</a> 发布在 <a href="http://css-tricks.com/" target="_blank" rel="external">css-trick</a> 上的一篇文章。他将会向我们解释为什么不能轻易地阻止事件的传播，而是尽可能的去避免。</p>
 <p> 如果你是一个前端开发人员，在你的工作中，应该有过这样的经历：编写一个自定义的弹出窗口或者对话框，当用户点击页面中弹窗的之外的其他地方，弹窗隐藏。如果你试着在网上搜索试图找到最好的解决方案，没准你会遇到这个 Stack Overflow 上的一个问题：<a href="http://stackoverflow.com/questions/152975/how-to-detect-a-click-outside-an-element" target="_blank" rel="external">How to detect a click outside an element?</a>。</p>
 <p> 下面的代码是投票最高的回答推荐的方案：</p>
-<pre><code>$(<span class="string">'html'</span>).click(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-  <span class="comment">// Hide the menus if visible.</span>
+<pre><code>$(&#39;html&#39;).click(function() {
+  // Hide the menus if visible.
 });
 
-$(<span class="string">'#menucontainer'</span>).click(<span class="function"><span class="keyword">function</span><span class="params">(event)</span></span>{
+$(&#39;#menucontainer&#39;).click(function(event){
   event.stopPropagation();
 });
 </code></pre><p> 这个例子可能说的不太明显。简单的解释一下：如果一个鼠标点击事件冒泡到 &lt;\html&gt; 元素上时，隐藏菜单。如果点击事件是在元素 #menucontainer 内部触发的，则阻止在这个事件使得事件永远不会到达 &lt;\html&gt;元素上。因此只有在元素 #menucontainer 外触发点击事件时菜单才会被隐藏。</p>
@@ -122,18 +122,18 @@ $(<span class="string">'#menucontainer'</span>).click(<span class="function"><sp
 <h3 id="Return_false">Return false</h3>
 <p>当你从一个事件处理程序返回 false 的时候，关于这个过程中发生的事情总是有很多混淆的地方。请思考下面三个例子：</p>
 <p><strong>HTML</strong> :</p>
-<pre><code><span class="comment">&lt;!-- 一个行间的事件处理程序. --&gt;</span>
-<span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://google.com"</span> <span class="attribute">onclick</span>=<span class="value">"return false"</span>&gt;</span>Google<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+<pre><code>&lt;!-- 一个行间的事件处理程序. --&gt;
+&lt;a href=&quot;http://google.com&quot; onclick=&quot;return false&quot;&gt;Google&lt;/a&gt;
 </code></pre><p><strong>Jquery</strong> :</p>
-<pre><code><span class="comment">// 一个 jQuery 事件处理程序.</span>
-$(<span class="string">'a'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-  <span class="keyword">return</span> <span class="literal">false</span>;
+<pre><code>// 一个 jQuery 事件处理程序.
+$(&#39;a&#39;).on(&#39;click&#39;, function() {
+  return false;
 });
 </code></pre><p><strong>JavaScript</strong> :</p>
-<pre><code><span class="comment">//一个原生的事件处理程序</span>
-<span class="keyword">var</span> link = <span class="built_in">document</span>.querySelector(<span class="string">'a'</span>);
-link.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
-  <span class="keyword">return</span> <span class="literal">false</span>;
+<pre><code>//一个原生的事件处理程序
+var link = document.querySelector(&#39;a&#39;);
+link.addEventListener(&#39;click&#39;, function() {
+  return false;
 });
 </code></pre><p>这三个例子都只做一件相同的事情：返回 false，但是实际上返回的结果却是大相径庭，来看看上述的每个例子到底发生了什么。</p>
 <ul>
@@ -143,8 +143,8 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
 </ul>
 <p>当你期待一件事情发生的时候，它并没有发生，你通常可以很快的找到解决方案。而更严重的问题是，当你期待一件事情发生，它确实发生了，但是伴随着意料之外的，并不引人注意的副作用。这就是bug诞生的源头。</p>
 <p>在 Jquery 的例子中，<code>return false</code> 的行为相比其他两种处理程序有哪些不同并不是完全清楚，但是确实有所不同。实际上 在这个例子中，jQuery 调用了两条语句</p>
-<pre><code><span class="keyword">event</span>.preventDefault();
-<span class="keyword">event</span>.stopPropagation();
+<pre><code>event.preventDefault();
+event.stopPropagation();
 </code></pre><p>由于 <code>return false</code> 的混乱，同时 jQuery 中的处理程序阻止了事件的传播，我建议不要使用。更好的做法是明确你的目的，然后直接调用这些事件的方法。</p>
 <h3 id="性能(Performance)">性能(Performance)</h3>
 <p>在老式的浏览器中，一个复杂的 DOM 结构真的会减慢你的站点加载速度。同时由于事件的传播需要经过整个 DOM ，所以文档中的节点越多，事件到达目标元素的速度就越慢。</p>
@@ -161,9 +161,9 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
 <p>在之前提到的 Stack Overflow 上的那个问题中，总而言之，其调用 <code>stopPropagation</code> 的目的不是为了摆脱点击事件，而是避免在页面上运行其他代码。</p>
 <p>之所以说它是个不好的方案，除了是因为它改变了全局对象的行为，还有它将菜单的隐藏逻辑代码放在了两个不同的而且没有联系的地方，这使得代码变得脆弱。</p>
 <p>有一个更好的解决办法就是创建单一的事件处理程序，它的逻辑完全的封闭，这个处理程序唯一的作用就是通过给定的事件决定这个菜单是否隐藏。事实证明这个更好的方案也减少了代码量：</p>
-<pre><code>$(<span class="built_in">document</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>{
-  <span class="keyword">if</span> (!$(event.target).closest(<span class="string">'#menucontainer'</span>).length) {
-    <span class="comment">// Hide the menus.</span>
+<pre><code>$(document).on(&#39;click&#39;, function(event) {
+  if (!$(event.target).closest(&#39;#menucontainer&#39;).length) {
+    // Hide the menus.
   }
 });
 </code></pre><p>上面的事件处理程序只监听在 document 上触发的点击事件，然后检查事件对象是否为 <code>#menucontainer</code> ，或者其子元素。如果不是，那么点击事件是在这个元素外触发的，因此菜单将被隐藏。</p>
@@ -174,18 +174,18 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
 <p>忽略了原文中的这些，直接跳到重点</p>
 </blockquote>
 <p>DOM API 已经提供了一个属性 <code><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/event.defaultPrevented" target="_blank" rel="external">defaultPrevented</a></code>，用以检查当前事件的默认动作是否被取消,也就是是否执行了 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/event.defaultPrevented" target="_blank" rel="external">event.preventDefault()</a> 方法。为了证明这个。让我举一个例子，想象一下你在文档上添加了一个事件监听器，当用户点击链接到外域的链接是使用谷歌分析跟踪用户。就想这样：</p>
-<pre><code>$(<span class="built_in">document</span>).on(<span class="string">'click'</span>, <span class="string">'a'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>{
-  <span class="keyword">if</span> (<span class="keyword">this</span>.hostname != <span class="string">'css-tricks.com'</span>) {
-    ga(<span class="string">'send'</span>, <span class="string">'event'</span>, <span class="string">'Outbound Link'</span>, <span class="keyword">this</span>.href);
+<pre><code>$(document).on(&#39;click&#39;, &#39;a&#39;, function(event) {
+  if (this.hostname != &#39;css-tricks.com&#39;) {
+    ga(&#39;send&#39;, &#39;event&#39;, &#39;Outbound Link&#39;, this.href);
   }
 });
 </code></pre><p>这段代码的问题是：不是所有的链接都是将用户引向其他页面的，有时候 JavaScript 会调用 preventDefault 拦截事件，然后去做其他的事情。另一个例子是，Twitter 的分享按钮打开的是一个窗口而不是跳转到 twitter.com。</p>
 <p>为了避免跟踪到这些不一样的链接，阻止事件的传播变得很有诱惑力，但是使用 <code>defaultPrevented</code> 来检查事件是一个更好的方法。</p>
-<pre><code>$(<span class="built_in">document</span>).on(<span class="string">'click'</span>, <span class="string">'a'</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>{
-  <span class="comment">// 如果事件的 preventDefault() 已经被调用，则忽略该事件.</span>
-  <span class="keyword">if</span> (event.defaultPrevented) <span class="keyword">return</span>;
-  <span class="keyword">if</span> (<span class="keyword">this</span>.hostname != <span class="string">'css-tricks.com'</span>) {
-    ga(<span class="string">'send'</span>, <span class="string">'event'</span>, <span class="string">'Outbound Link'</span>, <span class="keyword">this</span>.href);
+<pre><code>$(document).on(&#39;click&#39;, &#39;a&#39;, function(event) {
+  // 如果事件的 preventDefault() 已经被调用，则忽略该事件.
+  if (event.defaultPrevented) return;
+  if (this.hostname != &#39;css-tricks.com&#39;) {
+    ga(&#39;send&#39;, &#39;event&#39;, &#39;Outbound Link&#39;, this.href);
   }
 });
 </code></pre><p>因为在一个点击事件的处理程序上调用 preventDefault() 使得浏览器永远阻止导向链接所指向的地址，如果事件的 defaultPrevent 属性为 true 你可以 100% 地确定用户去不了别的地方。换句话说，这种技术不仅比 stopPropagation 可靠，还不会产生副作用。</p>
@@ -292,7 +292,7 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -302,6 +302,8 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -331,7 +333,7 @@ link.addEventListener(<span class="string">'click'</span>, <span class="function
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		

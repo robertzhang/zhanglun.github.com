@@ -104,35 +104,35 @@ $">
 		
 		<h3 id="一般处理">一般处理</h3>
 <p>初始化:</p>
-<pre><code><span class="variable">$ </span>git init 
+<pre><code>$ git init 
 </code></pre><p>这样就会在当前目录创建版本库.</p>
 <h5 id="常用指令:">常用指令:</h5>
 <p>添加文件：</p>
-<pre><code>$ git <span class="built_in">add</span> FILENAME
+<pre><code>$ git add FILENAME
 </code></pre><p>删除文件索引,<strong>并且删除文件</strong>：</p>
-<pre><code><span class="variable">$ </span>git rm <span class="constant">FILENAME</span>
+<pre><code>$ git rm FILENAME
 </code></pre><p>重命名：</p>
-<pre><code><span class="variable">$ </span>git mv <span class="constant">OLDFILENAME</span> <span class="constant">NEWFILENAME</span>
+<pre><code>$ git mv OLDFILENAME NEWFILENAME
 </code></pre><p>提交更新,全部：</p>
-<pre><code>$ git commit <span class="operator">-a</span>
+<pre><code>$ git commit -a
 </code></pre><p>查看日志.</p>
-<pre><code>$ git <span class="built_in">log</span>
+<pre><code>$ git log
 </code></pre><p>查看指定版本日志.</p>
-<pre><code>$ git <span class="literal">show</span> xxxxx
+<pre><code>$ git show xxxxx
 </code></pre><p>切换分支.</p>
-<pre><code><span class="variable">$ </span>git checkout <span class="constant">BRANCHNAME</span>
+<pre><code>$ git checkout BRANCHNAME
 </code></pre><p>创建新的分支.</p>
-<pre><code><span class="variable">$ </span>git branch <span class="constant">BRANCHNAME</span>
+<pre><code>$ git branch BRANCHNAME
 </code></pre><p>就近创建一个分支,转移所有目前修改到此分支中， 其实就是<strong>创建分支和切换分支的合并操作</strong></p>
-<pre><code><span class="variable">$ </span>git checkout -b <span class="constant">BRANCHNAME</span>
+<pre><code>$ git checkout -b BRANCHNAME
 </code></pre><p>实验完毕,发现可行提交后,直接返回主分支中进行合并.</p>
-<pre><code><span class="variable">$ </span>git commit -a 
-<span class="variable">$ </span>git checkout master 
-<span class="variable">$ </span>git merge <span class="constant">BRANCHNAME</span>
+<pre><code>$ git commit -a 
+$ git checkout master 
+$ git merge BRANCHNAME
 </code></pre><p>分支合并,切换到需要合并的分支中,然后执行merge就能够合并.</p>
-<pre><code><span class="variable">$ </span>git merge <span class="constant">TARGETBRANCH</span>
+<pre><code>$ git merge TARGETBRANCH
 </code></pre><p>更多时候我们需要远程操作.除了直接clone出来一个完整的仓库,需要追加更新.</p>
-<pre><code>$ git fetch git:<span class="comment">//xxxx.xxxx master:LOCALBRANCH</span>
+<pre><code>$ git fetch git://xxxx.xxxx master:LOCALBRANCH
 </code></pre><p>将远程仓库中的分支fetch到本临时分支后(例子中为origin:master),如果指定了分支,则会保存到指定分支中去(例子中为LOCALBRANCH).然后进行代码审核,最后再merge到主分支中去.</p>
 <p>当然,也有的时候我们对远程仓库中的代码有绝对信心,或者仅仅只是你一个人在维护,那么就可以直接获取并且合并.</p>
 <p>$ git pull git://xxx.xxxx master</p>
@@ -155,34 +155,34 @@ $">
 <p>从开发主线上分离开来，形成的分支可以在不影响主线的同时继续工作。git中的分支，不会创建源代码目录的完整备份，它的操作几乎在瞬间完成，在不同分支之间切换也很轻松 <code>git checkout brachname</code> 。</p>
 <p><img src="http://rogerdudler.github.io/git-guide/img/branches.png" alt="image"><br>图片来源：<a href="http://rogerdudler.github.io/git-guide/img/branches.png" target="_blank" rel="external">http://rogerdudler.github.io/git-guide/img/branches.png</a> <a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">git简明教程</a></p>
 <p>创建一个叫做“feature_x”的分支，并切换过去：</p>
-<pre><code><span class="variable">$ </span>git checkout -b feature_x
+<pre><code>$ git checkout -b feature_x
 </code></pre><p>切换回主分支：</p>
-<pre><code><span class="variable">$ </span>git checkout master
+<pre><code>$ git checkout master
 </code></pre><p>再把新建的分支删掉：</p>
-<pre><code>$ git branch <span class="operator">-d</span> feature_x
+<pre><code>$ git branch -d feature_x
 </code></pre><p>除非你将分支推送到远端仓库，不然该分支就是 不为他人所见的：</p>
-<pre><code><span class="variable">$ </span>git push origin &lt;branch&gt;
+<pre><code>$ git push origin &lt;branch&gt;
 </code></pre><h3 id="_"> </h3>
 <p>在项目中有很多文件不需要提交，比如IDE生成的项目文件，自动化工具 grunt等。在使用 <code>git status</code> 时，这些文件会列举在 Untracked files 中，有时候为了方便而使用 <code>git add -A</code> 命令的时候，会将这些没有被跟踪的文件添加到索引。</p>
 <p>如果一个不小心将某个不需要提交的修改添加到了暂存区（git add *），即：staged。如果这时进行 commit 操作，这个不想提交的修改也会一同提交到本地仓库的 HEAD 中，当然只有 push 之后修改才会提交到远端的仓库。在 commit 之前，使用</p>
-<pre><code><span class="comment">$</span> <span class="comment">git</span> <span class="comment">rm</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">cached</span> <span class="comment">filename</span>
+<pre><code>$ git rm --cached filename
 </code></pre><p>便可以把它从暂存区中删除，保留源文件。</p>
 <p>这条命令只是在暂存区中将文件快照删除而已，并不会将源文件从项目中删除。如果想连同源文件一起删除可以使用这条命令</p>
-<pre><code><span class="variable">$ </span>git rm filename
+<pre><code>$ git rm filename
 </code></pre><h3 id="比较提交_-_git_diff">比较提交 - git diff</h3>
 <p>使用 <code>git diff</code> 查看文件被修改的具体内容：</p>
-<pre><code><span class="variable">$ </span>git diff filename
+<pre><code>$ git diff filename
 </code></pre><p>也可以用来比较项目中任意两个版本的差异，比如比较两个分支之间的差异：</p>
-<pre><code><span class="variable">$ </span>git diff brach1..brach2 
+<pre><code>$ git diff brach1..brach2 
 </code></pre><p>你可能还会看到下面这条看起来非常相似的命令：</p>
-<pre><code><span class="variable">$ </span>git diff brach1...brach2 
+<pre><code>$ git diff brach1...brach2 
 </code></pre><p>不同之处在于：两个分支名之间的点的个数，后面这条也就是三个”.”的命令将显示出 brach1 和 brach2 共有父分支和 brach2 之间的差异。</p>
 <p>你通常用git diff来找你当前工作目录和上次提交与本地索引间的差异。</p>
-<pre><code><span class="variable">$ </span>git diff
+<pre><code>$ git diff
 </code></pre><p>上面的命令会显示在当前的工作目录里的，没有 modified (添加到索引中)，且在下次提交时 不会被提交的修改。如果你要看在下次提交时要提交的内容(staged,添加到索引中),你可以运行：</p>
-<pre><code><span class="comment">$</span> <span class="comment">git</span> <span class="comment">diff</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">cached</span>
+<pre><code>$ git diff --cached
 </code></pre><p>上面的命令会显示你当前的索引和上次提交间的差异；这些内容在不带”-a”参数运行 “git commit”命令时就会被提交。</p>
-<pre><code><span class="variable">$ </span>git diff <span class="constant">HEAD</span>
+<pre><code>$ git diff HEAD
 </code></pre><p>上面这条命令会显示你工作目录与上次提交时之间的所有差别，这条命令所显示的 内容都会在执行”git commit -a”命令时被提交。</p>
   
 	</div>
@@ -283,7 +283,7 @@ $">
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -293,6 +293,8 @@ $">
 		<ul class="clearfix">
 		
 			<li><a href="/tags/CSS/" title="CSS">CSS<sup>11</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
 		
@@ -322,7 +324,7 @@ $">
 		
 			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/笔记/" title="笔记">笔记<sup>15</sup></a></li>
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>16</sup></a></li>
 		
 			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
 		
