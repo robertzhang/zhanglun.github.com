@@ -164,6 +164,9 @@ button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
+code {
+  word-wrap: break-word;
+}
 h1 {
   font-size: 1.8em;
 }
