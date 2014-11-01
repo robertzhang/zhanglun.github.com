@@ -83,7 +83,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-10-15T06:50:00.000Z" itemprop="datePublished">10月 15 2014</time>
-    更新日期:<time datetime="2014-11-01T03:08:03.000Z" itemprop="dateModified">11月 1 2014</time>
+    更新日期:<time datetime="2014-11-01T14:58:13.000Z" itemprop="dateModified">11月 1 2014</time>
     
   </p>
 </header>
@@ -92,7 +92,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是浮动"><span class="toc-number">1.</span> <span class="toc-text">什么是浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素浮动之后如何表现"><span class="toc-number">2.</span> <span class="toc-text">元素浮动之后如何表现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#float:left|right|none|inherit;"><span class="toc-number">2.1.</span> <span class="toc-text">float:left|right|none|inherit;</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是浮动"><span class="toc-number">1.</span> <span class="toc-text">什么是浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素浮动之后如何表现"><span class="toc-number">2.</span> <span class="toc-text">元素浮动之后如何表现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#float:left|right|none|inherit;"><span class="toc-number">3.</span> <span class="toc-text">float:left|right|none|inherit;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我要控制浮动！"><span class="toc-number">4.</span> <span class="toc-text">我要控制浮动！</span></a></li></ol>
 		</div>
 		
 		<blockquote>
@@ -100,7 +100,7 @@
 </blockquote>
 <p>今天看的是 <a href="http://www.w3.org/TR/CSS21/visuren.html#floats" target="_blank" rel="external">Floats</a><br><a id="more"></a></p>
 <h2 id="什么是浮动">什么是浮动</h2>
-<p>当一个元素的CSS属性中添加了<code>float:left;</code>或者<code>float:right;</code>的时候，我们就可以把这个元素称之为“浮动元素”。当一个元素浮动之后，它会脱离文档流，也就是“out of flow”，然后尽可能地移动到当前行的左边或者右边。浮动最有意思的特性就是：内容沿着浮动元素的的边界流动。说直白一点就是，内容沿着向左浮动的元素的右边往下排（flows down），沿着向右浮动的元素的左边往下排。就像下面这样  </p>
+<p>当一个元素的CSS属性中添加了<code>float:left;</code>或者<code>float:right;</code>的时候，我们就可以把这个元素称之为“浮动元素”。当一个元素浮动之后，它会脱离文档流，也就是“out of flow”，然后尽可能地移动到当前行的左边或者右边。浮动最有意思的特性就是：内容沿着浮动元素的的边界流动。说直白一点就是，内容沿着向左浮动的元素的右边往下排（flows down），沿着向右浮动的元素的左边往下排。就像下面这样</p>
 <pre><code class="css">img{
     float:left;
 }
@@ -201,7 +201,7 @@ img{
 </code></pre>
 <p><img src="http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-11-01_095746.png" alt=""></p>
 <p>当p元素添加了 “clear:left” 之后，导致第二个段落被“推”到浮动图片的下方。有一个叫做“clearence”的东西添加到第二个段落的上外边距，就是这个“clearence”完成了调整的工作。后面会说到“clearence”</p>
-<h3 id="float:left|right|none|inherit;">float:left|right|none|inherit;</h3>
+<h2 id="float:left|right|none|inherit;">float:left|right|none|inherit;</h2>
 <blockquote>
 <p>额好吧上面说了这么多感觉乱乱的。</p>
 </blockquote>
@@ -213,8 +213,9 @@ img{
 <li>一个浮动元素的上外填充可能不会比它的包含块高。当浮动在两个重叠的margin之间发生，这个浮动就好像它有一个处于正常流中的空的匿名块的父元素一样</li>
 <li>一个浮动元素的上外填充通常不会比DOM结构比其优先的元素形成的块盒子或者浮动和的上外填充高</li>
 <li>一个浮动元素的上外填充通常不会比DOM结构比其优先的元素形成的line box（这个盒子要包含另一盒子）上外填充高</li>
-<li></li>
 </ul>
+<h2 id="我要控制浮动！">我要控制浮动！</h2>
+<p>CSS中提供了一个叫做<code>clear</code>的属性方便我们控制浮动之后的流。应用在块级元素上，可以使用的值有：none|left|right|both|inherit。这个属性标识元素形成的盒子的哪一边（左边或者右边）不与前面的浮动元素相邻</p>
 <p>（未完…………）</p>
 <p><img src="http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-10-31_183052.png" alt=""></p>
   
@@ -261,7 +262,7 @@ img{
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是浮动"><span class="toc-number">1.</span> <span class="toc-text">什么是浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素浮动之后如何表现"><span class="toc-number">2.</span> <span class="toc-text">元素浮动之后如何表现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#float:left|right|none|inherit;"><span class="toc-number">2.1.</span> <span class="toc-text">float:left|right|none|inherit;</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是浮动"><span class="toc-number">1.</span> <span class="toc-text">什么是浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素浮动之后如何表现"><span class="toc-number">2.</span> <span class="toc-text">元素浮动之后如何表现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#float:left|right|none|inherit;"><span class="toc-number">3.</span> <span class="toc-text">float:left|right|none|inherit;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我要控制浮动！"><span class="toc-number">4.</span> <span class="toc-text">我要控制浮动！</span></a></li></ol>
   </div>
 
 <div id="asidepart">
