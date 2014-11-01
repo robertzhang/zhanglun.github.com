@@ -1,0 +1,484 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Git 使用笔记(一)-入门级的操作 | 张小伦爱学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="张小伦爱学习">
+    
+    <meta name="description" content="一般处理
+初始化:
+$ git init 
+这样就会在当前目录创建版本库.
+常用指令:
+添加文件：
+$ git add FILENAME
+删除文件索引,并且删除文件：
+$ git rm FILENAME
+重命名：
+$ git mv OLDFILENAME NEWFILENAME
+提交更新,全部：
+$">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="张小伦爱学习">张小伦爱学习</a></h1>
+				<h2 class="blog-motto">勿忘初心  方得始终</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="http://www.cnblogs.com/zhanglun/">博客园</a></li>
+					
+						<li><a href="http://zhanglun.github.io/">Page</a></li>
+					
+						<li><a href="http://ncuey.sinaapp.com/CrispElite/">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/07/16/git 使用笔记(一)/" title="Git 使用笔记(一)-入门级的操作" itemprop="url">Git 使用笔记(一)-入门级的操作</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-07-16T13:09:00.000Z" itemprop="datePublished">7月 16 2014</time>
+    更新日期:<time datetime="2014-11-01T01:34:44.000Z" itemprop="dateModified">11月 1 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般处理"><span class="toc-number">1.</span> <span class="toc-text">一般处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#常用指令:"><span class="toc-number">1.0.1.</span> <span class="toc-text">常用指令:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git_记录的方式"><span class="toc-number">2.</span> <span class="toc-text">Git 记录的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支"><span class="toc-number">3.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#_"><span class="toc-number">4.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较提交_-_git_diff"><span class="toc-number">5.</span> <span class="toc-text">比较提交 - git diff</span></a></li></ol>
+		</div>
+		
+		<h3 id="一般处理">一般处理</h3>
+<p>初始化:</p>
+<pre><code>$ git init 
+</code></pre><p>这样就会在当前目录创建版本库.</p>
+<h5 id="常用指令:">常用指令:</h5>
+<p>添加文件：</p>
+<pre><code>$ git add FILENAME
+</code></pre><p>删除文件索引,<strong>并且删除文件</strong>：</p>
+<pre><code>$ git rm FILENAME
+</code></pre><p>重命名：</p>
+<pre><code>$ git mv OLDFILENAME NEWFILENAME
+</code></pre><p>提交更新,全部：</p>
+<pre><code>$ git commit -a
+</code></pre><p>查看日志.</p>
+<pre><code>$ git log
+</code></pre><p>查看指定版本日志.</p>
+<pre><code>$ git show xxxxx
+</code></pre><p>切换分支.</p>
+<pre><code>$ git checkout BRANCHNAME
+</code></pre><p>创建新的分支.</p>
+<pre><code>$ git branch BRANCHNAME
+</code></pre><p>就近创建一个分支,转移所有目前修改到此分支中， 其实就是<strong>创建分支和切换分支的合并操作</strong></p>
+<pre><code>$ git checkout -b BRANCHNAME
+</code></pre><p>实验完毕,发现可行提交后,直接返回主分支中进行合并.</p>
+<pre><code>$ git commit -a 
+$ git checkout master 
+$ git merge BRANCHNAME
+</code></pre><p>分支合并,切换到需要合并的分支中,然后执行merge就能够合并.</p>
+<pre><code>$ git merge TARGETBRANCH
+</code></pre><p>更多时候我们需要远程操作.除了直接clone出来一个完整的仓库,需要追加更新.</p>
+<pre><code>$ git fetch git://xxxx.xxxx master:LOCALBRANCH
+</code></pre><p>将远程仓库中的分支fetch到本临时分支后(例子中为origin:master),如果指定了分支,则会保存到指定分支中去(例子中为LOCALBRANCH).然后进行代码审核,最后再merge到主分支中去.</p>
+<p>当然,也有的时候我们对远程仓库中的代码有绝对信心,或者仅仅只是你一个人在维护,那么就可以直接获取并且合并.</p>
+<p>$ git pull git://xxx.xxxx master</p>
+<h3 id="Git_记录的方式">Git 记录的方式</h3>
+<p>Git 是一种分布式版本控制系统，客户端并不只提取最新版本的文件快照，而是把代码仓库完整</p>
+<p><img src="http://git-scm.com/figures/18333fig0103-tn.png" alt="image"></p>
+<p>图片来源：<a href="http://git-scm.com/figures/18333fig0103-tn.png" target="_blank" rel="external">http://git-scm.com/figures/18333fig0103-tn.png</a></p>
+<p>每次修改之后，Git 并不是保存这些修改之后的差异变化，实际上就像一个照相机一样，将修改后的文件拍下作为文件快照，记录在一个微型的文件系统中。每次提交更新时，检查一遍所有文件的信息</p>
+<p>对于任何一个文件，在 Git 内都只有三种状态：已提交（committed），已修改（modified）和已暂存（staged）。已提交表示该文件已经被安全地保存在本地数据库中了；已修改表示修改了某个文件，但还没有提交保存；已暂存表示把已修改的文件放在下次提交时要保存的清单中。</p>
+<p>Git 管理项目时，文件流转的三个工作区域：Git 的<strong>工作目录</strong>，<strong>暂存区域</strong>，以及<strong>本地仓库</strong>。</p>
+<p><img src="http://git-scm.com/figures/18333fig0106-tn.png" alt="image"></p>
+<p>图片来源：<a href="http://git-scm.com/figures/18333fig0106-tn.png" target="_blank" rel="external">http://git-scm.com/figures/18333fig0106-tn.png</a></p>
+<p><strong>工作区</strong>：就是电脑中可以看到的目录。<br><strong>版本库</strong>：工作区中有一个隐藏目录 “.git” ，这个不算做是工作区，而是 Git 的版本库。</p>
+<p>基本的 Git 工作流程如下：</p>
+<p>第一步是用 <code>git add</code> 把文件添加进去，实际上就是把文件修改添加到暂存区（对修改后的文件进行快照，然后保存到暂存区域。）；<br>第二步是用 <code>git commit</code> 提交更改，实际上就是把暂存区的所有内容提交到当前分支；<br>第三步是用 <code>git push</code> 推送更改，将保存在暂存区域的文件快照永久转储到 Git 目录中。</p>
+<p>如果是 Git 目录中保存着的特定版本文件，就属于<strong>已提交状态</strong>；如果作了修改并已<strong>放入暂存区域</strong>，就属于<strong>已暂存状态</strong>；如果自上次取出后，作了修改但还没有放到暂存区域，<strong>就是已修改状态</strong>。</p>
+<p>图片来源：<img src="http://rogerdudler.github.io/git-guide/img/trees.png" alt="image"><br><a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">git简明教程</a></p>
+<h3 id="分支">分支</h3>
+<p>分支是用来将特性开发绝缘开来的。在你创建仓库的时候，master 是“默认的”分支。在其他分支上进行开发，完成后再将它们合并到主分支上。</p>
+<p>从开发主线上分离开来，形成的分支可以在不影响主线的同时继续工作。git中的分支，不会创建源代码目录的完整备份，它的操作几乎在瞬间完成，在不同分支之间切换也很轻松 <code>git checkout brachname</code> 。</p>
+<p><img src="http://rogerdudler.github.io/git-guide/img/branches.png" alt="image"><br>图片来源：<a href="http://rogerdudler.github.io/git-guide/img/branches.png" target="_blank" rel="external">http://rogerdudler.github.io/git-guide/img/branches.png</a> <a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">git简明教程</a></p>
+<p>创建一个叫做“feature_x”的分支，并切换过去：</p>
+<pre><code>$ git checkout -b feature_x
+</code></pre><p>切换回主分支：</p>
+<pre><code>$ git checkout master
+</code></pre><p>再把新建的分支删掉：</p>
+<pre><code>$ git branch -d feature_x
+</code></pre><p>除非你将分支推送到远端仓库，不然该分支就是 不为他人所见的：</p>
+<pre><code>$ git push origin &lt;branch&gt;
+</code></pre><h3 id="_"> </h3>
+<p>在项目中有很多文件不需要提交，比如IDE生成的项目文件，自动化工具 grunt等。在使用 <code>git status</code> 时，这些文件会列举在 Untracked files 中，有时候为了方便而使用 <code>git add -A</code> 命令的时候，会将这些没有被跟踪的文件添加到索引。</p>
+<p>如果一个不小心将某个不需要提交的修改添加到了暂存区（git add *），即：staged。如果这时进行 commit 操作，这个不想提交的修改也会一同提交到本地仓库的 HEAD 中，当然只有 push 之后修改才会提交到远端的仓库。在 commit 之前，使用</p>
+<pre><code>$ git rm --cached filename
+</code></pre><p>便可以把它从暂存区中删除，保留源文件。</p>
+<p>这条命令只是在暂存区中将文件快照删除而已，并不会将源文件从项目中删除。如果想连同源文件一起删除可以使用这条命令</p>
+<pre><code>$ git rm filename
+</code></pre><h3 id="比较提交_-_git_diff">比较提交 - git diff</h3>
+<p>使用 <code>git diff</code> 查看文件被修改的具体内容：</p>
+<pre><code>$ git diff filename
+</code></pre><p>也可以用来比较项目中任意两个版本的差异，比如比较两个分支之间的差异：</p>
+<pre><code>$ git diff brach1..brach2 
+</code></pre><p>你可能还会看到下面这条看起来非常相似的命令：</p>
+<pre><code>$ git diff brach1...brach2 
+</code></pre><p>不同之处在于：两个分支名之间的点的个数，后面这条也就是三个”.”的命令将显示出 brach1 和 brach2 共有父分支和 brach2 之间的差异。</p>
+<p>你通常用git diff来找你当前工作目录和上次提交与本地索引间的差异。</p>
+<pre><code>$ git diff
+</code></pre><p>上面的命令会显示在当前的工作目录里的，没有 modified (添加到索引中)，且在下次提交时 不会被提交的修改。如果你要看在下次提交时要提交的内容(staged,添加到索引中),你可以运行：</p>
+<pre><code>$ git diff --cached
+</code></pre><p>上面的命令会显示你当前的索引和上次提交间的差异；这些内容在不带”-a”参数运行 “git commit”命令时就会被提交。</p>
+<pre><code>$ git diff HEAD
+</code></pre><p>上面这条命令会显示你工作目录与上次提交时之间的所有差别，这条命令所显示的 内容都会在执行”git commit -a”命令时被提交。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Git/">Git</a><a href="/tags/笔记/">笔记</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://zhanglun.github.io/2014/07/16/git 使用笔记(一)/" data-title="Git 使用笔记(一)-入门级的操作 | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/07/18/踩坑日记-ie下 a 标签的虚线框/" title="踩坑日记-IE下 A 标签的虚线框和必须要会用的 CSS 选择器">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  踩坑日记-IE下 A 标签的虚线框和必须要会用的 CSS 选择器</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/07/12/利用pip安装django/"  title="利用pip安装Django">
+ <strong>NEXT:</strong><br/> 
+ <span>利用pip安装Django
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般处理"><span class="toc-number">1.</span> <span class="toc-text">一般处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#常用指令:"><span class="toc-number">1.0.1.</span> <span class="toc-text">常用指令:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git_记录的方式"><span class="toc-number">2.</span> <span class="toc-text">Git 记录的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支"><span class="toc-number">3.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#_"><span class="toc-number">4.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较提交_-_git_diff"><span class="toc-number">5.</span> <span class="toc-text">比较提交 - git diff</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 人穷志短愿望多</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2671026564" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/zhanglun" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
+		
+			<li><a href="/categories/Python/" title="Python">Python<sup>2</sup></a></li>
+		
+			<li><a href="/categories/前端/" title="前端">前端<sup>10</sup></a></li>
+		
+			<li><a href="/categories/重构/" title="重构">重构<sup>4</sup></a></li>
+		
+			<li><a href="/categories/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>12</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
+		
+			<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
+		
+			<li><a href="/tags/css/" title="css">css<sup>1</sup></a></li>
+		
+			<li><a href="/tags/sass/" title="sass">sass<sup>2</sup></a></li>
+		
+			<li><a href="/tags/web优化/" title="web优化">web优化<sup>3</sup></a></li>
+		
+			<li><a href="/tags/兼容性/" title="兼容性">兼容性<sup>3</sup></a></li>
+		
+			<li><a href="/tags/命令行/" title="命令行">命令行<sup>1</sup></a></li>
+		
+			<li><a href="/tags/填坑日记/" title="填坑日记">填坑日记<sup>2</sup></a></li>
+		
+			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
+		
+			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
+		
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>17</sup></a></li>
+		
+			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
+		
+			<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

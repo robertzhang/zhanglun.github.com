@@ -1,0 +1,479 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>(译)Node.js的 EventEmitter 教程 | 张小伦爱学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="张小伦爱学习">
+    
+    <meta name="description" content="原文标题：Node.js EventEmitter Tutorial 原文链接：http://www.hacksparrow.com/node-js-eventemitter-tutorial.html">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="张小伦爱学习">张小伦爱学习</a></h1>
+				<h2 class="blog-motto">勿忘初心  方得始终</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="http://www.cnblogs.com/zhanglun/">博客园</a></li>
+					
+						<li><a href="http://zhanglun.github.io/">Page</a></li>
+					
+						<li><a href="http://ncuey.sinaapp.com/CrispElite/">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/05/05/(译)node.js 的 eventemitter 教程/" title="(译)Node.js的 EventEmitter 教程" itemprop="url">(译)Node.js的 EventEmitter 教程</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-05-05T13:23:00.000Z" itemprop="datePublished">5月 5 2014</time>
+    更新日期:<time datetime="2014-11-01T01:32:16.000Z" itemprop="dateModified">11月 1 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<blockquote>
+<p>原文标题：Node.js EventEmitter Tutorial<br> 原文链接：<a href="http://www.hacksparrow.com/node-js-eventemitter-tutorial.html" target="_blank" rel="external">http://www.hacksparrow.com/node-js-eventemitter-tutorial.html</a></p>
+</blockquote>
+<a id="more"></a>
+
+<p>听说过 Node.js 中的 <code>EventEmitter</code> 吗？也许你知道大部分内置的 Node.js 库 都使用它，也许你总是对 <code>EventEmitter</code> 充满好奇，但是没有谁向你解释？</p>
+<p>在这个教程中，我会给你一些关于 <code>EventEmitter</code> 类的例子。</p>
+<p>你必须熟悉各种 Node.js 中的事件比如： <code>on data</code> ， <code>on end</code> ， <code>on error</code> 等等之类的。事件机制的工作做得天衣无缝，十分完美，难道不是吗？所有的基于事件的 Node.js 库都依赖于 <code>EventEmitter</code> 类，你可能会说那些库都继承了 <code>EventEmitter</code>。</p>
+<p> <code>EventEmitter</code> 的强大之处不仅限于内置的 Node.js 库，你也可以拥有它！</p>
+<p>展示 <code>EventEmitter</code> 能力的最好方法就是通过一个例子，看看这个：</p>
+<pre><code>var EventEmitter = require(&#39;events&#39;).EventEmitter;
+var radium = new EventEmitter();
+
+//绑定 radiation 事件
+radium.on(&#39;radiation&#39;, function(ray) {
+    console.log(ray);
+});
+
+setInterval(function() {
+    //触发 radiation 事件
+    radium.emit(&#39;radiation&#39;, &#39;GAMMA&#39;);
+}, 1000);
+</code></pre><p>注意到了吧，创建一个事件，添加一个事件监听器，触发事件，通过事件传递数据是多么的简单。所有的这些因为 <code>EventEmitter</code> 的魔力而实现。 <code>EventEmitter</code> 让编写令人惊讶的 Node.js 库变得可能。</p>
+<p>上面的例子基于一个 <code>EventEmitter</code> 的实例，我们怎么做才能创建一个继承自 <code>EventEmitter</code> 的类呢？Node.js 有一个，叫做 <code>util</code> 的库，它有一个方法： <code>inherits</code>，实现对象之间原型继承的函数。我们可以很轻松的通过它让一个类继承另一个类（准确的说不能叫类）：</p>
+<pre><code>var util = require(&#39;util&#39;);
+util.inherits(MyClass, SuperClass);
+</code></pre><p>使用 <code>util.inherits()</code> ，我们创建了一个继承自 <code>EventEmitter</code> 的模块，注意下面的代码：</p>
+<p><em>radio.js</em> 中的内容：</p>
+<pre><code>var util = require(&#39;util&#39;);
+var EventEmitter = require(&#39;events&#39;).EventEmitter;
+
+//一个包含 &quot;freq&quot; 和 &quot;name&quot; 属性的对象
+var Radio = function(station) {
+    //保存 指向Radio的this，在setTimeout()中使用
+    var self = this;
+
+    setTimeout(function() {
+        self.emit(&#39;open&#39;, station);
+    }, 0);
+
+    setTimeout(function() {
+        self.emit(&#39;close&#39;, station);
+    }, 5000);
+
+    this.on(&#39;newListener&#39;, function(listener) {
+        console.log(&#39;Event Listener: &#39; + listener);
+    });
+
+};
+
+//Radio 继承 EventEmitter
+util.inherits(Radio, EventEmitter);
+module.exports = Radio;
+</code></pre><p>我们创建了一个继承自 <code>EventEmitter</code> 的模块。接下来让我们看看如何在一个例子中使用创建的模块。</p>
+<p><em>example.js</em> 中的内容：</p>
+<pre><code>var Radio = require(&#39;./radio.js&#39;);
+
+var station = {
+    freq: &#39;80.16&#39;,
+    name: &#39;Rock N Roll Radio&#39;,
+};
+// 创建一个Radio实例
+var radio = new Radio(station);
+
+//添加一个“open”事件监听器
+radio.on(&#39;open&#39;, function(station) {
+    console.log(&#39;&quot;%s&quot; FM %s OPENED&#39;, station.name, station.freq);
+    console.log(&#39;? ??&#39;);
+});
+
+//添加一个“close”事件监听器
+radio.on(&#39;close&#39;, function(station) {
+    console.log(&#39;&quot;%s&quot; FM %s CLOSED&#39;, station.name, station.freq);
+});
+</code></pre><p>运行 example.js 准备好见证 <code>EventEmitter</code> 的魔力。</p>
+<p>如果因为某些原因你不想使用 <code>util</code> 模块，你可以用这种方法来拓展一个类。</p>
+<pre><code>Apple.prototype = Object.create(require(&#39;events&#39;).EventEmitter.prototype);
+</code></pre><p> <code>EventEmitter</code> 可以帮你编写令人印象深刻的基于事件的 Node.js 模块。同时，作为作为一个 Node.js 的开发人员，你掌握的关于<code>EventEmitter</code>的知识会大大影响你的工作效率。所以，确保你阅读了<a href="http://nodejs.org/api/events.html#events_class_events_eventemitter" target="_blank" rel="external">关于 <code>EventEmitter</code> 的更详细的资料</a>，并且掌握里里外外它是如何工作的。如果你不了解<code>EventEmitter</code>，那你也不了解 Nodejs.js</p>
+<p>(完)</p>
+<p><strong>翻译水平有待提高，所翻译的博文并不是按照原文一句一句翻译，而是添加了自己对文章的理解。如有不正之处，欢迎指正！</strong><br><strong>个人笔记，仅供参考。</strong></p>
+<blockquote>
+<p>参考:<br><a href="http://www.hacksparrow.com/node-js-eventemitter-tutorial.html" target="_blank" rel="external">http://www.hacksparrow.com/node-js-eventemitter-tutorial.html
+</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/译文/">译文</a><a href="/tags/Node-js/">Node.js</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://zhanglun.github.io/2014/05/05/(译)node.js 的 eventemitter 教程/" data-title="(译)Node.js的 EventEmitter 教程 | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/05/08/学习sass时了解到的一些好玩特性/" title="学习sass时了解到的一些好玩特性">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  学习sass时了解到的一些好玩特性</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/04/28/(译)node.js的全局变量/"  title="(译)Node.js的全局变量">
+ <strong>NEXT:</strong><br/> 
+ <span>(译)Node.js的全局变量
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 人穷志短愿望多</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2671026564" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/zhanglun" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
+		
+			<li><a href="/categories/Python/" title="Python">Python<sup>2</sup></a></li>
+		
+			<li><a href="/categories/前端/" title="前端">前端<sup>10</sup></a></li>
+		
+			<li><a href="/categories/重构/" title="重构">重构<sup>4</sup></a></li>
+		
+			<li><a href="/categories/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>12</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
+		
+			<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
+		
+			<li><a href="/tags/css/" title="css">css<sup>1</sup></a></li>
+		
+			<li><a href="/tags/sass/" title="sass">sass<sup>2</sup></a></li>
+		
+			<li><a href="/tags/web优化/" title="web优化">web优化<sup>3</sup></a></li>
+		
+			<li><a href="/tags/兼容性/" title="兼容性">兼容性<sup>3</sup></a></li>
+		
+			<li><a href="/tags/命令行/" title="命令行">命令行<sup>1</sup></a></li>
+		
+			<li><a href="/tags/填坑日记/" title="填坑日记">填坑日记<sup>2</sup></a></li>
+		
+			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
+		
+			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
+		
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>17</sup></a></li>
+		
+			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
+		
+			<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

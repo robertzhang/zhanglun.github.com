@@ -1,0 +1,466 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>规范之路-CSS中的定位简介 | 张小伦爱学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="张小伦爱学习">
+    
+    <meta name="description" content="在 CSS2.1 中，一个盒子会根据下面三种定位方案进行排列：
+
+标准流（Normal flow）：在 CSS2.1 中包括 块级盒子形成的块级格式化上下文（block formatting context），行级格式化上下文（inline formatting context）和采用了绝对定位（r">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="张小伦爱学习">张小伦爱学习</a></h1>
+				<h2 class="blog-motto">勿忘初心  方得始终</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="http://www.cnblogs.com/zhanglun/">博客园</a></li>
+					
+						<li><a href="http://zhanglun.github.io/">Page</a></li>
+					
+						<li><a href="http://ncuey.sinaapp.com/CrispElite/">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/09/12/规范之路-css中的定位简介/" title="规范之路-CSS中的定位简介" itemprop="url">规范之路-CSS中的定位简介</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-09-12T12:30:00.000Z" itemprop="datePublished">9月 12 2014</time>
+    更新日期:<time datetime="2014-11-01T01:37:48.000Z" itemprop="dateModified">11月 1 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#position的值"><span class="toc-number">1.</span> <span class="toc-text">position的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子的偏移量（Box_offsets）"><span class="toc-number">2.</span> <span class="toc-text">盒子的偏移量（Box offsets）</span></a></li></ol>
+		</div>
+		
+		<p>在 CSS2.1 中，一个盒子会根据下面三种定位方案进行排列：</p>
+<ul>
+<li>标准流（Normal flow）：在 CSS2.1 中包括 块级盒子形成的块级格式化上下文（block formatting context），行级格式化上下文（inline formatting context）和采用了绝对定位（relative positioning）的盒子。</li>
+<li>浮动（Floats）：在浮动模型中，盒子先按照正常标准流（normal flow）排列，然后从 normal flow 中取出，将它尽可能的移动到左边或者右边</li>
+<li>绝对定位（Absoulte positioning）：整个盒子都将被从标准流中移出，相对于一个包含块（containing block）指定它自己的位置。将不会对它的兄弟元素有任何的影响。</li>
+</ul>
+<p>如果一个元素被浮动或者进行了绝对定位，或者元素本身是文档的根元素（root element）我们就可以说这个元素脱离了文档流（out of flow）。与 <code>out-of-flow</code> 相对的是 <code>in-flow</code>。元素A的流（the flow of an element A）是一个集合，这个集合包含了A本身和那些以A作为最近的脱离文档流的祖先元素的所有 in-flow 元素。</p>
+<p><img src="http://ncuey-crispelite.stor.sinaapp.com/QQ20140912-1.png" alt="look at this"></p>
+<p><code>position</code> 和 <code>float</code> 采用不同的方式来计算盒子的位置，这篇先简单的讲一下 <code>position</code></p>
+<h3 id="position的值">position的值</h3>
+<p>position可以应用在任何元素上，它 的值有：static | relative | absolute | fixed | inherit|，默认值是 static。</p>
+<p><strong>static</strong><br>    元素按标准流排列，’top’, ‘right’, ‘bottom’, 和 ‘left’ 对元素没有影响。  </p>
+<p><strong>relative</strong><br>    元素的位置按照标准流（中的位置）计算（the position in normal flow），然后盒子相对它标准流中的位置偏移。比如B元素相对原来的位置发生偏移之后，它后面的元素的位置计算不会受到影响，就像B元素一直在原来的位置上呆着一样。对于 table-row-group, table-header-group, table-footer-group, table-row, table-column-group, table-column, table-cell, and table-caption 这些元素，没有定义 <code>position:relative</code>。  </p>
+<p><strong>absolute</strong><br>    盒子的位置由’top’, ‘right’, ‘bottom’, 和 ‘left’ 指定。这四个值指定的偏移都是相对于盒子的包含块（containing block）。绝对定位的盒子从标准流中被移除，这一位置它们不会对接下来的相邻元素的布局产生影响。同时绝对定位的元素也有 magin ，不会与任何的 元素发生 margin坍塌现象。  </p>
+<p><strong>fixed</strong><br>    盒子的位置根据 ‘absolute’ model 来计算，除此之外，在不同的设备中，盒子固定的位置不太一样。在手持设备，投影设备，屏幕，电子打字机和电视上（handheld, projection, screen, tty, and tv media types），盒子的位置相对于视口（viewport）固定，当视口滚动的时候，盒子也不会移动；在打印机<br>上时，盒子在每个page（就是每张纸）上都会被渲染，位置相对page形成的盒子固定，即使页面是通过一个视口看到的（比如 打印预览）。对于其他的媒体类型来说，这种固定的盒子是未定义的。有时候可能想让一个盒子一直保持在屏幕的顶部，但是不想在打印的时候出现在每个页面上。使用媒体查询（@media rule）可以很轻松的做到这一定。</p>
+<pre><code>@media screen { 
+    h1#first { position: fixed } 
+}
+@media print { 
+    h1#first { position: static }
+}
+</code></pre><p>用户代理不能对固定的盒子中的内容做翻页处理，因为用户代理有可能以某种方式将不可见的内容输出（我没有实践过，see <a href="http://www.w3.org/TR/CSS21/page.html#outside-page-box" target="_blank" rel="external">“Content outside the page box”</a>）。暂时先搁着，先看完 chapter 9 (￣◇￣;)</p>
+<h3 id="盒子的偏移量（Box_offsets）">盒子的偏移量（Box offsets）</h3>
+<p>一个元素的 position 属性的值不是 “static“ 的时候，我们可以说这个元素使用了定位（is positioned）。使用了定位后的元素形成一个 “定位盒子“（positioned boxes），这个定位盒子的位置根据’top’, ‘right’, ‘bottom’, 和 ‘left’四个属性来计算，这四个属性决定了盒子的offset。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value</td>
+<td>\<length></length></td>
+<td>\<percentage></percentage></td>
+<td>auto</td>
+<td>inherit</td>
+</tr>
+<tr>
+<td>Initial</td>
+<td>auto</td>
+</tr>
+<tr>
+<td>Applies to</td>
+<td>positioned elements</td>
+</tr>
+<tr>
+<td>Inherited</td>
+<td>no</td>
+</tr>
+<tr>
+<td>Percentages</td>
+<td>refer to height of containing block</td>
+</tr>
+<tr>
+<td>Media</td>
+<td>visual</td>
+</tr>
+<tr>
+<td>Computed value</td>
+<td>if specified as a length, the corresponding absolute length; if specified as a percentage, the specified value; otherwise, ‘auto’.</td>
+</tr>
+</tbody>
+</table>
+<p>‘top’/‘right’/‘bottom’/‘left’四个属性的作用也很好理解，分别定义绝对定位的盒子的上/右/下/左部的margin边缘到这个盒子的包含块的上/右/下/左部边缘的距离。对于相对定位的盒子，偏移量参照的是盒子自身的上/右/下/左部边缘（包含marign），即相对于盒子处于标准流中的位置。</p>
+<p>当它们的值定义为百分比时，偏离量的计算方法是：包含块的宽度的百分比（定义 left 或者 right）或者高度的百分比（定义 top 或者 bottom）。</p>
+<p>先记录到这里，回头在看一下 标准中的 <a href="http://www.w3.org/TR/CSS21/visuren.html#normal-flow" target="_blank" rel="external">Normal flow</a> 和 <a href="http://www.w3.org/TR/CSS21/visuren.html#floats" target="_blank" rel="external">Floats</a> 以及 <a href="http://www.w3.org/TR/CSS21/visuren.html#absolute-positioning" target="_blank" rel="external">absolute-positioning</a></p>
+<p>(￣◇￣;)</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CSS/">CSS</a><a href="/tags/笔记/">笔记</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/重构/">重构</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://zhanglun.github.io/2014/09/12/规范之路-css中的定位简介/" data-title="规范之路-CSS中的定位简介 | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/09/14/git 使用笔记(三)-分支的使用/" title="Git 使用笔记(三)-分支的使用">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Git 使用笔记(三)-分支的使用</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/08/25/将footer始终保持在页面底部的方法一/"  title="如何将页面的footer保持在页面的底部一">
+ <strong>NEXT:</strong><br/> 
+ <span>如何将页面的footer保持在页面的底部一
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#position的值"><span class="toc-number">1.</span> <span class="toc-text">position的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#盒子的偏移量（Box_offsets）"><span class="toc-number">2.</span> <span class="toc-text">盒子的偏移量（Box offsets）</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 人穷志短愿望多</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2671026564" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/zhanglun" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
+		
+			<li><a href="/categories/Python/" title="Python">Python<sup>2</sup></a></li>
+		
+			<li><a href="/categories/前端/" title="前端">前端<sup>10</sup></a></li>
+		
+			<li><a href="/categories/重构/" title="重构">重构<sup>4</sup></a></li>
+		
+			<li><a href="/categories/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>12</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>8</sup></a></li>
+		
+			<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
+		
+			<li><a href="/tags/css/" title="css">css<sup>1</sup></a></li>
+		
+			<li><a href="/tags/sass/" title="sass">sass<sup>2</sup></a></li>
+		
+			<li><a href="/tags/web优化/" title="web优化">web优化<sup>3</sup></a></li>
+		
+			<li><a href="/tags/兼容性/" title="兼容性">兼容性<sup>3</sup></a></li>
+		
+			<li><a href="/tags/命令行/" title="命令行">命令行<sup>1</sup></a></li>
+		
+			<li><a href="/tags/填坑日记/" title="填坑日记">填坑日记<sup>2</sup></a></li>
+		
+			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
+		
+			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
+		
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>17</sup></a></li>
+		
+			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
+		
+			<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
