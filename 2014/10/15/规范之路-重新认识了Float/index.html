@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>规范之路-Floats | 张小伦爱学习</title>
+    <title>规范之路-重新认识了Float | 张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
@@ -75,7 +75,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/10/15/规范之路-floats/" title="规范之路-Floats" itemprop="url">规范之路-Floats</a>
+      <a href="/2014/10/15/规范之路-重新认识了Float/" title="规范之路-重新认识了Float" itemprop="url">规范之路-重新认识了Float</a>
   </h1>
   <p class="article-author">By
     
@@ -83,7 +83,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-10-15T06:50:00.000Z" itemprop="datePublished">10月 15 2014</time>
-    更新日期:<time datetime="2014-11-01T14:58:13.000Z" itemprop="dateModified">11月 1 2014</time>
+    更新日期:<time datetime="2014-11-02T09:12:16.000Z" itemprop="dateModified">11月 2 2014</time>
     
   </p>
 </header>
@@ -92,7 +92,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是浮动"><span class="toc-number">1.</span> <span class="toc-text">什么是浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素浮动之后如何表现"><span class="toc-number">2.</span> <span class="toc-text">元素浮动之后如何表现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#float:left|right|none|inherit;"><span class="toc-number">3.</span> <span class="toc-text">float:left|right|none|inherit;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我要控制浮动！"><span class="toc-number">4.</span> <span class="toc-text">我要控制浮动！</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是浮动"><span class="toc-number">1.</span> <span class="toc-text">什么是浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素浮动之后如何表现"><span class="toc-number">2.</span> <span class="toc-text">元素浮动之后如何表现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#float:left|right|none|inherit;"><span class="toc-number">3.</span> <span class="toc-text">float:left|right|none|inherit;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我要控制浮动！"><span class="toc-number">4.</span> <span class="toc-text">我要控制浮动！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#‘clear’的属性值"><span class="toc-number">4.1.</span> <span class="toc-text">‘clear’的属性值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子说明如何计算这个clearence"><span class="toc-number">4.2.</span> <span class="toc-text">例子说明如何计算这个clearence</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#再来说明一下“负clearence的情况”"><span class="toc-number">4.2.1.</span> <span class="toc-text">再来说明一下“负clearence的情况”</span></a></li></ol></li></ol></li></ol>
 		</div>
 		
 		<blockquote>
@@ -206,7 +206,8 @@ img{
 <p>额好吧上面说了这么多感觉乱乱的。</p>
 </blockquote>
 <p>可以为任何元素添加float属性，如果元素形成的盒子具有绝对定位属性（absolutely position：position的属性值是absolute或者fixed），浮动将不起作用。</p>
-<p>元素浮动之后，会形成 一个块级盒子。也就是说，通常情况下形成行级盒子的span元素，浮动之后也便会形成一个块级盒子。<br>在<a href="">这里</a>官方给出了关于浮动更精确的规则，挑了几条比较个人感觉重要的</p>
+<p>元素浮动之后，会形成 一个块级盒子。也就是说，通常情况下形成行级盒子的span元素，浮动之后也便会形成一个块级盒子。</p>
+<p>在<a href="http://www.w3.org/TR/CSS21/visuren.html#floats" target="_blank" rel="external">这里</a>官方给出了关于浮动更精确的规则，挑了几条比较个人感觉重要的</p>
 <ul>
 <li>向左浮动的元素的左外填充边缘（outer edge）不一定是 containing block 的左边缘。向右的元素同理。</li>
 <li>假设当前的盒子是向左浮动的，在它的DOM树之前也存在向左浮动的盒子。那么对于这个盒子来说，要么它的左外填充边缘与前面的盒子的右外填充边缘接触，要么它的顶外填充边缘与前面的盒子的底外填充边缘接触。向右浮动的元素同理。</li>
@@ -215,9 +216,67 @@ img{
 <li>一个浮动元素的上外填充通常不会比DOM结构比其优先的元素形成的line box（这个盒子要包含另一盒子）上外填充高</li>
 </ul>
 <h2 id="我要控制浮动！">我要控制浮动！</h2>
-<p>CSS中提供了一个叫做<code>clear</code>的属性方便我们控制浮动之后的流。应用在块级元素上，可以使用的值有：none|left|right|both|inherit。这个属性标识元素形成的盒子的哪一边（左边或者右边）不与前面的浮动元素相邻</p>
-<p>（未完…………）</p>
-<p><img src="http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-10-31_183052.png" alt=""></p>
+<p>CSS中提供了一个叫做<code>clear</code>的属性方便我们控制浮动之后的流。应用在块级元素上，可以使用的值有：none|left|right|both|inherit。这个属性决定元素形成的盒子的哪一边（左边或者右边）不与前面的浮动元素相邻。同时，不会作用于应用该属性的元素内部的浮动和其他的BFC中的浮动。</p>
+<h3 id="‘clear’的属性值">‘clear’的属性值</h3>
+<p>可以是将下面四个值应用在没有浮动的块级盒子上</p>
+<dl><br>    <dt><br>        <strong>left</strong><br>    </dt><br>    <dd><br>        命令使用<code>clear:left</code>的盒子的上外边界要低于任何DOM结构中比自己优先的左浮动元素框的下外边界。（只关心html结构上在自己之前的浮动元素）<br>    </dd><br>    <dt><br>        <strong>right</strong><br>    </dt><br>    <dd><br>        命令使用<code>clear:right</code>的盒子的上外边界要低于任何DOM结构中比自己优先的左浮动元素框的下外边界。（只关心html结构上在自己之前的浮动元素）<br>    </dd><br>    <dt><br>    <strong>both</strong><br>    </dt><br>    <dd><br>        命令使用<code>clear:both</code>的盒子的上外边界要低于任何DOM结构中比自己优先的左浮动或者右浮动元素框的下外边界。（只关心html结构上在自己之前的浮动元素）<br>    </dd><br></dl>
+
+<blockquote>
+<p>根据官方的定义，可以推断出，所谓“使用clear来清除浮动”这种说法是错误的。clear所起的作用不是针对浮动，它决定的是作用的元素与其前面的浮动元素的位置关系。假如A元素使用左浮动，B元素使用左清除浮动，其作用的结果是B元素的上外边界是紧跟随在A元素的下外边界，浮动依旧浮动，B元素只不过是让其本身左侧出现在A的下方（不是底下）。</p>
+</blockquote>
+<p>看下面的例子：</p>
+<pre><code class="html">&lt;div class=&quot;container&quot;&gt;
+    &lt;p&gt;
+        &lt;img src=&quot;http://placekitten.com/200/200?image=5&quot; alt=&quot;&quot;&gt;
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, iusto, eos, recusandae qui impedit blanditiis libero in accusamus necessitatibus repellendus porro quae inventore unde non voluptate iste nesciunt aut quis.&lt;/p&gt;
+    &lt;p&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<p><img src="http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-11-02_152036.png" alt=""></p>
+<p>当clear的值不是none时，潜在地引入了一个叫做“clearence”的东西，clearence禁止margin的重叠，表现得好像元素margin-top上的空白间隔。用来将元素从浮动元素身边挤下去（push past）。</p>
+<p>在第一次确定元素上边框边缘的位置的时候，元素的“clearence”的计算已经完成。如果clear设置为none，那么这个位置就是元素真正的上边框边缘的位置，也就是没有“clearence”。</p>
+<h3 id="例子说明如何计算这个clearence">例子说明如何计算这个clearence</h3>
+<p>假设，有三个盒子，顺序是：B1，margin-botom:M1，没有padding，border和子元素；浮动的F，高度为H；B2，margin-top:M2，同样没有padding，border和子元素,B2设置<code>clear:both</code>;</p>
+<p>如果暂时忽略B2的clear属性，我们会有下面的图片中的结果，B1和B2的margin重叠了，两者之间的间隔取大值也就是Max(M1, M2)。取B1的最底部在Y轴坐标为0，那么F的顶部的位置为y=M1，B2的顶部为y=Max(M1, M2)，F的底部为y=M1 + H。</p>
+<p><img src="http://ncuey-crispelite.stor.sinaapp.com/W3CR-Floats/2014-11-02_162630.png" alt=""></p>
+<p>考虑到B2的clear属性的作用，我们需要计算clearence，C1和C2，取Max(C1, C2)。</p>
+<ol>
+<li>B2的顶部会被挤到F的底部，坐标为y=M1 + H;这意味着它们自己空隙计算方式是：<pre><code> bottom of F = top border edge of B2
+ ⇔
+ M1 + H = M1 + C1 + M2
+ ⇔
+ C1 = M1 + H - M1 - M2 = H - M2
+</code></pre></li>
+<li><p>保持B2的顶部在原来的位置，坐标为y=Max(M1, M2);计算方式：</p>
+<pre><code> Max(M1, M2) = M1 + C2 + M2
+ ⇔
+ C2 = Max(M1, M2) - M1 - M2
+
+ 假设 Max(M1, M2) &lt; M1 + H，那么：
+
+ C2 = Max(M1,M2) - M1 - M2&lt; M1 + H - M1 - M2 = H - M2
+ ⇒
+ C2 &lt; H - M2
+</code></pre></li>
+<li>所以<pre><code>C1 = H - M2  &gt;C2  ⇒ Max(C1, C2);
+</code></pre></li>
+</ol>
+<h4 id="再来说明一下“负clearence的情况”">再来说明一下“负clearence的情况”</h4>
+<pre><code class="html">&lt;p style=&quot;margin-bottom: 4em&quot;&gt;
+  First paragraph.
+&lt;/p&gt;
+&lt;p style=&quot;float: left; height: 2em; margin: 0&quot;&gt;
+  Floating paragraph.
+&lt;/p&gt;
+&lt;p style=&quot;clear: left; margin-top: 3em&quot;&gt;
+  Last paragraph.
+&lt;/p&gt;
+</code></pre>
+<p>如果没有为最后一个段落添加clear属性，第一个和最后一个段落的margin会重叠，最后一个元素的顶部会与浮动元素的的顶部齐平。加上clear之后第三个段落会排列在第二个段落的下方比原来的位置低2em（浮动元素的高度），同时，margin也不在重叠。所以</p>
+<pre><code>clearence + margin-top = 2em ;
+⇒
+clearence = 2em -3em = -1em;
+</code></pre><p>完了，Bye~</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -237,7 +296,7 @@ img{
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/10/15/规范之路-floats/" data-title="规范之路-Floats | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/10/15/规范之路-重新认识了Float/" data-title="规范之路-重新认识了Float | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -262,7 +321,7 @@ img{
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是浮动"><span class="toc-number">1.</span> <span class="toc-text">什么是浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素浮动之后如何表现"><span class="toc-number">2.</span> <span class="toc-text">元素浮动之后如何表现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#float:left|right|none|inherit;"><span class="toc-number">3.</span> <span class="toc-text">float:left|right|none|inherit;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我要控制浮动！"><span class="toc-number">4.</span> <span class="toc-text">我要控制浮动！</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是浮动"><span class="toc-number">1.</span> <span class="toc-text">什么是浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元素浮动之后如何表现"><span class="toc-number">2.</span> <span class="toc-text">元素浮动之后如何表现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#float:left|right|none|inherit;"><span class="toc-number">3.</span> <span class="toc-text">float:left|right|none|inherit;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我要控制浮动！"><span class="toc-number">4.</span> <span class="toc-text">我要控制浮动！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#‘clear’的属性值"><span class="toc-number">4.1.</span> <span class="toc-text">‘clear’的属性值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子说明如何计算这个clearence"><span class="toc-number">4.2.</span> <span class="toc-text">例子说明如何计算这个clearence</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#再来说明一下“负clearence的情况”"><span class="toc-number">4.2.1.</span> <span class="toc-text">再来说明一下“负clearence的情况”</span></a></li></ol></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
