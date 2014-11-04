@@ -4,15 +4,14 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>git 使用笔记(二)-撤销操作 | 张小伦爱学习</title>
+    <title>Node学习笔记-Serving the content | 张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
     
-    <meta name="description" content="撤消操作
-在最近使用 git 的过程中，有时候遇到这样的一个问题：习惯性的 “add -A”，这会将所有的修改都添加到暂存区，可是有两个文件的修改暂时不想添加的呀，这该怎么办？git 提供了一些撤销操作的方法。比如：
-取消已经暂存的修改
-就像前面说的，习惯性的 “add -A” 将暂时不想添加的修改">
+    <meta name="description" content="Node中的MiddleWare
+
+In the context of a web server, middleware is a layer between the gutsof the server and the code you’re writing to run on it that pr">
     
     
     
@@ -76,15 +75,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/07/22/git使用笔记(二)-撤销操作/" title="git 使用笔记(二)-撤销操作" itemprop="url">git 使用笔记(二)-撤销操作</a>
+      <a href="/2014/11/03/Node学习笔记-Serving the content/" title="Node学习笔记-Serving the content" itemprop="url">Node学习笔记-Serving the content</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-07-22T13:09:00.000Z" itemprop="datePublished">7月 22 2014</time>
-    更新日期:<time datetime="2014-11-01T01:34:56.000Z" itemprop="dateModified">11月 1 2014</time>
+    <time datetime="2014-11-03T11:40:00.000Z" itemprop="datePublished">11月 3 2014</time>
+    更新日期:<time datetime="2014-11-04T12:06:41.000Z" itemprop="dateModified">11月 4 2014</time>
     
   </p>
 </header>
@@ -93,111 +92,119 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#撤消操作"><span class="toc-number">1.</span> <span class="toc-text">撤消操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#取消已经暂存的修改"><span class="toc-number">1.0.1.</span> <span class="toc-text">取消已经暂存的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#取消对文件的修改"><span class="toc-number">1.0.2.</span> <span class="toc-text">取消对文件的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改最后一次的提交"><span class="toc-number">1.0.3.</span> <span class="toc-text">修改最后一次的提交</span></a></li></ol></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Node中的MiddleWare"><span class="toc-number">1.</span> <span class="toc-text">Node中的MiddleWare</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Receiving_Data_from_the_Querystring"><span class="toc-number">2.</span> <span class="toc-text">Receiving Data from the Querystring</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing_and_Receiving_Data_from_a_Path"><span class="toc-number">3.</span> <span class="toc-text">Routing and Receiving Data from a Path</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Receiving_Data_from_a_POST"><span class="toc-number">4.</span> <span class="toc-text">Receiving Data from a POST</span></a></li></ol>
 		</div>
 		
-		<h3 id="撤消操作">撤消操作</h3>
-<p>在最近使用 git 的过程中，有时候遇到这样的一个问题：习惯性的 “add -A”，这会将所有的修改都添加到暂存区，可是有两个文件的修改暂时不想添加的呀，这该怎么办？git 提供了一些撤销操作的方法。比如：</p>
-<h5 id="取消已经暂存的修改">取消已经暂存的修改</h5>
-<p>就像前面说的，习惯性的 “add -A” 将暂时不想添加的修改添加到了暂存区。而取消已经暂存的修改的方法，git 已经在你每次使用 <code>git status</code> 查看文件状态的时候给出了解决方案，</p>
-<pre><code>➜  hexo-theme git:(master) ✗ git status
-On branch master
-Your branch is ahead of &#39;origin/master&#39; by 2 commits.
-  (use &quot;git push&quot; to publish your local commits)
+		<h2 id="Node中的MiddleWare">Node中的MiddleWare</h2>
+<blockquote>
+<p>In the context of a web server, middleware is a layer between the guts<br>of the server and the code you’re writing to run on it that provides a set<br>of abstractions anyone writing code for the platform will be likely to<br>need. It differs from other modules you might pull into your application<br>in that it exists as a buffer between Node and your app, not a utility used<br>within your app.</p>
+</blockquote>
+<p>在一个Web服务器的上下文中，中间件是服务器和你写在其上运行的代码的中间一层，为那些编写代码的人提供一组抽象（a set of abstractions）。它不同于其他那些引入到你的应用中的模块，middleware作为一个缓存区存在于Node与你的应用之间，</p>
+<p>Connect 是最受欢迎的Node中间件框架，为其他的web 框架比如Express提供了基础。Connect提供的工具之一就是 static 模块，用于处理静态文件，如果我们添加了Connect，对静态文件的引用可以酱紫：</p>
+<pre><code class="js">var connect = require(&#39;connect&#39;);
+var app = connect();
 
-Changes to be committed:
-  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+app.use(function middleware1(req, res, next) {
+  // middleware 1
+  next();
+});
 
-    modified:   processing/README.md
-    modified:   processing/layout/_partial/navigation.jade
-    modified:   processing/layout/_widget/archive.jade
-    modified:   processing/layout/_widget/categories.jade
-    modified:   processing/source/css/_base/base.scss
-    modified:   processing/source/css/_base/variables.scss
-    modified:   processing/source/css/_partial/navigation.scss
-    modified:   processing/source/css/style.scss
-</code></pre><p>可以使用 git reset HEAD <file>… 的方式取消暂存。</file></p>
-<pre><code>➜  hexo-theme git:(master) ✗ git reset HEAD *
-Unstaged changes after reset:
-M    processing/README.md
-M    processing/layout/_partial/navigation.jade
-M    processing/layout/_widget/archive.jade
-M    processing/layout/_widget/categories.jade
-M    processing/source/css/_base/base.scss
-M    processing/source/css/_base/variables.scss
-M    processing/source/css/_partial/navigation.scss
-M    processing/source/css/style.scss
-</code></pre><p>这时再使用 <code>git status</code> 查看文件状态可以看到</p>
-<pre><code>➜  hexo-theme git:(master) ✗ git status
-On branch master
-Your branch is ahead of &#39;origin/master&#39; by 2 commits.
-  (use &quot;git push&quot; to publish your local commits)
+app.use(function middleware2(req, res, next) {
+  // middleware 2
+  next();
+});
+</code></pre>
+<p><a href="https://github.com/senchalabs/connect" target="_blank" rel="external">Github:</a></p>
+<h2 id="Receiving_Data_from_the_Querystring">Receiving Data from the Querystring</h2>
+<p>向服务端传送数据最简单的办法就是在url中添加querystring，这种方式不需要在客户端做太多操作。</p>
+<p>Node官方提供了一个叫做<code>querystring</code>的模块，我们不需要做太多的工作就能够很轻松的解析出querystring中的数据，我们要做的一件事请就是“trim the querystring”，因为querystring模块提供了解析querystring字段的方法<code>parse()</code>,当时没有已经将querystring从URl中分离出来。</p>
+<pre><code class="js">var http = require(&quot;http&quot;),
+querystring = require(&quot;querystring&quot;);
+http.createServer(function(req, res) {
+    // parse everything after the &quot;?&quot; into key/value pairs
+    var qs = querystring.parse(req.url.split(&quot;?&quot;)[1]),
+    // property names are the same as in the querystring
+    userName = qs.firstName + &quot; &quot; + qs.lastName,
+    html = &quot;&lt;!doctype html&gt;&quot; +
+    &quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello &quot; + userName + &quot;&lt;/title&gt;&lt;/head&gt;&quot; +
+    &quot;&lt;body&gt;&lt;h1&gt;Hello, &quot; + userName + &quot;!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;;
+    res.end(html);
+}).listen(8000);
+</code></pre>
+<h2 id="Routing_and_Receiving_Data_from_a_Path">Routing and Receiving Data from a Path</h2>
+<p><code>Routing</code>是中间件提供的另一个功能，但是自己实现起来也不是很复杂。Routing可以让我们解析出除了querystring之外的URL路径中的数据。一个最简单的route包含三个部分：一个request方法；一个route匹配的模式（正则表达式）和一个请求匹配成功时调用的回调函数。</p>
+<p>要解析URL，必须引入URL模块</p>
+<pre><code class="js">var url = require(&quot;url&quot;);
+</code></pre>
+<p>前面讲到的使用querystring的例子，可以修改成Route版，通过检查URL来寻找信息。假设我们的路径是“sayhello/firstname/lastname”</p>
+<pre><code class="js">var http = require(&quot;http&quot;),
+    url = require(&quot;url&quot;);
+http.createServer(function(req, res) {
+    // split out parts of the path
+    var path = url.parse(req.url).pathname.split(&quot;/&quot;);
+    // handle GET requests to /sayHello/
 
-Changes not staged for commit:
-  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
-
-    modified:   processing/README.md
-    modified:   processing/layout/_partial/navigation.jade
-    modified:   processing/layout/_widget/archive.jade
-    modified:   processing/layout/_widget/categories.jade
-    modified:   processing/source/css/_base/base.scss
-    modified:   processing/source/css/_base/variables.scss
-    modified:   processing/source/css/_partial/navigation.scss
-    modified:   processing/source/css/style.scss
-
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre><p>可以看到，现在所有的修改都没有被暂存。</p>
-<h5 id="取消对文件的修改">取消对文件的修改</h5>
-<p>有一次，我正修复一个bug，修改本地仓库的一个文件，还没有完成时，同伴告诉我他已经修改好了，并且已经提交到远程了。我停下手头的工作，准备 pull ，这时候意识到，如果直接 pull，merge 的时候必然会冲突，因为我和同事同时修改了同一个文件的差不多相同的地方。但是我自己修改了文件很多地方，一味的 CTRL+Z 也难以解决问题，此时我需要将我修改的文件返回到修改之前的状态。很凑巧的是，在执行 <code>git status</code> 时，同样也给出了具体的撤销方法。</p>
-<pre><code>➜  hexo-theme git:(master) git status
-On branch master
-Your branch is up-to-date with &#39;origin/master&#39;.
-
-Changes not staged for commit:
-  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
-
-    modified:   processing/layout/_widget/archive.jade
-    modified:   processing/layout/_widget/categories.jade
-    modified:   processing/layout/_widget/tags.jade
-    modified:   processing/layout/layout.jade
-    modified:   processing/source/css/_base/base.scss
-
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre><p>使用 <code>git checkout -- &lt;filename&gt;</code> 来取消工作目录中的修改。</p>
-<pre><code>➜  hexo-theme git:(master) ✗ git checkout -- *
-➜  hexo-theme git:(master) git status
-On branch master
-Your branch is up-to-date with &#39;origin/master&#39;.
-
-nothing to commit, working directory clean
-</code></pre><p>效果显而易见！！这条命令有些危险，所有对文件的修改都没有了。如果一个不小心将自己需要的修改 discard 了，那就只有哭了……</p>
-<h5 id="修改最后一次的提交">修改最后一次的提交</h5>
-<p>有时候在提交时，发现自己漏掉或者多选了几个文件，亦或者提交信息写错了，想要撤销刚才的提交操作，可以使用 <code>--amend</code> 这个选项，重新提交</p>
-<pre><code>➜  hexo-theme git:(master) ✗ git add -A
-➜  hexo-theme git:(master) ✗ git commit -m &quot;commit wrong&quot;
-[master ebcbab2] commit wrong
- 4 files changed, 78 insertions(+), 106 deletions(-)
- rewrite processing/source/css/_base/base.scss (64%)
-</code></pre><p>发现自己提交了一个 “commit wrong” 的错误提交信息，也不用太紧张，输入指令</p>
-<pre><code>git commit --amend 
-</code></pre><p>之后，会跳转到命令行中的 vim 中，提示你修改提交信息。只要没有推送到远程端，一切都好说～</p>
+    if (req.method == &quot;GET&quot; &amp;&amp; path[1] == &quot;sayHello&quot;) {
+        var userName = path[2] + &quot; &quot; + path[3],
+        html = &quot;&lt;!doctype html&gt;&quot; +
+        &quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello &quot; + userName + &quot;&lt;/title&gt;&lt;/head&gt;&quot; +
+        &quot;&lt;body&gt;&lt;h1&gt;Hello, &quot; + userName + &quot;!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;;
+        res.end(html);
+    }
+}).listen(8000);
+</code></pre>
+<p>但是可以看到这样的代码是多么的不健壮，根本没有拓展性可言。我们可以使用Connect来提高代码的可用性。</p>
+<h2 id="Receiving_Data_from_a_POST">Receiving Data from a POST</h2>
+<p>最传统的获取用户数据的方式就是接受来自表单的一个POST请求，这可能不是你使用Node时做的第一件事，但是这个还是一件很必要的事情。亲自尝试使用Node处理POST请求时，可以很好的感受到Node与其他服务端开发的不同之处。<code>ServerRequest</code> 对象（回调函数中的req参数）的属性，没有包含POST传递过来的参数，但是它是一个<code>EventEmitter</code>-事件发射器。它是Node中的一个基本的对象，其作用就像它的名字一样-发射事件。我们不是去检查req的属性是否含有传递过来的数据，而是添加一个事件监听器来监听请求。</p>
+<p>所有的事件发射器的监听器，包括<code>ServerRequest</code>的监听器，都通过 on() 创建，这个方法至少需要一个事件的类型和一个回调函数作为参数（addListener()方法也是一样）。请求的数据将会出现在chunk中，我们不用等待接收完所有的数据就可执行后面的代码。现在，创建一个监听器，用于数据的接受，请求的结束和保存所有的数据块。但是只有在请求完成之后才能显示数据。</p>
+<pre><code class="js">var http = require(&quot;http&quot;),
+    fs = require(&quot;fs&quot;),
+    querystring = require(&quot;querystring&quot;);
+    http.createServer(function(req, res) {
+    var data = &quot;&quot;;
+    // serve static form
+    if (req.method == &quot;GET&quot;) {
+        getFile(__dirname + &quot;/public/simpleForm.html&quot;, res);
+    }
+    // handle form post
+    if (req.method == &quot;POST&quot;) {
+        req.on(&quot;data&quot;, function(chunk) {
+            // append received data
+            data += chunk;
+        });
+        req.on(&quot;end&quot;, function() {
+            // get key/value pairs from received data
+            var params = querystring.parse(data),
+            userName = params.firstName + &quot; &quot; + params.lastName,
+            html = &quot;&lt;!doctype html&gt;&quot; +
+            &quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello &quot; + userName + &quot;&lt;/title&gt;&lt;/head&gt;&quot; +
+            &quot;&lt;body&gt;&lt;h1&gt;Hello, &quot; + userName + &quot;!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;;
+            res.end(html);
+        });
+    }
+}).listen(8000);
+</code></pre>
+<p>同样的我们也可以利用中间件来完成，可以使用 <code>bodyParse</code>。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Git/">Git</a><a href="/tags/笔记/">笔记</a>
+  <span></span> <a href="/tags/笔记/">笔记</a><a href="/tags/Node-js/">Node.js</a>
   </div>
 
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/07/22/git使用笔记(二)-撤销操作/" data-title="git 使用笔记(二)-撤销操作 | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/11/03/Node学习笔记-Serving the content/" data-title="Node学习笔记-Serving the content | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -206,19 +213,11 @@ nothing to commit, working directory clean
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/08/08/grunt的简单配置和使用/" title="Grunt的简单配置和使用">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  Grunt的简单配置和使用</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/07/18/踩坑日记-ie下 a 标签的虚线框/"  title="踩坑日记-IE下 A 标签的虚线框和必须要会用的 CSS 选择器">
+<a href="/2014/10/15/规范之路-重新认识了Float/"  title="规范之路-重新认识了Float">
  <strong>NEXT:</strong><br/> 
- <span>踩坑日记-IE下 A 标签的虚线框和必须要会用的 CSS 选择器
+ <span>规范之路-重新认识了Float
 </span>
 </a>
 </div>
@@ -230,7 +229,7 @@ nothing to commit, working directory clean
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#撤消操作"><span class="toc-number">1.</span> <span class="toc-text">撤消操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#取消已经暂存的修改"><span class="toc-number">1.0.1.</span> <span class="toc-text">取消已经暂存的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#取消对文件的修改"><span class="toc-number">1.0.2.</span> <span class="toc-text">取消对文件的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改最后一次的提交"><span class="toc-number">1.0.3.</span> <span class="toc-text">修改最后一次的提交</span></a></li></ol></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Node中的MiddleWare"><span class="toc-number">1.</span> <span class="toc-text">Node中的MiddleWare</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Receiving_Data_from_the_Querystring"><span class="toc-number">2.</span> <span class="toc-text">Receiving Data from the Querystring</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing_and_Receiving_Data_from_a_Path"><span class="toc-number">3.</span> <span class="toc-text">Routing and Receiving Data from a Path</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Receiving_Data_from_a_POST"><span class="toc-number">4.</span> <span class="toc-text">Receiving Data from a POST</span></a></li></ol>
   </div>
 
 <div id="asidepart">
