@@ -4,15 +4,15 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>git 使用笔记(二)-撤销操作 | 张小伦爱学习</title>
+    <title>Node学习笔记-Server-Side Templates | 张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
     
-    <meta name="description" content="撤消操作
-在最近使用 git 的过程中，有时候遇到这样的一个问题：习惯性的 “add -A”，这会将所有的修改都添加到暂存区，可是有两个文件的修改暂时不想添加的呀，这该怎么办？git 提供了一些撤销操作的方法。比如：
-取消已经暂存的修改
-就像前面说的，习惯性的 “add -A” 将暂时不想添加的修改">
+    <meta name="description" content="因为各种版本的更新，文中的例子可能失效无法运行。毕竟Node for Front-End Developer这本书已经出现很久了。
+
+Creating a Dynamic Page
+不像其他的服务端语言开发，Node没有暗示你需要使用任何的模板引擎来创建动态页面。有很多JS模板引擎，而且这个数量还在">
     
     
     
@@ -76,15 +76,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/07/22/git使用笔记(二)-撤销操作/" title="git 使用笔记(二)-撤销操作" itemprop="url">git 使用笔记(二)-撤销操作</a>
+      <a href="/2014/11/03/Node学习笔记-Server-Side Templates/" title="Node学习笔记-Server-Side Templates" itemprop="url">Node学习笔记-Server-Side Templates</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-07-22T13:09:00.000Z" itemprop="datePublished">7月 22 2014</time>
-    更新日期:<time datetime="2014-11-01T01:34:56.000Z" itemprop="dateModified">11月 1 2014</time>
+    <time datetime="2014-11-03T05:39:00.000Z" itemprop="datePublished">11月 3 2014</time>
+    更新日期:<time datetime="2014-11-05T08:24:18.000Z" itemprop="dateModified">11月 5 2014</time>
     
   </p>
 </header>
@@ -93,111 +93,133 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#撤消操作"><span class="toc-number">1.</span> <span class="toc-text">撤消操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#取消已经暂存的修改"><span class="toc-number">1.0.1.</span> <span class="toc-text">取消已经暂存的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#取消对文件的修改"><span class="toc-number">1.0.2.</span> <span class="toc-text">取消对文件的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改最后一次的提交"><span class="toc-number">1.0.3.</span> <span class="toc-text">修改最后一次的提交</span></a></li></ol></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Creating_a_Dynamic_Page"><span class="toc-number">1.</span> <span class="toc-text">Creating a Dynamic Page</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Partial_Templates"><span class="toc-number">2.</span> <span class="toc-text">Partial Templates</span></a></li></ol>
 		</div>
 		
-		<h3 id="撤消操作">撤消操作</h3>
-<p>在最近使用 git 的过程中，有时候遇到这样的一个问题：习惯性的 “add -A”，这会将所有的修改都添加到暂存区，可是有两个文件的修改暂时不想添加的呀，这该怎么办？git 提供了一些撤销操作的方法。比如：</p>
-<h5 id="取消已经暂存的修改">取消已经暂存的修改</h5>
-<p>就像前面说的，习惯性的 “add -A” 将暂时不想添加的修改添加到了暂存区。而取消已经暂存的修改的方法，git 已经在你每次使用 <code>git status</code> 查看文件状态的时候给出了解决方案，</p>
-<pre><code>➜  hexo-theme git:(master) ✗ git status
-On branch master
-Your branch is ahead of &#39;origin/master&#39; by 2 commits.
-  (use &quot;git push&quot; to publish your local commits)
+		<blockquote>
+<p>因为各种版本的更新，文中的例子可能失效无法运行。毕竟<strong><em>Node for Front-End Developer</em></strong>这本书已经出现很久了。</p>
+</blockquote>
+<h2 id="Creating_a_Dynamic_Page">Creating a Dynamic Page</h2>
+<p>不像其他的服务端语言开发，Node没有暗示你需要使用任何的模板引擎来创建动态页面。有很多JS模板引擎，而且这个数量还在增加。所以有很多选择的对象。使用哪一个模板引擎并不重要，重要的是你需要什么样子的引擎，什么样子的引擎适合你。</p>
+<p>当你在选择模板引擎的时候，你可能需要考虑吧下面的这几个问题：</p>
+<ul>
+<li>是否需要除了JavaScript之外其他的语言<ul>
+<li>如果是，你将没法在客户端上使用</li>
+</ul>
+</li>
+<li>是否依赖已经存在DOM结构<ul>
+<li>如果是，你需要在Node中预先编写一端DOM来使用它，这个很easy，但是多走了一步</li>
+</ul>
+</li>
+<li>在模板第一次渲染之前，是否允许模板一次编译完成并缓存<ul>
+<li>如果你想在前台解析所有的模板或者你渲染的模板会重复使用多次，你可能会比较关心这个</li>
+</ul>
+</li>
+<li>模板中可以使用多少逻辑<ul>
+<li>一些模板的提供少量的逻辑处理，有些允许在模板中编写JS代码块。不同模板的不同特性将影响到你的结构，值得去做点研究</li>
+</ul>
+</li>
+</ul>
+<p>为了简单化，我们使用Mustache模板引擎。如果你没有使用过任何的JS模板引擎，Mustache是一个好的开始，因为它站在逻辑与非逻辑中间，它提供了一系列方法，但是又能使用完整的JavaScript。再者，它的语法也用在其他的一些模板引擎中，对你来说是个好事。</p>
+<p>我们的第一个服务端模板是这样一个包含表单的页面，用以编辑用户的相关信息 和一个接受提交的页面。</p>
+<pre><code class="html">&lt;!--edit.html--&gt;
 
-Changes to be committed:
-  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+&lt;h1&gt;&lt;/h1&gt;
+&lt;form action=&quot;/&quot; method=&quot;POST&quot;&gt;
+    &lt;label&gt;First name:
+        &lt;input type=&quot;text&quot; name=&quot;firstName&quot; value=&quot;&quot; /&gt;
+    &lt;/label&gt;
+    &lt;label&gt;Last name:
+        &lt;input type=&quot;text&quot; name=&quot;lastName&quot; value=&quot;&quot; /&gt;
+    &lt;/label&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Save&quot; /&gt;
+&lt;/form&gt;
 
-    modified:   processing/README.md
-    modified:   processing/layout/_partial/navigation.jade
-    modified:   processing/layout/_widget/archive.jade
-    modified:   processing/layout/_widget/categories.jade
-    modified:   processing/source/css/_base/base.scss
-    modified:   processing/source/css/_base/variables.scss
-    modified:   processing/source/css/_partial/navigation.scss
-    modified:   processing/source/css/style.scss
-</code></pre><p>可以使用 git reset HEAD <file>… 的方式取消暂存。</file></p>
-<pre><code>➜  hexo-theme git:(master) ✗ git reset HEAD *
-Unstaged changes after reset:
-M    processing/README.md
-M    processing/layout/_partial/navigation.jade
-M    processing/layout/_widget/archive.jade
-M    processing/layout/_widget/categories.jade
-M    processing/source/css/_base/base.scss
-M    processing/source/css/_base/variables.scss
-M    processing/source/css/_partial/navigation.scss
-M    processing/source/css/style.scss
-</code></pre><p>这时再使用 <code>git status</code> 查看文件状态可以看到</p>
-<pre><code>➜  hexo-theme git:(master) ✗ git status
-On branch master
-Your branch is ahead of &#39;origin/master&#39; by 2 commits.
-  (use &quot;git push&quot; to publish your local commits)
+&lt;!--result.html--&gt;
+&lt;h1&gt;Edit finish!&lt;/h1&gt;
+&lt;p&gt;Hello，Mr.&lt;/p&gt;
+</code></pre>
+<p>双花括号是模板的定义符号，告诉Mustache在页面渲染的时候在何处填充传递过来的数据。<br>使用Mustache之前，需要使用npm安装Mustache，具体的可以去<a href="http://mustache.github.io/" target="_blank" rel="external">官网</a>查看,然后修改代码去渲染一个模板文件。</p>
+<pre><code class="js">var http = require(&quot;http&quot;),
+    path = require(&quot;path&quot;),
+    connect = require(&quot;connect&quot;);
 
-Changes not staged for commit:
-  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+var app = connect();
 
-    modified:   processing/README.md
-    modified:   processing/layout/_partial/navigation.jade
-    modified:   processing/layout/_widget/archive.jade
-    modified:   processing/layout/_widget/categories.jade
-    modified:   processing/source/css/_base/base.scss
-    modified:   processing/source/css/_base/variables.scss
-    modified:   processing/source/css/_partial/navigation.scss
-    modified:   processing/source/css/style.scss
+var bodyParser = require(&quot;body-parser&quot;);
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre><p>可以看到，现在所有的修改都没有被暂存。</p>
-<h5 id="取消对文件的修改">取消对文件的修改</h5>
-<p>有一次，我正修复一个bug，修改本地仓库的一个文件，还没有完成时，同伴告诉我他已经修改好了，并且已经提交到远程了。我停下手头的工作，准备 pull ，这时候意识到，如果直接 pull，merge 的时候必然会冲突，因为我和同事同时修改了同一个文件的差不多相同的地方。但是我自己修改了文件很多地方，一味的 CTRL+Z 也难以解决问题，此时我需要将我修改的文件返回到修改之前的状态。很凑巧的是，在执行 <code>git status</code> 时，同样也给出了具体的撤销方法。</p>
-<pre><code>➜  hexo-theme git:(master) git status
-On branch master
-Your branch is up-to-date with &#39;origin/master&#39;.
 
-Changes not staged for commit:
-  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+var mu = require(&quot;mu2&quot;);
+mu.root = __dirname + &quot;/public/&quot;;
 
-    modified:   processing/layout/_widget/archive.jade
-    modified:   processing/layout/_widget/categories.jade
-    modified:   processing/layout/_widget/tags.jade
-    modified:   processing/layout/layout.jade
-    modified:   processing/source/css/_base/base.scss
+app.use(&#39;/edit&#39;, function(req, res){
 
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre><p>使用 <code>git checkout -- &lt;filename&gt;</code> 来取消工作目录中的修改。</p>
-<pre><code>➜  hexo-theme git:(master) ✗ git checkout -- *
-➜  hexo-theme git:(master) git status
-On branch master
-Your branch is up-to-date with &#39;origin/master&#39;.
+    var view={
+        pagetitle:&quot;edit your profile&quot;,
+        pageheader:&quot;This page is perpare for everyone!&quot;,
+    };
+    var readable = mu.compileAndRender(&#39;edit.html&#39;, view);
+    readable.pipe(res);
+});
 
-nothing to commit, working directory clean
-</code></pre><p>效果显而易见！！这条命令有些危险，所有对文件的修改都没有了。如果一个不小心将自己需要的修改 discard 了，那就只有哭了……</p>
-<h5 id="修改最后一次的提交">修改最后一次的提交</h5>
-<p>有时候在提交时，发现自己漏掉或者多选了几个文件，亦或者提交信息写错了，想要撤销刚才的提交操作，可以使用 <code>--amend</code> 这个选项，重新提交</p>
-<pre><code>➜  hexo-theme git:(master) ✗ git add -A
-➜  hexo-theme git:(master) ✗ git commit -m &quot;commit wrong&quot;
-[master ebcbab2] commit wrong
- 4 files changed, 78 insertions(+), 106 deletions(-)
- rewrite processing/source/css/_base/base.scss (64%)
-</code></pre><p>发现自己提交了一个 “commit wrong” 的错误提交信息，也不用太紧张，输入指令</p>
-<pre><code>git commit --amend 
-</code></pre><p>之后，会跳转到命令行中的 vim 中，提示你修改提交信息。只要没有推送到远程端，一切都好说～</p>
+app.use(&quot;/api/users/edit&quot;, function(req, res){
+    mu.clearCache(); // 暂时禁用模版缓存
+    res.writeHead({
+        &quot;Content-Type&quot;:&quot;text/html&quot;
+    });
+    if(req.method == &quot;POST&quot;){
+        if (!req.body){
+            res.writeHead(400);
+            res.end(&quot;Server is missing!&quot;);
+        }
+        // POST 的数据
+        var userName = {
+            firstname: req.body.firstName,
+            lastname: req.body.lastName
+        };
+
+        var readable = mu.compileAndRender(&#39;result.html&#39;, userName);
+
+        readable.pipe(res); // 关于stream的更多用法，要找时间看看
+    }
+
+    if(req.method == &quot;GET&quot;){
+
+        res.writeHead(200);
+        res.end(&quot;Hey! Don&#39;t visit this page !&quot;);   
+    }
+});
+
+http.createServer(app).listen(3000);
+</code></pre>
+<p>假设我们将 edit.html 文件保存在 public 目录中，上述的代码将会将内容转换为文本流保存到一个变量中，一旦模板完全加载，便将传递过来的信息渲染成HTML。然后再将最后的HTML输出。</p>
+<p><strong>注意：</strong> Mustache的具体使用方法请看官方给出的教程：<a href="http://mustache.github.io/" target="_blank" rel="external">官网</a>。</p>
+<h2 id="Partial_Templates">Partial Templates</h2>
+<p>在站点中，都会有很多相同的部分，比如导航，页脚或者其他的一些页面组件会在多个页面上出现。笨一点的话就是把HTML每个都复制粘贴一遍，但是将它们作为一个个简单的可共享的模板进行管理比起复制粘贴来说，更加的方便，有利于管理和维护。</p>
+<p>对于一些静态文件，如果我们不想重复的在每个模板中引用，我们可以为站点设置一个默认的模板，里面包含了静态文件的引用。对于页面上不同的内容，可以为其留下空间，在需要的时候利用它们。<br>不同模板的嵌套采用不同的处理方法，当然具体的用法还是参照官网最直接。</p>
+<p>(未完……)</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Git/">Git</a><a href="/tags/笔记/">笔记</a>
+  <span></span> <a href="/tags/笔记/">笔记</a><a href="/tags/Node-js/">Node.js</a>
   </div>
 
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/07/22/git使用笔记(二)-撤销操作/" data-title="git 使用笔记(二)-撤销操作 | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/11/03/Node学习笔记-Server-Side Templates/" data-title="Node学习笔记-Server-Side Templates | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -206,19 +228,11 @@ nothing to commit, working directory clean
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/08/08/grunt的简单配置和使用/" title="Grunt的简单配置和使用">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  Grunt的简单配置和使用</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/07/18/踩坑日记-ie下 a 标签的虚线框/"  title="踩坑日记-IE下 A 标签的虚线框和必须要会用的 CSS 选择器">
+<a href="/2014/10/28/Node学习笔记-Serving the content/"  title="Node学习笔记-Serving the content">
  <strong>NEXT:</strong><br/> 
- <span>踩坑日记-IE下 A 标签的虚线框和必须要会用的 CSS 选择器
+ <span>Node学习笔记-Serving the content
 </span>
 </a>
 </div>
@@ -230,7 +244,7 @@ nothing to commit, working directory clean
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#撤消操作"><span class="toc-number">1.</span> <span class="toc-text">撤消操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#取消已经暂存的修改"><span class="toc-number">1.0.1.</span> <span class="toc-text">取消已经暂存的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#取消对文件的修改"><span class="toc-number">1.0.2.</span> <span class="toc-text">取消对文件的修改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改最后一次的提交"><span class="toc-number">1.0.3.</span> <span class="toc-text">修改最后一次的提交</span></a></li></ol></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Creating_a_Dynamic_Page"><span class="toc-number">1.</span> <span class="toc-text">Creating a Dynamic Page</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Partial_Templates"><span class="toc-number">2.</span> <span class="toc-text">Partial Templates</span></a></li></ol>
   </div>
 
 <div id="asidepart">
