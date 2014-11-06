@@ -4,40 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>边用边学—Linux命令行(持续更新) | 张小伦爱学习</title>
+    <title>Node学习笔记-Data Sources and Flow Control | 张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
     
-    <meta name="description" content="文件操作
-
-
-
-操作
-指令
-
-
-
-
-删除空目录
-rmdir dir  
-
-
-删除非空目录
-rm -rf dir
-
-
-复制文件
-cp source_dir aim_dir
-
-
-复制文件夹
-cp -R source_dir aim_dir
-
-
-
-Nignx
-切换至 nginx.conf 所在的目录，执行">
+    <meta name="description" content="额在之前的笔记中，提到了使用middleware，设置路由，发送数据，处理请求，渲染模板等。但是这些都不足以完成一个Web应用程序，动态数据交互需要和数据库联系在一起。当用户向服务器发送一个请求，响应的服务器可能就需要向数据库发送请求，此时，之后当数据库将数据返回给服务器，服务端才能够将响应给用户。">
     
     
     
@@ -101,15 +73,15 @@ Nignx
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/08/20/边用边学—linux命令行/" title="边用边学—Linux命令行(持续更新)" itemprop="url">边用边学—Linux命令行(持续更新)</a>
+      <a href="/2014/11/06/Node学习笔记-Data Sources and Flow Control/" title="Node学习笔记-Data Sources and Flow Control" itemprop="url">Node学习笔记-Data Sources and Flow Control</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-08-20T15:14:48.000Z" itemprop="datePublished">8月 20 2014</time>
-    更新日期:<time datetime="2014-09-13T14:27:32.000Z" itemprop="dateModified">9月 13 2014</time>
+    <time datetime="2014-11-06T13:17:00.000Z" itemprop="datePublished">11月 6 2014</time>
+    更新日期:<time datetime="2014-11-06T14:26:43.000Z" itemprop="dateModified">11月 6 2014</time>
     
   </p>
 </header>
@@ -118,58 +90,67 @@ Nignx
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件操作"><span class="toc-number">1.</span> <span class="toc-text">文件操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Nignx"><span class="toc-number">2.</span> <span class="toc-text">Nignx</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Connecting_to_Database"><span class="toc-number">1.</span> <span class="toc-text">Connecting to Database</span></a></li></ol>
 		</div>
 		
-		<h4 id="文件操作">文件操作</h4>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>指令</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>删除空目录</td>
-<td>rmdir dir  </td>
-</tr>
-<tr>
-<td>删除非空目录</td>
-<td>rm -rf dir</td>
-</tr>
-<tr>
-<td>复制文件</td>
-<td>cp source_dir aim_dir</td>
-</tr>
-<tr>
-<td>复制文件夹</td>
-<td>cp -R source_dir aim_dir</td>
-</tr>
-</tbody>
-</table>
-<h4 id="Nignx">Nignx</h4>
-<p>切换至 nginx.conf 所在的目录，执行下面的命令：</p>
-<pre><code>sudo nginx
-</code></pre><p>如果不知道 nginx.conf 具体的路径，可以使用 <code>nginx -t</code> 来查看。当你执行 nginx -t 得时候，nginx会去测试你得配置文件得语法，并告诉你配置文件是否写得正确，同时也告诉了你配置文件得路径：</p>
-<pre><code># nginx -t
-nginx: the configuration file /usr/local/etc/nginx/        nginx.conf syntax is ok
-nginx: configuration file /usr/local/etc/nginx/    nginx.conf test is successful
-</code></pre>  
+		<blockquote>
+<p>额在之前的笔记中，提到了使用middleware，设置路由，发送数据，处理请求，渲染模板等。但是这些都不足以完成一个Web应用程序，动态数据交互需要和数据库联系在一起。当用户向服务器发送一个请求，响应的服务器可能就需要向数据库发送请求，此时，之后当数据库将数据返回给服务器，服务端才能够将响应给用户。好的，在这里就涉及到了服务端的流控制（server-side flow control）</p>
+</blockquote>
+<h2 id="Connecting_to_Database">Connecting to Database</h2>
+<p>在Node中没有的提供默认的链接数据的方法，同时又有很多类型的数据库都支持在Node中使用。至于如何选择还是要看具体情况具体分析。书上用的例子是Redis，这是一个很轻量级的数据，具体的我也不太懂。这里是它的<a href="http://redis.io/" target="_blank" rel="external">官网</a>，由于没有官方的window版本，我决定先试试用SQLite。</p>
+<p>之前有过一个sqlite的数据文件，里面是在豆瓣电影上抓取的一点点东西，正好可以用上。</p>
+<p>Node的包实在是太多了，往往有时候陷入选择困难症……。我选用的是叫做<code>sqlite3</code>的modules，NPM上提供的详细资料在<a href="https://www.npmjs.org/package/sqlite3" target="_blank" rel="external">这里</a>，<a href="https://github.com/mapbox/node-sqlite3/wiki/" target="_blank" rel="external">这里</a>还有其API文档。</p>
+<p>在server.js的目录下新建<code>db</code>文件夹，里面放着待会儿要用的db文件。在Node中使用sqlite时，也要先引用它对应的module。</p>
+<pre><code class="js">var sqlite3 = require(&#39;sqlite3&#39;).verbose();
+var db = new sqlite3.Database(&#39;./db/douban.rdb&#39;);
+</code></pre>
+<p>路由的设置和之前的一样，采用<code>connect-route</code>，从数据库读取到数据完成之后，调用回调函数，回调函数中的参数<code>row</code>包含每一行的数据，</p>
+<pre><code class="html">&lt;!--movie.html template--&gt;
+&lt;h1&gt;豆瓣电影&lt;/h1&gt;
+&lt;dl&gt;
+    &lt;dt&gt;&lt;/dt&gt;
+    &lt;dd&gt;&lt;img src=&quot;&quot; alt=&quot;&quot;&gt;&lt;/dd&gt;
+    &lt;dd&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;&lt;/dd&gt;
+    &lt;dd&gt;&lt;span&gt;&lt;/span&gt; &amp;nbsp;&amp;nbsp;&lt;span&gt;&lt;/span&gt;&lt;/dd&gt;
+&lt;/dl&gt;
+</code></pre>
+<pre><code class="js">// server.js
+// 忽略外部函数，只显示核心代码
+router.get(&#39;/movie&#39;, function(req, res, next){
+    var search = db.each(&quot;select * from MOVIE&quot;, function(err, row){
+        console.log(row);
+        var movie={
+            name:row.name,
+            href:row.href,
+            img:row.post_url,
+            type:row.type
+        };
+        var readable = mu.compileAndRender(&#39;movie.html&#39;, movie);
+        readable.pipe(res);
+    });
+});
+</code></pre>
+<p>(未完……) ==!</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/命令行/">命令行</a><a href="/tags/笔记/">笔记</a>
+  <span></span> <a href="/tags/笔记/">笔记</a><a href="/tags/Node-js/">Node.js</a>
   </div>
 
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/08/20/边用边学—linux命令行/" data-title="边用边学—Linux命令行(持续更新) | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/11/06/Node学习笔记-Data Sources and Flow Control/" data-title="Node学习笔记-Data Sources and Flow Control | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -178,19 +159,11 @@ nginx: configuration file /usr/local/etc/nginx/    nginx.conf test is successful
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/08/21/规范之路-visual formatting model概述 /" title="规范之路-visual formatting model 概述">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  规范之路-visual formatting model 概述</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/08/12/踩坑日记-ie中的 haslayout 属性/"  title="踩坑日记-IE中的 hasLayout 属性">
+<a href="/2014/11/03/Node学习笔记-Server-Side Templates/"  title="Node学习笔记-Server-Side Templates">
  <strong>NEXT:</strong><br/> 
- <span>踩坑日记-IE中的 hasLayout 属性
+ <span>Node学习笔记-Server-Side Templates
 </span>
 </a>
 </div>
@@ -202,7 +175,7 @@ nginx: configuration file /usr/local/etc/nginx/    nginx.conf test is successful
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件操作"><span class="toc-number">1.</span> <span class="toc-text">文件操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Nignx"><span class="toc-number">2.</span> <span class="toc-text">Nignx</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Connecting_to_Database"><span class="toc-number">1.</span> <span class="toc-text">Connecting to Database</span></a></li></ol>
   </div>
 
 <div id="asidepart">
