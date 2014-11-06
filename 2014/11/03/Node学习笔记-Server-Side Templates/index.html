@@ -84,7 +84,7 @@ Creating a Dynamic Page
     </p>
   <p class="article-time">
     <time datetime="2014-11-03T05:39:00.000Z" itemprop="datePublished">11月 3 2014</time>
-    更新日期:<time datetime="2014-11-05T08:24:18.000Z" itemprop="dateModified">11月 5 2014</time>
+    更新日期:<time datetime="2014-11-06T10:37:55.000Z" itemprop="dateModified">11月 6 2014</time>
     
   </p>
 </header>
@@ -199,7 +199,9 @@ http.createServer(app).listen(3000);
 <h2 id="Partial_Templates">Partial Templates</h2>
 <p>在站点中，都会有很多相同的部分，比如导航，页脚或者其他的一些页面组件会在多个页面上出现。笨一点的话就是把HTML每个都复制粘贴一遍，但是将它们作为一个个简单的可共享的模板进行管理比起复制粘贴来说，更加的方便，有利于管理和维护。</p>
 <p>对于一些静态文件，如果我们不想重复的在每个模板中引用，我们可以为站点设置一个默认的模板，里面包含了静态文件的引用。对于页面上不同的内容，可以为其留下空间，在需要的时候利用它们。<br>不同模板的嵌套采用不同的处理方法，当然具体的用法还是参照官网最直接。</p>
-<p>(未完……)</p>
+<p>不指是html模板，如果我们想动态生成CSS（比如修改主题）或者JavaScript，同样可以使用模板来操作，修改文件类型就可以了。因为读取文件的时候将其看到做是一些字符串，这对Node的解析来说没有什么区别。</p>
+<p>例如，我们想利用Mustache根据用户定义的值来修改CSS文件，实现的方法与前面描述的加载HTML模板简直是一模一样，只不过requirejs请求的文件变成了CSS文件而已。假设从一个POST请求中接收到了修改样式的参数，然后根据这些参数来请求不同的CSS。</p>
+<p>Node里面的各种模块好蛋疼 ==!(未完……)</p>
   
 	</div>
 		<footer class="article-footer clearfix">
