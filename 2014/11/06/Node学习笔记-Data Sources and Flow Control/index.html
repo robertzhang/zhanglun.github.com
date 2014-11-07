@@ -81,7 +81,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-11-06T13:17:00.000Z" itemprop="datePublished">11月 6 2014</time>
-    更新日期:<time datetime="2014-11-06T14:42:01.000Z" itemprop="dateModified">11月 6 2014</time>
+    更新日期:<time datetime="2014-11-07T02:59:49.000Z" itemprop="dateModified">11月 7 2014</time>
     
   </p>
 </header>
@@ -90,7 +90,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Connecting_to_Database"><span class="toc-number">1.</span> <span class="toc-text">Connecting to Database</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storing_Data_in_Files"><span class="toc-number">2.</span> <span class="toc-text">Storing Data in Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Callbacks_and_Messaging"><span class="toc-number">3.</span> <span class="toc-text">Callbacks and Messaging</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Connecting_to_Database"><span class="toc-number">1.</span> <span class="toc-text">Connecting to Database</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storing_Data_in_Files"><span class="toc-number">2.</span> <span class="toc-text">Storing Data in Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node-sqlite3_简单的操作"><span class="toc-number">3.</span> <span class="toc-text">node-sqlite3 简单的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#new_sqlite3-Database(filename,_[mode],_[callback])"><span class="toc-number">3.1.</span> <span class="toc-text">new sqlite3.Database(filename, [mode], [callback])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sqlite3-verbose()"><span class="toc-number">3.2.</span> <span class="toc-text">sqlite3.verbose()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Database#close([callback])"><span class="toc-number">3.3.</span> <span class="toc-text">Database#close([callback])</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Database#run(sql,_[param,_…],_[callback])"><span class="toc-number">4.</span> <span class="toc-text">Database#run(sql, [param, …], [callback])</span></a></li></ol>
 		</div>
 		
 		<blockquote>
@@ -132,9 +132,50 @@ router.get(&#39;/movie&#39;, function(req, res, next){
 </code></pre>
 <p>这应该算的上是Node中操作数据库最简单的例子，执行select语句读取数据，然后将数据渲染到模板中，呈现给用户。觉得还是有必要把sqlite3的API稍微翻译下做个笔记，不然每次都去查有点子麻烦。</p>
 <h2 id="Storing_Data_in_Files">Storing Data in Files</h2>
-<p>上面讲的是从数据库中取数据，现在来说说如何存储数据。其实我觉得这些问题，只要搞明白了一个，其他的也就不怎么困难了。取数据的时候我们是先访问数据库，然后查找，找到自己需要的数据之后返回就行，大体上就是这么个过程，那么反过来存储数据就是 先准备好打算存储的数据，然后访问数据库，将要存储的数据存入数据库就行了。整个过程都依赖相应数据库modules的API，看懂了API结合着操作几次，差不多就熟练了。我觉得这也没什么好说的，回头还是看看有关Node中MySQL的使用吧。</p>
-<h2 id="Callbacks_and_Messaging">Callbacks and Messaging</h2>
-<p>(未完……) ==!</p>
+<p>上面讲的是从数据库中取数据，现在来说说如何存储数据。其实我觉得这些问题，只要搞明白了一个，其他的也就不怎么困难了。取数据的时候我们是先访问数据库，然后查找，找到自己需要的数据之后返回就行，大体上就是这么个过程，那么反过来存储数据就是 先准备好打算存储的数据，然后访问数据库，将要存储的数据存入数据库就行了。整个过程都依赖相应数据库modules的API，看懂了API结合着操作几次，差不多就熟练了。我觉得这也没什么好说的。</p>
+<h2 id="node-sqlite3_简单的操作">node-sqlite3 简单的操作</h2>
+<blockquote>
+<p>来自<a href="https://github.com/mapbox/node-sqlite3/wiki/API" target="_blank" rel="external">node sqlite3 wiki api</a></p>
+</blockquote>
+<h3 id="new_sqlite3-Database(filename,_[mode],_[callback])">new sqlite3.Database(filename, [mode], [callback])</h3>
+<p>返回一个新的Database对象，并且自动打开这个数据库。没有其他间接的方法来打开数据库。</p>
+<ul>
+<li><code>filename</code>： 正确的值是文件名，如果是“:memory:”，则在内存中创建一个匿名的数据库，匿名数据库不持久，关闭数据库程序之后内容就会消失。</li>
+<li><code>mode</code>：可选参数，可以是<code>sqlite3.OPEN_READONLY</code>, <code>sqlite3.OPEN_READWRITE</code> 和 <code>sqlite3.OPEN_CREATE</code>中的一个或者多个。默认值是 <code>OPEN_READWRITE | OPEN_CREATE</code>。</li>
+<li><code>callback</code>：可选参数，数据库成功打开或者打开时遇到错误调用，回调函数的第一个参数是一个err对象。当err对象为<code>null</code>时，数据库打开成功，此时触发一个没有参数的<code>open</code>事件，无论回调函数是否存在。</li>
+</ul>
+<h3 id="sqlite3-verbose()">sqlite3.verbose()</h3>
+<p>设置执行模式。See the wiki page on <a href="https://github.com/developmentseed/node-sqlite3/wiki/Debugging" target="_blank" rel="external">debugging</a> for more information.</p>
+<h3 id="Database#close([callback])">Database#close([callback])</h3>
+<p>关闭数据库</p>
+<ul>
+<li><code>callback</code>：可选参数。当数据库成功关闭或者关闭时遇到错误调用。回调函数的第一个参数是一个err对象。当err对象为<code>null</code>时，数据库关闭成功，此时触发一个没有参数的<code>open</code>事件，无论回调函数是否存在。</li>
+</ul>
+<h2 id="Database#run(sql,_[param,_…],_[callback])">Database#run(sql, [param, …], [callback])</h2>
+<p>执行SQL语句，然后调用回调函数。返回的是一个Database对象，可以链式调用。</p>
+<ul>
+<li><p><code>sql</code>：执行的SQL语句。如果SQL语句无效，同时run方法有一个回调函数。回调函数将被调用，参数是一个包含错误信息的err对象。如果没有回调函数来处理错误，一个<code>error</code>事件会在影响到后面的数据库相关语句，导致其无法正常工作。</p>
+</li>
+<li><p><code>param, ...</code>：可选参数。当SQL语句包含占位符的时候，可以将参数在这里写出。在执行前，参数会被添加到语句中。有三种方式传递参数：直接作为函数的参数列举出来；以数组的形式；或者一个json对象。</p>
+</li>
+</ul>
+<pre><code class="javascript">      // Directly in the function arguments.
+      db.run(&quot;UPDATE tbl SET name = ? WHERE id = ?&quot;, &quot;bar&quot;, 2);
+
+      // As an array.
+      db.run(&quot;UPDATE tbl SET name = ? WHERE id = ?&quot;, [ &quot;bar&quot;, 2 ]);
+
+      // As an object with named parameters.
+      db.run(&quot;UPDATE tbl SET name = $name WHERE id = $id&quot;, {
+          $id: 2,
+          $name: &quot;bar&quot;
+      });
+</code></pre>
+<p> 参数的键可以这么书写 <code>:name</code>, <code>@name</code> and <code>$name</code>. 建议使用 <code>$name</code>因为JS中允许使用$来声明变量。</p>
+<ul>
+<li><code>callback</code> ：可选参数。在语句执行的任何一个步骤出错和查询执行后都会调用这个函数。遇到错误时，第一个（只有一个）参数是一个包含错误信息的err对象。如果执行成功，第一个参数是<code>null</code>。函数的上下文（this）指向的是statement对象。在第一次运行之后无妨再次运行这个statement，因为在第一次运行之后它被自动销毁了。<br>如果执行成功，this对象将包含两个属性：<code>lastID</code>和<code>changes</code>，这两个属性包含这最后插入的行的ID和这条语句影响的行数（如果它们都不是undefined的话）。执行INSERT才会有lastID，执行UPDATE和DELETE才会有changes。其他情况下，这两个属性的都是不准确的，不应该被使用。<br>在查询方法总，只有<code>.run()</code>的回调函数才有这两个值，其他的比如<code>.all()</code>，<code>.get()</code>等都没有这些值。</li>
+</ul>
+<p>更多详情请戳<a href="https://github.com/mapbox/node-sqlite3/wiki/API" target="_blank" rel="external">这里</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -179,7 +220,7 @@ router.get(&#39;/movie&#39;, function(req, res, next){
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Connecting_to_Database"><span class="toc-number">1.</span> <span class="toc-text">Connecting to Database</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storing_Data_in_Files"><span class="toc-number">2.</span> <span class="toc-text">Storing Data in Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Callbacks_and_Messaging"><span class="toc-number">3.</span> <span class="toc-text">Callbacks and Messaging</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Connecting_to_Database"><span class="toc-number">1.</span> <span class="toc-text">Connecting to Database</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storing_Data_in_Files"><span class="toc-number">2.</span> <span class="toc-text">Storing Data in Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node-sqlite3_简单的操作"><span class="toc-number">3.</span> <span class="toc-text">node-sqlite3 简单的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#new_sqlite3-Database(filename,_[mode],_[callback])"><span class="toc-number">3.1.</span> <span class="toc-text">new sqlite3.Database(filename, [mode], [callback])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sqlite3-verbose()"><span class="toc-number">3.2.</span> <span class="toc-text">sqlite3.verbose()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Database#close([callback])"><span class="toc-number">3.3.</span> <span class="toc-text">Database#close([callback])</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Database#run(sql,_[param,_…],_[callback])"><span class="toc-number">4.</span> <span class="toc-text">Database#run(sql, [param, …], [callback])</span></a></li></ol>
   </div>
 
 <div id="asidepart">
