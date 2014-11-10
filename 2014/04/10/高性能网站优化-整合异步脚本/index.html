@@ -79,7 +79,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-04-10T11:40:00.000Z" itemprop="datePublished">4月 10 2014</time>
-    更新日期:<time datetime="2014-08-20T15:14:50.000Z" itemprop="dateModified">8月 20 2014</time>
+    更新日期:<time datetime="2014-11-09T10:37:30.000Z" itemprop="dateModified">11月 9 2014</time>
     
   </p>
 </header>
@@ -88,7 +88,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#如何保证执行顺序"><span class="toc-number">1.</span> <span class="toc-text">如何保证执行顺序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法1：硬编码回调_(Hardcoded_Callback)"><span class="toc-number">1.1.</span> <span class="toc-text">方法1：硬编码回调 (Hardcoded Callback)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法2：_Window_Onload"><span class="toc-number">1.2.</span> <span class="toc-text">方法2： Window Onload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法3：定时器(Timer)"><span class="toc-number">1.3.</span> <span class="toc-text">方法3：定时器(Timer)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法4：Script_Onload"><span class="toc-number">1.4.</span> <span class="toc-text">方法4：Script Onload</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#如何保证执行顺序"><span class="toc-number">1.</span> <span class="toc-text">如何保证执行顺序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法1：硬编码回调_(Hardcoded_Callback)"><span class="toc-number">1.1.</span> <span class="toc-text">方法1：硬编码回调 (Hardcoded Callback)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法3：定时器(Timer)"><span class="toc-number">1.2.</span> <span class="toc-text">方法3：定时器(Timer)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法4：Script_Onload"><span class="toc-number">1.3.</span> <span class="toc-text">方法4：Script Onload</span></a></li></ol></li></ol>
 		</div>
 		
 		<blockquote>
@@ -122,44 +122,45 @@ function createMenu(id) {
 }
 // callback to the main page
 init();
-</code></pre><p>如果开发人员可以同时控制主页面和外部脚本，这种技术是可行的的。但是我们常常会调用第三方的 JavaScript ，比如： jQuery ，我们不可能降回调添加在 jQuery 的文件中。而且这种方法也不太灵活，一旦改变了回调函数需要同时修改外部脚本。  </p>
-<h3 id="方法2：_Window_Onload">方法2： Window Onload</h3>
-<p>通过监听 Window 的 onload 事件来触发行内代码的执行。这使得只要确保外部脚本在 window.onload 之前下载执行就能保证执行顺序。有些异步加载技术确保在 window.onload  触发之前加载外部脚步：</p>
-<ul>
-<li><p><a href="http://zhanglun.github.io/2014/03/30/%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96-%E6%97%A0%E9%98%BB%E5%A1%9E%E5%8A%A0%E8%BD%BD%E8%84%9A%E6%9C%AC/#Script_in_Iframe" target="_blank" rel="external">Script in Iframe</a> 在IE、Firefox、Safari、Chrome 和 Opera 中保持顺序执行</p>
-</li>
+`&lt;/pre&gt;
+
+如果开发人员可以同时控制主页面和外部脚本，这种技术是可行的的。但是我们常常会调用第三方的 JavaScript ，比如： jQuery ，我们不可能降回调添加在 jQuery 的文件中。而且这种方法也不太灵活，一旦改变了回调函数需要同时修改外部脚本。  
+
+### 方法2： Window Onload
+
+通过监听 Window 的 onload 事件来触发行内代码的执行。这使得只要确保外部脚本在 window.onload 之前下载执行就能保证执行顺序。有些异步加载技术确保在 window.onload  触发之前加载外部脚步：
+</code></pre><ul>
+<li><a href="http://zhanglun.github.io/2014/03/30/%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96-%E6%97%A0%E9%98%BB%E5%A1%9E%E5%8A%A0%E8%BD%BD%E8%84%9A%E6%9C%AC/#Script_in_Iframe" target="_blank" rel="external">Script in Iframe</a> 在IE、Firefox、Safari、Chrome 和 Opera 中保持顺序执行</li>
 <li><p><a href="http://zhanglun.github.io/2014/03/30/%E9%AB%98%E6%80%A7%E8%83%BD%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96-%E6%97%A0%E9%98%BB%E5%A1%9E%E5%8A%A0%E8%BD%BD%E8%84%9A%E6%9C%AC/#Script_DOM_Element" target="_blank" rel="external">Script DOM</a> 在Firefox、Safari 和 Chrome 中保持顺序执行</p>
-</li>
-</ul>
 <p>使用其中一种技术，再通过 window.onload 触发行内脚本就可以实现并行下载的同时保证执行顺序。<a href="&quot;http://stevesouders.com/efws/window-onload.php?t=1398076365&quot;">查看官网demo</a>。这个例子使用了 Script in Iframe 方法加载外部脚本，几乎在所有的浏览器中它都会阻塞onload事件。外部脚本被嵌入在 menu.php 中，然后用 iframe 加载它而不是直接加载 menu.js 。依据浏览器的差异选用 addEventListener 或者 attachEvent 比简单的地使用 window.onload() 好一些。<a href="&quot;http://blog.moocss.com/tutorials/javascript-tutorials/526.html&quot;">关于window.onload加载的多种解决方案 »</a> </p>
 <p>Window Onload 整合技术有两个缺点：首先，必须确定异步脚本是通过阻塞 onload 事件的方式加载的。其次，可能会造成行内代码的延迟执行。如果页面还有很多其他的资源，比如图片等，那么外部脚本加载执行结束之后， window.onload内部的代码必须等到页面完全加载之后才能够执行。通常行内脚本最好在外部脚本下载和执行之后立即调用。</p>
 <h3 id="方法3：定时器(Timer)">方法3：定时器(Timer)</h3>
 <p>定时器技术指的是使用轮询方法来保证在行内代码执行之，前所依赖的外部脚本已经加载。《高性能网站建设进阶优化》一书给出的demo中可以看到<a href="&quot;http://stevesouders.com/efws/timer.php?t=1398076380&quot;">link</a>。修改行内代码，添加一个新函数 initTimer ，负责检查依赖的命名空间和标示符是否存在。如果存在，则调用需要调用的函数；如果不存在，就在指定的时间段之后再次调用 initTimer 函数检查命名空间和标示符。</p>
-<pre><code>function initTimer() {
-    if ( &quot;undefined&quot; === typeof(EFWS) ) {
+<pre>`function initTimer() {
+    if ( "undefined" === typeof(EFWS) ) {
         setTimeout(initTimer, 300);
     }
     else {
         init();
     }
 }
-</code></pre><p>这个技术也有它的缺点。如果setTimeout方法中设置的事件间隔太小，可能会增加页面的开销。相反，如果设置太大，又可能造成外部脚本加载完成和行内代码开始执行之间的延迟。就上面的例子来说，如果外部脚本加载失败，即行内脚本永远无法检测到指定的命名空间，轮询将会无限进行下去。同时稍微增加了维护的成本，如果外部文件的命名空间和标示符变了，行内代码也要更新。</p>
+`</pre>
+
+<p>这个技术也有它的缺点。如果setTimeout方法中设置的事件间隔太小，可能会增加页面的开销。相反，如果设置太大，又可能造成外部脚本加载完成和行内代码开始执行之间的延迟。就上面的例子来说，如果外部脚本加载失败，即行内脚本永远无法检测到指定的命名空间，轮询将会无限进行下去。同时稍微增加了维护的成本，如果外部文件的命名空间和标示符变了，行内代码也要更新。</p>
 <h3 id="方法4：Script_Onload">方法4：Script Onload</h3>
 <p>前面的那些整合技术会增加页面的脆弱性，开销，导致页面的延迟。Script Onload 方法通过监听脚本的 onload 事件解决了所有的这些问题。<a href="&quot;http://stevesouders.com/efws/script-onload.php?t=1398081543&quot;">link</a>。考虑到浏览器之间的差异，添加了 script 元素的 onload 和 onreadystatechange 事件处理程序。onload 在其他浏览器中有效，Opera 两者都有效。</p>
-<pre><code>var DOMScript=document.createElement(&quot;script&quot;);
-DOMScript.src=&quot;someting.js&quot;;
-DOMScript.onloadDone=false;
-DOMScript.onload=function(){
+<p><pre>`var DOMScript=document.createElement(“script”);<br>DOMScript.src=”someting.js”;<br>DOMScript.onloadDone=false;<br>DOMScript.onload=function(){</pre></p>
+<pre><code>DOMScript.onloadDone=true;
+init();
+</code></pre><p>}<br>DOMScript.onreadystatechange=function(){</p>
+<pre><code>if((&quot;loaded&quot; === DOMScript.readyState || &quot;complete&quot; === DOMScript.readyState) &amp;&amp; ! DOMScript.onloadDone){
     DOMScript.onloadDone=true;
     init();
 }
-DOMScript.onreadystatechange=function(){
-    if((&quot;loaded&quot; === DOMScript.readyState || &quot;complete&quot; === DOMScript.readyState) &amp;&amp; ! DOMScript.onloadDone){
-        DOMScript.onloadDone=true;
-        init();
-    }
-}
-</code></pre><p><strong>Script Onload 是整合异步加载外部脚本和行内脚本的首选</strong>。不引用任何外部的标示符，所以维护简单。行内脚本可以在外部脚本加载之后立即执行。同时事件处理也很简单</p>
+</code></pre><p>}</p>
+</li>
+</ul>
+<p><strong>Script Onload 是整合异步加载外部脚本和行内脚本的首选</strong>。不引用任何外部的标示符，所以维护简单。行内脚本可以在外部脚本加载之后立即执行。同时事件处理也很简单</p>
 <p>……未完待续……</p>
   
 	</div>
@@ -213,7 +214,7 @@ DOMScript.onreadystatechange=function(){
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#如何保证执行顺序"><span class="toc-number">1.</span> <span class="toc-text">如何保证执行顺序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法1：硬编码回调_(Hardcoded_Callback)"><span class="toc-number">1.1.</span> <span class="toc-text">方法1：硬编码回调 (Hardcoded Callback)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法2：_Window_Onload"><span class="toc-number">1.2.</span> <span class="toc-text">方法2： Window Onload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法3：定时器(Timer)"><span class="toc-number">1.3.</span> <span class="toc-text">方法3：定时器(Timer)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法4：Script_Onload"><span class="toc-number">1.4.</span> <span class="toc-text">方法4：Script Onload</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#如何保证执行顺序"><span class="toc-number">1.</span> <span class="toc-text">如何保证执行顺序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法1：硬编码回调_(Hardcoded_Callback)"><span class="toc-number">1.1.</span> <span class="toc-text">方法1：硬编码回调 (Hardcoded Callback)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法3：定时器(Timer)"><span class="toc-number">1.2.</span> <span class="toc-text">方法3：定时器(Timer)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法4：Script_Onload"><span class="toc-number">1.3.</span> <span class="toc-text">方法4：Script Onload</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
@@ -250,7 +251,7 @@ DOMScript.onreadystatechange=function(){
 		
 			<li><a href="/categories/Node-js/" title="Node.js">Node.js<sup>12</sup></a></li>
 		
-			<li><a href="/categories/Python/" title="Python">Python<sup>2</sup></a></li>
+			<li><a href="/categories/Python/" title="Python">Python<sup>3</sup></a></li>
 		
 			<li><a href="/categories/前端/" title="前端">前端<sup>10</sup></a></li>
 		
@@ -265,7 +266,7 @@ DOMScript.onreadystatechange=function(){
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
@@ -286,11 +287,13 @@ DOMScript.onreadystatechange=function(){
 		
 			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>12</sup></a></li>
 		
-			<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
+			<li><a href="/tags/Python/" title="Python">Python<sup>3</sup></a></li>
 		
 			<li><a href="/tags/Sass/" title="Sass">Sass<sup>1</sup></a></li>
 		
 			<li><a href="/tags/sass/" title="sass">sass<sup>1</sup></a></li>
+		
+			<li><a href="/tags/webpy/" title="webpy">webpy<sup>1</sup></a></li>
 		
 			<li><a href="/tags/web优化/" title="web优化">web优化<sup>3</sup></a></li>
 		

@@ -1,0 +1,492 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>定时将图片保存在SAE的Storage中 | 张小伦爱学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="张小伦爱学习">
+    
+    <meta name="description" content="前几天一直在看Node相关的书，做了一些笔记，挂在自己的博客上。挺累的，毕竟看的是两本英文的书。而且疲了，一时间学的太猛，以至于晕头转向的。Node中我觉得有一个很麻烦的问题就是：包太多，更新速度也是参差不齐，有的一直在维护，有的已经很长时间不变化，太乱了。光一个MySQL的模块就好多好多好多个。怎">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	
+
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="张小伦爱学习">张小伦爱学习</a></h1>
+				<h2 class="blog-motto">勿忘初心  方得始终</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="http://zhanglun.github.io/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="http://www.cnblogs.com/zhanglun/">博客园</a></li>
+					
+						<li><a href="http://ncuey.sinaapp.com/CrispElite/">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/06/定时将图片保存在SAE的Storage中/" title="定时将图片保存在SAE的Storage中" itemprop="url">定时将图片保存在SAE的Storage中</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-11-06T13:17:00.000Z" itemprop="datePublished">11月 6 2014</time>
+    更新日期:<time datetime="2014-11-10T11:55:58.000Z" itemprop="dateModified">11月 10 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题来了：在本地开发，保存图片的尴尬"><span class="toc-number">1.</span> <span class="toc-text">问题来了：在本地开发，保存图片的尴尬</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转机：本地和SAE线上同步开发"><span class="toc-number">2.</span> <span class="toc-text">转机：本地和SAE线上同步开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构建SAE中webpy的本地开发"><span class="toc-number">2.1.</span> <span class="toc-text">构建SAE中webpy的本地开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将图片存至Storage"><span class="toc-number">2.2.</span> <span class="toc-text">将图片存至Storage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何引用Storage中的图片"><span class="toc-number">2.3.</span> <span class="toc-text">如何引用Storage中的图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何定时？"><span class="toc-number">2.4.</span> <span class="toc-text">如何定时？</span></a></li></ol></li></ol>
+		</div>
+		
+		<blockquote>
+<p>前几天一直在看Node相关的书，做了一些笔记，挂在自己的博客上。挺累的，毕竟看的是两本英文的书。而且疲了，一时间学的太猛，以至于晕头转向的。Node中我觉得有一个很麻烦的问题就是：包太多，更新速度也是参差不齐，有的一直在维护，有的已经很长时间不变化，太乱了。光一个MySQL的模块就好多好多好多个。怎么说呢，感觉模块什么的都不太需要太在意，重要的是理解Node的一些本质，虽然我现在还不清楚有些什么很重要的本质，总之慢慢来吧。</p>
+<p>反观python，虽然我只是也业余的python玩家，但是我也看出来了，python的很多套路都比较稳定，做起来的话踩的坑比较少，对于想我这种渴望从代码中找到成就感的屌丝来说还是很不错的。所以歇了两天之后能开始玩python</p>
+</blockquote>
+<p>之前尝试用python来做一个网站，网站干嘛的我自己也不清楚，只想借机多了解一点后端的技术。然后我决定利用知乎日报的数据来给自己做一个“纸糊日报”。其他的什么就先不说了，之前做的时候，没有掌握Evernote的使用技巧，也就没有想着做笔记。不过现在不一样了，我有特殊的做笔记技巧。</p>
+<h2 id="问题来了：在本地开发，保存图片的尴尬">问题来了：在本地开发，保存图片的尴尬</h2>
+<p>原本只是利用webpy自带的小小服务器在本地开发，但是遇到一个问题就是，抓到图片原始路径之后，没办法直接在页面上使用，因为没有权限在知乎意外的站点使用。然后我也不知道怎么解决这种问题啊，当时为了能早点看到效果，下了一个脚本把图片保存到一个指定的路径，再从这个地方引用。</p>
+<p>那么问题来了，每过一天，打开电脑之后，我都要单独地手动地执行一次脚本，我很蛋疼！！更重要的是，如果我放到线上之后，还要把所有的图片都传上去嘛！！</p>
+<h2 id="转机：本地和SAE线上同步开发">转机：本地和SAE线上同步开发</h2>
+<p>然后我也没有什么好办法，就荒废下去了。昨天呢，突然意识到，发布到线上我也只有放在SAE啊，毕竟穷屌丝……。SAE支持Python开发，可以使用webpy这一小巧的框架；提供MySQL和Storage服务，Stroage最少都有10G的容量，这应该够了吧。<br>所以安排如下：</p>
+<ul>
+<li>将本地的代码，转移到SAE上</li>
+<li>将图片保存到Stroage中而不是代码目录里</li>
+<li>日后可能使用MySQL服务</li>
+</ul>
+<h3 id="构建SAE中webpy的本地开发">构建SAE中webpy的本地开发</h3>
+<p>webpy在本地运行和在SAE中运行有点不同，</p>
+<pre><code class="python"># 本地
+app = web.application(urls, globals())
+if __name__ == &quot;__main__&quot;:
+    app.run()
+
+
+# SAE
+app = web.application(urls, globals()).wsgifunc()
+application = sae.create_wsgi_app(app)
+</code></pre>
+<p>将两者合并，我们得到一个既可以直接在本地运行，又可以直接在SAE运行的代码：</p>
+<pre><code class="python">app = web.application(urls, globals())
+if __name__ == &quot;__main__&quot;:
+    app.run()
+else:
+    import sae
+    application = sae.create_wsgi_app(app.wsgifunc())
+</code></pre>
+<p>SAE上的Python应用的入口为 <code>index.wsgi:application</code> ，也就是 <code>index.wsgi</code> 这个文件中名为 <code>application</code> 的对象。</p>
+<p>在本地，我可以运用<code>code.py</code>，但是在SAE上的入口是<code>index.wsgi</code>。在<a href="http://www.liaoxuefeng.com/article/00137389260145256f699d538ae4fd3910be06d2753b192000" target="_blank" rel="external">这篇博客</a>上看到了解决方案，菜鸟表示，不太明白怎么回事，我还是先乖乖拷贝吧。</p>
+<h3 id="将图片存至Storage">将图片存至Storage</h3>
+<p>图片的抓取就不多说了。假设已经拿到了图片的地址<code>http://pic4.zhimg.com/e80a34cf13d590dea72ad5e1dfb66bac.jpg</code>。</p>
+<p>SAE提供了Storage的使用帮助文档，<a href="http://sae.sina.com.cn/doc/python/storage.html#module-sae.storage" target="_blank" rel="external">这里是Python的文档</a>，简单明了。</p>
+<p>所以我的代码是酱紫的：</p>
+<pre><code class="python">def saveimagetostorage(url):
+    # 去掉 ‘http://’
+    file_path = url[6:]
+    # 文件夹
+    dir_path = re.match(r&#39;/\w+(\.\w+){0,}\/&#39;, file_path).group(0)
+    # 获取文件名
+    file_name = file_path[len(dir_path):]
+
+    if &#39;SERVER_SOFTWARE&#39; in os.environ:
+        # import sae
+        from sae.storage import Bucket
+        bucket = Bucket(&quot;zhihudaily&quot;)
+        # 存取一个文件到bucket中
+        fr = urllib.urlopen(url)
+        stream = fr.read()
+        bucket.put_object(dir_path[1:]+file_name, stream)
+        return bucket
+
+    else:
+        mkdir(save_path)
+        print file_path
+        print &#39;&gt;&gt;&gt;&gt;&#39;
+        print url
+        urllib.urlretrieve(url, imagePath + file_path)
+        return &quot;LocalHost&quot;
+</code></pre>
+<p>核心代码就是这些：</p>
+<pre><code class="python">from sae.storage import Bucket
+bucket = Bucket(&quot;storage的名字&quot;)
+fr = urllib.urlopen(url)
+stream = fr.read()
+bucket.put_object(dir_path[1:]+file_name, stream)
+</code></pre>
+<h3 id="如何引用Storage中的图片">如何引用Storage中的图片</h3>
+<p>额暂时还没解决</p>
+<h3 id="如何定时？">如何定时？</h3>
+<p>SAE提供了<a href="http://zh.wikipedia.org/wiki/Cron" target="_blank" rel="external">Cron(wiki)</a>服务，SAE的相关文档在<a href="http://sae.sina.com.cn/doc/php/cron.html" target="_blank" rel="external">这里</a>。这个Cron就是用来设置周期性被执行的指令的。之前每次都是手动的执行脚本来保存图片，麻烦的要死，既然已经可以图片存到SAE上了，何不再利用SAE提供的便利服务来定时执行保存的操作呢？</p>
+<blockquote>
+<p>Cron服务是SAE为开发者提供的分布式计划任务服务，用来定时触发开发者的特定动作，满足比如定时计算排行榜等需求。</p>
+<p>Cron的执行是以HTTP方式触发的，触发后真正执行的是用户在应用的HTTP的回调函数。Cron服务是分布式环境部署的，具有高可靠性，多点之间相互隔离且同时触发，并且通过分布式锁进行选举并最终由一个健康节点执行。</p>
+</blockquote>
+<p>Cron的应用场景主要是让用户可以在指定的时间执行一些计划任务。</p>
+<pre><code>* 每隔一定时间执行，如每隔2个小时执行1次。
+* 在某个特定时间点执行，如每周二晚上9:10执行。
+</code></pre><p>我可以在应用的配置文件 <code>config.yaml</code> 中来添加Cron。例如：</p>
+<p>```ymal<br>name: crontest<br>version: 1<br>cron:</p>
+<ul>
+<li>description: cron_test<br>url: /cron/make<br>schedule: “<em>/5 </em> <em> </em> *”<br>```ymal</li>
+</ul>
+<p>添加了一个Cron任务， 该任务每5分钟执行 <a href="http://crontest.sinaapp.com/cron/make" target="_blank" rel="external">http://crontest.sinaapp.com/cron/make</a> 一次。具体如何配置可以文档给出的<a href="http://sae.sina.com.cn/doc/php/cron.html#id3" target="_blank" rel="external">例子</a></p>
+<p>在我的代码中，我设置的是每一个小时抓取一次图片，所以是酱紫的：</p>
+<p>```ymal<br>name: daily<br>version: 1<br>cron:</p>
+<ul>
+<li>description: daily<br>url: /api/save_image<br>schedule: “0 <em>/1 </em> <em> </em>“<br>```ymal</li>
+</ul>
+<p><strong>注意:Cron使用HTTP GET方式请求URL</strong></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/webpy/">webpy</a><a href="/tags/Python/">Python</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Python/">Python</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://zhanglun.github.io/2014/11/06/定时将图片保存在SAE的Storage中/" data-title="定时将图片保存在SAE的Storage中 | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/11/07/Node学习笔记-Wrangling the File System/" title="Node学习笔记-Wrangling the File System">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Node学习笔记-Wrangling the File System</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/11/06/Node学习笔记-Data Sources and Flow Control/"  title="Node学习笔记-Data Sources and Flow Control">
+ <strong>NEXT:</strong><br/> 
+ <span>Node学习笔记-Data Sources and Flow Control
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题来了：在本地开发，保存图片的尴尬"><span class="toc-number">1.</span> <span class="toc-text">问题来了：在本地开发，保存图片的尴尬</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转机：本地和SAE线上同步开发"><span class="toc-number">2.</span> <span class="toc-text">转机：本地和SAE线上同步开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构建SAE中webpy的本地开发"><span class="toc-number">2.1.</span> <span class="toc-text">构建SAE中webpy的本地开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将图片存至Storage"><span class="toc-number">2.2.</span> <span class="toc-text">将图片存至Storage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何引用Storage中的图片"><span class="toc-number">2.3.</span> <span class="toc-text">如何引用Storage中的图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何定时？"><span class="toc-number">2.4.</span> <span class="toc-text">如何定时？</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 人穷志短愿望多</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2671026564" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/zhanglun" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/Node-js/" title="Node.js">Node.js<sup>12</sup></a></li>
+		
+			<li><a href="/categories/Python/" title="Python">Python<sup>3</sup></a></li>
+		
+			<li><a href="/categories/前端/" title="前端">前端<sup>10</sup></a></li>
+		
+			<li><a href="/categories/重构/" title="重构">重构<sup>4</sup></a></li>
+		
+			<li><a href="/categories/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>13</sup></a></li>
+		
+			<li><a href="/tags/Git/" title="Git">Git<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Grunt/" title="Grunt">Grunt<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>12</sup></a></li>
+		
+			<li><a href="/tags/Python/" title="Python">Python<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Sass/" title="Sass">Sass<sup>1</sup></a></li>
+		
+			<li><a href="/tags/sass/" title="sass">sass<sup>1</sup></a></li>
+		
+			<li><a href="/tags/webpy/" title="webpy">webpy<sup>1</sup></a></li>
+		
+			<li><a href="/tags/web优化/" title="web优化">web优化<sup>3</sup></a></li>
+		
+			<li><a href="/tags/兼容性/" title="兼容性">兼容性<sup>3</sup></a></li>
+		
+			<li><a href="/tags/命令行/" title="命令行">命令行<sup>1</sup></a></li>
+		
+			<li><a href="/tags/填坑日记/" title="填坑日记">填坑日记<sup>2</sup></a></li>
+		
+			<li><a href="/tags/工具/" title="工具">工具<sup>1</sup></a></li>
+		
+			<li><a href="/tags/移动web开发/" title="移动web开发">移动web开发<sup>1</sup></a></li>
+		
+			<li><a href="/tags/笔记/" title="笔记">笔记<sup>22</sup></a></li>
+		
+			<li><a href="/tags/译文/" title="译文">译文<sup>5</sup></a></li>
+		
+			<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
