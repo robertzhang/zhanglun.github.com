@@ -79,7 +79,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-11-10T11:27:00.000Z" itemprop="datePublished">11月 10 2014</time>
-    更新日期:<time datetime="2014-11-10T12:21:09.000Z" itemprop="dateModified">11月 10 2014</time>
+    更新日期:<time datetime="2014-11-11T11:35:31.000Z" itemprop="dateModified">11月 11 2014</time>
     
   </p>
 </header>
@@ -88,7 +88,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题来了：在本地开发，保存图片的尴尬"><span class="toc-number">1.</span> <span class="toc-text">问题来了：在本地开发，保存图片的尴尬</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转机：本地和SAE线上同步开发"><span class="toc-number">2.</span> <span class="toc-text">转机：本地和SAE线上同步开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构建SAE中webpy的本地开发"><span class="toc-number">2.1.</span> <span class="toc-text">构建SAE中webpy的本地开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将图片存至Storage"><span class="toc-number">2.2.</span> <span class="toc-text">将图片存至Storage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何引用Storage中的图片"><span class="toc-number">2.3.</span> <span class="toc-text">如何引用Storage中的图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何定时？"><span class="toc-number">2.4.</span> <span class="toc-text">如何定时？</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题来了：在本地开发，保存图片的尴尬"><span class="toc-number">1.</span> <span class="toc-text">问题来了：在本地开发，保存图片的尴尬</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转机：本地和SAE线上同步开发"><span class="toc-number">2.</span> <span class="toc-text">转机：本地和SAE线上同步开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构建SAE中webpy的本地开发"><span class="toc-number">2.1.</span> <span class="toc-text">构建SAE中webpy的本地开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将图片存至Storage"><span class="toc-number">2.2.</span> <span class="toc-text">将图片存至Storage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何定时？"><span class="toc-number">2.3.</span> <span class="toc-text">如何定时？</span></a></li></ol></li></ol>
 		</div>
 		
 		<blockquote>
@@ -97,7 +97,7 @@
 </blockquote>
 <p>之前尝试用python来做一个网站，网站干嘛的我自己也不清楚，只想借机多了解一点后端的技术。然后我决定利用知乎日报的数据来给自己做一个“纸糊日报”。其他的什么就先不说了，之前做的时候，没有掌握Evernote的使用技巧，也就没有想着做笔记。不过现在不一样了，我有特殊的做笔记技巧。</p>
 <h2 id="问题来了：在本地开发，保存图片的尴尬">问题来了：在本地开发，保存图片的尴尬</h2>
-<p>原本只是利用webpy自带的小小服务器在本地开发，但是遇到一个问题就是，抓到图片原始路径之后，没办法直接在页面上使用，因为没有权限在知乎意外的站点使用。然后我也不知道怎么解决这种问题啊，当时为了能早点看到效果，下了一个脚本把图片保存到一个指定的路径，再从这个地方引用。</p>
+<p>原本只是利用webpy自带的小小服务器在本地开发，但是遇到一个问题就是，抓到图片原始路径之后，没办法直接在页面上使用，因为没有权限在知乎以外的站点使用。然后我也不知道怎么解决这种问题啊，当时为了能早点看到效果，写了一个脚本把图片保存到一个指定的路径，再从这个地方引用。</p>
 <p>那么问题来了，每过一天，打开电脑之后，我都要单独地手动地执行一次脚本，我很蛋疼！！更重要的是，如果我放到线上之后，还要把所有的图片都传上去嘛！！</p>
 <h2 id="转机：本地和SAE线上同步开发">转机：本地和SAE线上同步开发</h2>
 <p>然后我也没有什么好办法，就荒废下去了。昨天呢，突然意识到，发布到线上我也只有放在SAE啊，毕竟穷屌丝……。SAE支持Python开发，可以使用webpy这一小巧的框架；提供MySQL和Storage服务，Stroage最少都有10G的容量，这应该够了吧。<br>所以安排如下：</p>
@@ -165,8 +165,6 @@ fr = urllib.urlopen(url)
 stream = fr.read()
 bucket.put_object(dir_path[1:]+file_name, stream)
 </code></pre>
-<h3 id="如何引用Storage中的图片">如何引用Storage中的图片</h3>
-<p>额暂时还没解决</p>
 <h3 id="如何定时？">如何定时？</h3>
 <p>SAE提供了<a href="http://zh.wikipedia.org/wiki/Cron" target="_blank" rel="external">Cron(wiki)</a>服务，SAE的相关文档在<a href="http://sae.sina.com.cn/doc/php/cron.html" target="_blank" rel="external">这里</a>。这个Cron就是用来设置周期性被执行的指令的。之前每次都是手动的执行脚本来保存图片，麻烦的要死，既然已经可以图片存到SAE上了，何不再利用SAE提供的便利服务来定时执行保存的操作呢？</p>
 <blockquote>
@@ -177,17 +175,21 @@ bucket.put_object(dir_path[1:]+file_name, stream)
 <pre><code>* 每隔一定时间执行，如每隔2个小时执行1次。
 * 在某个特定时间点执行，如每周二晚上9:10执行。
 </code></pre><p>我可以在应用的配置文件 <code>config.yaml</code> 中来添加Cron。例如：</p>
-<p>```ymal<br>name: crontest<br>version: 1<br>cron:</p>
-<ul>
-<li>description: cron_test<br>url: /cron/make<br>schedule: “<em>/5 </em> <em> </em> *”<br>```ymal</li>
-</ul>
-<p>添加了一个Cron任务， 该任务每5分钟执行 <a href="http://crontest.sinaapp.com/cron/make" target="_blank" rel="external">http://crontest.sinaapp.com/cron/make</a> 一次。具体如何配置可以文档给出的<a href="http://sae.sina.com.cn/doc/php/cron.html#id3" target="_blank" rel="external">例子</a></p>
+<pre><code>name: crontest
+version: 1
+cron:
+- description: cron_test
+  url: /cron/make
+  schedule: &quot;*/5 * * * *&quot;
+</code></pre><p>添加了一个Cron任务， 该任务每5分钟执行 <a href="http://crontest.sinaapp.com/cron/make" target="_blank" rel="external">http://crontest.sinaapp.com/cron/make</a> 一次。具体如何配置可以文档给出的<a href="http://sae.sina.com.cn/doc/php/cron.html#id3" target="_blank" rel="external">例子</a></p>
 <p>在我的代码中，我设置的是每一个小时抓取一次图片，所以是酱紫的：</p>
-<p>```ymal<br>name: daily<br>version: 1<br>cron:</p>
-<ul>
-<li>description: daily<br>url: /api/save_image<br>schedule: “0 <em>/1 </em> <em> </em>“<br>```ymal</li>
-</ul>
-<p><strong>注意:Cron使用HTTP GET方式请求URL</strong></p>
+<pre><code>name: daily
+version: 1
+cron:
+- description: daily
+  url: /api/save_image
+  schedule: &quot;0 */1 * * *&quot;
+</code></pre><p><strong>注意:Cron使用HTTP GET方式请求URL</strong></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -232,7 +234,7 @@ bucket.put_object(dir_path[1:]+file_name, stream)
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题来了：在本地开发，保存图片的尴尬"><span class="toc-number">1.</span> <span class="toc-text">问题来了：在本地开发，保存图片的尴尬</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转机：本地和SAE线上同步开发"><span class="toc-number">2.</span> <span class="toc-text">转机：本地和SAE线上同步开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构建SAE中webpy的本地开发"><span class="toc-number">2.1.</span> <span class="toc-text">构建SAE中webpy的本地开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将图片存至Storage"><span class="toc-number">2.2.</span> <span class="toc-text">将图片存至Storage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何引用Storage中的图片"><span class="toc-number">2.3.</span> <span class="toc-text">如何引用Storage中的图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何定时？"><span class="toc-number">2.4.</span> <span class="toc-text">如何定时？</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题来了：在本地开发，保存图片的尴尬"><span class="toc-number">1.</span> <span class="toc-text">问题来了：在本地开发，保存图片的尴尬</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转机：本地和SAE线上同步开发"><span class="toc-number">2.</span> <span class="toc-text">转机：本地和SAE线上同步开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构建SAE中webpy的本地开发"><span class="toc-number">2.1.</span> <span class="toc-text">构建SAE中webpy的本地开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将图片存至Storage"><span class="toc-number">2.2.</span> <span class="toc-text">将图片存至Storage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何定时？"><span class="toc-number">2.3.</span> <span class="toc-text">如何定时？</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
