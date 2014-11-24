@@ -83,7 +83,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-11-20T03:45:00.000Z" itemprop="datePublished">11月 20 2014</time>
-    更新日期:<time datetime="2014-11-24T03:46:31.000Z" itemprop="dateModified">11月 24 2014</time>
+    更新日期:<time datetime="2014-11-24T03:51:44.000Z" itemprop="dateModified">11月 24 2014</time>
     
   </p>
 </header>
@@ -122,6 +122,7 @@
 <p>每一个字符图形都定义了一个<code>leading L</code>，其中 <code>L = &#39;line-height&#39; - AD</code>。leading的一半添加到A的上面，另一半添加到D的下面。所以最终呢，在基线之上<code>A&#39; = A + L/2</code>，在基线之下<code>D&#39; = D + L/2</code>。说的直白一点，就是字体本身占据高地，当添加了line-height属性之后，L不能为负数。</p>
 <p>inline 盒子的高度将所有的字符图形和它们上下的 <code>hadf-leading</code> 包裹在一起，这个高度就是我们说的“行高”（这一行的高度，不等同于line-height的值）。盒子的子元素不受这个高度的影响，</p>
 <p>尽管margin，padding和border不会纳入inline box的高度的计算中，但是它们依旧会在盒子周围渲染。这意味这，如果指点高度的line-height的值比盒子的内容的高度小，那么padding和border的背景和颜色会流入到邻接的line box中。因为渲染顺序的关系，导致后面的line box 的boderh会覆盖前面line box的border和文本。</p>
+<p>参考：<br><a href="http://www.w3.org/TR/CSS2/visudet.html#line-height" target="_blank" rel="external">W3C line-height</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
