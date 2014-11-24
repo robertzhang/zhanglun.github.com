@@ -4,13 +4,14 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>规范之路-Normal Flow | 张小伦爱学习</title>
+    <title>规范之路-line-height的工作原理 | 张小伦爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="张小伦爱学习">
     
-    <meta name="description" content="Normal Flow
-在正常流中的盒子们都是一个格式化上下文（formatting context）中的成员，可以表现成一个block或者inline，但是不能既是block又是inline。block 元素进入块级格式化上下文（block formatting context），inline 元">
+    <meta name="description" content="有人问我，“line-height到底是怎么一回事？”，“元素高度到底是怎么计算出来的？”。我说不出个所以然……
+
+ 首先有一点我们需要明白的是：在标准的盒模型中，height属性定义的是盒子中内容的高度。而line-height属性只能作用在行级的非替换元素上（什么是非替换元素），指定了元素形成的">
     
     
     
@@ -74,15 +75,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/10/02/规范之路-normal flow/" title="规范之路-Normal Flow" itemprop="url">规范之路-Normal Flow</a>
+      <a href="/2014/11/20/规范之路-行高的工作原理/" title="规范之路-line-height的工作原理" itemprop="url">规范之路-line-height的工作原理</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://zhanglun.github.io" title="张小伦爱学习">张小伦爱学习</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-10-02T12:39:00.000Z" itemprop="datePublished">10月 2 2014</time>
-    更新日期:<time datetime="2014-11-01T01:37:39.000Z" itemprop="dateModified">11月 1 2014</time>
+    <time datetime="2014-11-20T03:45:00.000Z" itemprop="datePublished">11月 20 2014</time>
+    更新日期:<time datetime="2014-11-24T03:46:31.000Z" itemprop="dateModified">11月 24 2014</time>
     
   </p>
 </header>
@@ -91,58 +92,36 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Normal_Flow"><span class="toc-number">1.</span> <span class="toc-text">Normal Flow</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Block_formatting_contexts"><span class="toc-number">1.1.</span> <span class="toc-text">Block formatting contexts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inline_formatting_contexts"><span class="toc-number">1.2.</span> <span class="toc-text">Inline formatting contexts</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#那么到底line-height是如何工作的呢？"><span class="toc-number">1.</span> <span class="toc-text">那么到底line-height是如何工作的呢？</span></a></li></ol>
 		</div>
 		
-		<h2 id="Normal_Flow">Normal Flow</h2>
-<p>在正常流中的盒子们都是一个格式化上下文（formatting context）中的成员，可以表现成一个block或者inline，但是不能既是block又是inline。block 元素进入块级格式化上下文（block formatting context），inline 元素进入行级格式化上下文（inline formatting context）。</p>
-<h3 id="Block_formatting_contexts">Block formatting contexts</h3>
-<p>浮动元素，绝对定位元素，非块级盒子的块级容器（inline-block元素，table-cell元素和table-caption元素）和 overflow 的值不为 visiable的盒子，都会为它们的内容创建一个新的块级格式化上下文（BFC）。</p>
-<p>在BFC中，盒子从顶端开始垂直地一个接一个地排列，两个盒子之间的垂直的间隙是由他们的margin 值所决定的。在一个BFC中，两个相邻的块级盒子的垂直外边距会产生折叠。</p>
-<p>在BFC中，每一个盒子的左外边缘（margin-left）会触碰到容器的左边缘(padding-left 或者 border-left)（对于从右到左的格式来说，则触碰到右边缘）。</p>
-<h3 id="Inline_formatting_contexts">Inline formatting contexts</h3>
-<p>在IFC中，盒子从顶端水平地一个接一个地排列。盒子之间的水平的外边距，边框和内边距会起作用。这些可以可以以不同的方式对齐：底部对齐，顶部对齐或者盒子内容中文本的基线对齐。每一行包含的盒子所形成的矩形区域我们称之为“line box”。</p>
-<p>通常情况下，一个line box的高度足够容纳它包含的盒子。但是，有可能会比最高的盒子还高。当一个盒子B的高度比包含着它的line box 的高度还要小的时候，盒子B在line box中的垂直对齐由属性 “vertival-align” 决定。当几个行级盒子不能在一个单一的line box中正常地水平排列时，它们会被分配到两个或者多个垂直堆叠（vertical-stacked）的line box中。因此一个段落是line box中一个垂直的堆（vertical stack）。</p>
-<p>通常来说，一个line box的左边缘会接触到它的包含块的做边缘，右边缘接触到包含块的右边缘。但是，浮动的盒子可能会出现在line box 的边缘和它的包含块的边缘之间。因此，虽然在同一个IFC中的line box有同样的宽度（取决于包含块的宽度），但是当浮动导致水平方向上可用的空间减少时，它们宽度将不一样。同样的，同一个IFC中的它们的高度也有可能不同，比如有的包含一个图片，有的只包含一行文字。</p>
-<p>当一个内联元素的超过了 line box 的宽度，它将分割成若干个盒子，并且这些盒子将会分布在多个line box 上。但是有时候超过宽度的盒子没办法被分割（e.g., 盒子中包含一个单字符；语言特定的断字规则不允许断开；内联盒子受 CSS属性 <code>white-space</code> 的值 <code>nowrap</code> 或者 <code>pre</code> 标签的作用），它将溢出。</p>
-<p>当一个内联盒子被截断时，margin，padding和border在截断处都不会有任何的视觉效果。  </p>
-<hr>
-<p><img src="http://ncuey-crispelite.stor.sinaapp.com/inline-box-split-margin.png" alt="inline-box-split-margin"></p>
-<hr>
-<p><img src="http://ncuey-crispelite.stor.sinaapp.com/inline-box-split-padding.png" alt="inline-box-split-padding"></p>
-<hr>
-<p><img src="http://ncuey-crispelite.stor.sinaapp.com/inline-box-split-border.png" alt="inline-box-split-border"></p>
-<hr>
-<p>Line box 的诞生是为了容纳一个包含着一个行级格式化上下文的行级内容（inline-level content）。当一个 line box 中不包含文本，不存在保留的空白，没有非零外边距，内边距，或者边框的内联元素和其他未脱离文档流的内容，以及不已一个保留的新行作为结尾时，它的高度被看作是0（zero-height）</p>
-<blockquote>
-<p>这是一个inline box 建立的过程。p元素的内容中包含一段匿名的文本，并穿插着em元素和strong元素：</p>
+		<blockquote>
+<p>有人问我，“line-height到底是怎么一回事？”，“元素高度到底是怎么计算出来的？”。我说不出个所以然……</p>
 </blockquote>
-<pre><code>&lt;p&gt;
-    Several 
-    &lt;em&gt;emphasized words&lt;/em&gt;
-     appear
-    &lt;strong&gt;in this&lt;/strong&gt;
-     sentence, dear.
-&lt;/p&gt;
-</code></pre><p>p元素形成了一个块级盒子，包含着五个行内盒子，其中三个是匿名盒子：</p>
+<p> 首先有一点我们需要明白的是：在标准的盒模型中，height属性定义的是盒子中内容的高度。而line-height属性只能作用在行级的非替换元素上（<a href="http://stackoverflow.com/questions/8012297/html5-non-replaced-vs-replaced-element" target="_blank" rel="external">什么是非替换元素</a>），指定了元素形成的line box的最小高度。</p>
+<p> 常见的例子就是大段的文本了，当你对一个段落设置了固定的高度时，要么内容不多底部出现了空白，要么内容太多溢出了容器，这也是显而易见的。但是在这种情况下，是无法直接影响到文本的排版。</p>
+<p> 一个没有设置高度的段落，当包含文字的时候，它会自动获得一个恰好可以包裹着文本内容的高度。其本质是文本形成的line box具有高度而将段落撑开。此时，line box的潜在的高度的决定因素就是<code>line-height</code>。</p>
+<h3 id="那么到底line-height是如何工作的呢？">那么到底line-height是如何工作的呢？</h3>
+<p>先来看看W3C官方给出的解释：</p>
+<blockquote>
+<p>The height of a line box is determined as follows:</p>
+</blockquote>
 <ul>
-<li>Anonymous: “Several”</li>
-<li>EM: “emphasized words”</li>
-<li>Anonymous: “appear”</li>
-<li>STRONG: “in this”</li>
-<li>Anonymous: “sentence, dear.”</li>
+<li>The height of each inline-level box in the line box is calculated. For replaced elements, inline-block elements, and inline-table elements, this is the height of their margin box; for inline boxes, this is their ‘line-height’. (See “Calculating heights and margins” and the height of inline boxes in “Leading and half-leading”.)</li>
+<li>The inline-level boxes are aligned vertically according to their ‘vertical-align’ property. In case they are aligned ‘top’ or ‘bottom’, they must be aligned so as to minimize the line box height. If such boxes are tall enough, there are multiple solutions and CSS 2.1 does not define the position of the line box’s baseline (i.e., the position of the strut, see below).</li>
+<li>The line box height is the distance between the uppermost box top and the lowermost box bottom. (This includes the strut, as explained under ‘line-height’ below.) </li>
 </ul>
-<p>为了格式化这个段落，用户代理将五个盒子绘入到 line box 中。在这个例子里面，p元素形成的盒子为inline box 建立了一个 containing block。如果包含块足够宽，所有行内盒子将放入一个单独的一行中：</p>
-<pre><code>Several emphasized words appear in this sentence, dear.
-</code></pre><p>如果不是，则行内盒子将被分裂并分布在几个 line box中。前一段可能会被分拆如下：</p>
-<pre><code>Several emphasized words appear
-in this sentence, dear.
-</code></pre><p>或者这样：</p>
-<pre><code>Several emphasized  
-words appear in this 
-sentence, dear.
-</code></pre><p>下次就是<a href="http://www.w3.org/TR/CSS21/visuren.html#floats" target="_blank" rel="external">Floats</a></p>
-<p>Bye~</p>
+<p>大致的意思是,一个line box的高度有下面列举的情况来决定：</p>
+<ul>
+<li>对于可替换元素，inline-block元素和inline-table元素，高度又它们的外边距盒子的高度来决定；而对于inline盒子来说，高度由<code>line-height</code>决定</li>
+<li>行级盒子使用<code>vertical-align</code>属性来对齐时，如果是顶部或者底部对齐，line box的高度会达到它的最小值。如果盒子的高度足够高，则存在多种情况，同时在CSS2.1中并没有定义line box基线的位置</li>
+<li>line box 的高度是最顶部的盒子顶部到最底下的盒子的底部</li>
+</ul>
+<p>CSS假定每一种字体的字体规格，指定了一个在基线上方的高度和基线下方的depth（也就是两个值）。通俗的来说，就是字体占据高度，基线从所占据的高度穿过。假设用A代表基线上方的高度（指定大小的具体字体），D代表基线下方的depth，同时<code>AD = A + D</code>代表从上到下的距离。</p>
+<p>在非替代元素中，用户代理一定会将所有的图像字符基于他们的基线对齐。对于每一个文字形成的字符图形来说，决定了A和D。这里所说的字符图形（glyph）是一个单独的元素可能由不同的字体组成，他们的A和D不一定相同。如果一个行级盒子没有任何的字符图形（glyph），我们认为它将包含一个<code>strut</code>(一个宽度为零，高度为AD的不可见的glyph)。</p>
+<p>每一个字符图形都定义了一个<code>leading L</code>，其中 <code>L = &#39;line-height&#39; - AD</code>。leading的一半添加到A的上面，另一半添加到D的下面。所以最终呢，在基线之上<code>A&#39; = A + L/2</code>，在基线之下<code>D&#39; = D + L/2</code>。说的直白一点，就是字体本身占据高地，当添加了line-height属性之后，L不能为负数。</p>
+<p>inline 盒子的高度将所有的字符图形和它们上下的 <code>hadf-leading</code> 包裹在一起，这个高度就是我们说的“行高”（这一行的高度，不等同于line-height的值）。盒子的子元素不受这个高度的影响，</p>
+<p>尽管margin，padding和border不会纳入inline box的高度的计算中，但是它们依旧会在盒子周围渲染。这意味这，如果指点高度的line-height的值比盒子的内容的高度小，那么padding和border的背景和颜色会流入到邻接的line box中。因为渲染顺序的关系，导致后面的line box 的boderh会覆盖前面line box的border和文本。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -162,7 +141,7 @@ sentence, dear.
 
 <div class="article-share" id="share">
 
-  <div data-url="http://zhanglun.github.io/2014/10/02/规范之路-normal flow/" data-title="规范之路-Normal Flow | 张小伦爱学习" data-tsina="null" class="share clearfix">
+  <div data-url="http://zhanglun.github.io/2014/11/20/规范之路-行高的工作原理/" data-title="规范之路-line-height的工作原理 | 张小伦爱学习" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -171,19 +150,11 @@ sentence, dear.
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/10/05/css的盒模型回顾/" title="CSS的盒模型-过去和将来">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  CSS的盒模型-过去和将来</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/09/30/css元素居中对齐大法/"  title="CSS元素居中对齐大法">
+<a href="/2014/11/10/定时将图片保存在SAE的Storage中/"  title="定时将图片保存在SAE的Storage中">
  <strong>NEXT:</strong><br/> 
- <span>CSS元素居中对齐大法
+ <span>定时将图片保存在SAE的Storage中
 </span>
 </a>
 </div>
@@ -195,7 +166,7 @@ sentence, dear.
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Normal_Flow"><span class="toc-number">1.</span> <span class="toc-text">Normal Flow</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Block_formatting_contexts"><span class="toc-number">1.1.</span> <span class="toc-text">Block formatting contexts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inline_formatting_contexts"><span class="toc-number">1.2.</span> <span class="toc-text">Inline formatting contexts</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#那么到底line-height是如何工作的呢？"><span class="toc-number">1.</span> <span class="toc-text">那么到底line-height是如何工作的呢？</span></a></li></ol>
   </div>
 
 <div id="asidepart">
