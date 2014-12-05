@@ -9,9 +9,11 @@
     
     <meta name="author" content="张小伦爱学习">
     
-    <meta name="description" content="有人问我，“line-height到底是怎么一回事？”，“元素高度到底是怎么计算出来的？”。我说不出个所以然……
+    <meta name="description" content="前言
 
- 首先有一点我们需要明白的是：在标准的盒模型中，height属性定义的是盒子中内容的高度。而line-height属性只能作用在行级的非替换元素上（什么是非替换元素），指定了元素形成的">
+有人问我，“line-height到底是怎么一回事？”，“元素高度到底是怎么计算出来的？”。我说不出个所以然……
+
+ 首先有一点我们需要明白的是：在标准的盒模型中，height属性定义的是盒子中内容的高度。而line-height属性只能作用在行级的非替换元素上（什么是非替换元素），指定了元">
     
     
     
@@ -83,7 +85,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-11-20T03:45:00.000Z" itemprop="datePublished">11月 20 2014</time>
-    更新日期:<time datetime="2014-12-03T14:31:53.000Z" itemprop="dateModified">12月 3 2014</time>
+    更新日期:<time datetime="2014-12-05T09:27:44.000Z" itemprop="dateModified">12月 5 2014</time>
     
   </p>
 </header>
@@ -92,10 +94,11 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#那么到底line-height是如何工作的呢？"><span class="toc-number">1.</span> <span class="toc-text">那么到底line-height是如何工作的呢？</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#那么到底line-height是如何工作的呢？"><span class="toc-number">2.</span> <span class="toc-text">那么到底line-height是如何工作的呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#line-height的值"><span class="toc-number">3.</span> <span class="toc-text">line-height的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Specified,_computed,_and_actual_values的简单解释"><span class="toc-number">4.</span> <span class="toc-text">Specified, computed, and actual values的简单解释</span></a></li></ol>
 		</div>
 		
-		<blockquote>
+		<h3 id="前言">前言</h3>
+<blockquote>
 <p>有人问我，“line-height到底是怎么一回事？”，“元素高度到底是怎么计算出来的？”。我说不出个所以然……</p>
 </blockquote>
 <p> 首先有一点我们需要明白的是：在标准的盒模型中，height属性定义的是盒子中内容的高度。而line-height属性只能作用在行级的非替换元素上（<a href="http://stackoverflow.com/questions/8012297/html5-non-replaced-vs-replaced-element" target="_blank" rel="external">什么是非替换元素</a>），指定了元素形成的line box的最小高度。</p>
@@ -122,13 +125,25 @@
 <p>每一个字符图形都定义了一个<code>leading L</code>，其中 <code>L = &#39;line-height&#39; - AD</code>。leading的一半添加到A的上面，另一半添加到D的下面。所以最终呢，在基线之上<code>A&#39; = A + L/2</code>，在基线之下<code>D&#39; = D + L/2</code>。说的直白一点，就是字体本身占据高地，当添加了line-height属性之后，L不能为负数。</p>
 <p>inline 盒子的高度将所有的字符图形和它们上下的 <code>hadf-leading</code> 包裹在一起，这个高度就是我们说的“行高”（这一行的高度，不等同于line-height的值）。盒子的子元素不受这个高度的影响，</p>
 <p>尽管margin，padding和border不会纳入inline box的高度的计算中，但是它们依旧会在盒子周围渲染。这意味这，如果指点高度的line-height的值比盒子的内容的高度小，那么padding和border的背景和颜色会流入到邻接的line box中。因为渲染顺序的关系，导致后面的line box 的boderh会覆盖前面line box的border和文本。</p>
+<h3 id="line-height的值">line-height的值</h3>
 <p>说了这么多，现在来看看line-height的使用</p>
 <p>line-height呢有这么几个值</p>
 <ul>
 <li><strong> normal</strong>：告诉用户代理，在元素字体的基础上，将<code>used value</code>设置为一个“合理的值”，这个值和’&lt;\number&gt;’，有相同的意义。我们建议将normal的<code>used value</code>设置在1.0至1.2.</li>
-<li><strong>length</strong>：指定一个数值用于计算line box的高度</li>
-<li><strong>number</strong>：</li>
+<li><strong>length</strong>：指定一个数值用于计算line box的高度，不能为负值</li>
+<li><strong>number</strong>：属性的<code>used value</code>是值与字体大小的乘积，不能为负值</li>
+<li><strong>percentage</strong>：属性的<code>computed value</code>是当前元素字体计算值的百分比，同样也不能使用负值</li>
 </ul>
+<p>当一个元素中的文本包含不止一种字体时，用户代理可能会根据最大的字体大小来设置line-height的<code>normal</code>值。</p>
+<h3 id="Specified,_computed,_and_actual_values的简单解释">Specified, computed, and actual values的简单解释</h3>
+<p>当用户代理解析一个文档，创建出一个DOM树时，针对当前的媒体设备，为每一个元素的每一个属性指定一个属性值。</p>
+<p>元素属性最终的值取决于一个“四步计算”的结果：</p>
+<ol>
+<li>浏览器对元素设置的默认样式（‘specified value’）</li>
+<li>使用继承自祖先元素的值（‘computed value’）</li>
+<li>如果有必要，转换成一个绝对的值（‘used value’）</li>
+<li>最后根据当时的环境转换属性值（‘actual value’）</li>
+</ol>
 <p>参考：<br><a href="http://www.w3.org/TR/CSS2/visudet.html#line-height" target="_blank" rel="external">W3C line-height</a><br><a href="http://www.w3.org/TR/CSS2/cascade.html#used-value" target="_blank" rel="external">W3C Assigning property values</a></p>
   
 	</div>
@@ -158,6 +173,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2014/12/05/规范之路-行高的工作原理/" title="">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  (no title)</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2014/11/10/定时将图片保存在SAE的Storage中/"  title="定时将图片保存在SAE的Storage中">
@@ -174,7 +197,7 @@
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#那么到底line-height是如何工作的呢？"><span class="toc-number">1.</span> <span class="toc-text">那么到底line-height是如何工作的呢？</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#那么到底line-height是如何工作的呢？"><span class="toc-number">2.</span> <span class="toc-text">那么到底line-height是如何工作的呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#line-height的值"><span class="toc-number">3.</span> <span class="toc-text">line-height的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Specified,_computed,_and_actual_values的简单解释"><span class="toc-number">4.</span> <span class="toc-text">Specified, computed, and actual values的简单解释</span></a></li></ol>
   </div>
 
 <div id="asidepart">
@@ -226,7 +249,7 @@
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">3</span></li></ul>
   </div>
 
 
