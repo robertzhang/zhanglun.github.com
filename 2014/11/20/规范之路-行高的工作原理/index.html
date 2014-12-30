@@ -85,7 +85,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-11-20T03:45:00.000Z" itemprop="datePublished">11月 20 2014</time>
-    更新日期:<time datetime="2014-12-16T11:49:18.000Z" itemprop="dateModified">12月 16 2014</time>
+    更新日期:<time datetime="2014-12-17T06:22:15.000Z" itemprop="dateModified">12月 17 2014</time>
     
   </p>
 </header>
@@ -93,19 +93,18 @@
 		
 		
 		<div id="toc" class="toc-article">
-		�����ط�������
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#那么到底line-height是如何工作的呢？"><span class="toc-number">2.</span> <span class="toc-text">那么到底line-height是如何工作的呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#line-height的值"><span class="toc-number">3.</span> <span class="toc-text">line-height的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Specified,_computed,_and_actual_values的简单解释"><span class="toc-number">4.</span> <span class="toc-text">Specified, computed, and actual values的简单解释</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#那么到底line-height是如何工作的呢？"><span class="toc-number">2.</span> <span class="toc-text">那么到底line-height是如何工作的呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#line-height的值"><span class="toc-number">3.</span> <span class="toc-text">line-height的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Specified,_computed,_and_actual_values的简单解释"><span class="toc-number">4.</span> <span class="toc-text">Specified, computed, and actual values的简单解释</span></a></li></ol>
 		</div>
 		
-		<h3 id="前言">前言</h3>
+		<h2 id="前言">前言</h2>
 <blockquote>
 <p>有人问我，“line-height到底是怎么一回事？”，“元素高度到底是怎么计算出来的？”。我说不出个所以然……</p>
 </blockquote>
 <p> 首先有一点我们需要明白的是：在标准的盒模型中，height属性定义的是盒子中内容的高度。而line-height属性只能作用在行级的非替换元素上（<a href="http://stackoverflow.com/questions/8012297/html5-non-replaced-vs-replaced-element" target="_blank" rel="external">什么是非替换元素</a>），指定了元素形成的line box的最小高度。</p>
 <p> 常见的例子就是大段的文本了，当你对一个段落设置了固定的高度时，要么内容不多底部出现了空白，要么内容太多溢出了容器，这也是显而易见的。但是在这种情况下，是无法直接影响到文本的排版。</p>
 <p> 一个没有设置高度的段落，当包含文字的时候，它会自动获得一个恰好可以包裹着文本内容的高度。其本质是文本形成的line box具有高度而将段落撑开。此时，line box的潜在的高度的决定因素就是<code>line-height</code>。</p>
-<h3 id="那么到底line-height是如何工作的呢？">那么到底line-height是如何工作的呢？</h3>
+<h2 id="那么到底line-height是如何工作的呢？">那么到底line-height是如何工作的呢？</h2>
 <p>先来看看W3C官方给出的解释：</p>
 <blockquote>
 <p>The height of a line box is determined as follows:</p>
@@ -126,7 +125,7 @@
 <p>每一个字符图形都定义了一个<code>leading L</code>，其中 <code>L = &#39;line-height&#39; - AD</code>。leading的一半添加到A的上面，另一半添加到D的下面。所以最终呢，在基线之上<code>A&#39; = A + L/2</code>，在基线之下<code>D&#39; = D + L/2</code>。说的直白一点，就是字体本身占据高地，当添加了line-height属性之后，L不能为负数。</p>
 <p>inline 盒子的高度将所有的字符图形和它们上下的 <code>hadf-leading</code> 包裹在一起，这个高度就是我们说的“行高”（这一行的高度，不等同于line-height的值）。盒子的子元素不受这个高度的影响，</p>
 <p>尽管margin，padding和border不会纳入inline box的高度的计算中，但是它们依旧会在盒子周围渲染。这意味这，如果指点高度的line-height的值比盒子的内容的高度小，那么padding和border的背景和颜色会流入到邻接的line box中。因为渲染顺序的关系，导致后面的line box 的boderh会覆盖前面line box的border和文本。</p>
-<h3 id="line-height的值">line-height的值</h3>
+<h2 id="line-height的值">line-height的值</h2>
 <p>说了这么多，现在来看看line-height的使用</p>
 <p>line-height呢有这么几个值</p>
 <ul>
@@ -136,7 +135,7 @@
 <li><strong>percentage</strong>：属性的<code>computed value</code>是当前元素字体计算值的百分比，同样也不能使用负值</li>
 </ul>
 <p>当一个元素中的文本包含不止一种字体时，用户代理可能会根据最大的字体大小来设置line-height的<code>normal</code>值。</p>
-<h3 id="Specified,_computed,_and_actual_values的简单解释">Specified, computed, and actual values的简单解释</h3>
+<h2 id="Specified,_computed,_and_actual_values的简单解释">Specified, computed, and actual values的简单解释</h2>
 <p>当用户代理解析一个文档，创建出一个DOM树时，针对当前的媒体设备，为每一个元素的每一个属性指定一个属性值。</p>
 <p>元素属性最终的值取决于一个“四步计算”的结果：</p>
 <ol>
@@ -190,7 +189,7 @@
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#那么到底line-height是如何工作的呢？"><span class="toc-number">2.</span> <span class="toc-text">那么到底line-height是如何工作的呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#line-height的值"><span class="toc-number">3.</span> <span class="toc-text">line-height的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Specified,_computed,_and_actual_values的简单解释"><span class="toc-number">4.</span> <span class="toc-text">Specified, computed, and actual values的简单解释</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#那么到底line-height是如何工作的呢？"><span class="toc-number">2.</span> <span class="toc-text">那么到底line-height是如何工作的呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#line-height的值"><span class="toc-number">3.</span> <span class="toc-text">line-height的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Specified,_computed,_and_actual_values的简单解释"><span class="toc-number">4.</span> <span class="toc-text">Specified, computed, and actual values的简单解释</span></a></li></ol>
   </div>
 
 <div id="asidepart">
